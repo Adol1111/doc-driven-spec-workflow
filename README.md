@@ -1,6 +1,6 @@
 # Doc-Driven Spec Workflow
 
-[中文说明](./README_CN.md)
+[中文说明](./README_CN.md) · [Changelog](./CHANGELOG.md)
 
 A docs-driven workflow skill set for AI coding agents.
 
