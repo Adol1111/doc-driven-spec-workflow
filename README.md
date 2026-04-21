@@ -30,6 +30,29 @@ npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflo
 
 Restart your agent after installation so it can discover the new skill.
 
+## Bootstrap A Repository
+
+To initialize the minimum docs scaffold in a repository, ask your agent:
+
+```text
+Use doc-driven-spec-workflow to initialize the docs workflow scaffold for this repository.
+```
+
+This should create the core entry points:
+
+```text
+docs/
+├── index.md
+├── architecture/
+│   └── index.md
+├── tasks/
+│   └── index.md
+└── context/
+    └── index.md
+```
+
+The workflow does not create `docs/specs/` or `docs/plans/` by default. Task-local `spec.md` and `plan.md` files should be created under `docs/tasks/<milestone>/<task>/` when there is a concrete task. Global `docs/specs/` and `docs/plans/` are reserved for standalone or cross-task documents.
+
 ## Usage
 
 After installation, ask your agent to use the workflow when starting or continuing implementation work in a docs-driven repository:

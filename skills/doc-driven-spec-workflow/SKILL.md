@@ -74,6 +74,20 @@ Load only the relevant reference:
 
 Do not load every template by default.
 
+## Bootstrap Docs Layout
+
+When the user asks to initialize, bootstrap, create, or scaffold the docs workflow for a repository:
+
+1. Create the minimum docs entry points:
+   - `docs/index.md`
+   - `docs/architecture/index.md`
+   - `docs/tasks/index.md`
+   - `docs/context/index.md`
+2. Use `references/index-template.md` for the index file shape.
+3. Do not create implementation tasks unless the user provides an actual milestone/task.
+4. Do not create `docs/specs/` or `docs/plans/` by default; create them only for standalone or cross-task documents.
+5. Report created or changed files and stop. This is docs governance work, not implementation permission.
+
 Follow this order unless the user explicitly asks for something different:
 
 1. If the user's feature, behavior, or task intent is ambiguous, use `brainstorming` when available, or an equivalent clarification workflow, before selecting or creating a concrete task.
