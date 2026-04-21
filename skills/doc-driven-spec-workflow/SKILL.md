@@ -84,9 +84,10 @@ When the user asks to initialize, bootstrap, create, or scaffold the docs workfl
    - `docs/tasks/index.md`
    - `docs/context/index.md`
 2. Use `references/index-template.md` for the index file shape.
-3. Do not create implementation tasks unless the user provides an actual milestone/task.
-4. Do not create `docs/specs/` or `docs/plans/` by default; create them only for standalone or cross-task documents.
-5. Report created or changed files and stop. This is docs governance work, not implementation permission.
+3. If the user or repository instructions specify a documentation language, write generated docs in that language.
+4. Do not create implementation tasks unless the user provides an actual milestone/task.
+5. Do not create `docs/specs/` or `docs/plans/` by default; create them only for standalone or cross-task documents.
+6. Report created or changed files and stop. This is docs governance work, not implementation permission.
 
 Follow this order unless the user explicitly asks for something different:
 
@@ -172,5 +173,6 @@ If you need the exact task-file or module-index shape, read `references/tasks-te
 ## Source Of Truth Rules
 
 - Treat code as the source of truth when code and docs diverge.
+- When writing docs, follow the user's current language instruction first; otherwise follow repository-level instruction files such as `AGENTS.md`, `CLAUDE.md`, or `.claude/CLAUDE.md`.
 - If implementation changes behavior, API shape, task status, architecture assumptions, or other documented constraints, update the relevant docs in the same round.
 - If a conclusion in `docs/context/` becomes a stable system rule, move or restate it in `docs/architecture/`.

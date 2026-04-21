@@ -1,5 +1,7 @@
 # Doc-Driven Spec Workflow
 
+[中文说明](./README_CN.md)
+
 A docs-driven spec workflow skill for AI coding agents.
 
 This repository packages a reusable workflow for keeping implementation work aligned with project documentation. It is useful for repositories that organize work around architecture docs, task roadmaps, task-local specs, optional plans, and explicit readiness checkpoints before code changes.
@@ -52,6 +54,32 @@ docs/
 ```
 
 The workflow does not create `docs/specs/` or `docs/plans/` by default. Task-local `spec.md` and `plan.md` files should be created under `docs/tasks/<milestone>/<task>/` when there is a concrete task. Global `docs/specs/` and `docs/plans/` are reserved for standalone or cross-task documents.
+
+## Template Language
+
+The bundled templates are written in English, but generated project docs can use any language.
+
+For Codex, the simplest project-level convention is to add a short rule to `AGENTS.md`:
+
+```md
+Write all generated project documentation in Chinese unless the user explicitly asks for another language.
+```
+
+For Claude Code, add the same rule to `CLAUDE.md` or `.claude/CLAUDE.md`:
+
+```md
+Write all generated project documentation in Chinese unless the user explicitly asks for another language.
+```
+
+For repositories used by both Codex and Claude Code, keep the language rule in both `AGENTS.md` and `CLAUDE.md`.
+
+You can also specify the language directly in a request:
+
+```text
+Use doc-driven-spec-workflow to initialize the docs workflow scaffold for this repository. Write all generated docs in Chinese.
+```
+
+You can also fork this repository and translate the files under `skills/doc-driven-spec-workflow/references/` if you want the template headings themselves to be localized.
 
 ## Usage
 
