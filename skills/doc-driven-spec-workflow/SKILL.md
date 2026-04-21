@@ -62,6 +62,8 @@ Use this skill when the repository uses `docs/architecture`, `docs/tasks`, `docs
 
 Task ownership: `docs/tasks/index.md` lists only open/completed milestones; milestone indexes list modules/progress when modules exist; module or milestone indexes list open/completed task directories, order, and dependencies; task-local `task.md` tracks source, status, dependencies, and acceptance points.
 
+This skill assumes the roadmap-layer docs shape already exists or is being updated separately. Its references define the compact docs shape used by current-task execution, task-local specs/plans, and bootstrap docs entry points. Roadmap decomposition and planning-stage output belong to `milestone-planning`.
+
 ## Templates And Workflow
 
 Load only the relevant reference:
@@ -74,6 +76,7 @@ Load only the relevant reference:
 - task-local `plan.md`: `references/plan-template.md`
 
 Do not load every template by default.
+Do not use these references as the default planning-stage output for milestone decomposition.
 
 ## Bootstrap Docs Layout
 

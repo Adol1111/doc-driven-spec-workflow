@@ -1,6 +1,6 @@
 # Tasks Template
 
-Use for project-level execution tracking, dependencies, task status, and milestone/module ordering.
+Use for current-task execution-compatible `docs/tasks/` documents: task directories, task metadata, dependencies, and milestone/module ordering after roadmap structure has been decided.
 
 ## Task Directory
 

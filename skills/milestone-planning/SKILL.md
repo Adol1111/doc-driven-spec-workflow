@@ -7,7 +7,7 @@ description: Use when a request or repository needs roadmap decomposition before
 
 Plan roadmap structure before task-local spec work begins.
 
-This skill is for deciding `Milestone -> optional Module -> Task` shape, not for writing implementation specs or managing implementation execution. It helps keep task tracking aligned with delivery phases instead of topic lists or engineering sub-steps.
+This skill is for deciding `Milestone -> optional Module -> Task` shape, not for writing implementation specs, using execution-side templates, or managing implementation execution. It helps keep task tracking aligned with delivery phases instead of topic lists or engineering sub-steps.
 
 ## Mandatory Rules
 
@@ -21,6 +21,7 @@ This skill is for deciding `Milestone -> optional Module -> Task` shape, not for
 - MUST use `brainstorming` first when the request is still ambiguous about goals, constraints, or success criteria.
 - MUST hand off to `doc-driven-spec-workflow` only after the current concrete task is chosen.
 - MUST treat milestone/module/task creation or reshaping as docs governance. Updating roadmap structure does not by itself authorize spec writing or implementation.
+- MUST keep its document output focused on roadmap structure and task selection. Task-local `spec.md`, `plan.md`, readiness, and implementation guidance belong to `doc-driven-spec-workflow`.
 
 ## When To Use
 
@@ -157,14 +158,44 @@ Always provide:
 - dependency notes
 - assumptions or open questions
 
-If the repository already uses `docs/tasks/`, prefer updating or proposing:
+If the repository already uses `docs/tasks/`, prefer updating or proposing roadmap-layer docs only:
 
 - `docs/tasks/index.md`
 - `docs/tasks/<milestone>/index.md`
 - optional `docs/tasks/<milestone>/<module>/index.md`
 - `docs/tasks/<milestone>/<task>/task.md`
 
-Do not write `spec.md` here unless the user explicitly asks to continue into current-task spec execution.
+Do not write `spec.md` or `plan.md` here unless the user explicitly asks to continue into current-task spec execution.
+Do not use `doc-driven-spec-workflow` execution-side templates as the default output format for this stage.
+
+When writing docs in this stage, prefer a compact planning-side output shape:
+
+- `docs/tasks/index.md`
+  - `Open Milestones`
+  - `Completed Milestones`
+- `docs/tasks/<milestone>/index.md`
+  - `Goal`
+  - `Exit Criteria`
+  - `Modules` or `Tasks`
+  - `Status`
+  - `Current Gaps`
+  - `Notes`
+- `docs/tasks/<milestone>/<module>/index.md`, if modules exist
+  - `Goals`
+  - `Recommended Order`
+  - `Dependency Notes`
+  - `Open Tasks`
+  - `Completed Tasks`
+- `docs/tasks/<milestone>/<task>/task.md`
+  - `Placement`
+  - `Source`
+  - `Dependencies`
+  - `Status`
+  - `Checklist`
+  - `Notes`
+
+Keep this stage focused on planning-ready task metadata and roadmap navigation.
+Do not expand into task-local design, implementation slices, or readiness instructions.
 
 ## Composition With Other Skills
 

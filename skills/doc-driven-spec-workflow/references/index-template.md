@@ -173,7 +173,7 @@ This directory stores research notes, validation notes, and references.
 ## Role
 
 - spec 用于记录当前任务进入实现前的目标、边界、方案和验证方式
-- 具体结构与写法以 `doc-driven-spec-workflow` skill 及其 references 模板为准
+- task-local spec 的具体结构与写法以 `doc-driven-spec-workflow` skill 及其 references 模板为准
 - 当结论成为长期系统约束时，应迁移或沉淀到 `docs/architecture/`
 
 ## Lifecycle
@@ -199,7 +199,7 @@ This directory stores research notes, validation notes, and references.
 
 - plan 只在任务确实复杂或多步骤时创建
 - plan 用来拆实现切片、文件范围和验证方式，不重复已经确认的 spec
-- 具体结构与写法以 `doc-driven-spec-workflow` skill 及其 references 模板为准
+- task-local plan 的具体结构与写法以 `doc-driven-spec-workflow` skill 及其 references 模板为准
 
 ## Lifecycle
 
