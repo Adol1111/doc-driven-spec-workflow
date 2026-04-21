@@ -4,6 +4,10 @@ A docs-driven spec workflow skill for AI coding agents.
 
 This repository packages a reusable workflow for keeping implementation work aligned with project documentation. It is useful for repositories that organize work around architecture docs, task roadmaps, task-local specs, optional plans, and explicit readiness checkpoints before code changes.
 
+> Opinionated workflow skill
+>
+> This project is intentionally focused on docs-driven repositories. It is not a general replacement for every agent development workflow; it is a lightweight way to make agents respect architecture docs, task tracking, spec approval, and branch readiness before implementation.
+
 ## Quick Start
 
 Install with the open agent skills CLI:
@@ -26,6 +30,33 @@ npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflo
 
 Restart your agent after installation so it can discover the new skill.
 
+## Usage
+
+After installation, ask your agent to use the workflow when starting or continuing implementation work in a docs-driven repository:
+
+```text
+Use doc-driven-spec-workflow to pick the next task and write the spec.
+```
+
+For Claude Code, you can also invoke it directly:
+
+```text
+/doc-driven-spec-workflow
+```
+
+The skill is designed to activate when a repository uses `docs/architecture/`, `docs/tasks/`, `docs/context/`, task-local `spec.md`, and optional `plan.md` files.
+
+## Example Workflow
+
+1. Clarify ambiguous intent with `brainstorming` or an equivalent clarification flow.
+2. Read the relevant architecture, task, and context docs.
+3. Select or create the concrete task under `docs/tasks/`.
+4. Write or update the task-local `spec.md`.
+5. Stop for user approval before implementation.
+6. Create `plan.md` only when the task is genuinely complex.
+7. Run the readiness checkpoint and isolate work with a branch or worktree.
+8. Implement, verify, update docs/status, and resolve branch closing.
+
 ## What It Does
 
 - Treats `docs/tasks/` as the source of truth for concrete implementation work.
@@ -35,26 +66,42 @@ Restart your agent after installation so it can discover the new skill.
 - Enforces readiness checkpoints before code edits, including branch or worktree isolation.
 - Provides compact templates for architecture docs, task indexes, specs, plans, and context notes.
 
-## Repository Layout
+## Expected Docs Layout
 
 ```text
-.
-├── README.md
-└── skills/
-    └── doc-driven-spec-workflow/
-        ├── SKILL.md
-        ├── agents/
-        │   └── openai.yaml
-        └── references/
-            ├── architecture-template.md
-            ├── context-template.md
-            ├── index-template.md
-            ├── plan-template.md
-            ├── spec-template.md
-            └── tasks-template.md
+docs/
+├── index.md
+├── architecture/
+│   ├── index.md
+│   └── <topic>.md
+├── tasks/
+│   ├── index.md
+│   ├── <milestone>/
+│   │   ├── index.md
+│   │   └── <task>/
+│   │       ├── task.md
+│   │       ├── spec.md
+│   │       └── plan.md
+│   └── <milestone-with-modules>/
+│       ├── index.md
+│       └── <module>/
+│           ├── index.md
+│           └── <task>/
+│               ├── task.md
+│               ├── spec.md
+│               └── plan.md
+├── context/
+│   ├── index.md
+│   └── <research-note>.md
+├── specs/
+│   └── <standalone-or-cross-task-spec>.md
+└── plans/
+    └── <standalone-or-cross-task-plan>.md
 ```
 
-The installable skill is located at `skills/doc-driven-spec-workflow/`.
+Task-local `spec.md` and `plan.md` files should live with the task by default. Use `docs/specs/` or `docs/plans/` only for standalone or cross-task documents that do not belong to one concrete task.
+
+The module layer is optional. Use `docs/tasks/<milestone>/<task>/` when a milestone has one real capability area. Use `docs/tasks/<milestone>/<module>/<task>/` only when a milestone has multiple durable capability areas with different ownership, dependencies, risk profiles, release boundaries, or acceptance criteria.
 
 ## Compatibility Notes
 
