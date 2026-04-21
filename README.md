@@ -4,6 +4,28 @@ A docs-driven spec workflow skill for AI coding agents.
 
 This repository packages a reusable workflow for keeping implementation work aligned with project documentation. It is useful for repositories that organize work around architecture docs, task roadmaps, task-local specs, optional plans, and explicit readiness checkpoints before code changes.
 
+## Quick Start
+
+Install with the open agent skills CLI:
+
+```bash
+npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow
+```
+
+For a global Claude Code install:
+
+```bash
+npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow -g -a claude-code
+```
+
+For a global Codex install:
+
+```bash
+npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow -g -a codex
+```
+
+Restart your agent after installation so it can discover the new skill.
+
 ## What It Does
 
 - Treats `docs/tasks/` as the source of truth for concrete implementation work.
@@ -57,7 +79,7 @@ Use Superpowers when you want the full end-to-end agentic development methodolog
 
 ## Installation
 
-### Install With `npx skills`
+### Install With `npx skills` (Recommended)
 
 Install the skill with the open agent skills CLI:
 
@@ -159,9 +181,3 @@ Use this skill when a repository has, or should have, a documentation-driven wor
 - Task-local `task.md`, `spec.md`, and optional `plan.md` files.
 
 It is most helpful when you want an agent to avoid jumping straight into code and instead follow a spec-first, checkpointed implementation process.
-
-## Recommended GitHub Description
-
-```text
-A docs-driven spec workflow skill for AI coding agents.
-```
