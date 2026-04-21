@@ -11,6 +11,7 @@ These are requirements, not suggestions. If any rule below is not satisfied, the
 
 - MUST NOT edit implementation code for a concrete `docs/tasks/*` task until spec approval, plan approval when required, branch/worktree isolation, and the readiness checkpoint are complete.
 - MUST keep pure docs governance in docs mode. Architecture edits, task/module reshaping, milestone updates, and index maintenance do not create implementation permission and do not require a new spec by default.
+- MUST defer roadmap decomposition to `milestone-planning` when the main question is how many milestones should exist, whether modules are needed, or how work should be split into tasks before selecting the current concrete task.
 - MUST treat routine cleanup and concept clarification as inline maintenance, not standalone tasks. Create a pure cleanup/governance/clarification task only when it is complex, cross-cutting, independently reviewable, or needs project-level execution tracking.
 - MUST use `docs/tasks/` as the only source of truth for concrete next work; if no open milestone/module/task exists, update `docs/tasks/` before writing a spec.
 - MUST size tasks as complete implementation rounds that deliver user-visible behavior, system capability, or a coherent project outcome. NEVER create a task for code review, a single test, single file edit, refactor step, migration file, or other implementation/verification sub-step.
@@ -47,7 +48,7 @@ Violations that require stopping immediately:
 
 ## When To Use
 
-Use this skill when the repository uses `docs/architecture`, `docs/tasks`, `docs/context`, and task-local or standalone specs/plans, and task selection, design, status, or code changes must stay aligned with those docs. Do not use it for repositories without this layout.
+Use this skill when the repository uses `docs/architecture`, `docs/tasks`, `docs/context`, and task-local or standalone specs/plans, and the current concrete task has been chosen or is ready to be chosen from the existing roadmap. Use `milestone-planning` first when the user is still deciding milestone/module/task structure. Do not use it for repositories without this layout.
 
 ## Docs Roles
 
@@ -92,24 +93,25 @@ When the user asks to initialize, bootstrap, create, or scaffold the docs workfl
 Follow this order unless the user explicitly asks for something different:
 
 1. If the user's feature, behavior, or task intent is ambiguous, use `brainstorming` when available, or an equivalent clarification workflow, before selecting or creating a concrete task.
-2. Read `docs/index.md` and the relevant docs index files.
-3. Read the relevant `docs/architecture/` documents for behavior boundaries.
-4. Read the relevant `docs/tasks/` milestone/module index plus task directory or `task.md` for order, status, and dependencies.
-5. Use `docs/context/` only for supporting research or unstable reference material.
-6. If there is no suitable open task, update `docs/tasks/` before creating a spec.
-7. If implementing one concrete task, create or update its task directory and write one focused `spec.md` inside it.
-8. Stop after writing the spec; do not code until the user explicitly confirms it in the current thread.
-9. Create `plan.md` inside the task directory only for genuinely complex or multi-step work; if created, stop again for user confirmation before coding.
-10. Before implementation edits, announce and run the readiness checkpoint.
-11. Implement from the approved spec or plan, then verify, update docs/status, and resolve branch closing.
-12. Stop after one concrete task. Continue only when the user explicitly asks in the current thread.
-13. Add an `index.md` for every new major documentation section.
+2. If the main uncertainty is roadmap shape rather than current-task design, use `milestone-planning` before continuing here.
+3. Read `docs/index.md` and the relevant docs index files.
+4. Read the relevant `docs/architecture/` documents for behavior boundaries.
+5. Read the relevant `docs/tasks/` milestone/module index plus task directory or `task.md` for order, status, and dependencies.
+6. Use `docs/context/` only for supporting research or unstable reference material.
+7. If there is no suitable open task because the roadmap shape itself is missing or unclear, stop and use `milestone-planning`.
+8. If implementing one concrete task, create or update its task directory and write one focused `spec.md` inside it.
+9. Stop after writing the spec; do not code until the user explicitly confirms it in the current thread.
+10. Create `plan.md` inside the task directory only for genuinely complex or multi-step work; if created, stop again for user confirmation before coding.
+11. Before implementation edits, announce and run the readiness checkpoint.
+12. Implement from the approved spec or plan, then verify, update docs/status, and resolve branch closing.
+13. Stop after one concrete task. Continue only when the user explicitly asks in the current thread.
+14. Add an `index.md` for every new major documentation section.
 
 ## Execution Rules
 
 - Default flow: `spec -> user confirms -> code`
 - Complex flow: `spec -> user confirms -> plan -> user confirms -> code`
-- Ambiguous flow: `brainstorming or equivalent clarification -> spec -> user confirms -> code`
+- Ambiguous flow: `brainstorming or equivalent clarification -> milestone-planning if needed -> spec -> user confirms -> code`
 - Do not default to TDD, plan-driven execution, or heavyweight shared workflows unless the user explicitly asks.
 - Write task-local specs/plans directly in this repository's compact local format.
 - Treat tests and verification as delivery checks, not as a mandatory test-first workflow.
@@ -153,7 +155,7 @@ Run this checkpoint after spec confirmation, and after plan confirmation when a 
 
 - Use `docs/tasks/` to decide the next task, not `docs/context/`.
 - Do not infer a new concrete implementation task from `docs/architecture/` alone.
-- If architecture implies follow-up work but `docs/tasks/` has no corresponding open task, update `docs/tasks/` first.
+- If architecture implies follow-up work but `docs/tasks/` has no corresponding open task, use `milestone-planning` or an equivalent roadmap update flow before creating a spec.
 - Modules are optional durable capability areas. Use them only for navigational value; if a milestone has one real capability area, place task directories directly under the milestone. Merge modules with fewer than three likely tasks unless they have distinct domain, ownership, dependency graph, release boundary, risk profile, or acceptance criteria.
 - Tasks should fit one focused branch while including implementation, tests, docs/status updates, code review, and verification. Split only when pieces can ship, verify, or be reviewed independently with different acceptance outcomes.
 - Keep implementation steps inside `spec.md`, optional `plan.md`, or checklist items; do not promote them into tasks.

@@ -5,9 +5,9 @@ description: Use when a request or repository needs roadmap decomposition before
 
 # Milestone Planning
 
-Plan roadmap structure before writing specs or implementation plans.
+Plan roadmap structure before task-local spec work begins.
 
-This skill is for deciding `Milestone -> optional Module -> Task` shape, not for writing implementation specs. It helps keep task tracking aligned with delivery phases instead of topic lists or engineering sub-steps.
+This skill is for deciding `Milestone -> optional Module -> Task` shape, not for writing implementation specs or managing implementation execution. It helps keep task tracking aligned with delivery phases instead of topic lists or engineering sub-steps.
 
 ## Mandatory Rules
 
@@ -20,6 +20,7 @@ This skill is for deciding `Milestone -> optional Module -> Task` shape, not for
 - MUST explain why each milestone, module, and task boundary exists. Output structure without rationale is incomplete.
 - MUST use `brainstorming` first when the request is still ambiguous about goals, constraints, or success criteria.
 - MUST hand off to `doc-driven-spec-workflow` only after the current concrete task is chosen.
+- MUST treat milestone/module/task creation or reshaping as docs governance. Updating roadmap structure does not by itself authorize spec writing or implementation.
 
 ## When To Use
 
@@ -28,12 +29,12 @@ Use this skill when:
 - A product or business request contains several features and the roadmap shape is unclear
 - The user asks whether work should be one milestone or several
 - The user wants to break a phase into milestones, modules, and tasks
-- A repository already uses `docs/tasks/`, but the task structure needs to be created or reshaped before spec writing
+- A repository already uses `docs/tasks/`, but the task structure needs to be created or reshaped before current-task spec writing
 - A request mixes current delivery scope with later enhancements, and the stage boundary needs to be made explicit
 
 Do not use this skill when:
 
-- The current concrete task is already selected and only needs a `spec.md`
+- The current concrete task is already selected and only needs task-local spec or implementation governance
 - The problem is implementation design within one task rather than roadmap decomposition
 - The work is pure docs maintenance with no milestone or task planning need
 
@@ -59,7 +60,7 @@ Follow this order:
 4. Split tasks by independently reviewable capability outcome
 5. Validate the decomposition against anti-patterns
 6. Output the structure with rationale and recommended order
-7. Stop after planning unless the user explicitly asks to update docs or move into spec writing
+7. Stop after planning unless the user explicitly asks to update docs or hand off to current-task spec execution
 
 ## 1. Clarify The Delivery Frame
 
@@ -163,16 +164,17 @@ If the repository already uses `docs/tasks/`, prefer updating or proposing:
 - optional `docs/tasks/<milestone>/<module>/index.md`
 - `docs/tasks/<milestone>/<task>/task.md`
 
-Do not write `spec.md` yet unless the user explicitly asks to move into spec writing.
+Do not write `spec.md` here unless the user explicitly asks to continue into current-task spec execution.
 
 ## Composition With Other Skills
 
+- `docs-delivery-workflow`: use when the main question is which stage of the docs-driven workflow comes next
 - `brainstorming`: use first when the request is still fuzzy or the product scope needs clarification
 - `doc-driven-spec-workflow`: use after the current concrete task is selected and the user wants to write or update the task spec
 
 Recommended chain:
 
-`brainstorming -> milestone-planning -> doc-driven-spec-workflow`
+`docs-delivery-workflow -> brainstorming -> milestone-planning -> doc-driven-spec-workflow`
 
 Skip `brainstorming` when the scope is already well-defined and the user only needs decomposition.
 
