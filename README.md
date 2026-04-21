@@ -14,11 +14,12 @@ This repository packages a reusable workflow for keeping implementation work ali
 
 These skills are not parallel alternatives. They are different stages of one docs-driven delivery workflow:
 
-`docs-delivery-workflow -> brainstorming -> milestone-planning -> doc-driven-spec-workflow`
+`docs-delivery-workflow -> docs-workflow-bootstrap -> brainstorming -> milestone-planning -> doc-driven-spec-workflow`
 
 Not every request uses every stage:
 
 - Start with `docs-delivery-workflow` when the main question is which stage comes next.
+- Use `docs-workflow-bootstrap` when the repository needs the minimum docs scaffold.
 - Use `brainstorming` only when goals, scope, or success criteria are still unclear.
 - Use `milestone-planning` when the roadmap shape is unclear and you need to decide milestones, modules, and tasks.
 - Use `doc-driven-spec-workflow` after the current concrete task is chosen and you want to write the task-local spec and move toward implementation.
@@ -30,6 +31,7 @@ This repository currently contains three workflow skills plus one optional upstr
 | Skill | Responsibility | Stop Point |
 | --- | --- | --- |
 | `docs-delivery-workflow` | Route work to the right workflow stage | When the next stage is clear |
+| `docs-workflow-bootstrap` | Initialize the minimum docs scaffold | When core docs entry points are created |
 | `milestone-planning` | Decompose scope into `Milestone -> optional Module -> Task` | When roadmap docs are updated or the current task is selected |
 | `doc-driven-spec-workflow` | Execute the current task via `spec -> optional plan -> readiness -> implementation` | When the current task checkpoint and branch closing are resolved |
 | `brainstorming` | Clarify ambiguous intent before planning or spec work | When scope and success criteria are clear enough to continue |
@@ -51,7 +53,7 @@ Use interactive selection by default. See [Installation](#installation) for inst
 To initialize the minimum docs scaffold in a repository, ask your agent:
 
 ```text
-Use doc-driven-spec-workflow to initialize the docs workflow scaffold for this repository.
+Use docs-workflow-bootstrap to initialize the docs workflow scaffold for this repository.
 ```
 
 This should create the core entry points:
@@ -90,7 +92,7 @@ For repositories used by both Codex and Claude Code, keep the language rule in b
 You can also specify the language directly in a request:
 
 ```text
-Use doc-driven-spec-workflow to initialize the docs workflow scaffold for this repository. Write all generated docs in Chinese.
+Use docs-workflow-bootstrap to initialize the docs workflow scaffold for this repository. Write all generated docs in Chinese.
 ```
 
 You can also fork this repository and translate the files under `skills/doc-driven-spec-workflow/references/` if you want the template headings themselves to be localized.
@@ -123,6 +125,7 @@ For Claude Code, you can also invoke the individual skills directly:
 
 ```text
 /docs-delivery-workflow
+/docs-workflow-bootstrap
 /milestone-planning
 /doc-driven-spec-workflow
 ```
@@ -132,14 +135,15 @@ These skills are designed for repositories that use `docs/architecture/`, `docs/
 ## Example Workflow
 
 1. Route the request with `docs-delivery-workflow`.
-2. Clarify ambiguous intent with `brainstorming` or an equivalent clarification flow when needed.
-3. Use `milestone-planning` to decide milestone, module, and task structure when the roadmap shape is still unclear.
-4. Select the current concrete task under `docs/tasks/`.
-5. Use `doc-driven-spec-workflow` to write or update the task-local `spec.md`.
-6. Stop for user approval before implementation.
-7. Create `plan.md` only when the task is genuinely complex.
-8. Run the readiness checkpoint and isolate work with a branch or worktree.
-9. Implement, verify, update docs/status, and resolve branch closing.
+2. Use `docs-workflow-bootstrap` if the repository still needs the minimum docs scaffold.
+3. Clarify ambiguous intent with `brainstorming` or an equivalent clarification flow when needed.
+4. Use `milestone-planning` to decide milestone, module, and task structure when the roadmap shape is still unclear.
+5. Select the current concrete task under `docs/tasks/`.
+6. Use `doc-driven-spec-workflow` to write or update the task-local `spec.md`.
+7. Stop for user approval before implementation.
+8. Create `plan.md` only when the task is genuinely complex.
+9. Run the readiness checkpoint and isolate work with a branch or worktree.
+10. Implement, verify, update docs/status, and resolve branch closing.
 
 ## What It Does
 
@@ -214,7 +218,7 @@ Use Superpowers when you want the full end-to-end agentic development methodolog
 
 ### Install With `npx skills` (Recommended)
 
-Install this repository as a skill set:
+Install this repository as a skill set and choose the skills you want:
 
 ```bash
 npx skills add Adol1111/doc-driven-spec-workflow
@@ -226,52 +230,29 @@ Install all skills from the repo explicitly:
 npx skills add Adol1111/doc-driven-spec-workflow --skill '*'
 ```
 
-Or install the full workflow one skill at a time:
+Install a specific skill by name using the skill list above:
 
 ```bash
-npx skills add Adol1111/doc-driven-spec-workflow --skill docs-delivery-workflow
 npx skills add Adol1111/doc-driven-spec-workflow --skill milestone-planning
-npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow
 ```
 
-For a global Claude Code install:
+Add agent targets when needed:
 
 ```bash
 npx skills add Adol1111/doc-driven-spec-workflow -g -a claude-code
-npx skills add Adol1111/doc-driven-spec-workflow --skill '*' -g -a claude-code
-```
-
-Or target Claude Code one skill at a time:
-
-```bash
-npx skills add Adol1111/doc-driven-spec-workflow --skill docs-delivery-workflow -g -a claude-code
-npx skills add Adol1111/doc-driven-spec-workflow --skill milestone-planning -g -a claude-code
-npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow -g -a claude-code
-```
-
-For a global Codex install:
-
-```bash
 npx skills add Adol1111/doc-driven-spec-workflow -g -a codex
-npx skills add Adol1111/doc-driven-spec-workflow --skill '*' -g -a codex
 ```
 
-Or target Codex one skill at a time:
+Combine flags for a specific agent and skill:
 
 ```bash
-npx skills add Adol1111/doc-driven-spec-workflow --skill docs-delivery-workflow -g -a codex
 npx skills add Adol1111/doc-driven-spec-workflow --skill milestone-planning -g -a codex
-npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow -g -a codex
 ```
 
-If you only want one stage, install just that skill by name.
-
-You can also install directly from each skill path:
+You can also install directly from a skill path:
 
 ```bash
-npx skills add https://github.com/Adol1111/doc-driven-spec-workflow/tree/main/skills/docs-delivery-workflow
-npx skills add https://github.com/Adol1111/doc-driven-spec-workflow/tree/main/skills/milestone-planning
-npx skills add https://github.com/Adol1111/doc-driven-spec-workflow/tree/main/skills/doc-driven-spec-workflow
+npx skills add https://github.com/Adol1111/doc-driven-spec-workflow/tree/main/skills/docs-workflow-bootstrap
 ```
 
 If you fork this repository, replace `Adol1111/doc-driven-spec-workflow` with your fork's `<owner>/<repo>` name.
@@ -289,9 +270,7 @@ scripts/install-skill-from-github.py --repo Adol1111/doc-driven-spec-workflow
 Or install each skill by pointing the installer at its path:
 
 ```bash
-scripts/install-skill-from-github.py --repo Adol1111/doc-driven-spec-workflow --path skills/docs-delivery-workflow
 scripts/install-skill-from-github.py --repo Adol1111/doc-driven-spec-workflow --path skills/milestone-planning
-scripts/install-skill-from-github.py --repo Adol1111/doc-driven-spec-workflow --path skills/doc-driven-spec-workflow
 ```
 
 Restart your agent after installation so it can discover the new skills.
@@ -302,21 +281,17 @@ Claude Code discovers personal skills from `~/.claude/skills/`:
 
 ```bash
 mkdir -p "$HOME/.claude/skills"
-cp -R skills/docs-delivery-workflow "$HOME/.claude/skills/"
-cp -R skills/milestone-planning "$HOME/.claude/skills/"
-cp -R skills/doc-driven-spec-workflow "$HOME/.claude/skills/"
+cp -R skills/<skill-name> "$HOME/.claude/skills/"
 ```
 
 For a project-local Claude Code skill shared with a repository:
 
 ```bash
 mkdir -p .claude/skills
-cp -R skills/docs-delivery-workflow .claude/skills/
-cp -R skills/milestone-planning .claude/skills/
-cp -R skills/doc-driven-spec-workflow .claude/skills/
+cp -R skills/<skill-name> .claude/skills/
 ```
 
-Claude Code also supports invoking each installed skill directly as `/docs-delivery-workflow`, `/milestone-planning`, or `/doc-driven-spec-workflow`.
+Claude Code also supports invoking each installed skill directly as `/docs-delivery-workflow`, `/docs-workflow-bootstrap`, `/milestone-planning`, or `/doc-driven-spec-workflow`.
 
 ### Manual Install For Codex
 
@@ -324,9 +299,7 @@ Codex discovers skills from `$CODEX_HOME/skills`, or `~/.codex/skills` when `COD
 
 ```bash
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-cp -R skills/docs-delivery-workflow "${CODEX_HOME:-$HOME/.codex}/skills/"
-cp -R skills/milestone-planning "${CODEX_HOME:-$HOME/.codex}/skills/"
-cp -R skills/doc-driven-spec-workflow "${CODEX_HOME:-$HOME/.codex}/skills/"
+cp -R skills/<skill-name> "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
 Restart Codex after copying the skill.
@@ -336,18 +309,14 @@ Restart Codex after copying the skill.
 If your agent uses a different skill directory, copy the installable skill folders into that directory:
 
 ```bash
-cp -R skills/docs-delivery-workflow /path/to/agent/skills/
-cp -R skills/milestone-planning /path/to/agent/skills/
-cp -R skills/doc-driven-spec-workflow /path/to/agent/skills/
+cp -R skills/<skill-name> /path/to/agent/skills/
 ```
 
 For example, in an environment that discovers skills from `~/.agents/skills`:
 
 ```bash
 mkdir -p "$HOME/.agents/skills"
-cp -R skills/docs-delivery-workflow "$HOME/.agents/skills/"
-cp -R skills/milestone-planning "$HOME/.agents/skills/"
-cp -R skills/doc-driven-spec-workflow "$HOME/.agents/skills/"
+cp -R skills/<skill-name> "$HOME/.agents/skills/"
 ```
 
 Restart the agent after installation.

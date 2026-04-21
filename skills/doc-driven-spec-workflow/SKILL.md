@@ -11,6 +11,7 @@ These are requirements, not suggestions. If any rule below is not satisfied, the
 
 - MUST NOT edit implementation code for a concrete `docs/tasks/*` task until spec approval, plan approval when required, branch/worktree isolation, and the readiness checkpoint are complete.
 - MUST keep pure docs governance in docs mode. Architecture edits, task/module reshaping, milestone updates, and index maintenance do not create implementation permission and do not require a new spec by default.
+- MUST defer repository docs scaffold initialization to `docs-workflow-bootstrap` when the main question is creating the minimum docs layout.
 - MUST defer roadmap decomposition to `milestone-planning` when the main question is how many milestones should exist, whether modules are needed, or how work should be split into tasks before selecting the current concrete task.
 - MUST treat routine cleanup and concept clarification as inline maintenance, not standalone tasks. Create a pure cleanup/governance/clarification task only when it is complex, cross-cutting, independently reviewable, or needs project-level execution tracking.
 - MUST use `docs/tasks/` as the only source of truth for concrete next work; if no open milestone/module/task exists, update `docs/tasks/` before writing a spec.
@@ -62,7 +63,7 @@ Use this skill when the repository uses `docs/architecture`, `docs/tasks`, `docs
 
 Task ownership: `docs/tasks/index.md` lists only open/completed milestones; milestone indexes list modules/progress when modules exist; module or milestone indexes list open/completed task directories, order, and dependencies; task-local `task.md` tracks source, status, dependencies, and acceptance points.
 
-This skill assumes the roadmap-layer docs shape already exists or is being updated separately. Its references define the compact docs shape used by current-task execution, task-local specs/plans, and bootstrap docs entry points. Roadmap decomposition and planning-stage output belong to `milestone-planning`.
+This skill assumes the minimum docs scaffold and roadmap-layer docs shape already exist or are being updated separately. Its references define the compact docs shape used by current-task execution and task-local specs/plans. Bootstrap belongs to `docs-workflow-bootstrap`; roadmap decomposition and planning-stage output belong to `milestone-planning`.
 
 ## Templates And Workflow
 
@@ -78,20 +79,11 @@ Load only the relevant reference:
 Do not load every template by default.
 Do not use these references as the default planning-stage output for milestone decomposition.
 
-## Bootstrap Docs Layout
+## Bootstrap Handoff
 
-When the user asks to initialize, bootstrap, create, or scaffold the docs workflow for a repository:
+When the user asks to initialize, bootstrap, create, or scaffold the minimum docs workflow for a repository, use `docs-workflow-bootstrap` instead of this skill.
 
-1. Create the minimum docs entry points:
-   - `docs/index.md`
-   - `docs/architecture/index.md`
-   - `docs/tasks/index.md`
-   - `docs/context/index.md`
-2. Use `references/index-template.md` for the index file shape.
-3. If the user or repository instructions specify a documentation language, write generated docs in that language.
-4. Do not create implementation tasks unless the user provides an actual milestone/task.
-5. Do not create `docs/specs/` or `docs/plans/` by default; create them only for standalone or cross-task documents.
-6. Report created or changed files and stop. This is docs governance work, not implementation permission.
+This skill may read or maintain bootstrap-created docs after they exist, but it is not the primary owner of repository scaffold initialization.
 
 Follow this order unless the user explicitly asks for something different:
 

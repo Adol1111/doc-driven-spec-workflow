@@ -1,19 +1,20 @@
 ---
 name: docs-delivery-workflow
-description: Use when a docs-driven repository needs an overall workflow decision across clarification, roadmap decomposition, and current-task spec execution, especially to decide whether to use brainstorming, milestone-planning, or doc-driven-spec-workflow next.
+description: Use when a docs-driven repository needs an overall workflow decision across bootstrap, clarification, roadmap decomposition, and current-task spec execution, especially to decide whether to use docs-workflow-bootstrap, brainstorming, milestone-planning, or doc-driven-spec-workflow next.
 ---
 
 # Docs Delivery Workflow
 
-Coordinate the overall docs-driven workflow across three stages:
+Coordinate the overall docs-driven workflow across four stages:
 
-`brainstorming -> milestone-planning -> doc-driven-spec-workflow`
+`docs-workflow-bootstrap -> brainstorming -> milestone-planning -> doc-driven-spec-workflow`
 
 This skill is an orchestrator. It decides which stage comes next and where to stop. It does not replace the stage-specific rules in the other skills.
 
 ## Mandatory Rules
 
 - MUST choose the next stage based on the user's current uncertainty and decision need, not by loading every workflow skill at once.
+- MUST use `docs-workflow-bootstrap` when the repository needs the minimum docs scaffold initialized.
 - MUST use `brainstorming` first when goals, constraints, success criteria, or scope boundaries are still ambiguous.
 - MUST use `milestone-planning` when the user needs roadmap decomposition: milestone count, module need, task breakdown, delivery order, or stage boundaries.
 - MUST use `doc-driven-spec-workflow` only after the current concrete task is chosen and the user is ready to write or revise that task's `spec.md`, optionally `plan.md`, and then move toward implementation.
@@ -21,6 +22,19 @@ This skill is an orchestrator. It decides which stage comes next and where to st
 - MUST stop at the end of each stage unless the user explicitly asks to continue into the next one.
 
 ## Stage Model
+
+## 0. Bootstrap
+
+Use `docs-workflow-bootstrap` when the repository lacks the minimum docs-driven workflow scaffold.
+
+Typical work:
+
+- create `docs/index.md`
+- create `docs/architecture/index.md`
+- create `docs/tasks/index.md`
+- create `docs/context/index.md`
+
+Stop after the scaffold is created and reported.
 
 ## 1. Clarification
 
@@ -68,6 +82,7 @@ Stop after the current concrete task checkpoint is resolved.
 Choose the next skill with this test:
 
 - "We still do not understand what we are building." -> `brainstorming`
+- "We need the minimum docs scaffold first." -> `docs-workflow-bootstrap`
 - "We understand the request, but not the milestone/module/task shape." -> `milestone-planning`
 - "We know the current task and need to execute it safely." -> `doc-driven-spec-workflow`
 
@@ -77,6 +92,7 @@ Do not use `doc-driven-spec-workflow` as the primary place to invent milestone s
 
 ## Handoff Rules
 
+- `docs-workflow-bootstrap -> brainstorming or milestone-planning`: after the minimum docs scaffold exists
 - `brainstorming -> milestone-planning`: after scope, boundaries, and success criteria are clear enough to plan delivery structure
 - `milestone-planning -> doc-driven-spec-workflow`: after the current concrete task is selected and the user wants to enter spec-first execution
 

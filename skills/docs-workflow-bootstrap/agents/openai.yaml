@@ -1,0 +1,4 @@
+interface:
+  display_name: "Docs Workflow Bootstrap"
+  short_description: "Initialize the minimum docs-driven workflow scaffold"
+  default_prompt: "Use $docs-workflow-bootstrap to initialize the minimum docs-driven workflow scaffold for this repository."
