@@ -12,28 +12,28 @@ This repository packages a reusable workflow for keeping implementation work ali
 
 ## Workflow Overview
 
-These skills are not parallel alternatives. They are different stages of one docs-driven delivery workflow:
+These skills are not parallel alternatives. Use the root skill as the entry point, then move through the relevant stage skills:
 
-`docs-delivery-workflow -> docs-workflow-bootstrap -> brainstorming -> milestone-planning -> doc-driven-spec-workflow`
+`doc-driven-spec-workflow -> docs-workflow-bootstrap -> brainstorming -> milestone-planning -> task-spec-execution`
 
 Not every request uses every stage:
 
-- Start with `docs-delivery-workflow` when the main question is which stage comes next.
+- Start with `doc-driven-spec-workflow` when the main question is which stage comes next.
 - Use `docs-workflow-bootstrap` when the repository needs the minimum docs scaffold.
 - Use `brainstorming` only when goals, scope, or success criteria are still unclear.
 - Use `milestone-planning` when the roadmap shape is unclear and you need to decide milestones, modules, and tasks.
-- Use `doc-driven-spec-workflow` after the current concrete task is chosen and you want to write the task-local spec and move toward implementation.
+- Use `task-spec-execution` after the current concrete task is chosen and you want to write the task-local spec and move toward implementation.
 
 ## Skill Responsibilities
 
-This repository currently contains three workflow skills plus one optional upstream clarification skill:
+This repository currently contains four workflow skills plus one optional upstream clarification skill:
 
 | Skill | Responsibility | Stop Point |
 | --- | --- | --- |
-| `docs-delivery-workflow` | Route work to the right workflow stage | When the next stage is clear |
+| `doc-driven-spec-workflow` | Route work to the right workflow stage | When the next stage is clear |
 | `docs-workflow-bootstrap` | Initialize the minimum docs scaffold | When core docs entry points are created |
 | `milestone-planning` | Decompose scope into `Milestone -> optional Module -> Task` | When roadmap docs are updated or the current task is selected |
-| `doc-driven-spec-workflow` | Execute the current task via `spec -> optional plan -> readiness -> implementation` | When the current task checkpoint and branch closing are resolved |
+| `task-spec-execution` | Execute the current task via `spec -> optional plan -> readiness -> implementation` | When the current task checkpoint and branch closing are resolved |
 | `brainstorming` | Clarify ambiguous intent before planning or spec work | When scope and success criteria are clear enough to continue |
 
 Roadmap planning and task reshaping are docs governance work. They do not automatically authorize spec writing or code changes.
@@ -95,7 +95,7 @@ You can also specify the language directly in a request:
 Use docs-workflow-bootstrap to initialize the docs workflow scaffold for this repository. Write all generated docs in Chinese.
 ```
 
-You can also fork this repository and translate the files under `skills/doc-driven-spec-workflow/references/` if you want the template headings themselves to be localized.
+You can also fork this repository and translate the files under each skill's `references/` directory if you want the template headings themselves to be localized.
 
 ## Usage
 
@@ -104,10 +104,10 @@ After installation, ask your agent to use the workflow when starting or continui
 Recommended entry point when you are unsure which stage comes next:
 
 ```text
-Use docs-delivery-workflow to decide whether this request needs clarification, milestone planning, or current-task spec execution.
+Use doc-driven-spec-workflow to decide whether this request needs bootstrap, clarification, milestone planning, or current-task spec execution.
 ```
 
-After entering through `docs-delivery-workflow`, you can usually keep moving stage by stage with messages like `continue`. Explicit approval points still require explicit confirmation, such as roadmap confirmation when needed, `spec.md` approval, `plan.md` approval, and branch-closing decisions.
+After entering through `doc-driven-spec-workflow`, you can usually keep moving stage by stage with messages like `continue`. Explicit approval points still require explicit confirmation, such as roadmap confirmation when needed, `spec.md` approval, `plan.md` approval, and branch-closing decisions.
 
 Use the roadmap decomposition skill directly when the main question is milestone or task structure:
 
@@ -118,28 +118,28 @@ Use milestone-planning to break this scope into milestones, modules, and tasks.
 Use the current-task execution skill directly when the concrete task is already chosen:
 
 ```text
-Use doc-driven-spec-workflow to pick the next task and write the spec.
+Use task-spec-execution to pick the next task and write the spec.
 ```
 
 For Claude Code, you can also invoke the individual skills directly:
 
 ```text
-/docs-delivery-workflow
+/doc-driven-spec-workflow
 /docs-workflow-bootstrap
 /milestone-planning
-/doc-driven-spec-workflow
+/task-spec-execution
 ```
 
 These skills are designed for repositories that use `docs/architecture/`, `docs/tasks/`, `docs/context/`, task-local `spec.md`, and optional `plan.md` files.
 
 ## Example Workflow
 
-1. Route the request with `docs-delivery-workflow`.
+1. Route the request with `doc-driven-spec-workflow`.
 2. Use `docs-workflow-bootstrap` if the repository still needs the minimum docs scaffold.
 3. Clarify ambiguous intent with `brainstorming` or an equivalent clarification flow when needed.
 4. Use `milestone-planning` to decide milestone, module, and task structure when the roadmap shape is still unclear.
 5. Select the current concrete task under `docs/tasks/`.
-6. Use `doc-driven-spec-workflow` to write or update the task-local `spec.md`.
+6. Use `task-spec-execution` to write or update the task-local `spec.md`.
 7. Stop for user approval before implementation.
 8. Create `plan.md` only when the task is genuinely complex.
 9. Run the readiness checkpoint and isolate work with a branch or worktree.
@@ -291,7 +291,7 @@ mkdir -p .claude/skills
 cp -R skills/<skill-name> .claude/skills/
 ```
 
-Claude Code also supports invoking each installed skill directly as `/docs-delivery-workflow`, `/docs-workflow-bootstrap`, `/milestone-planning`, or `/doc-driven-spec-workflow`.
+Claude Code also supports invoking each installed skill directly as `/doc-driven-spec-workflow`, `/docs-workflow-bootstrap`, `/milestone-planning`, or `/task-spec-execution`.
 
 ### Manual Install For Codex
 

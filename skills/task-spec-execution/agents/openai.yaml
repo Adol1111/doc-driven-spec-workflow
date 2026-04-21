@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task Spec Execution"
+  short_description: "Execute a concrete task through spec, readiness, implementation, and closing"
+  default_prompt: "Use $task-spec-execution to execute the current docs/tasks task through spec, optional plan, readiness checkpoints, implementation, verification, and branch closing."

@@ -45,6 +45,6 @@ Do not create roadmap details during bootstrap unless the user supplies actual r
 After bootstrap:
 
 - Use `milestone-planning` when the user wants to plan milestones, modules, and tasks.
-- Use `doc-driven-spec-workflow` only after a concrete task exists or is selected.
+- Use `task-spec-execution` only after a concrete task exists or is selected.
 
 Stop after reporting the bootstrap result unless the user explicitly asks to continue.

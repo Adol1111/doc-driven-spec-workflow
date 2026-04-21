@@ -12,28 +12,28 @@
 
 ## Workflow 总览
 
-这些 skills 不是并列替代关系，而是同一条 docs-driven delivery workflow 的不同阶段：
+这些 skills 不是并列替代关系。对外先使用 root skill 作为入口，再进入对应阶段 skill：
 
-`docs-delivery-workflow -> docs-workflow-bootstrap -> brainstorming -> milestone-planning -> doc-driven-spec-workflow`
+`doc-driven-spec-workflow -> docs-workflow-bootstrap -> brainstorming -> milestone-planning -> task-spec-execution`
 
 并不是每次都要走完整链路：
 
-- 当你不确定现在该进入哪个阶段时，从 `docs-delivery-workflow` 开始。
+- 当你不确定现在该进入哪个阶段时，从 `doc-driven-spec-workflow` 开始。
 - 当仓库还没有最小 docs scaffold 时，使用 `docs-workflow-bootstrap`。
 - 当目标、范围或成功标准还不清楚时，才进入 `brainstorming`。
 - 当 roadmap shape 还不清楚，需要决定 milestones、modules 和 tasks 时，使用 `milestone-planning`。
-- 当当前 concrete task 已经确定，并准备进入 task-local spec 和实现治理时，使用 `doc-driven-spec-workflow`。
+- 当当前 concrete task 已经确定，并准备进入 task-local spec 和实现治理时，使用 `task-spec-execution`。
 
 ## Skill 分工
 
-这个仓库目前包含三个 workflow skills，以及一个可选的上游澄清 skill：
+这个仓库目前包含四个 workflow skills，以及一个可选的上游澄清 skill：
 
 | Skill | 负责内容 | 停止点 |
 | --- | --- | --- |
-| `docs-delivery-workflow` | 路由到正确的 workflow 阶段 | 当下一阶段已经明确 |
+| `doc-driven-spec-workflow` | 路由到正确的 workflow 阶段 | 当下一阶段已经明确 |
 | `docs-workflow-bootstrap` | 初始化最小 docs scaffold | 当核心 docs 入口创建完成 |
 | `milestone-planning` | 把范围拆成 `Milestone -> 可选 Module -> Task` | 当 roadmap docs 更新完成，或当前 task 已选出 |
-| `doc-driven-spec-workflow` | 执行当前 task 的 `spec -> 可选 plan -> readiness -> implementation` | 当当前 task checkpoint 和 branch closing 处理完成 |
+| `task-spec-execution` | 执行当前 task 的 `spec -> 可选 plan -> readiness -> implementation` | 当当前 task checkpoint 和 branch closing 处理完成 |
 | `brainstorming` | 在 planning 或 spec work 之前澄清模糊意图 | 当 scope 和 success criteria 已足够清晰 |
 
 roadmap planning 和 task reshaping 都属于 docs governance，它们不会自动授权进入 spec 或代码实现。
@@ -95,7 +95,7 @@ Write all generated project documentation in Chinese unless the user explicitly 
 Use docs-workflow-bootstrap to initialize the docs workflow scaffold for this repository. Write all generated docs in Chinese.
 ```
 
-如果你希望模板标题本身也变成本地化语言，可以 fork 这个仓库，并翻译 `skills/doc-driven-spec-workflow/references/` 下的模板文件。
+如果你希望模板标题本身也变成本地化语言，可以 fork 这个仓库，并翻译各个 skill 的 `references/` 目录下的模板文件。
 
 ## 使用方式
 
@@ -104,10 +104,10 @@ Use docs-workflow-bootstrap to initialize the docs workflow scaffold for this re
 当你不确定现在应该进入哪个阶段时，推荐从总控 skill 开始：
 
 ```text
-Use docs-delivery-workflow to decide whether this request needs clarification, milestone planning, or current-task spec execution.
+Use doc-driven-spec-workflow to decide whether this request needs bootstrap, clarification, milestone planning, or current-task spec execution.
 ```
 
-从 `docs-delivery-workflow` 进入后，通常可以通过 `继续` 这样的消息按阶段往下推进。但遇到明确审批点时，仍然需要显式确认，例如 roadmap 结构确认、`spec.md` 批准、`plan.md` 批准，以及 branch closing 决策。
+从 `doc-driven-spec-workflow` 进入后，通常可以通过 `继续` 这样的消息按阶段往下推进。但遇到明确审批点时，仍然需要显式确认，例如 roadmap 结构确认、`spec.md` 批准、`plan.md` 批准，以及 branch closing 决策。
 
 当主要问题是 milestone 或 task 结构时，可以直接使用 roadmap decomposition skill：
 
@@ -118,28 +118,28 @@ Use milestone-planning to break this scope into milestones, modules, and tasks.
 当 concrete task 已经明确时，可以直接进入 current-task execution skill：
 
 ```text
-Use doc-driven-spec-workflow to pick the next task and write the spec.
+Use task-spec-execution to pick the next task and write the spec.
 ```
 
 Claude Code 也可以直接调用各个已安装的 skill：
 
 ```text
-/docs-delivery-workflow
+/doc-driven-spec-workflow
 /docs-workflow-bootstrap
 /milestone-planning
-/doc-driven-spec-workflow
+/task-spec-execution
 ```
 
 这些 skills 主要面向使用 `docs/architecture/`、`docs/tasks/`、`docs/context/`、task-local `spec.md` 和可选 `plan.md` 的仓库。
 
 ## 示例流程
 
-1. 用 `docs-delivery-workflow` 判断当前请求属于哪个阶段。
+1. 用 `doc-driven-spec-workflow` 判断当前请求属于哪个阶段。
 2. 如果仓库还没有最小 docs scaffold，使用 `docs-workflow-bootstrap` 初始化。
 3. 需要时，用 `brainstorming` 或等价澄清流程明确模糊意图。
 4. 当 roadmap shape 还不清楚时，用 `milestone-planning` 决定 milestone、module 和 task 结构。
 5. 在 `docs/tasks/` 下选定当前 concrete task。
-6. 用 `doc-driven-spec-workflow` 编写或更新 task-local `spec.md`。
+6. 用 `task-spec-execution` 编写或更新 task-local `spec.md`。
 7. 停下来等待用户批准，不直接进入实现。
 8. 只有任务确实复杂时才创建 `plan.md`。
 9. 运行 readiness checkpoint，并用 branch 或 worktree 隔离实现工作。

@@ -1,6 +1,6 @@
 ---
 name: milestone-planning
-description: Use when a request or repository needs roadmap decomposition before spec writing, especially to decide whether a batch of requirements should become one milestone or several, whether modules are needed, and how to split independently reviewable tasks.
+description: Use when a request or repository needs roadmap decomposition before spec writing because milestone boundaries, module grouping, or independently reviewable tasks are unclear.
 ---
 
 # Milestone Planning
@@ -19,9 +19,9 @@ This skill is for deciding `Milestone -> optional Module -> Task` shape, not for
 - MUST NOT create tasks for implementation mechanics such as single files, API endpoints, tests, migrations, refactors, code review, or docs updates when they belong inside one implementation round.
 - MUST explain why each milestone, module, and task boundary exists. Output structure without rationale is incomplete.
 - MUST use `brainstorming` first when the request is still ambiguous about goals, constraints, or success criteria.
-- MUST hand off to `doc-driven-spec-workflow` only after the current concrete task is chosen.
+- MUST hand off to `task-spec-execution` only after the current concrete task is chosen.
 - MUST treat milestone/module/task creation or reshaping as docs governance. Updating roadmap structure does not by itself authorize spec writing or implementation.
-- MUST keep its document output focused on roadmap structure and task selection. Task-local `spec.md`, `plan.md`, readiness, and implementation guidance belong to `doc-driven-spec-workflow`.
+- MUST keep its document output focused on roadmap structure and task selection. Task-local `spec.md`, `plan.md`, readiness, and implementation guidance belong to `task-spec-execution`.
 
 ## When To Use
 
@@ -165,8 +165,10 @@ If the repository already uses `docs/tasks/`, prefer updating or proposing roadm
 - optional `docs/tasks/<milestone>/<module>/index.md`
 - `docs/tasks/<milestone>/<task>/task.md`
 
+When writing these files, load `references/roadmap-template.md` for the exact planning-stage document shape.
+
 Do not write `spec.md` or `plan.md` here unless the user explicitly asks to continue into current-task spec execution.
-Do not use `doc-driven-spec-workflow` execution-side templates as the default output format for this stage.
+Do not use `task-spec-execution` execution-side templates as the default output format for this stage.
 
 When writing docs in this stage, prefer a compact planning-side output shape:
 
@@ -199,13 +201,13 @@ Do not expand into task-local design, implementation slices, or readiness instru
 
 ## Composition With Other Skills
 
-- `docs-delivery-workflow`: use when the main question is which stage of the docs-driven workflow comes next
+- `doc-driven-spec-workflow`: use when the main question is which stage of the docs-driven workflow comes next
 - `brainstorming`: use first when the request is still fuzzy or the product scope needs clarification
-- `doc-driven-spec-workflow`: use after the current concrete task is selected and the user wants to write or update the task spec
+- `task-spec-execution`: use after the current concrete task is selected and the user wants to write or update the task spec
 
 Recommended chain:
 
-`docs-delivery-workflow -> brainstorming -> milestone-planning -> doc-driven-spec-workflow`
+`doc-driven-spec-workflow -> brainstorming -> milestone-planning -> task-spec-execution`
 
 Skip `brainstorming` when the scope is already well-defined and the user only needs decomposition.
 
