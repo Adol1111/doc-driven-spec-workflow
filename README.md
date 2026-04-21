@@ -36,7 +36,24 @@ The installable skill is located at `skills/doc-driven-spec-workflow/`.
 
 ## Compatibility Notes
 
-This skill references `using-git-worktrees` for safe branch/worktree isolation when a workspace is dirty, shared, risky, or likely to conflict. That workflow skill comes from [obra/superpowers](https://github.com/obra/superpowers) and is optional but recommended. If your agent environment does not have `using-git-worktrees`, use your agent's equivalent git worktree or branch-isolation workflow instead, while preserving the same safety rule: do not start concrete implementation on an unsafe current branch, and do not delete or merge branches/worktrees without an explicit closing decision.
+This skill can work on its own, but it references two optional workflow skills from [obra/superpowers](https://github.com/obra/superpowers):
+
+- `brainstorming`: Clarifies ambiguous feature, behavior, or task intent before selecting a concrete task or writing a spec.
+- `using-git-worktrees`: Creates safe branch/worktree isolation when a workspace is dirty, shared, risky, or likely to conflict.
+
+If your agent environment does not have these skills, use equivalent clarification and git isolation workflows instead. Preserve the same safety rules: clarify unclear intent before locking a spec, do not start concrete implementation on an unsafe current branch, and do not delete or merge branches/worktrees without an explicit closing decision.
+
+## Why Not Just Use Superpowers?
+
+Superpowers is a broader software development methodology with many composable skills for brainstorming, planning, TDD, subagents, code review, verification, and branch finishing. This workflow is intentionally narrower:
+
+- It is organized around a repository's durable documentation structure: `docs/architecture/`, `docs/tasks/`, `docs/context/`, task-local `spec.md`, and optional `plan.md`.
+- It treats `docs/tasks/` as the source of truth for selecting concrete work, tracking milestone status, and preventing agents from inventing implementation tasks directly from architecture notes.
+- It separates docs governance from implementation permission, so architecture edits, roadmap reshaping, and index maintenance do not automatically authorize code changes.
+- It keeps TDD, heavyweight planning, and subagent workflows optional instead of mandatory, which makes it easier to use in projects that want spec-first coordination without adopting the full Superpowers methodology.
+- It can still compose with Superpowers where useful, especially `brainstorming` before ambiguous specs and `using-git-worktrees` before risky implementation work.
+
+Use Superpowers when you want the full end-to-end agentic development methodology. Use this workflow when your main need is to keep agents aligned with a docs-driven architecture, task roadmap, and spec approval process.
 
 ## Installation
 

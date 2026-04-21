@@ -76,23 +76,25 @@ Do not load every template by default.
 
 Follow this order unless the user explicitly asks for something different:
 
-1. Read `docs/index.md` and the relevant docs index files.
-2. Read the relevant `docs/architecture/` documents for behavior boundaries.
-3. Read the relevant `docs/tasks/` milestone/module index plus task directory or `task.md` for order, status, and dependencies.
-4. Use `docs/context/` only for supporting research or unstable reference material.
-5. If there is no suitable open task, update `docs/tasks/` before creating a spec.
-6. If implementing one concrete task, create or update its task directory and write one focused `spec.md` inside it.
-7. Stop after writing the spec; do not code until the user explicitly confirms it in the current thread.
-8. Create `plan.md` inside the task directory only for genuinely complex or multi-step work; if created, stop again for user confirmation before coding.
-9. Before implementation edits, announce and run the readiness checkpoint.
-10. Implement from the approved spec or plan, then verify, update docs/status, and resolve branch closing.
-11. Stop after one concrete task. Continue only when the user explicitly asks in the current thread.
-12. Add an `index.md` for every new major documentation section.
+1. If the user's feature, behavior, or task intent is ambiguous, use `brainstorming` when available, or an equivalent clarification workflow, before selecting or creating a concrete task.
+2. Read `docs/index.md` and the relevant docs index files.
+3. Read the relevant `docs/architecture/` documents for behavior boundaries.
+4. Read the relevant `docs/tasks/` milestone/module index plus task directory or `task.md` for order, status, and dependencies.
+5. Use `docs/context/` only for supporting research or unstable reference material.
+6. If there is no suitable open task, update `docs/tasks/` before creating a spec.
+7. If implementing one concrete task, create or update its task directory and write one focused `spec.md` inside it.
+8. Stop after writing the spec; do not code until the user explicitly confirms it in the current thread.
+9. Create `plan.md` inside the task directory only for genuinely complex or multi-step work; if created, stop again for user confirmation before coding.
+10. Before implementation edits, announce and run the readiness checkpoint.
+11. Implement from the approved spec or plan, then verify, update docs/status, and resolve branch closing.
+12. Stop after one concrete task. Continue only when the user explicitly asks in the current thread.
+13. Add an `index.md` for every new major documentation section.
 
 ## Execution Rules
 
 - Default flow: `spec -> user confirms -> code`
 - Complex flow: `spec -> user confirms -> plan -> user confirms -> code`
+- Ambiguous flow: `brainstorming or equivalent clarification -> spec -> user confirms -> code`
 - Do not default to TDD, plan-driven execution, or heavyweight shared workflows unless the user explicitly asks.
 - Write task-local specs/plans directly in this repository's compact local format.
 - Treat tests and verification as delivery checks, not as a mandatory test-first workflow.
