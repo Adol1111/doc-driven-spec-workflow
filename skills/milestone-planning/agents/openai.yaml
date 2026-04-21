@@ -1,0 +1,4 @@
+interface:
+  display_name: "Milestone Planning"
+  short_description: "Decompose roadmap scope into milestones, modules, and tasks"
+  default_prompt: "Use $milestone-planning to decide whether this scope should be one milestone or several, whether modules are needed, and how to split independently reviewable tasks."
