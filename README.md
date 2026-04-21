@@ -44,21 +44,7 @@ Install this repository as a skill set:
 npx skills add Adol1111/doc-driven-spec-workflow
 ```
 
-Then either choose skills interactively, or install all of them explicitly:
-
-```bash
-npx skills add Adol1111/doc-driven-spec-workflow --skill '*'
-```
-
-You can also install a specific stage only:
-
-```bash
-npx skills add Adol1111/doc-driven-spec-workflow --skill docs-delivery-workflow
-npx skills add Adol1111/doc-driven-spec-workflow --skill milestone-planning
-npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow
-```
-
-Restart your agent after installation so it can discover the new skills.
+Use interactive selection by default. See [Installation](#installation) for installing all skills, single stages, global agent targets, or manual copies.
 
 ## Bootstrap A Repository
 
@@ -118,6 +104,8 @@ Recommended entry point when you are unsure which stage comes next:
 ```text
 Use docs-delivery-workflow to decide whether this request needs clarification, milestone planning, or current-task spec execution.
 ```
+
+After entering through `docs-delivery-workflow`, you can usually keep moving stage by stage with messages like `continue`. Explicit approval points still require explicit confirmation, such as roadmap confirmation when needed, `spec.md` approval, `plan.md` approval, and branch-closing decisions.
 
 Use the roadmap decomposition skill directly when the main question is milestone or task structure:
 

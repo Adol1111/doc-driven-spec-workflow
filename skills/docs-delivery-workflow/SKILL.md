@@ -86,6 +86,15 @@ At each handoff, briefly restate:
 - what remains undecided
 - what the next skill is responsible for
 
+Treat a user message such as `continue` or `继续` as permission to advance to the next workflow stage only when the current stage is complete and no explicit approval gate is outstanding.
+
+Do not treat `continue` as automatic approval for:
+
+- roadmap structure that still needs confirmation
+- spec approval
+- plan approval
+- branch closing or destructive cleanup decisions
+
 ## Response Shape
 
 Keep orchestration responses compact:
