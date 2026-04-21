@@ -104,7 +104,7 @@ Follow this order unless the user explicitly asks for something different:
 
 - After completing a concrete `docs/tasks/*` task, do not start another task until branch closing is resolved.
 - If work happened on a task branch, ask whether to merge/delete, keep for review, or leave committed but unmerged.
-- If work happened in a worktree, follow `using-git-worktrees` cleanup and merge rules.
+- If work happened in a worktree, follow `using-git-worktrees` cleanup and merge rules when that skill is available; otherwise follow an equivalent safe worktree cleanup process.
 - Never delete a branch or worktree without confirming the closing decision.
 - If the user asks to continue, treat that as a prompt to resolve branch closing first, not permission to skip it.
 
@@ -124,12 +124,12 @@ Run this checkpoint after spec confirmation, and after plan confirmation when a 
 
 | Situation | Required action |
 | --- | --- |
-| Workspace is dirty, shared, already risky, or likely to conflict | Use `using-git-worktrees` |
+| Workspace is dirty, shared, already risky, or likely to conflict | Use `using-git-worktrees` when available, or an equivalent safe worktree workflow |
 | Workspace is clean and isolation risk is low | Create a dedicated task branch in place |
 | User explicitly asks to stay on the current branch | You may stay, but only because the user explicitly chose that |
 
 - Never start implementation for a concrete task on the current branch by default.
-- If a worktree is needed, do not manage it manually; use `using-git-worktrees`.
+- If a worktree is needed, prefer `using-git-worktrees`; if it is unavailable, use the environment's equivalent git worktree workflow and preserve the same safety checks.
 - Before the first implementation edit, tell the user: `Spec/plan is approved. I am handling branch isolation now before coding.`
 
 ## Task And Status Rules

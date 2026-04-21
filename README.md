@@ -34,6 +34,10 @@ This repository packages a reusable workflow for keeping implementation work ali
 
 The installable skill is located at `skills/doc-driven-spec-workflow/`.
 
+## Compatibility Notes
+
+This skill references `using-git-worktrees` for safe branch/worktree isolation when a workspace is dirty, shared, risky, or likely to conflict. That workflow skill comes from [obra/superpowers](https://github.com/obra/superpowers) and is optional but recommended. If your agent environment does not have `using-git-worktrees`, use your agent's equivalent git worktree or branch-isolation workflow instead, while preserving the same safety rule: do not start concrete implementation on an unsafe current branch, and do not delete or merge branches/worktrees without an explicit closing decision.
+
 ## Installation
 
 ### Install With `npx skills`
