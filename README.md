@@ -38,13 +38,25 @@ Roadmap planning and task reshaping are docs governance work. They do not automa
 
 ## Quick Start
 
-For the full staged workflow, install all three skill folders from this repository:
+Install this repository as a skill set:
 
-- `skills/docs-delivery-workflow`
-- `skills/milestone-planning`
-- `skills/doc-driven-spec-workflow`
+```bash
+npx skills add Adol1111/doc-driven-spec-workflow
+```
 
-If you only want the current-task execution phase, you can install just `skills/doc-driven-spec-workflow`.
+Then either choose skills interactively, or install all of them explicitly:
+
+```bash
+npx skills add Adol1111/doc-driven-spec-workflow --skill '*'
+```
+
+You can also install a specific stage only:
+
+```bash
+npx skills add Adol1111/doc-driven-spec-workflow --skill docs-delivery-workflow
+npx skills add Adol1111/doc-driven-spec-workflow --skill milestone-planning
+npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow
+```
 
 Restart your agent after installation so it can discover the new skills.
 
@@ -214,7 +226,19 @@ Use Superpowers when you want the full end-to-end agentic development methodolog
 
 ### Install With `npx skills` (Recommended)
 
-Install the full workflow one skill at a time:
+Install this repository as a skill set:
+
+```bash
+npx skills add Adol1111/doc-driven-spec-workflow
+```
+
+Install all skills from the repo explicitly:
+
+```bash
+npx skills add Adol1111/doc-driven-spec-workflow --skill '*'
+```
+
+Or install the full workflow one skill at a time:
 
 ```bash
 npx skills add Adol1111/doc-driven-spec-workflow --skill docs-delivery-workflow
@@ -225,6 +249,13 @@ npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflo
 For a global Claude Code install:
 
 ```bash
+npx skills add Adol1111/doc-driven-spec-workflow -g -a claude-code
+npx skills add Adol1111/doc-driven-spec-workflow --skill '*' -g -a claude-code
+```
+
+Or target Claude Code one skill at a time:
+
+```bash
 npx skills add Adol1111/doc-driven-spec-workflow --skill docs-delivery-workflow -g -a claude-code
 npx skills add Adol1111/doc-driven-spec-workflow --skill milestone-planning -g -a claude-code
 npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow -g -a claude-code
@@ -233,12 +264,19 @@ npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflo
 For a global Codex install:
 
 ```bash
+npx skills add Adol1111/doc-driven-spec-workflow -g -a codex
+npx skills add Adol1111/doc-driven-spec-workflow --skill '*' -g -a codex
+```
+
+Or target Codex one skill at a time:
+
+```bash
 npx skills add Adol1111/doc-driven-spec-workflow --skill docs-delivery-workflow -g -a codex
 npx skills add Adol1111/doc-driven-spec-workflow --skill milestone-planning -g -a codex
 npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow -g -a codex
 ```
 
-If you only want one stage, install just that skill's folder.
+If you only want one stage, install just that skill by name.
 
 You can also install directly from each skill path:
 
@@ -254,7 +292,13 @@ Restart your agent after installation so it can discover the new skills.
 
 ### Install With Codex Skill Installer
 
-Install each skill by pointing the installer at its path:
+Install from the repository path directly:
+
+```bash
+scripts/install-skill-from-github.py --repo Adol1111/doc-driven-spec-workflow
+```
+
+Or install each skill by pointing the installer at its path:
 
 ```bash
 scripts/install-skill-from-github.py --repo Adol1111/doc-driven-spec-workflow --path skills/docs-delivery-workflow
