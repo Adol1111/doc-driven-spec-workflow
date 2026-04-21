@@ -1,0 +1,4 @@
+interface:
+  display_name: "Doc-Driven Spec Workflow"
+  short_description: "Keep agent work aligned with docs, specs, and tasks"
+  default_prompt: "Use $doc-driven-spec-workflow to align implementation with docs, task tracking, specs, plans, and readiness checkpoints."
