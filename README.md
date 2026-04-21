@@ -38,47 +38,67 @@ The installable skill is located at `skills/doc-driven-spec-workflow/`.
 
 ### Install With `npx skills`
 
-After pushing this repository to GitHub, install the skill with the open agent skills CLI:
+Install the skill with the open agent skills CLI:
 
 ```bash
-npx skills add <owner>/<repo> --skill doc-driven-spec-workflow
+npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow
+```
+
+For a global Claude Code install:
+
+```bash
+npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow -g -a claude-code
 ```
 
 For a global Codex install:
 
 ```bash
-npx skills add <owner>/<repo> --skill doc-driven-spec-workflow -g -a codex
+npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow -g -a codex
+```
+
+For a global install to both Claude Code and Codex:
+
+```bash
+npx skills add Adol1111/doc-driven-spec-workflow --skill doc-driven-spec-workflow -g -a claude-code -a codex
 ```
 
 You can also install directly from the skill path:
 
 ```bash
-npx skills add https://github.com/<owner>/<repo>/tree/main/skills/doc-driven-spec-workflow
+npx skills add https://github.com/Adol1111/doc-driven-spec-workflow/tree/main/skills/doc-driven-spec-workflow
 ```
 
-Replace `<owner>/<repo>` with the GitHub repository name, for example:
-
-```bash
-npx skills add your-name/doc-driven-spec-workflow --skill doc-driven-spec-workflow -g -a codex
-```
+If you fork this repository, replace `Adol1111/doc-driven-spec-workflow` with your fork's `<owner>/<repo>` name.
 
 Restart your agent after installation so it can discover the new skill.
 
 ### Install With Codex Skill Installer
 
-After pushing this repository to GitHub, install it by pointing the installer at the skill path:
+Install it by pointing the installer at the skill path:
 
 ```bash
-scripts/install-skill-from-github.py --repo <owner>/<repo> --path skills/doc-driven-spec-workflow
-```
-
-Replace `<owner>/<repo>` with the GitHub repository name, for example:
-
-```bash
-scripts/install-skill-from-github.py --repo your-name/doc-driven-spec-workflow --path skills/doc-driven-spec-workflow
+scripts/install-skill-from-github.py --repo Adol1111/doc-driven-spec-workflow --path skills/doc-driven-spec-workflow
 ```
 
 Restart your agent after installation so it can discover the new skill.
+
+### Manual Install For Claude Code
+
+Claude Code discovers personal skills from `~/.claude/skills/`:
+
+```bash
+mkdir -p "$HOME/.claude/skills"
+cp -R skills/doc-driven-spec-workflow "$HOME/.claude/skills/"
+```
+
+For a project-local Claude Code skill shared with a repository:
+
+```bash
+mkdir -p .claude/skills
+cp -R skills/doc-driven-spec-workflow .claude/skills/
+```
+
+Claude Code also supports invoking the skill directly as `/doc-driven-spec-workflow` after it is installed.
 
 ### Manual Install For Codex
 
