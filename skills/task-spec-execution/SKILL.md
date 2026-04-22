@@ -5,6 +5,13 @@ description: Use when a docs-driven repository has a selected or selectable conc
 
 # Task Spec Execution
 
+## Composition
+
+- Entry: normally reached from `doc-driven-spec-workflow` or `milestone-planning` after a concrete task exists or is selected.
+- Owns: task-local `spec.md`, optional task-local `plan.md`, readiness checks, implementation governance, verification, docs/status updates, and branch closing.
+- Does not own: minimum docs scaffold bootstrap, milestone boundary decisions, module grouping, roadmap-layer task creation, or planning-stage templates.
+- Handoff: return to `doc-driven-spec-workflow` after one concrete task checkpoint and branch closing are resolved.
+
 ## Mandatory Rules
 
 These are requirements, not suggestions. If any rule below is not satisfied, the work is blocked until it is satisfied.
@@ -14,10 +21,10 @@ These are requirements, not suggestions. If any rule below is not satisfied, the
 - MUST defer repository docs scaffold initialization to `docs-workflow-bootstrap` when the main question is creating the minimum docs layout.
 - MUST defer roadmap decomposition to `milestone-planning` when the main question is how many milestones should exist, whether modules are needed, or how work should be split into tasks before selecting the current concrete task.
 - MUST treat routine cleanup and concept clarification as inline maintenance, not standalone tasks. Create a pure cleanup/governance/clarification task only when it is complex, cross-cutting, independently reviewable, or needs project-level execution tracking.
-- MUST use `docs/tasks/` as the only source of truth for concrete next work; if no open milestone/module/task exists, update `docs/tasks/` before writing a spec.
-- MUST size tasks as complete implementation rounds that deliver user-visible behavior, system capability, or a coherent project outcome. NEVER create a task for code review, a single test, single file edit, refactor step, migration file, or other implementation/verification sub-step.
-- MUST treat the module layer as optional. Use `Milestone -> tasks` when a milestone has only one real capability area; use `Milestone -> modules -> tasks` only when multiple meaningful capability areas exist.
-- MUST treat completed milestones as frozen history. NEVER reopen them or add modules/tasks to them; put follow-up work in a new open milestone.
+- MUST use `docs/tasks/` as the only source of truth for concrete next work; if no suitable open task exists, stop and use `milestone-planning` before writing a spec.
+- MUST respect task sizing from the roadmap. If the selected task is too small, too broad, or only an implementation sub-step, stop and use `milestone-planning` to reshape it before writing a spec.
+- MUST respect the module layer chosen by the roadmap. Do not create, remove, or regroup modules here.
+- MUST treat completed milestones as frozen history. NEVER reopen them or add modules/tasks to them; use `milestone-planning` for follow-up work.
 - MUST resolve the previous task checkpoint before starting another concrete task. Default action is commit; uncommitted checkpoints require explicit user approval.
 - MUST NOT treat checkpoint rules as permission to auto-commit newly made docs-only/governance changes. Report the diff/result first; commit only when the user explicitly asked for commit upfront or confirms after review.
 - MUST resolve branch closing after completing a concrete task: verification, docs/status updates, commit or approved uncommitted checkpoint, and branch closing decision.
@@ -29,13 +36,13 @@ Spec creation requirements:
 - MUST place concrete task specs and plans inside the task directory by default: `docs/tasks/<milestone>/<module>/<task>/task.md`, `spec.md`, and optional `plan.md`.
 - MUST use global `docs/specs/` or `docs/plans/` only for standalone or cross-task documents that do not belong to one concrete task.
 - MUST revise the existing spec for that task instead of creating a second spec for corrections or clarifications.
-- MUST split the task in `docs/tasks/` first if multiple specs seem necessary. NEVER silently create multiple specs for one task.
+- MUST stop and use `milestone-planning` to split the task first if multiple specs seem necessary. NEVER silently create multiple specs for one task.
 
 Violations that require stopping immediately:
 
 - Coding before branch/worktree isolation.
 - Skipping the checkpoint because a change seems small.
-- Inferring a task directly from architecture without adding it to `docs/tasks/`.
+- Inferring a task directly from architecture instead of using `milestone-planning` to add or select it in `docs/tasks/`.
 - Creating standalone tasks for routine cleanup, concept clarification, link fixes, renames, formatting, index maintenance, or small docs reorganization that should be handled in the current work round.
 - Splitting implementation or delivery verification into separate tasks, such as "code review", "write unit tests", "add repository file", "update handler", or "write migration" when they belong to one coherent implementation round.
 - Creating tiny modules as buckets for one-off tasks, or one catch-all module when tasks should live directly under the milestone.
@@ -151,8 +158,8 @@ Run this checkpoint after spec confirmation, and after plan confirmation when a 
 - Use `docs/tasks/` to decide the next task, not `docs/context/`.
 - Do not infer a new concrete implementation task from `docs/architecture/` alone.
 - If architecture implies follow-up work but `docs/tasks/` has no corresponding open task, use `milestone-planning` or an equivalent roadmap update flow before creating a spec.
-- Modules are optional durable capability areas. Use them only for navigational value; if a milestone has one real capability area, place task directories directly under the milestone. Merge modules with fewer than three likely tasks unless they have distinct domain, ownership, dependency graph, release boundary, risk profile, or acceptance criteria.
-- Tasks should fit one focused branch while including implementation, tests, docs/status updates, code review, and verification. Split only when pieces can ship, verify, or be reviewed independently with different acceptance outcomes.
+- Modules are optional durable capability areas owned by roadmap planning. Respect the selected task's existing milestone/module placement; if placement seems wrong, stop and use `milestone-planning`.
+- Tasks should fit one focused branch while including implementation, tests, docs/status updates, code review, and verification. If the selected task does not fit that shape, stop and use `milestone-planning` before writing a spec.
 - Keep implementation steps inside `spec.md`, optional `plan.md`, or checklist items; do not promote them into tasks.
 - Task-level `Depends on` should normally stay within the same milestone. Put cross-milestone sequencing in milestone-level `Notes`, `Exit Criteria`, or roadmap text; if future task details depend on an earlier milestone, keep them as roadmap text or milestone-level `planned`.
 - Respect task dependencies exactly as written.
@@ -162,7 +169,7 @@ Run this checkpoint after spec confirmation, and after plan confirmation when a 
 - Milestone indexes list modules/progress when modules exist; module or milestone indexes keep `Open Tasks` and `Completed Tasks` accurate.
 - Each concrete task should be a directory containing `task.md`, task-local `spec.md`, and optional `plan.md`.
 - `task.md` tracks status, dependencies, and acceptance points; it should not become a detailed step-by-step implementation plan.
-- When all current open tasks are complete, decide whether the current milestone is complete; if yes, move it to completed and continue in a new open milestone; if no, add missing module/task under the open milestone before creating any spec.
+- When all current open tasks are complete, report whether the current milestone appears complete. Use `milestone-planning` before moving milestone state or adding missing module/task work.
 - Pure cleanup, concept clarification, or docs governance belongs in the current work round by default. Create a task directory only for complex/cross-cutting governance or clarification with independent acceptance or project-level execution state; even then, do not create a spec unless it drives concrete implementation.
 
 If you need the selected task directory or `task.md` execution shape, read `references/task-execution-template.md`. If you need milestone/module index shape or roadmap-layer task creation, use `milestone-planning` and its `references/roadmap-template.md`.

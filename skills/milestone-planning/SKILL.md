@@ -9,6 +9,13 @@ Plan roadmap structure before task-local spec work begins.
 
 This skill is for deciding `Milestone -> optional Module -> Task` shape, not for writing implementation specs, using execution-side templates, or managing implementation execution. It helps keep task tracking aligned with delivery phases instead of topic lists or engineering sub-steps.
 
+## Composition
+
+- Entry: normally reached from `doc-driven-spec-workflow` after scope is clear enough to plan delivery structure.
+- Owns: milestone boundaries, optional module grouping, roadmap-layer task breakdown, task order, dependency notes, and planning-stage `docs/tasks/` documents.
+- Does not own: repository scaffold bootstrap, task-local `spec.md`, task-local `plan.md`, readiness checks, implementation, verification, or branch closing.
+- Handoff: use `task-spec-execution` only after the current concrete task is selected and the user wants to enter spec-first execution.
+
 ## Mandatory Rules
 
 - MUST identify the delivery boundary before creating milestones. Start from release goal, phase boundary, and acceptance boundary, not from the number of features mentioned.
@@ -199,15 +206,11 @@ When writing docs in this stage, prefer a compact planning-side output shape:
 Keep this stage focused on planning-ready task metadata and roadmap navigation.
 Do not expand into task-local design, implementation slices, or readiness instructions.
 
-## Composition With Other Skills
+## Related Skills
 
-- `doc-driven-spec-workflow`: use when the main question is which stage of the docs-driven workflow comes next
-- `brainstorming`: use first when the request is still fuzzy or the product scope needs clarification
-- `task-spec-execution`: use after the current concrete task is selected and the user wants to write or update the task spec
-
-Recommended chain:
-
-`doc-driven-spec-workflow -> brainstorming -> milestone-planning -> task-spec-execution`
+- Use `doc-driven-spec-workflow` when the main question is which stage of the docs-driven workflow comes next.
+- Use `brainstorming` first when the request is still fuzzy or the product scope needs clarification.
+- Use `task-spec-execution` after the current concrete task is selected and the user wants to write or update the task spec.
 
 Skip `brainstorming` when the scope is already well-defined and the user only needs decomposition.
 

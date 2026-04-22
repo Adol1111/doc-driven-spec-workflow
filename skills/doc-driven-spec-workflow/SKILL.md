@@ -3,11 +3,13 @@ name: doc-driven-spec-workflow
 description: Use when a docs-driven repository request is unclear about whether the next step is scaffold initialization, clarification, roadmap decomposition, or current-task execution.
 ---
 
-# Doc-Driven Spec Workflow
+# Using Doc-Driven Spec Workflow
 
 Use this root skill to select and coordinate the right docs-driven workflow skill.
 
 This skill is the entry protocol for the workflow. It does not own bootstrap, planning, specs, plans, implementation, templates, or branch-closing details. Those belong to the stage-specific skills.
+
+This is analogous to `using-superpowers`: it makes the agent choose and respect the right composable skill instead of improvising the whole workflow from memory.
 
 ## Mandatory Rules
 

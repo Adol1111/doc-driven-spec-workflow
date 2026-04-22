@@ -9,6 +9,13 @@ Initialize the minimum docs-driven workflow scaffold for a repository.
 
 This skill is only for repository documentation bootstrap. It does not plan milestones, create implementation tasks, write specs, or authorize code changes.
 
+## Composition
+
+- Entry: normally reached from `doc-driven-spec-workflow` when the repository lacks the minimum docs scaffold.
+- Owns: minimum docs entry points and compact bootstrap content.
+- Does not own: roadmap decomposition, task creation, task-local specs, plans, implementation, or branch closing.
+- Handoff: return to `doc-driven-spec-workflow` after reporting created or changed files, unless the user explicitly asks to continue to planning.
+
 ## Mandatory Rules
 
 - MUST keep bootstrap work in docs governance mode.
@@ -44,7 +51,8 @@ Do not create roadmap details during bootstrap unless the user supplies actual r
 
 After bootstrap:
 
-- Use `milestone-planning` when the user wants to plan milestones, modules, and tasks.
-- Use `task-spec-execution` only after a concrete task exists or is selected.
+- Return to `doc-driven-spec-workflow` so it can choose the next stage.
+- Continue directly to `milestone-planning` only when the user explicitly asks to plan milestones, modules, and tasks.
+- Continue directly to `task-spec-execution` only when the user explicitly asks and a concrete task already exists or is selected.
 
 Stop after reporting the bootstrap result unless the user explicitly asks to continue.
