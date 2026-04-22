@@ -36,8 +36,8 @@ This repository currently contains four workflow skills plus one optional upstre
 | --- | --- | --- |
 | `doc-driven-spec-workflow` | Route work to the right workflow stage | When the next stage is clear |
 | `docs-workflow-bootstrap` | Initialize the minimum docs scaffold | When core docs entry points are created |
-| `milestone-planning` | Decompose scope into `Milestone -> optional Module -> Task` | When roadmap docs are updated or the current task is selected |
-| `task-spec-execution` | Execute the current task via `spec -> optional plan -> readiness -> implementation` | When the current task checkpoint and branch closing are resolved |
+| `milestone-planning` | Decompose scope into `Milestone -> optional Module -> Task` | When roadmap docs are updated, or the current task is selected |
+| `task-spec-execution` | Execute a selected task via `spec -> optional plan -> readiness -> implementation` | When the current task checkpoint and branch closing are resolved |
 | `brainstorming` | Clarify ambiguous intent before planning or spec work | When scope and success criteria are clear enough to continue |
 
 Roadmap planning and task reshaping are docs governance work. They do not automatically authorize spec writing or code changes.
@@ -119,7 +119,7 @@ Use the roadmap decomposition skill directly when the main question is milestone
 Use milestone-planning to break this scope into milestones, modules, and tasks.
 ```
 
-Use the current-task execution skill directly when the concrete task is already chosen:
+Use the current-task execution skill directly when the concrete task already exists or is already chosen:
 
 ```text
 Use task-spec-execution to pick the next task and write the spec.
@@ -157,7 +157,7 @@ These skills are designed for repositories that use `docs/architecture/`, `docs/
 - Keeps architecture, task tracking, specs, and status updates aligned.
 - Separates docs governance from implementation permission.
 - Enforces readiness checkpoints before code edits, including branch or worktree isolation.
-- Provides compact templates for architecture docs, task indexes, specs, plans, and context notes.
+- Keeps templates with their owning stage: roadmap templates in `milestone-planning`, execution templates in `task-spec-execution`.
 
 ## Expected Docs Layout
 
@@ -198,7 +198,7 @@ The module layer is optional. Use `docs/tasks/<milestone>/<task>/` when a milest
 
 ## Compatibility Notes
 
-The current-task execution skill can work on its own, but this repository is designed to compose with optional clarification and execution-safety skills from [obra/superpowers](https://github.com/obra/superpowers):
+The current-task execution skill can work on its own after a concrete task exists, but this repository is designed to compose with optional clarification and execution-safety skills from [obra/superpowers](https://github.com/obra/superpowers):
 
 - `brainstorming`: Clarifies ambiguous feature, behavior, or task intent before roadmap decomposition or current-task spec work.
 - `using-git-worktrees`: Creates safe branch/worktree isolation when a workspace is dirty, shared, risky, or likely to conflict.

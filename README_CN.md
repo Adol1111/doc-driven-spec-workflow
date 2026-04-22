@@ -37,7 +37,7 @@ root skill 不拥有模板或实现细节。它只负责路由、交接上下文
 | `doc-driven-spec-workflow` | 路由到正确的 workflow 阶段 | 当下一阶段已经明确 |
 | `docs-workflow-bootstrap` | 初始化最小 docs scaffold | 当核心 docs 入口创建完成 |
 | `milestone-planning` | 把范围拆成 `Milestone -> 可选 Module -> Task` | 当 roadmap docs 更新完成，或当前 task 已选出 |
-| `task-spec-execution` | 执行当前 task 的 `spec -> 可选 plan -> readiness -> implementation` | 当当前 task checkpoint 和 branch closing 处理完成 |
+| `task-spec-execution` | 执行已选 task 的 `spec -> 可选 plan -> readiness -> implementation` | 当当前 task checkpoint 和 branch closing 处理完成 |
 | `brainstorming` | 在 planning 或 spec work 之前澄清模糊意图 | 当 scope 和 success criteria 已足够清晰 |
 
 roadmap planning 和 task reshaping 都属于 docs governance，它们不会自动授权进入 spec 或代码实现。
@@ -119,7 +119,7 @@ Use doc-driven-spec-workflow to decide whether this request needs bootstrap, cla
 Use milestone-planning to break this scope into milestones, modules, and tasks.
 ```
 
-当 concrete task 已经明确时，可以直接进入 current-task execution skill：
+当 concrete task 已经存在或已经明确时，可以直接进入 current-task execution skill：
 
 ```text
 Use task-spec-execution to pick the next task and write the spec.
@@ -157,7 +157,7 @@ Claude Code 也可以直接调用各个已安装的 skill：
 - 保持 architecture、task tracking、spec 和 status updates 对齐。
 - 区分 docs governance 和 implementation permission。
 - 在写代码前执行 readiness checkpoint，包括 branch/worktree isolation。
-- 提供 architecture docs、task indexes、specs、plans 和 context notes 的紧凑模板。
+- 模板跟随所属阶段：roadmap 模板归 `milestone-planning`，execution 模板归 `task-spec-execution`。
 
 ## 期望的 Docs 结构
 
@@ -198,7 +198,7 @@ module 层是可选的。当 milestone 只有一个真实能力域时，使用 `
 
 ## 兼容说明
 
-current-task execution skill 可以独立使用，但这个仓库的整体 workflow 设计上会和 [obra/superpowers](https://github.com/obra/superpowers) 中的可选澄清与执行安全 skills 组合：
+current-task execution skill 在 concrete task 已经存在后可以独立使用，但这个仓库的整体 workflow 设计上会和 [obra/superpowers](https://github.com/obra/superpowers) 中的可选澄清与执行安全 skills 组合：
 
 - `brainstorming`：在 roadmap decomposition 或 current-task spec work 之前，澄清模糊的 feature、behavior 或 task intent。
 - `using-git-worktrees`：当 workspace dirty、shared、风险较高或可能冲突时，创建安全的 branch/worktree isolation。
