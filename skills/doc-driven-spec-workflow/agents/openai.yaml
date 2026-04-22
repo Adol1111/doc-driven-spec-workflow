@@ -1,4 +1,4 @@
 interface:
   display_name: "Doc-Driven Spec Workflow"
-  short_description: "Route docs-driven work across bootstrap, clarification, planning, and task execution"
+  short_description: "Select the right stage skill for docs-driven workflow work"
   default_prompt: "Use $doc-driven-spec-workflow to decide whether this docs-driven request should go to docs-workflow-bootstrap, brainstorming, milestone-planning, or task-spec-execution next."

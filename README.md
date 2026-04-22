@@ -1,18 +1,20 @@
 # Doc-Driven Spec Workflow
 
-[中文说明](./README_CN.md) · [Changelog](./CHANGELOG.md)
+[中文说明](./README_CN.md) · [Release Notes](./RELEASE-NOTES.md)
 
-A docs-driven workflow skill set for AI coding agents.
+A docs-driven workflow methodology for AI coding agents.
 
-This repository packages a reusable workflow for keeping implementation work aligned with project documentation. It is useful for repositories that organize work around architecture docs, task roadmaps, task-local specs, optional plans, and explicit readiness checkpoints before code changes.
+This repository packages a reusable methodology for keeping implementation work aligned with project documentation. It is useful for repositories that organize work around architecture docs, task roadmaps, task-local specs, optional plans, and explicit readiness checkpoints before code changes.
 
-> Opinionated workflow skill set
+> Opinionated workflow methodology
 >
 > This project is intentionally focused on docs-driven repositories. It is not a general replacement for every agent development workflow; it is a lightweight way to make agents respect architecture docs, task tracking, roadmap decomposition, spec approval, and branch readiness before implementation.
 
-## Workflow Overview
+## How It Works
 
-These skills are not parallel alternatives. Use the root skill as the entry point, then move through the relevant stage skills:
+Like Superpowers, this project splits a larger agent workflow into composable stage skills. The root skill, `doc-driven-spec-workflow`, plays the same kind of role as an entry protocol: it decides which stage skill applies next and where the agent must stop.
+
+The stage chain is:
 
 `doc-driven-spec-workflow -> docs-workflow-bootstrap -> brainstorming -> milestone-planning -> task-spec-execution`
 
@@ -24,7 +26,9 @@ Not every request uses every stage:
 - Use `milestone-planning` when the roadmap shape is unclear and you need to decide milestones, modules, and tasks.
 - Use `task-spec-execution` after the current concrete task is chosen and you want to write the task-local spec and move toward implementation.
 
-## Skill Responsibilities
+The root skill does not own templates or implementation details. It routes, hands off context, and protects approval gates. Stage-specific skills own their own rules, templates, and stop points.
+
+## Skills Library
 
 This repository currently contains four workflow skills plus one optional upstream clarification skill:
 
@@ -40,13 +44,13 @@ Roadmap planning and task reshaping are docs governance work. They do not automa
 
 ## Quick Start
 
-Install this repository as a skill set:
+Install this repository as a workflow skill set:
 
 ```bash
 npx skills add Adol1111/doc-driven-spec-workflow
 ```
 
-Use interactive selection by default. See [Installation](#installation) for installing all skills, single stages, global agent targets, or manual copies.
+Install the full set by default. See [Installation](#installation) for single-stage installs, global agent targets, or manual copies.
 
 ## Bootstrap A Repository
 
@@ -99,7 +103,7 @@ You can also fork this repository and translate the files under each skill's `re
 
 ## Usage
 
-After installation, ask your agent to use the workflow when starting or continuing work in a docs-driven repository.
+After installation, ask your agent to use the root workflow skill when starting or continuing work in a docs-driven repository.
 
 Recommended entry point when you are unsure which stage comes next:
 
@@ -107,7 +111,7 @@ Recommended entry point when you are unsure which stage comes next:
 Use doc-driven-spec-workflow to decide whether this request needs bootstrap, clarification, milestone planning, or current-task spec execution.
 ```
 
-After entering through `doc-driven-spec-workflow`, you can usually keep moving stage by stage with messages like `continue`. Explicit approval points still require explicit confirmation, such as roadmap confirmation when needed, `spec.md` approval, `plan.md` approval, and branch-closing decisions.
+After entering through `doc-driven-spec-workflow`, you can usually keep moving stage by stage with messages like `continue`. The root skill should route to one stage skill at a time and carry forward handoff context. Explicit approval points still require explicit confirmation, such as roadmap confirmation when needed, `spec.md` approval, `plan.md` approval, and branch-closing decisions.
 
 Use the roadmap decomposition skill directly when the main question is milestone or task structure:
 
@@ -148,7 +152,7 @@ These skills are designed for repositories that use `docs/architecture/`, `docs/
 ## What It Does
 
 - Treats `docs/tasks/` as the source of truth for roadmap and concrete implementation work.
-- Separates workflow routing, roadmap decomposition, and current-task execution into distinct skills.
+- Separates the root routing protocol, roadmap decomposition, and current-task execution into distinct skills.
 - Requires task-local specs before implementation and optional plans for complex work.
 - Keeps architecture, task tracking, specs, and status updates aligned.
 - Separates docs governance from implementation permission.
@@ -218,7 +222,7 @@ Use Superpowers when you want the full end-to-end agentic development methodolog
 
 ### Install With `npx skills` (Recommended)
 
-Install this repository as a skill set and choose the skills you want:
+Install this repository as a workflow skill set:
 
 ```bash
 npx skills add Adol1111/doc-driven-spec-workflow

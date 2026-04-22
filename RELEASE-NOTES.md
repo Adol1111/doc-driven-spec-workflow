@@ -1,8 +1,8 @@
-# Changelog
+# Release Notes
 
-All notable changes to this project are documented here.
+User-facing workflow, installation, and migration changes are documented here.
 
-This project follows Conventional Commits for commit history. Version headings describe user-facing workflow and installation changes, not every internal edit.
+This project follows Conventional Commits for commit history, but release notes focus on what users need to know when adopting or upgrading the workflow.
 
 ## 0.2.0 - Unreleased
 
