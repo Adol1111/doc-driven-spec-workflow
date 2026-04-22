@@ -4,53 +4,47 @@ User-facing workflow, installation, and migration changes are documented here.
 
 This project follows Conventional Commits for commit history, but release notes focus on what users need to know when adopting or upgrading the workflow.
 
-## 0.2.0 - Unreleased
+## v0.2.1
 
-Compared with `0.1.0` / remote baseline `3f104aa`, this release reorganizes the repository from a single workflow skill into a staged docs-driven workflow methodology with composable skills.
+### Fixes
 
-### Breaking Changes
+- `task-spec-execution` now treats branch closing as unresolved until a merged task branch is explicitly deleted or explicitly kept, even after worktree cleanup.
+- `task-spec-execution` now points to `finishing-a-development-branch` for merge, PR, keep, discard, and cleanup decisions after implementation is complete.
 
-- `docs-delivery-workflow` has been removed.
-- `doc-driven-spec-workflow` is now the public root entry protocol and stage router, and should be used as the default workflow entry point.
-- The former execution-stage meaning of `doc-driven-spec-workflow` has moved to `task-spec-execution`.
-- Templates moved out of the root skill. Consumers that referenced `skills/doc-driven-spec-workflow/references/` directly should update paths.
+### Notes
 
-### Migration Notes
+- Removing a worktree does not remove its merged task branch.
+- If implementation is complete and Git integration remains, prefer using `task-spec-execution` together with `finishing-a-development-branch`.
 
-- Use `doc-driven-spec-workflow` when you are unsure which workflow stage should run next.
-- Replace direct usage of `docs-delivery-workflow` with `doc-driven-spec-workflow`.
-- Replace direct current-task execution usage of `doc-driven-spec-workflow` with `task-spec-execution`.
-- Do not use `task-spec-execution` to invent or reshape roadmap structure. Use `milestone-planning` first when the task does not exist, is too broad, or needs splitting.
-- Keep installation commands pointed at the repository name: `Adol1111/doc-driven-spec-workflow`.
-- If you copied templates manually, move execution templates to `skills/task-spec-execution/references/` and roadmap templates to `skills/milestone-planning/references/`.
+## v0.2.0
 
-### Added
+### Features
 
-- Added `milestone-planning` as a dedicated roadmap decomposition skill for deciding milestone boundaries, optional modules, task breakdown, delivery order, and task selection.
-- Added `docs-workflow-bootstrap` for initializing the minimum docs scaffold before roadmap planning or current-task execution.
-- Added `task-spec-execution` as the dedicated selected-task execution skill for task-local specs, optional plans, readiness checks, implementation governance, verification, and branch closing.
-- Added `skills/milestone-planning/references/roadmap-template.md` for roadmap-layer `docs/tasks/` documents.
-- Added `skills/task-spec-execution/references/task-execution-template.md` for selected task directories and task-local metadata.
-
-### Changed
-
-- Reworked the public workflow chain to:
+- The workflow moved from one combined skill to a staged model:
 
   ```text
   doc-driven-spec-workflow -> docs-workflow-bootstrap -> brainstorming -> milestone-planning -> task-spec-execution
   ```
 
-- Updated README positioning to treat this repository as a docs-driven workflow methodology rather than a loose skill collection.
-- Simplified installation examples so users install from the repository and optionally select a skill by name.
-- Clarified that users can enter through `doc-driven-spec-workflow`, route to one stage skill at a time, and continue only when no approval gate is outstanding.
-- Clarified stage ownership boundaries: bootstrap initializes docs, milestone planning owns roadmap shape, and task execution defers roadmap reshaping back to milestone planning.
-- Split template ownership by stage: roadmap templates belong to `milestone-planning`; execution templates belong to `task-spec-execution`; root routing owns no templates.
+- Added `docs-workflow-bootstrap` for minimum docs scaffold initialization.
+- Added `milestone-planning` for roadmap decomposition and task selection.
+- Added `task-spec-execution` for task-local spec, optional plan, readiness, implementation governance, verification, and branch closing.
+- `doc-driven-spec-workflow` became the public root entry point and stage router.
+- The repository split stage ownership more clearly:
+  - `docs-workflow-bootstrap` initializes the minimum docs scaffold.
+  - `milestone-planning` owns roadmap decomposition.
+  - `task-spec-execution` owns task-local spec/plan/readiness/execution flow.
+- Template ownership moved out of the root skill:
+  - roadmap templates live under `skills/milestone-planning/references/`
+  - execution templates live under `skills/task-spec-execution/references/`
 
-### Removed
+### Breaking Changes
 
-- Removed `skills/docs-delivery-workflow/` after its routing responsibility moved to `skills/doc-driven-spec-workflow/`.
-- Removed the old combined `tasks-template.md` to avoid mixing roadmap planning and current-task execution responsibilities.
+- The old execution-stage meaning of `doc-driven-spec-workflow` moved to `task-spec-execution`.
+- Replace old root-skill execution usage of `doc-driven-spec-workflow` with `task-spec-execution`.
+- Do not use `task-spec-execution` to invent or reshape roadmap structure; use `milestone-planning` first.
+- If you referenced `skills/doc-driven-spec-workflow/references/` directly, update those template paths.
 
-## 0.1.0
+## v0.1.0
 
 Initial public docs-driven spec workflow baseline.
