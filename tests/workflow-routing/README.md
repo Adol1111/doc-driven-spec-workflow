@@ -64,6 +64,7 @@ For each case:
 
 ## Cases
 
+- `approved-spec-needs-checkpoint.md`: approved task-local docs must be checkpointed before branch/worktree isolation for implementation.
 - `branch-closing-after-worktree.md`: merged task branches must be explicitly deleted or kept after worktree cleanup.
 - `bootstrap-needed.md`: missing docs scaffold should route to `docs-workflow-bootstrap`.
 - `roadmap-needed.md`: broad product scope should route to `milestone-planning`.

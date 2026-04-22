@@ -4,6 +4,18 @@ User-facing workflow, installation, and migration changes are documented here.
 
 This project follows Conventional Commits for commit history, but release notes focus on what users need to know when adopting or upgrading the workflow.
 
+## v0.2.2
+
+### Fixes
+
+- `task-spec-execution` now requires an approved task-local docs checkpoint before branch/worktree isolation for implementation.
+- `task-spec-execution` no longer defaults to carrying approved-but-uncommitted `spec.md` or `plan.md` into an implementation worktree or task branch.
+
+### Notes
+
+- Default flow is now `spec -> approval -> docs checkpoint -> implementation`.
+- If a task-local `plan.md` exists, checkpoint it together with the approved `spec.md` before implementation isolation.
+
 ## v0.2.1
 
 ### Fixes

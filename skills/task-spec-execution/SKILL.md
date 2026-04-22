@@ -104,16 +104,17 @@ Follow this order unless the user explicitly asks for something different:
 8. If implementing one concrete task, create or update its task directory and write one focused `spec.md` inside it.
 9. Stop after writing the spec; do not code until the user explicitly confirms it in the current thread.
 10. Create `plan.md` inside the task directory only for genuinely complex or multi-step work; if created, stop again for user confirmation before coding.
-11. Before implementation edits, announce and run the readiness checkpoint.
-12. Implement from the approved spec or plan, then verify, update docs/status, and resolve branch closing.
-13. Stop after one concrete task. Continue only when the user explicitly asks in the current thread.
-14. Add an `index.md` for every new major documentation section.
+11. After spec approval, and after plan approval when a plan exists, resolve a docs checkpoint for the approved task-local docs before implementation isolation.
+12. Before implementation edits, announce and run the readiness checkpoint.
+13. Implement from the approved spec or plan, then verify, update docs/status, and resolve branch closing.
+14. Stop after one concrete task. Continue only when the user explicitly asks in the current thread.
+15. Add an `index.md` for every new major documentation section.
 
 ## Execution Rules
 
-- Default flow: `spec -> user confirms -> code`
-- Complex flow: `spec -> user confirms -> plan -> user confirms -> code`
-- Ambiguous flow: `brainstorming or equivalent clarification -> milestone-planning if needed -> spec -> user confirms -> code`
+- Default flow: `spec -> user confirms -> docs checkpoint -> code`
+- Complex flow: `spec -> user confirms -> plan -> user confirms -> docs checkpoint -> code`
+- Ambiguous flow: `brainstorming or equivalent clarification -> milestone-planning if needed -> spec -> user confirms -> docs checkpoint -> code`
 - Do not default to TDD, plan-driven execution, or heavyweight shared workflows unless the user explicitly asks.
 - Write task-local specs/plans directly in this repository's compact local format.
 - Treat tests and verification as delivery checks, not as a mandatory test-first workflow.
@@ -142,6 +143,7 @@ Follow this order unless the user explicitly asks for something different:
 Run this checkpoint after spec confirmation, and after plan confirmation when a plan exists:
 
 - Resolve previous task checkpoint first: commit by default, or keep uncommitted only with explicit user approval.
+- Resolve a docs checkpoint for the approved task-local `spec.md`, and `plan.md` when it exists, before implementation isolation. Default action is to commit these approved docs on the current shared branch; keep them uncommitted before implementation only with explicit user approval.
 - Confirm permission to code: current-thread spec approval, and plan approval when a plan exists.
 - If this is a concrete `docs/tasks/*` implementation round, branch isolation is mandatory before code edits.
 
@@ -152,8 +154,9 @@ Run this checkpoint after spec confirmation, and after plan confirmation when a 
 | User explicitly asks to stay on the current branch | You may stay, but only because the user explicitly chose that |
 
 - Never start implementation for a concrete task on the current branch by default.
+- Do not carry approved-but-uncommitted task-local `spec.md` or `plan.md` into an implementation worktree or task branch by default.
 - If a worktree is needed, prefer `using-git-worktrees`; if it is unavailable, use the environment's equivalent git worktree workflow and preserve the same safety checks.
-- Before the first implementation edit, tell the user: `Spec/plan is approved. I am handling branch isolation now before coding.`
+- Before the first implementation edit, tell the user: `Spec/plan is approved and checkpointed. I am handling branch isolation now before coding.`
 
 ## Task And Status Rules
 
