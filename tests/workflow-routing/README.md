@@ -66,6 +66,7 @@ For each case:
 
 - `bootstrap-needed.md`: missing docs scaffold should route to `docs-workflow-bootstrap`.
 - `roadmap-needed.md`: broad product scope should route to `milestone-planning`.
+- `roadmap-no-mechanical-split.md`: implementation-mechanical task requests should be corrected into capability-level roadmap tasks.
 - `roadmap-small-output.md`: small roadmap scope should route to `milestone-planning` and generate inspectable roadmap-layer task docs.
 - `selected-task-spec.md`: selected concrete task should route to `task-spec-execution`.
 - `task-too-broad.md`: too-broad task should return to `milestone-planning`.
