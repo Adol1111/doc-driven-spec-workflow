@@ -64,6 +64,7 @@ For each case:
 
 ## Cases
 
+- `branch-closing-after-worktree.md`: merged task branches must be explicitly deleted or kept after worktree cleanup.
 - `bootstrap-needed.md`: missing docs scaffold should route to `docs-workflow-bootstrap`.
 - `roadmap-needed.md`: broad product scope should route to `milestone-planning`.
 - `roadmap-no-mechanical-split.md`: implementation-mechanical task requests should be corrected into capability-level roadmap tasks.

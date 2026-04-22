@@ -124,8 +124,10 @@ Follow this order unless the user explicitly asks for something different:
 ## Branch Closing Rules
 
 - After completing a concrete `docs/tasks/*` task, do not start another task until branch closing is resolved.
-- If work happened on a task branch, ask whether to merge/delete, keep for review, or leave committed but unmerged.
-- If work happened in a worktree, follow `using-git-worktrees` cleanup and merge rules when that skill is available; otherwise follow an equivalent safe worktree cleanup process.
+- When implementation is complete, verification passes, and Git integration or cleanup remains, use `finishing-a-development-branch` when available to present merge, PR, keep, or discard options.
+- If work happened in a worktree, use `using-git-worktrees` cleanup rules when available; otherwise follow an equivalent safe worktree cleanup process.
+- Removing a worktree does not remove its task branch. Branch closing is unresolved until the merged task branch is deleted with confirmation or explicitly kept for review/history.
+- If the user chooses merge and cleanup, confirm whether cleanup includes deleting the fully merged task branch before deleting it.
 - Never delete a branch or worktree without confirming the closing decision.
 - If the user asks to continue, treat that as a prompt to resolve branch closing first, not permission to skip it.
 

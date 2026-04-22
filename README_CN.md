@@ -202,8 +202,9 @@ current-task execution skill 在 concrete task 已经存在后可以独立使用
 
 - `brainstorming`：在 roadmap decomposition 或 current-task spec work 之前，澄清模糊的 feature、behavior 或 task intent。
 - `using-git-worktrees`：当 workspace dirty、shared、风险较高或可能冲突时，创建安全的 branch/worktree isolation。
+- `finishing-a-development-branch`：当实现完成后，处理 Git integration 选择，包括本地 merge、创建 PR、保留 branch、丢弃 work，以及 branch/worktree cleanup。
 
-如果你的 agent 环境没有这些 skills，请使用等价的 clarification 和 git isolation workflows。需要保留相同安全规则：在锁定 roadmap structure 或 spec 前澄清不明确意图，不要在不安全的当前分支上开始具体实现，不要在没有明确 closing decision 的情况下删除或合并 branches/worktrees。
+如果你的 agent 环境没有这些 skills，请使用等价的 clarification、git isolation 和 branch finishing workflows。需要保留相同安全规则：在锁定 roadmap structure 或 spec 前澄清不明确意图，不要在不安全的当前分支上开始具体实现，不要在没有明确 closing decision 的情况下删除或合并 branches/worktrees。删除 worktree 不等于删除 task branch；只有 merged branch 被明确删除或明确保留后，branch closing 才算完成。
 
 ## 为什么不直接使用 Superpowers？
 
@@ -214,7 +215,7 @@ Superpowers 是更完整的软件开发方法论，包含 brainstorming、planni
 - 它区分 docs governance 和 implementation permission，因此 architecture edits、roadmap reshaping 和 index maintenance 不会自动授权写代码。
 - 它把 workflow routing、roadmap planning 和 current-task execution 拆成不同 skills，而不是堆进一个过大的说明文件里。
 - 它不强制 TDD、heavyweight planning 或 subagent workflows，更适合只想采用 spec-first coordination、但不想引入完整 Superpowers 方法论的项目。
-- 它仍然可以和 Superpowers 组合使用，尤其是模糊 scope 前的 `brainstorming`，以及高风险实现前的 `using-git-worktrees`。
+- 它仍然可以和 Superpowers 组合使用，尤其是模糊 scope 前的 `brainstorming`、高风险实现前的 `using-git-worktrees`，以及 task branch 需要 merge、PR、keep、discard 或 cleanup 决策时的 `finishing-a-development-branch`。
 
 如果你想要完整的端到端 agentic development methodology，使用 Superpowers。如果你的主要目标是让 agent 对齐 docs-driven architecture、task roadmap 和 spec approval process，使用这个 workflow。
 

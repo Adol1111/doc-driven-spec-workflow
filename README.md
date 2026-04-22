@@ -202,8 +202,9 @@ The current-task execution skill can work on its own after a concrete task exist
 
 - `brainstorming`: Clarifies ambiguous feature, behavior, or task intent before roadmap decomposition or current-task spec work.
 - `using-git-worktrees`: Creates safe branch/worktree isolation when a workspace is dirty, shared, risky, or likely to conflict.
+- `finishing-a-development-branch`: Handles Git integration choices after implementation is complete, including local merge, PR creation, keeping a branch, discarding work, and branch/worktree cleanup.
 
-If your agent environment does not have these skills, use equivalent clarification and git isolation workflows instead. Preserve the same safety rules: clarify unclear intent before locking roadmap structure or specs, do not start concrete implementation on an unsafe current branch, and do not delete or merge branches/worktrees without an explicit closing decision.
+If your agent environment does not have these skills, use equivalent clarification, git isolation, and branch finishing workflows instead. Preserve the same safety rules: clarify unclear intent before locking roadmap structure or specs, do not start concrete implementation on an unsafe current branch, and do not delete or merge branches/worktrees without an explicit closing decision. Removing a worktree does not remove its task branch; branch closing is not complete until the merged branch is explicitly deleted or intentionally kept.
 
 ## Why Not Just Use Superpowers?
 
@@ -214,7 +215,7 @@ Superpowers is a broader software development methodology with many composable s
 - It separates docs governance from implementation permission, so architecture edits, roadmap reshaping, and index maintenance do not automatically authorize code changes.
 - It splits workflow routing, roadmap planning, and current-task execution into separate skills instead of collapsing them into one oversized instruction file.
 - It keeps TDD, heavyweight planning, and subagent workflows optional instead of mandatory, which makes it easier to use in projects that want spec-first coordination without adopting the full Superpowers methodology.
-- It can still compose with Superpowers where useful, especially `brainstorming` before ambiguous scope and `using-git-worktrees` before risky implementation work.
+- It can still compose with Superpowers where useful, especially `brainstorming` before ambiguous scope, `using-git-worktrees` before risky implementation work, and `finishing-a-development-branch` when a task branch needs merge, PR, keep, discard, or cleanup decisions.
 
 Use Superpowers when you want the full end-to-end agentic development methodology. Use this workflow when your main need is to keep agents aligned with a docs-driven architecture, task roadmap, and spec approval process.
 
