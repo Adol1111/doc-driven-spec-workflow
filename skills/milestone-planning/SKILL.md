@@ -26,8 +26,8 @@ This skill is for deciding `Milestone -> optional Module -> Task` shape, not for
 - MUST NOT create tasks for implementation mechanics such as single files, API endpoints, tests, migrations, refactors, code review, or docs updates when they belong inside one implementation round.
 - MUST explain why each milestone, module, and task boundary exists. Output structure without rationale is incomplete.
 - MUST first determine whether the user needs roadmap alignment or decomposition of an already-defined target whenever the current situation is unclear.
-- MUST treat an empty or missing milestone list as a routing signal, not enough information to decompose by itself.
-- MUST use `brainstorming` first when goals, constraints, success criteria, or roadmap alignment are still unclear. If milestones are empty because mid/long-term goals are not aligned, use `brainstorming` to align direction and prefer at least three milestones before detailed decomposition.
+- MUST treat an empty `Open Milestones` list as a routing signal, not enough information to decompose by itself.
+- MUST use `brainstorming` first when goals, constraints, success criteria, or roadmap alignment are still unclear. If `Open Milestones` is empty because mid/long-term goals are not aligned, use `brainstorming` to align direction and prefer at least three milestones before detailed decomposition.
 - MUST skip `brainstorming` and decompose directly when the user already has a concrete short-term target, especially in enterprise or iteration-driven work with a clear case, scope, or delivery outcome.
 - MUST hand off to `task-spec-execution` only after the current concrete task is chosen.
 - MUST treat milestone/module/task creation or reshaping as docs governance. Updating roadmap structure does not by itself authorize spec writing or implementation.
@@ -78,10 +78,10 @@ Follow this order:
 
 Ask which mode applies before decomposing:
 
-- `roadmap alignment`: milestones are empty or unclear, no agreed mid/long-term outcome exists, or a single short-term goal may conflict with later phases
+- `roadmap alignment`: `Open Milestones` is empty or unclear, no agreed mid/long-term outcome exists, or a single short-term goal may conflict with later phases
 - `direct decomposition`: the target is already concrete and the user wants this phase or iteration broken into milestones, modules, or tasks
 
-If the answer is unclear, ask directly instead of inferring from an empty milestone list alone.
+If the answer is unclear, ask directly instead of inferring from an empty `Open Milestones` list alone.
 
 Route like this:
 

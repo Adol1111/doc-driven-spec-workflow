@@ -9,12 +9,12 @@ This project follows Conventional Commits for commit history, but release notes 
 ### Features
 
 - `milestone-planning` now asks whether the user needs mid/long-term roadmap alignment or decomposition of an already-defined target before it proposes milestone structure.
-- When milestones are empty because roadmap goals are not aligned yet, `milestone-planning` now routes to `brainstorming` first and prefers shaping at least three milestones before detailed decomposition.
+- When `Open Milestones` is empty because roadmap goals are not aligned yet, `milestone-planning` now routes to `brainstorming` first and prefers shaping at least three milestones before detailed decomposition.
 - When the user already has a concrete short-term goal, especially in enterprise or iteration-driven scenarios with a clear case, `milestone-planning` now skips `brainstorming` and decomposes the current iteration directly.
 
 ### Notes
 
-- An empty milestone list is now treated as a decision point, not an automatic signal to decompose immediately.
+- An empty `Open Milestones` list is now treated as a decision point, not an automatic signal to decompose immediately.
 - The new default is: first determine whether the user needs roadmap alignment or execution planning, then choose `brainstorming` or direct milestone decomposition accordingly.
 
 ## v0.2.2

@@ -1,10 +1,10 @@
-# Empty Milestones Need Alignment
+# Empty Open Milestones Need Alignment
 
 ## Prompt
 
 Use doc-driven-spec-workflow.
 
-Our `docs/tasks/` area is basically empty right now. We have a rough idea for an internal developer platform, but no agreed roadmap yet and people keep proposing one-off near-term work that may not fit together. Help me figure out what we should do next.
+Our `docs/tasks/` index has no `Open Milestones` right now. We have a rough idea for an internal developer platform, but no agreed roadmap yet and people keep proposing one-off near-term work that may not fit together. Help me figure out what we should do next.
 
 ## Expected Skill
 
@@ -12,7 +12,7 @@ Our `docs/tasks/` area is basically empty right now. We have a rough idea for an
 
 ## Expected Behavior
 
-- Recognizes that milestones are empty because roadmap goals and phase boundaries are not aligned yet.
+- Recognizes that `Open Milestones` is empty because roadmap goals and phase boundaries are not aligned yet.
 - Routes to `brainstorming` before roadmap decomposition.
 - Frames the next step as clarifying mid/long-term goals and `now versus later` boundaries.
 - Does not jump straight into milestone or task decomposition.
