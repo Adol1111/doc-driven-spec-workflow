@@ -11,11 +11,13 @@ This project follows Conventional Commits for commit history, but release notes 
 - `milestone-planning` now asks whether the user needs mid/long-term roadmap alignment or decomposition of an already-defined target before it proposes milestone structure.
 - When `Open Milestones` is empty because roadmap goals are not aligned yet, `milestone-planning` now routes to `brainstorming` first and prefers shaping at least three milestones before detailed decomposition.
 - When the user already has a concrete short-term goal, especially in enterprise or iteration-driven scenarios with a clear case, `milestone-planning` now skips `brainstorming` and decomposes the current iteration directly.
+- `milestone-planning` now treats milestone confirmation as an explicit routing signal for task decomposition. Use `Roadmap confirmed: no` on a milestone to force a routing question before decomposing tasks, and flip it once the user confirms staying on that path.
 
 ### Notes
 
 - An empty `Open Milestones` list is now treated as a decision point, not an automatic signal to decompose immediately.
 - The new default is: first determine whether the user needs roadmap alignment or execution planning, then choose `brainstorming` or direct milestone decomposition accordingly.
+- Explicit unconfirmed milestones now behave like a guarded handoff: ask whether to re-evaluate the milestone structure or continue on the current route before task breakdown starts.
 
 ## v0.2.2
 

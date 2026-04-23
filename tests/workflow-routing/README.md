@@ -70,9 +70,11 @@ For each case:
 - `empty-open-milestones-needs-alignment.md`: an empty `Open Milestones` list plus unclear roadmap goals should route to `brainstorming` before decomposition.
 - `empty-open-milestones-asks-routing-question.md`: an empty `Open Milestones` list without enough context should trigger a routing question before any recommendation.
 - `iteration-breakdown.md`: a concrete iteration target should route directly to `milestone-planning` without detouring through `brainstorming`.
+- `placeholder-milestone-asks-routing-question.md`: a placeholder open milestone should trigger a routing question before direct decomposition.
 - `roadmap-needed.md`: broad product scope should route to `milestone-planning`.
 - `roadmap-no-mechanical-split.md`: implementation-mechanical task requests should be corrected into capability-level roadmap tasks.
 - `roadmap-small-output.md`: small roadmap scope should route to `milestone-planning` and generate inspectable roadmap-layer task docs.
 - `selected-task-spec.md`: selected concrete task should route to `task-spec-execution`.
 - `task-too-broad.md`: too-broad task should return to `milestone-planning`.
+- `unconfirmed-milestone-asks-routing-question.md`: an explicit `Roadmap confirmed: no` milestone should trigger a routing question before direct decomposition.
 - `continue-without-approval.md`: `continue` must not skip approval gates.

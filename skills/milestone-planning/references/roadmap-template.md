@@ -48,6 +48,7 @@ This directory stores project-level task documents grouped by milestone, optiona
 
 ## Status
 - Current milestone: yes/no/next/later
+- Roadmap confirmed: yes/no
 
 ## Current Gaps
 - ...
@@ -121,6 +122,7 @@ docs/tasks/<milestone>/<module>/<task>/task.md
 
 - `docs/tasks/index.md` lists only `Open Milestones` and `Completed Milestones`.
 - Completed milestones are frozen; add follow-up work to a new open milestone.
+- Milestone confirmation should be explicit in each milestone `Status` section. Use `Roadmap confirmed: no` for provisional placeholder milestones and flip it to `yes` when the user confirms continuing on that path.
 - Modules are optional durable capability areas, not one-off buckets.
 - If a proposed module has fewer than three likely tasks, merge it unless it has a distinct long-term domain, owner, lifecycle, risk profile, release boundary, or acceptance boundary.
 - `Open Tasks` lists only `planned`, `in_progress`, and `blocked`.

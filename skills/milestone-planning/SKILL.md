@@ -27,6 +27,8 @@ This skill is for deciding `Milestone -> optional Module -> Task` shape, not for
 - MUST explain why each milestone, module, and task boundary exists. Output structure without rationale is incomplete.
 - MUST first determine whether the user needs roadmap alignment or decomposition of an already-defined target whenever the current situation is unclear.
 - MUST treat an empty `Open Milestones` list as a routing signal, not enough information to decompose by itself.
+- MUST treat milestone confirmation as the primary routing signal for task decomposition. If a milestone is explicitly unconfirmed, ask whether to re-evaluate milestone structure or continue on the current path.
+- MUST treat placeholder names or other provisional milestone markers as fallback routing signals only when no explicit confirmation flag exists.
 - MUST ask a routing question before recommending a path whenever it is still unclear whether the user needs roadmap alignment or direct decomposition.
 - MUST treat that routing question as the required first response in ambiguous cases. Do not explain the recommended route, propose next steps, or start decomposition before the user answers.
 - MUST use `brainstorming` first when goals, constraints, success criteria, or roadmap alignment are still unclear. If `Open Milestones` is empty because mid/long-term goals are not aligned, use `brainstorming` to align direction and prefer at least three milestones before detailed decomposition.
@@ -85,9 +87,25 @@ Ask which mode applies before decomposing:
 
 If the answer is unclear, ask directly instead of inferring from an empty `Open Milestones` list alone.
 
+Before direct decomposition, check whether the milestone path is confirmed.
+
+Use this precedence:
+
+- explicit confirmation flag such as `Roadmap confirmed: no`
+- provisional notes or status markers
+- placeholder names such as `TBD`, `Later`, `Future`, or `Phase X`
+
+If the milestone is not confirmed, the first reply should confirm whether to:
+
+- re-evaluate the milestone structure first
+- keep the current milestone path and decompose tasks within it anyway
+
+If the user explicitly confirms continuing on the current milestone path, remove the provisional state before or as part of the decomposition change. Prefer flipping the explicit confirmation flag rather than relying on naming cleanup alone.
+
 In ambiguous cases, the first reply should be a short routing question such as:
 
 - "Do you already have a concrete short-term target for this iteration, or do we need to realign the next stage of the roadmap first?"
+- "I can see a placeholder milestone in the current roadmap. Do you want to re-evaluate the milestone structure first, or should I keep that route and decompose tasks within it?"
 
 Do not answer that question on the user's behalf before they respond.
 
