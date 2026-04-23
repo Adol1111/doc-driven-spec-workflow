@@ -67,6 +67,8 @@ For each case:
 - `approved-spec-needs-checkpoint.md`: approved task-local docs must be checkpointed before branch/worktree isolation for implementation.
 - `branch-closing-after-worktree.md`: merged task branches must be explicitly deleted or kept after worktree cleanup.
 - `bootstrap-needed.md`: missing docs scaffold should route to `docs-workflow-bootstrap`.
+- `empty-milestones-needs-alignment.md`: empty milestones plus unclear roadmap goals should route to `brainstorming` before decomposition.
+- `iteration-breakdown.md`: a concrete iteration target should route directly to `milestone-planning` without detouring through `brainstorming`.
 - `roadmap-needed.md`: broad product scope should route to `milestone-planning`.
 - `roadmap-no-mechanical-split.md`: implementation-mechanical task requests should be corrected into capability-level roadmap tasks.
 - `roadmap-small-output.md`: small roadmap scope should route to `milestone-planning` and generate inspectable roadmap-layer task docs.
