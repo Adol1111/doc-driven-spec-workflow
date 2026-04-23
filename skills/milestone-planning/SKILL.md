@@ -25,7 +25,10 @@ This skill is for deciding `Milestone -> optional Module -> Task` shape, not for
 - MUST treat tasks as independently reviewable implementation rounds. A task should deliver one coherent capability outcome, including implementation, tests, docs/status updates, and verification.
 - MUST NOT create tasks for implementation mechanics such as single files, API endpoints, tests, migrations, refactors, code review, or docs updates when they belong inside one implementation round.
 - MUST explain why each milestone, module, and task boundary exists. Output structure without rationale is incomplete.
-- MUST use `brainstorming` first when the request is still ambiguous about goals, constraints, or success criteria.
+- MUST first determine whether the user needs roadmap alignment or decomposition of an already-defined target whenever the current situation is unclear.
+- MUST treat an empty or missing milestone list as a routing signal, not enough information to decompose by itself.
+- MUST use `brainstorming` first when goals, constraints, success criteria, or roadmap alignment are still unclear. If milestones are empty because mid/long-term goals are not aligned, use `brainstorming` to align direction and prefer at least three milestones before detailed decomposition.
+- MUST skip `brainstorming` and decompose directly when the user already has a concrete short-term target, especially in enterprise or iteration-driven work with a clear case, scope, or delivery outcome.
 - MUST hand off to `task-spec-execution` only after the current concrete task is chosen.
 - MUST treat milestone/module/task creation or reshaping as docs governance. Updating roadmap structure does not by itself authorize spec writing or implementation.
 - MUST keep its document output focused on roadmap structure and task selection. Task-local `spec.md`, `plan.md`, readiness, and implementation guidance belong to `task-spec-execution`.
@@ -34,17 +37,17 @@ This skill is for deciding `Milestone -> optional Module -> Task` shape, not for
 
 Use this skill when:
 
-- A product or business request contains several features and the roadmap shape is unclear
-- The user asks whether work should be one milestone or several
-- The user wants to break a phase into milestones, modules, and tasks
-- A repository already uses `docs/tasks/`, but the task structure needs to be created or reshaped before current-task spec writing
-- A request mixes current delivery scope with later enhancements, and the stage boundary needs to be made explicit
+- milestone boundaries, module grouping, or task breakdown need to be decided
+- milestones are missing, stale, or need to be reshaped around current goals
+- the user wants a phase, iteration, or request broken into roadmap structure
+- a roadmap-layer `docs/tasks/` structure must be created or reshaped before current-task spec writing
+- current delivery scope and later enhancements need an explicit stage boundary
 
 Do not use this skill when:
 
-- The current concrete task is already selected and only needs task-local spec or implementation governance
-- The problem is implementation design within one task rather than roadmap decomposition
-- The work is pure docs maintenance with no milestone or task planning need
+- the current concrete task is already selected and only needs task-local spec or implementation governance
+- the problem is implementation design within one task rather than roadmap decomposition
+- the work is pure docs maintenance with no milestone or task planning need
 
 ## Core Model
 
@@ -52,25 +55,46 @@ Do not use this skill when:
 - `Module`: an optional capability-area grouping inside one milestone
 - `Task`: one independently reviewable implementation round
 
-Use this test:
+Quick test:
 
-- If the work completes one phase of the project, it may be a milestone.
-- If the work is one capability area inside that phase, it may be a module.
-- If the work is one complete implementation round inside that area, it is a task.
+- one project phase -> `Milestone`
+- one capability area inside that phase -> `Module`
+- one complete implementation round inside that area -> `Task`
 
 ## Decomposition Workflow
 
 Follow this order:
 
-1. Clarify the delivery frame
-2. Find milestone boundaries
-3. Decide whether modules add navigational value
-4. Split tasks by independently reviewable capability outcome
-5. Validate the decomposition against anti-patterns
-6. Output the structure with rationale and recommended order
-7. Stop after planning unless the user explicitly asks to update docs or hand off to current-task spec execution
+1. Choose planning mode: roadmap alignment or direct decomposition
+2. Clarify the delivery frame
+3. Find milestone boundaries
+4. Decide whether modules add navigational value
+5. Split tasks by independently reviewable capability outcome
+6. Validate against anti-patterns
+7. Output the structure with rationale and recommended order
+8. Stop after planning unless the user explicitly asks to update docs or hand off to current-task spec execution
 
-## 1. Clarify The Delivery Frame
+## 1. Choose The Planning Mode
+
+Ask which mode applies before decomposing:
+
+- `roadmap alignment`: milestones are empty or unclear, no agreed mid/long-term outcome exists, or a single short-term goal may conflict with later phases
+- `direct decomposition`: the target is already concrete and the user wants this phase or iteration broken into milestones, modules, or tasks
+
+If the answer is unclear, ask directly instead of inferring from an empty milestone list alone.
+
+Route like this:
+
+- `roadmap alignment` -> use `brainstorming` first, align direction, and prefer at least three milestones before detailed decomposition
+- `direct decomposition` -> stay in `milestone-planning` and decompose the current phase or iteration
+
+Typical `direct decomposition` signals:
+
+- enterprise delivery with a named case, customer ask, contract scope, or fixed near-term objective
+- a team already knows what this iteration must ship
+- the user wants task breakdown more than product-direction alignment
+
+## 2. Clarify The Delivery Frame
 
 Establish these before creating structure:
 
@@ -82,7 +106,7 @@ Establish these before creating structure:
 
 If these are still unclear, use `brainstorming` first instead of forcing milestones.
 
-## 2. Milestone Decision Rules
+## 3. Milestone Decision Rules
 
 Default to one milestone when most answers are "yes":
 
@@ -107,7 +131,7 @@ Do not split milestones just because:
 - Different components or files are involved
 - The implementation has multiple steps but still belongs to one delivery phase
 
-## 3. Module Decision Rules
+## 4. Module Decision Rules
 
 Inside one milestone, skip modules when there is only one real capability area.
 
@@ -122,7 +146,7 @@ Create modules only when the milestone contains multiple durable capability area
 
 Avoid modules that are only temporary buckets or one-off categories.
 
-## 4. Task Decision Rules
+## 5. Task Decision Rules
 
 A task should be one coherent implementation round that can be reviewed and accepted on its own.
 
@@ -143,17 +167,18 @@ Keep these inside the task instead of splitting them out:
 
 Split tasks only when the parts can ship, verify, or be rejected independently with different acceptance outcomes.
 
-## 5. Anti-Patterns
+## 6. Anti-Patterns
 
 Stop and reshape if the output looks like any of these:
 
 - One giant milestone containing multiple future phases only because the product request was broad
 - Several tiny milestones that are really just ordered tasks
+- Only one milestone created from an otherwise open-ended product request without first aligning the longer roadmap
 - One fake module inside a milestone that has only one real capability area
 - Tasks named after files, endpoints, tests, migrations, or refactor slices
 - Task dependencies carrying phase sequencing that should be expressed as milestone order
 
-## 6. Output Requirements
+## 7. Output Requirements
 
 Always provide:
 
@@ -165,54 +190,25 @@ Always provide:
 - dependency notes
 - assumptions or open questions
 
-If the repository already uses `docs/tasks/`, prefer updating or proposing roadmap-layer docs only:
+If the repository already uses `docs/tasks/`, update or propose roadmap-layer docs only:
 
 - `docs/tasks/index.md`
 - `docs/tasks/<milestone>/index.md`
 - optional `docs/tasks/<milestone>/<module>/index.md`
 - `docs/tasks/<milestone>/<task>/task.md`
 
-When writing these files, load `references/roadmap-template.md` for the exact planning-stage document shape.
+Use `references/roadmap-template.md` for the exact planning-stage shape and section layout.
 
 Do not write `spec.md` or `plan.md` here unless the user explicitly asks to continue into current-task spec execution.
 Do not use `task-spec-execution` execution-side templates as the default output format for this stage.
 
-When writing docs in this stage, prefer a compact planning-side output shape:
-
-- `docs/tasks/index.md`
-  - `Open Milestones`
-  - `Completed Milestones`
-- `docs/tasks/<milestone>/index.md`
-  - `Goal`
-  - `Exit Criteria`
-  - `Modules` or `Tasks`
-  - `Status`
-  - `Current Gaps`
-  - `Notes`
-- `docs/tasks/<milestone>/<module>/index.md`, if modules exist
-  - `Goals`
-  - `Recommended Order`
-  - `Dependency Notes`
-  - `Open Tasks`
-  - `Completed Tasks`
-- `docs/tasks/<milestone>/<task>/task.md`
-  - `Placement`
-  - `Source`
-  - `Dependencies`
-  - `Status`
-  - `Checklist`
-  - `Notes`
-
-Keep this stage focused on planning-ready task metadata and roadmap navigation.
-Do not expand into task-local design, implementation slices, or readiness instructions.
+Keep this stage focused on planning-ready task metadata and roadmap navigation, not task-local design, implementation slices, or readiness instructions.
 
 ## Related Skills
 
-- Use `doc-driven-spec-workflow` when the main question is which stage of the docs-driven workflow comes next.
-- Use `brainstorming` first when the request is still fuzzy or the product scope needs clarification.
-- Use `task-spec-execution` after the current concrete task is selected and the user wants to write or update the task spec.
-
-Skip `brainstorming` when the scope is already well-defined and the user only needs decomposition.
+- `doc-driven-spec-workflow`: use when the main question is which stage of the docs-driven workflow comes next
+- `brainstorming`: use as the upstream alignment step when planning mode shows decomposition should not start yet
+- `task-spec-execution`: use after the current concrete task is selected and the user wants to write or update the task spec
 
 ## Response Shape
 
