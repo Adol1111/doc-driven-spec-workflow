@@ -68,6 +68,7 @@ For each case:
 - `branch-closing-after-worktree.md`: merged task branches must be explicitly deleted or kept after worktree cleanup.
 - `bootstrap-needed.md`: missing docs scaffold should route to `docs-workflow-bootstrap`.
 - `empty-open-milestones-needs-alignment.md`: an empty `Open Milestones` list plus unclear roadmap goals should route to `brainstorming` before decomposition.
+- `empty-open-milestones-asks-routing-question.md`: an empty `Open Milestones` list without enough context should trigger a routing question before any recommendation.
 - `iteration-breakdown.md`: a concrete iteration target should route directly to `milestone-planning` without detouring through `brainstorming`.
 - `roadmap-needed.md`: broad product scope should route to `milestone-planning`.
 - `roadmap-no-mechanical-split.md`: implementation-mechanical task requests should be corrected into capability-level roadmap tasks.

@@ -27,6 +27,8 @@ This skill is for deciding `Milestone -> optional Module -> Task` shape, not for
 - MUST explain why each milestone, module, and task boundary exists. Output structure without rationale is incomplete.
 - MUST first determine whether the user needs roadmap alignment or decomposition of an already-defined target whenever the current situation is unclear.
 - MUST treat an empty `Open Milestones` list as a routing signal, not enough information to decompose by itself.
+- MUST ask a routing question before recommending a path whenever it is still unclear whether the user needs roadmap alignment or direct decomposition.
+- MUST treat that routing question as the required first response in ambiguous cases. Do not explain the recommended route, propose next steps, or start decomposition before the user answers.
 - MUST use `brainstorming` first when goals, constraints, success criteria, or roadmap alignment are still unclear. If `Open Milestones` is empty because mid/long-term goals are not aligned, use `brainstorming` to align direction and prefer at least three milestones before detailed decomposition.
 - MUST skip `brainstorming` and decompose directly when the user already has a concrete short-term target, especially in enterprise or iteration-driven work with a clear case, scope, or delivery outcome.
 - MUST hand off to `task-spec-execution` only after the current concrete task is chosen.
@@ -82,6 +84,12 @@ Ask which mode applies before decomposing:
 - `direct decomposition`: the target is already concrete and the user wants this phase or iteration broken into milestones, modules, or tasks
 
 If the answer is unclear, ask directly instead of inferring from an empty `Open Milestones` list alone.
+
+In ambiguous cases, the first reply should be a short routing question such as:
+
+- "Do you already have a concrete short-term target for this iteration, or do we need to realign the next stage of the roadmap first?"
+
+Do not answer that question on the user's behalf before they respond.
 
 Route like this:
 
