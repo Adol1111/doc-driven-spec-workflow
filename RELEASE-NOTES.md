@@ -4,6 +4,25 @@ User-facing workflow, installation, and migration changes are documented here.
 
 This project follows Conventional Commits for commit history, but release notes focus on what users need to know when adopting or upgrading the workflow.
 
+## v0.3.1
+
+### Fixes
+
+- `milestone-planning` now treats crossing from one milestone to the next as a separate governance decision instead of assuming "start the next task" authorizes direct task selection in the later milestone.
+- `milestone-planning` now stops when the previous milestone still appears open or the target milestone is still marked `Roadmap confirmed: no`, and routes through milestone closure/confirmation first.
+- `task-spec-execution` now blocks starting a task in `M(n+1)` when `M(n)` still has unresolved closure or the new milestone is not explicitly confirmed.
+- milestone roadmap docs now use optional `Handoff Notes` instead of `Current Gaps` for carry-forward findings discovered during a completed milestone.
+- `milestone-planning` now requires every retained handoff note to be explicitly attached to a later milestone or backlog before the current milestone can close.
+- `milestone-planning` now treats `Handoff Notes` as a temporary transfer queue that must be empty before milestone closure.
+
+### Notes
+
+- The workflow now distinguishes three separate checkpoints: previous task branch closing, previous milestone closure, and next milestone roadmap confirmation.
+- A message like "continue" or "start the next task" should no longer be interpreted as permission to skip milestone closure and jump straight into a later milestone task.
+- `Handoff Notes` is for later-milestone follow-up only; it should not duplicate task status or keep an otherwise-complete milestone artificially open.
+- A handoff note is only valid if it has somewhere to go next; otherwise it is unresolved roadmap work, not a completed handoff.
+- After a handoff item is moved to its destination, remove it from the source milestone instead of keeping it as historical residue.
+
 ## v0.3.0
 
 ### Features

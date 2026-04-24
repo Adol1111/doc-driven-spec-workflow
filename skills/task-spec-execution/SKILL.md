@@ -26,6 +26,8 @@ These are requirements, not suggestions. If any rule below is not satisfied, the
 - MUST respect the module layer chosen by the roadmap. Do not create, remove, or regroup modules here.
 - MUST treat completed milestones as frozen history. NEVER reopen them or add modules/tasks to them; use `milestone-planning` for follow-up work.
 - MUST resolve the previous task checkpoint before starting another concrete task. Default action is commit; uncommitted checkpoints require explicit user approval.
+- MUST NOT start a concrete task in a later milestone while the previous milestone is still operationally unresolved. If the earlier milestone's last task is done but milestone closure or milestone transition is still pending, stop and use docs governance first.
+- MUST require explicit milestone-entry confirmation before starting a task in a milestone whose status still shows `Roadmap confirmed: no` or equivalent provisional wording.
 - MUST NOT treat checkpoint rules as permission to auto-commit newly made docs-only/governance changes. Report the diff/result first; commit only when the user explicitly asked for commit upfront or confirms after review.
 - MUST resolve branch closing after completing a concrete task: verification, docs/status updates, commit or approved uncommitted checkpoint, and branch closing decision.
 
@@ -52,6 +54,7 @@ Violations that require stopping immediately:
 - Adding work to a completed milestone.
 - Auto-committing docs-only/governance changes before reporting the result or before user commit confirmation.
 - Starting another task before resolving branch closing for the current task.
+- Starting a task in milestone `M(n+1)` while `M(n)` still appears open and unclosed, or while the target milestone is still explicitly unconfirmed.
 - Assuming the workspace is clean or staying on the current branch without explicit user choice.
 
 ## When To Use
@@ -101,14 +104,15 @@ Follow this order unless the user explicitly asks for something different:
 5. Read the relevant `docs/tasks/` milestone/module index plus task directory or `task.md` for order, status, and dependencies.
 6. Use `docs/context/` only for supporting research or unstable reference material.
 7. If there is no suitable open task because the roadmap shape itself is missing or unclear, stop and use `milestone-planning`.
-8. If implementing one concrete task, create or update its task directory and write one focused `spec.md` inside it.
-9. Stop after writing the spec; do not code until the user explicitly confirms it in the current thread.
-10. Create `plan.md` inside the task directory only for genuinely complex or multi-step work; if created, stop again for user confirmation before coding.
-11. After spec approval, and after plan approval when a plan exists, resolve a docs checkpoint for the approved task-local docs before implementation isolation.
-12. Before implementation edits, announce and run the readiness checkpoint.
-13. Implement from the approved spec or plan, then verify, update docs/status, and resolve branch closing.
-14. Stop after one concrete task. Continue only when the user explicitly asks in the current thread.
-15. Add an `index.md` for every new major documentation section.
+8. If the next candidate task is in a new milestone, first verify that the previous milestone checkpoint is closed and the target milestone is explicitly confirmed for entry. If not, stop and resolve milestone governance first.
+9. If implementing one concrete task, create or update its task directory and write one focused `spec.md` inside it.
+10. Stop after writing the spec; do not code until the user explicitly confirms it in the current thread.
+11. Create `plan.md` inside the task directory only for genuinely complex or multi-step work; if created, stop again for user confirmation before coding.
+12. After spec approval, and after plan approval when a plan exists, resolve a docs checkpoint for the approved task-local docs before implementation isolation.
+13. Before implementation edits, announce and run the readiness checkpoint.
+14. Implement from the approved spec or plan, then verify, update docs/status, and resolve branch closing.
+15. Stop after one concrete task. Continue only when the user explicitly asks in the current thread.
+16. Add an `index.md` for every new major documentation section.
 
 ## Execution Rules
 
@@ -120,6 +124,7 @@ Follow this order unless the user explicitly asks for something different:
 - Treat tests and verification as delivery checks, not as a mandatory test-first workflow.
 - A concrete task is a hard pause point: report verification/docs updates, resolve commit or approved uncommitted checkpoint, resolve branch closing, then stop.
 - Milestone completion is a hard boundary: once moved to `Completed Milestones`, it is frozen; follow-up work belongs in a new open milestone.
+- Crossing from one milestone to another is also a hard pause point: first resolve milestone closure for the old milestone and explicit roadmap confirmation for the new one, then select the next concrete task.
 - For docs-only/governance work, stop after reporting changed files and key diffs. Do not commit unless the user already asked for commit/sync in the same request or confirms after seeing the result.
 
 ## Branch Closing Rules
@@ -131,6 +136,7 @@ Follow this order unless the user explicitly asks for something different:
 - If the user chooses merge and cleanup, confirm whether cleanup includes deleting the fully merged task branch before deleting it.
 - Never delete a branch or worktree without confirming the closing decision.
 - If the user asks to continue, treat that as a prompt to resolve branch closing first, not permission to skip it.
+- If the user asks to continue after the last open task in a milestone is complete, treat that as a prompt to resolve milestone closure and next-milestone confirmation first, not permission to jump directly into a later milestone task.
 
 ## Spec, Plan, And Readiness
 
@@ -171,6 +177,7 @@ Run this checkpoint after spec confirmation, and after plan confirmation when a 
 - Keep task status mutually exclusive: `planned`, `in_progress`, `blocked`, `completed`.
 - `docs/tasks/index.md` lists only `Open Milestones` and `Completed Milestones`, with no modules or task counts.
 - Move milestones from open to completed only when the whole milestone is done; do not use milestone `[completed/total]`.
+- Do not begin a task from a later milestone until the previous milestone is either still intentionally active by explicit user choice or has been reviewed for closure and the target milestone is explicitly confirmed.
 - Milestone indexes list modules/progress when modules exist; module or milestone indexes keep `Open Tasks` and `Completed Tasks` accurate.
 - Each concrete task should be a directory containing `task.md`, task-local `spec.md`, and optional `plan.md`.
 - `task.md` tracks status, dependencies, and acceptance points; it should not become a detailed step-by-step implementation plan.

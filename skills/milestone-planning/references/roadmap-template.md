@@ -50,7 +50,7 @@ This directory stores project-level task documents grouped by milestone, optiona
 - Current milestone: yes/no/next/later
 - Roadmap confirmed: yes/no
 
-## Current Gaps
+## Handoff Notes
 - ...
 
 ## Notes
@@ -123,6 +123,12 @@ docs/tasks/<milestone>/<module>/<task>/task.md
 - `docs/tasks/index.md` lists only `Open Milestones` and `Completed Milestones`.
 - Completed milestones are frozen; add follow-up work to a new open milestone.
 - Milestone confirmation should be explicit in each milestone `Status` section. Use `Roadmap confirmed: no` for provisional placeholder milestones and flip it to `yes` when the user confirms continuing on that path.
+- Starting a task in a later milestone requires two checks first: the earlier milestone is intentionally still active or explicitly closed, and the later milestone has `Roadmap confirmed: yes`.
+- `Handoff Notes` is optional. Use it only for follow-up findings discovered during the milestone that should be carried into a later milestone.
+- Do not use `Handoff Notes` to restate open task status, explain the next task, or duplicate `Open Tasks`, `Completed Tasks`, `Goal`, or `Exit Criteria`.
+- `Handoff Notes` is a temporary transfer queue. Once an item is attached to a later milestone or backlog, remove it from `Handoff Notes`.
+- `Handoff Notes` must be empty before milestone closure. If a handoff item still exists here, the handoff is not finished.
+- If a finding means the current milestone is not actually complete, express that through `Exit Criteria` or open task state instead of treating it as handoff-only information.
 - Modules are optional durable capability areas, not one-off buckets.
 - If a proposed module has fewer than three likely tasks, merge it unless it has a distinct long-term domain, owner, lifecycle, risk profile, release boundary, or acceptance boundary.
 - `Open Tasks` lists only `planned`, `in_progress`, and `blocked`.

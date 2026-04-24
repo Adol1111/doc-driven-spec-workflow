@@ -69,6 +69,9 @@ For each case:
 - `bootstrap-needed.md`: missing docs scaffold should route to `docs-workflow-bootstrap`.
 - `empty-open-milestones-needs-alignment.md`: an empty `Open Milestones` list plus unclear roadmap goals should route to `brainstorming` before decomposition.
 - `empty-open-milestones-asks-routing-question.md`: an empty `Open Milestones` list without enough context should trigger a routing question before any recommendation.
+- `cross-milestone-transition-requires-closure.md`: finishing one milestone does not authorize jumping into the next milestone while closure and roadmap confirmation are still unresolved.
+- `milestone-close-blocked-by-nonempty-handoff-notes.md`: a milestone must not close while `Handoff Notes` still contains unresolved transfer items.
+- `milestone-close-allows-empty-handoff-notes.md`: a milestone may close once its own work is done and `Handoff Notes` has been cleared after transfer.
 - `iteration-breakdown.md`: a concrete iteration target should route directly to `milestone-planning` without detouring through `brainstorming`.
 - `placeholder-milestone-asks-routing-question.md`: a placeholder open milestone should trigger a routing question before direct decomposition.
 - `roadmap-needed.md`: broad product scope should route to `milestone-planning`.
