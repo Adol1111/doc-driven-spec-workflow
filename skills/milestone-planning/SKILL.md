@@ -28,6 +28,7 @@ This skill is for deciding `Milestone -> optional Module -> Task` shape, not for
 - MUST first determine whether the user needs roadmap alignment or decomposition of an already-defined target whenever the current situation is unclear.
 - MUST treat an empty `Open Milestones` list as a routing signal, not enough information to decompose by itself.
 - MUST treat milestone confirmation as the primary routing signal for task decomposition. If a milestone is explicitly unconfirmed, ask whether to re-evaluate milestone structure or continue on the current path.
+- MUST treat tasks inside a milestone marked `Roadmap confirmed: no` as provisional candidate tasks for planning only, not as formally selected execution tasks.
 - MUST treat cross-milestone movement as a separate governance decision from "start the next task". If the user appears to be moving from one milestone to another, first resolve whether the previous milestone should be closed and whether the next milestone path is confirmed.
 - MUST treat milestone-level handoff notes as optional carry-forward context, not as a duplicate task tracker. Use them only for follow-up findings that belong to a later milestone, not for restating current open work.
 - MUST treat `Handoff Notes` as a temporary transfer queue. Once a handoff item is attached to a later milestone, backlog, or equivalent planning location, remove it from the current milestone.
@@ -113,6 +114,8 @@ If the milestone is not confirmed, the first reply should confirm whether to:
 
 - re-evaluate the milestone structure first
 - keep the current milestone path and decompose tasks within it anyway
+
+If the user chooses to keep decomposing tasks inside an unconfirmed milestone, treat that breakdown as provisional planning output. Do not present those tasks as formally ready for current-task spec execution until the milestone is explicitly confirmed.
 
 If the user explicitly confirms continuing on the current milestone path, remove the provisional state before or as part of the decomposition change. Prefer flipping the explicit confirmation flag rather than relying on naming cleanup alone.
 

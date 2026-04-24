@@ -49,6 +49,7 @@ This directory stores project-level task documents grouped by milestone, optiona
 ## Status
 - Current milestone: yes/no/next/later
 - Roadmap confirmed: yes/no
+- When `Roadmap confirmed: no`, treat listed tasks as candidate tasks only until milestone entry is explicitly confirmed.
 
 ## Handoff Notes
 - ...

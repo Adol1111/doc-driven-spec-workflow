@@ -11,9 +11,13 @@ This project follows Conventional Commits for commit history, but release notes 
 - `milestone-planning` now treats crossing from one milestone to the next as a separate governance decision instead of assuming "start the next task" authorizes direct task selection in the later milestone.
 - `milestone-planning` now stops when the previous milestone still appears open or the target milestone is still marked `Roadmap confirmed: no`, and routes through milestone closure/confirmation first.
 - `task-spec-execution` now blocks starting a task in `M(n+1)` when `M(n)` still has unresolved closure or the new milestone is not explicitly confirmed.
+- milestones now treat `Exit Criteria` as persistent checklist items to verify at closure time instead of temporary text to remove after completion.
 - milestone roadmap docs now use optional `Handoff Notes` instead of `Current Gaps` for carry-forward findings discovered during a completed milestone.
 - `milestone-planning` now requires every retained handoff note to be explicitly attached to a later milestone or backlog before the current milestone can close.
 - `milestone-planning` now treats `Handoff Notes` as a temporary transfer queue that must be empty before milestone closure.
+- tasks inside milestones marked `Roadmap confirmed: no` are now treated as candidate tasks only until milestone entry is explicitly confirmed.
+- roadmap templates now simplify module indexes by removing standalone `Recommended Order` and `Dependency Notes` sections; default order follows task numbering and task-level `Dependencies`.
+- execution-side index templates are now fully English again, matching the repository convention outside `README_CN.md`.
 
 ### Notes
 
@@ -22,6 +26,9 @@ This project follows Conventional Commits for commit history, but release notes 
 - `Handoff Notes` is for later-milestone follow-up only; it should not duplicate task status or keep an otherwise-complete milestone artificially open.
 - A handoff note is only valid if it has somewhere to go next; otherwise it is unresolved roadmap work, not a completed handoff.
 - After a handoff item is moved to its destination, remove it from the source milestone instead of keeping it as historical residue.
+- `Roadmap confirmed: no` can still allow provisional task breakdown for planning, but those tasks are not formal execution tasks until the milestone is confirmed.
+- `docs/tasks/<milestone>/index.md` now makes that candidate-task status explicit in the milestone `Status` section.
+- Task dependencies should now live on concrete `task.md` files rather than being repeated in roadmap-layer indexes.
 
 ## v0.3.0
 

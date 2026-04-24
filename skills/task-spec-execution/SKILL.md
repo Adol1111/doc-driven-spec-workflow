@@ -22,12 +22,14 @@ These are requirements, not suggestions. If any rule below is not satisfied, the
 - MUST defer roadmap decomposition to `milestone-planning` when the main question is how many milestones should exist, whether modules are needed, or how work should be split into tasks before selecting the current concrete task.
 - MUST treat routine cleanup and concept clarification as inline maintenance, not standalone tasks. Create a pure cleanup/governance/clarification task only when it is complex, cross-cutting, independently reviewable, or needs project-level execution tracking.
 - MUST use `docs/tasks/` as the only source of truth for concrete next work; if no suitable open task exists, stop and use `milestone-planning` before writing a spec.
+- MUST treat a task inside an unconfirmed milestone as not yet suitable open work for spec execution, even if the task directory or breakdown already exists.
 - MUST respect task sizing from the roadmap. If the selected task is too small, too broad, or only an implementation sub-step, stop and use `milestone-planning` to reshape it before writing a spec.
 - MUST respect the module layer chosen by the roadmap. Do not create, remove, or regroup modules here.
 - MUST treat completed milestones as frozen history. NEVER reopen them or add modules/tasks to them; use `milestone-planning` for follow-up work.
 - MUST resolve the previous task checkpoint before starting another concrete task. Default action is commit; uncommitted checkpoints require explicit user approval.
 - MUST NOT start a concrete task in a later milestone while the previous milestone is still operationally unresolved. If the earlier milestone's last task is done but milestone closure or milestone transition is still pending, stop and use docs governance first.
 - MUST require explicit milestone-entry confirmation before starting a task in a milestone whose status still shows `Roadmap confirmed: no` or equivalent provisional wording.
+- MUST treat tasks in a milestone whose status still shows `Roadmap confirmed: no` as candidate tasks only. They are not formal execution tasks until milestone entry is explicitly confirmed.
 - MUST NOT treat checkpoint rules as permission to auto-commit newly made docs-only/governance changes. Report the diff/result first; commit only when the user explicitly asked for commit upfront or confirms after review.
 - MUST resolve branch closing after completing a concrete task: verification, docs/status updates, commit or approved uncommitted checkpoint, and branch closing decision.
 
@@ -64,7 +66,7 @@ Use this skill when the repository uses `docs/architecture`, `docs/tasks`, `docs
 ## Docs Roles
 
 - `docs/architecture/`: stable behavior and long-lived constraints
-- `docs/tasks/`: milestone roadmap, optional module grouping, task order/dependencies/status, and task directories for complete implementation rounds
+- `docs/tasks/`: milestone roadmap, optional module grouping, task order/dependencies/status, and task directories for complete implementation rounds; tasks under unconfirmed milestones remain provisional candidates until entry is confirmed
 - `docs/context/`: supporting research only
 - task-local `spec.md`: one current-task design per concrete task by default
 - task-local `plan.md`: optional implementation plan for genuinely complex concrete tasks
