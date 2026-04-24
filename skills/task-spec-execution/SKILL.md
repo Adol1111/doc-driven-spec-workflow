@@ -31,6 +31,7 @@ These are requirements, not suggestions. If any rule below is not satisfied, the
 - MUST require explicit milestone-entry confirmation before starting a task in a milestone whose status still shows `Roadmap confirmed: no` or equivalent provisional wording.
 - MUST treat tasks in a milestone whose status still shows `Roadmap confirmed: no` as candidate tasks only. They are not formal execution tasks until milestone entry is explicitly confirmed.
 - MUST NOT treat checkpoint rules as permission to auto-commit newly made docs-only/governance changes. Report the diff/result first; commit only when the user explicitly asked for commit upfront or confirms after review.
+- MUST report milestone-entry governance changes before drafting the first task spec in that milestone.
 - MUST resolve branch closing after completing a concrete task: verification, docs/status updates, commit or approved uncommitted checkpoint, and branch closing decision.
 
 Spec creation requirements:

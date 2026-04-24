@@ -120,7 +120,7 @@ If the milestone is not confirmed, the first reply should confirm whether to:
 
 If the user chooses to keep decomposing tasks inside an unconfirmed milestone, treat that breakdown as provisional planning output. Do not present those tasks as formally ready for current-task spec execution until the milestone is explicitly confirmed.
 
-If the user explicitly confirms continuing on the current milestone path, remove the provisional state before or as part of the decomposition change. Prefer flipping the explicit confirmation flag rather than relying on naming cleanup alone.
+If the user explicitly confirms continuing on the current milestone path, complete the milestone-entry docs update before any task-spec work: flip `Roadmap confirmed` to `yes`, make the listed tasks formally active, and report the governance changes. Prefer flipping the explicit confirmation flag rather than relying on naming cleanup alone.
 
 If the previous milestone appears complete but is still listed as open, close or explicitly review that milestone before recommending a task from the next one. Do not treat "continue", "start the next task", or similar phrasing as automatic permission to skip milestone closure.
 
