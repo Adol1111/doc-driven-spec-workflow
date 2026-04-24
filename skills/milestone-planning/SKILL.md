@@ -31,6 +31,7 @@ This skill is for deciding `Milestone -> optional Module -> Task` shape, not for
 - MUST treat tasks inside a milestone marked `Roadmap confirmed: no` as provisional candidate tasks for planning only, not as formally selected execution tasks.
 - MUST treat cross-milestone movement as a separate governance decision from "start the next task". If the user appears to be moving from one milestone to another, first resolve whether the previous milestone should be closed and whether the next milestone path is confirmed.
 - MUST treat milestone-level handoff notes as optional carry-forward context, not as a duplicate task tracker. Use them only for follow-up findings that belong to a later milestone, not for restating current open work.
+- MUST allow newly discovered follow-up discussion points to be recorded in the current milestone's `Handoff Notes` first when their final destination is not decided yet.
 - MUST treat `Handoff Notes` as a temporary transfer queue. Once a handoff item is attached to a later milestone, backlog, or equivalent planning location, remove it from the current milestone.
 - MUST NOT close a milestone while `Handoff Notes` is non-empty.
 - MUST treat placeholder names or other provisional milestone markers as fallback routing signals only when no explicit confirmation flag exists.
@@ -41,7 +42,9 @@ This skill is for deciding `Milestone -> optional Module -> Task` shape, not for
 - MUST hand off to `task-spec-execution` only after the current concrete task is chosen.
 - MUST treat milestone/module/task creation or reshaping as docs governance. Updating roadmap structure does not by itself authorize spec writing or implementation.
 - MUST close a milestone when its original exit criteria are satisfied, even if the work surfaced new follow-up findings for later milestones. Record those findings as handoff context or new roadmap items instead of keeping the finished milestone artificially open.
-- MUST treat any item still present in `Handoff Notes` as unresolved roadmap work. Before closing the milestone, either attach it to a later milestone or backlog and remove it from `Handoff Notes`, or conclude that it is not worth tracking and remove it entirely.
+- MUST clear `Handoff Notes` before milestone closure by resolving each item into exactly one outcome: current-milestone open work, a later milestone, `docs/tasks/backlog.md`, or removal if it is no longer worth tracking.
+- MUST remove any item kept in the current milestone from `Handoff Notes` and express it through open task state, new task creation, or `Exit Criteria` instead.
+- MUST revisit backlog during roadmap planning and when changing `Roadmap confirmed: no` to `yes`; once an item's placement is clear, attach it to the right milestone or task and remove it from backlog.
 - MUST keep its document output focused on roadmap structure and task selection. Task-local `spec.md`, `plan.md`, readiness, and implementation guidance belong to `task-spec-execution`.
 
 ## When To Use
@@ -242,6 +245,7 @@ Always provide:
 If the repository already uses `docs/tasks/`, update or propose roadmap-layer docs only:
 
 - `docs/tasks/index.md`
+- optional `docs/tasks/backlog.md`
 - `docs/tasks/<milestone>/index.md`
 - optional `docs/tasks/<milestone>/<module>/index.md`
 - `docs/tasks/<milestone>/<task>/task.md`

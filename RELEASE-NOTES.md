@@ -15,6 +15,7 @@ This project follows Conventional Commits for commit history, but release notes 
 - milestone roadmap docs now use optional `Handoff Notes` instead of `Current Gaps` for carry-forward findings discovered during a completed milestone.
 - `milestone-planning` now requires every retained handoff note to be explicitly attached to a later milestone or backlog before the current milestone can close.
 - `milestone-planning` now treats `Handoff Notes` as a temporary transfer queue that must be empty before milestone closure.
+- milestone roadmap docs now support an optional `docs/tasks/backlog.md` for roadmap items that are worth keeping but not yet attached to a milestone.
 - tasks inside milestones marked `Roadmap confirmed: no` are now treated as candidate tasks only until milestone entry is explicitly confirmed.
 - roadmap templates now simplify module indexes by removing standalone `Recommended Order` and `Dependency Notes` sections; default order follows task numbering and task-level `Dependencies`.
 - execution-side index templates are now fully English again, matching the repository convention outside `README_CN.md`.
@@ -26,6 +27,10 @@ This project follows Conventional Commits for commit history, but release notes 
 - `Handoff Notes` is for later-milestone follow-up only; it should not duplicate task status or keep an otherwise-complete milestone artificially open.
 - A handoff note is only valid if it has somewhere to go next; otherwise it is unresolved roadmap work, not a completed handoff.
 - After a handoff item is moved to its destination, remove it from the source milestone instead of keeping it as historical residue.
+- New follow-up discussion discovered during execution should land in the current milestone's `Handoff Notes` first, not jump directly into backlog.
+- Before milestone closure, every `Handoff Notes` item must resolve into exactly one outcome: current-milestone open work, a later milestone, `docs/tasks/backlog.md`, or removal if it is no longer worth tracking.
+- Backlog is now a deferred routing pool rather than a running history list: when an item is attached to a milestone or task, remove it from backlog instead of marking it completed there.
+- Revisit backlog during roadmap planning and when changing `Roadmap confirmed: no` to `yes`; those are the main points where backlog items should be pulled into milestones or concrete tasks.
 - `Roadmap confirmed: no` can still allow provisional task breakdown for planning, but those tasks are not formal execution tasks until the milestone is confirmed.
 - `docs/tasks/<milestone>/index.md` now makes that candidate-task status explicit in the milestone `Status` section.
 - Task dependencies should now live on concrete `task.md` files rather than being repeated in roadmap-layer indexes.

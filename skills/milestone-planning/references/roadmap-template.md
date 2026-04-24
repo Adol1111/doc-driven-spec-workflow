@@ -20,9 +20,14 @@ This directory stores project-level task documents grouped by milestone, optiona
 
 - None
 
+## Backlog
+
+- Optional: [Backlog](./backlog.md)
+
 ## Conventions
 
 - Each milestone directory has its own `index.md`
+- `backlog.md` is optional and stores roadmap items that are not yet attached to a milestone
 - Module directories are optional; use them only when a milestone has multiple meaningful capability areas
 - Task directories contain `task.md`, task-local `spec.md`, and optional `plan.md`
 - Milestones are frozen after completion; add follow-up work to a new open milestone
@@ -116,16 +121,34 @@ Use this path when modules exist:
 docs/tasks/<milestone>/<module>/<task>/task.md
 ```
 
+## `docs/tasks/backlog.md`
+
+```md
+# Backlog
+
+This file stores candidate roadmap items that are not yet attached to a milestone.
+
+## Items
+
+- Some follow-up item
+  Source: `M1` handoff note
+  Notes: waiting for milestone assignment
+```
+
 ## Rules
 
-- `docs/tasks/index.md` lists only `Open Milestones` and `Completed Milestones`.
+- `docs/tasks/index.md` lists `Open Milestones` and `Completed Milestones`; it may also link an optional `Backlog`.
 - Completed milestones are frozen; add follow-up work to a new open milestone.
 - Milestone confirmation should be explicit in each milestone `Status` section. Use `Roadmap confirmed: no` for provisional placeholder milestones and flip it to `yes` when the user confirms continuing on that path.
 - Starting a task in a later milestone requires two checks first: the earlier milestone is intentionally still active or explicitly closed, and the later milestone has `Roadmap confirmed: yes`.
-- `Handoff Notes` is optional. Use it only for follow-up findings discovered during the milestone that should be carried into a later milestone.
+- `Handoff Notes` is optional. Use it as a temporary transfer queue for follow-up findings discovered during the milestone while their destination is still being decided.
 - Do not use `Handoff Notes` to restate open task status, explain the next task, or duplicate `Open Tasks`, `Completed Tasks`, `Goal`, or `Exit Criteria`.
 - `Handoff Notes` is a temporary transfer queue. Once an item is attached to a later milestone or backlog, remove it from `Handoff Notes`.
 - `Handoff Notes` must be empty before milestone closure. If a handoff item still exists here, the handoff is not finished.
+- Before closing a milestone, resolve every `Handoff Notes` item into exactly one outcome: current-milestone open work, a later milestone, `docs/tasks/backlog.md`, or removal if it is no longer worth tracking.
+- If a handoff item stays in the current milestone, remove it from `Handoff Notes` and express it through task state, a new task, or `Exit Criteria` instead.
+- `docs/tasks/backlog.md` is optional. Use it for roadmap items that are not yet attached to a milestone.
+- Revisit backlog during roadmap planning and when changing `Roadmap confirmed: no` to `yes`; once an item clearly belongs to a milestone or task, attach it there and remove it from backlog.
 - If a finding means the current milestone is not actually complete, express that through `Exit Criteria` or open task state instead of treating it as handoff-only information.
 - Write `Exit Criteria` as checklist items and mark them complete before milestone closure; do not remove them after closure.
 - Modules are optional durable capability areas, not one-off buckets.
