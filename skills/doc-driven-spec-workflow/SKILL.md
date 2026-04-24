@@ -67,7 +67,7 @@ At each handoff, briefly restate:
 - what the next skill is responsible for
 - which explicit approval gate, if any, remains outstanding
 
-Treat a user message such as `continue` or `继续` as permission to advance to the next workflow stage only when the current stage is complete and no explicit approval gate is outstanding.
+Treat a user message such as `continue` as permission to advance to the next workflow stage only when the current stage is complete and no explicit approval gate is outstanding.
 
 Do not treat `continue` as automatic approval for:
 

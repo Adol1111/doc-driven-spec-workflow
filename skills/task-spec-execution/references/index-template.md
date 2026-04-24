@@ -73,24 +73,24 @@ This directory stores research notes, validation notes, and references.
 ```md
 # Working Specs
 
-本目录保存进入实现前的设计规格。
+This directory stores design specs created before implementation begins.
 
 ## Naming
 
-- 使用 `YYYY-MM-DD-<topic>-design.md`
-- `<topic>` 使用简短英文 kebab-case
-- 示例：`2026-04-16-chat-fixed-user-context-design.md`
+- Use `YYYY-MM-DD-<topic>-design.md`
+- Use short English kebab-case for `<topic>`
+- Example: `2026-04-16-chat-fixed-user-context-design.md`
 
 ## Role
 
-- spec 用于记录当前任务进入实现前的目标、边界、方案和验证方式
-- task-local spec 的具体结构与写法以 `task-spec-execution` skill 及其 references 模板为准
-- 当结论成为长期系统约束时，应迁移或沉淀到 `docs/architecture/`
+- Use specs to record goals, boundaries, approach, and verification before implementation.
+- Follow the `task-spec-execution` skill and its reference templates for task-local spec structure and writing guidance.
+- Move stable long-term constraints into `docs/architecture/`.
 
 ## Lifecycle
 
-- 新规格应在开始实现前创建，并在进入代码阶段前得到用户确认。
-- 只有任务确实复杂或多步骤时，才创建对应的 `docs/plans/` 计划文档。
+- Create new specs before implementation starts, and get user approval before coding.
+- Create a corresponding `docs/plans/` document only when the task is genuinely complex or multi-step.
 ```
 
 ## `docs/plans/index.md`
@@ -98,27 +98,27 @@ This directory stores research notes, validation notes, and references.
 ```md
 # Working Plans
 
-本目录保存复杂任务需要的详细实施计划。
+This directory stores detailed implementation plans for complex tasks.
 
 ## Naming
 
-- 使用 `YYYY-MM-DD-<feature-name>.md`
-- `<feature-name>` 使用简短英文 kebab-case
-- 示例：`2026-04-16-chat-fixed-user-context.md`
+- Use `YYYY-MM-DD-<feature-name>.md`
+- Use short English kebab-case for `<feature-name>`
+- Example: `2026-04-16-chat-fixed-user-context.md`
 
 ## Role
 
-- plan 只在任务确实复杂或多步骤时创建
-- plan 用来拆实现切片、文件范围和验证方式，不重复已经确认的 spec
-- task-local plan 的具体结构与写法以 `task-spec-execution` skill 及其 references 模板为准
+- Create plans only when the task is genuinely complex or multi-step.
+- Use plans to break down implementation slices, file scope, and verification without repeating the approved spec.
+- Follow the `task-spec-execution` skill and its reference templates for task-local plan structure and writing guidance.
 
 ## Lifecycle
 
-- plan 写完后先等用户确认，再开始编码
+- Wait for user approval after writing the plan before starting implementation.
 
 ## Relationship To `docs/tasks/`
 
-`docs/plans/` 是详细执行入口。`docs/tasks/` 只记录 milestone、module、任务状态、依赖关系和历史索引；如果某个项目任务有对应 plan，应在 task 的 `Source` 或 `Notes` 中链接到这里，而不是复制完整执行步骤。
+`docs/plans/` is the detailed execution entry point. `docs/tasks/` records milestone, module, task status, dependencies, and historical indexing only. If a project task has a corresponding plan here, link to it from the task's `Source` or `Notes` instead of copying the full execution steps.
 ```
 
 ## Rules

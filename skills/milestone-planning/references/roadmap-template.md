@@ -68,17 +68,14 @@ Use either `Modules` or `Tasks`. Do not create a single catch-all module when th
 ## Goals
 - ...
 
-## Recommended Order
-1. [01 Some Task](./01-some-task/task.md)
-
-## Dependency Notes
-- `01-some-task`: ...
-
 ## Open Tasks
 - `planned`: [01 Some Task](./01-some-task/task.md)
 
 ## Completed Tasks
 - [02 Done Task](./02-done-task/task.md)
+
+## Notes
+- Default order follows task numbering unless a task's own `Dependencies` says otherwise.
 ```
 
 ## `docs/tasks/<milestone>/<task>/task.md`
