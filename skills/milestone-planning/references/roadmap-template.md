@@ -38,7 +38,7 @@ This directory stores project-level task documents grouped by milestone, optiona
 - ...
 
 ## Exit Criteria
-- ...
+- [ ] ...
 
 ## Modules
 - [Some Module [1/3]](./some-module/index.md)
@@ -129,6 +129,7 @@ docs/tasks/<milestone>/<module>/<task>/task.md
 - `Handoff Notes` is a temporary transfer queue. Once an item is attached to a later milestone or backlog, remove it from `Handoff Notes`.
 - `Handoff Notes` must be empty before milestone closure. If a handoff item still exists here, the handoff is not finished.
 - If a finding means the current milestone is not actually complete, express that through `Exit Criteria` or open task state instead of treating it as handoff-only information.
+- Write `Exit Criteria` as checklist items and mark them complete before milestone closure; do not remove them after closure.
 - Modules are optional durable capability areas, not one-off buckets.
 - If a proposed module has fewer than three likely tasks, merge it unless it has a distinct long-term domain, owner, lifecycle, risk profile, release boundary, or acceptance boundary.
 - `Open Tasks` lists only `planned`, `in_progress`, and `blocked`.
