@@ -67,17 +67,23 @@ For each case:
 - `approved-spec-needs-checkpoint.md`: approved task-local docs must be checkpointed before branch/worktree isolation for implementation.
 - `branch-closing-after-worktree.md`: merged task branches must be explicitly deleted or kept after worktree cleanup.
 - `bootstrap-needed.md`: missing docs scaffold should route to `docs-workflow-bootstrap`.
+- `bootstrap-overreach-request.md`: even when the user bundles roadmap, task selection, and `spec.md` requests into bootstrap, the workflow should still stop at minimum scaffold creation.
 - `empty-open-milestones-needs-alignment.md`: an empty `Open Milestones` list plus unclear roadmap goals should route to `brainstorming` before decomposition.
 - `empty-open-milestones-asks-routing-question.md`: an empty `Open Milestones` list without enough context should trigger a routing question before any recommendation.
+  These two cases are the same routing family with different pressure sources: one should ask a routing question, the other should route to alignment.
 - `cross-milestone-transition-requires-closure.md`: finishing one milestone does not authorize jumping into the next milestone while closure and roadmap confirmation are still unresolved.
-- `milestone-close-blocked-by-nonempty-handoff-notes.md`: a milestone must not close while `Handoff Notes` still contains unresolved transfer items.
-- `milestone-close-allows-empty-handoff-notes.md`: a milestone may close once its own work is done and `Handoff Notes` has been cleared after transfer.
+- `milestone-close-handoff-notes-gate.md`: paired closure gate cases for `Handoff Notes`:
+  - Scenario A: a milestone must not close while `Handoff Notes` still contains unresolved transfer items.
+  - Scenario B: a milestone may close once its own work is done and `Handoff Notes` has been cleared after transfer.
 - `iteration-breakdown.md`: a concrete iteration target should route directly to `milestone-planning` without detouring through `brainstorming`.
 - `placeholder-milestone-asks-routing-question.md`: a placeholder open milestone should trigger a routing question before direct decomposition.
+- `placeholder-milestone-asks-routing-question.md` and `unconfirmed-milestone-asks-routing-question.md` are the same guarded-decomposition family with different signals: placeholder naming versus explicit `Roadmap confirmed: no`.
 - `roadmap-needed.md`: broad product scope should route to `milestone-planning`.
 - `roadmap-no-mechanical-split.md`: implementation-mechanical task requests should be corrected into capability-level roadmap tasks.
 - `roadmap-small-output.md`: small roadmap scope should route to `milestone-planning` and generate inspectable roadmap-layer task docs.
 - `selected-task-spec.md`: selected concrete task should route to `task-spec-execution`.
+- `selected-task-skip-spec-and-code.md`: a selected concrete task still must not skip task-local spec work just because the user wants to code immediately.
 - `task-too-broad.md`: too-broad task should return to `milestone-planning`.
 - `unconfirmed-milestone-asks-routing-question.md`: an explicit `Roadmap confirmed: no` milestone should trigger a routing question before direct decomposition.
+- `unconfirmed-milestone-continue-current-path.md`: after the user explicitly chooses to keep the current milestone path, `milestone-planning` should continue with governance and decomposition instead of re-asking the routing question or jumping into execution.
 - `continue-without-approval.md`: `continue` must not skip approval gates.
