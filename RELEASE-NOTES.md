@@ -4,6 +4,35 @@ User-facing workflow, installation, and migration changes are documented here.
 
 This project follows Conventional Commits for commit history, but release notes focus on what users need to know when adopting or upgrading the workflow.
 
+## v0.4.0
+
+### Features
+
+- `milestone-planning` now treats roadmap decomposition as a clearer planning stage with explicit ownership over roadmap-layer `docs/tasks/` structure, milestone boundaries, module grouping, and planning-stage backlog/handoff governance.
+- `milestone-planning` now separates core planning rules, anti-patterns, and roadmap templates more cleanly:
+  - high-frequency routing and closure behavior stays in the main skill
+  - anti-patterns live in `references/milestone-anti-patterns.md`
+  - roadmap document shape lives in `references/roadmap-template.md`
+- `task-spec-execution` now exposes more of its high-frequency execution behavior directly in the main skill, including docs boundaries, branch-closing expectations, and source-of-truth guidance.
+- `task-spec-execution` now treats `references/task-execution-detailed-rules.md` as a low-frequency companion for stop conditions, edge cases, and template-loading guidance rather than as a hidden second main workflow document.
+
+### Fixes
+
+- `task-spec-execution` now makes it explicit that bootstrap-created docs may be maintained during execution, but bootstrap ownership still belongs to `docs-workflow-bootstrap`.
+- branch-closing guidance now explicitly covers the case where a user chooses merge plus cleanup and clarifies that deleting a worktree does not by itself resolve task-branch cleanup.
+- `milestone-planning` template guidance now distinguishes document shape from workflow policy more clearly: milestone confirmation, `Handoff Notes`, closure gates, and task-list semantics are documented as rules rather than buried inside the template text.
+
+### Notes
+
+- This release is primarily a skill-boundary and discoverability refinement rather than a new workflow stage.
+- The main intent is to make the high-frequency rules visible in each stage's primary `SKILL.md` while keeping low-frequency examples, anti-patterns, and templates in `references/`.
+- In practice, this should reduce the chance that an agent loads a stage skill, misses a critical approval gate, and only discovers the real rule after diving into a reference file.
+- `milestone-planning` is now closer to a stable split:
+  - `SKILL.md` for planning decisions and handoff rules
+  - `milestone-detailed-rules.md` for finer routing/closure policy
+  - `roadmap-template.md` for file shape
+- `task-spec-execution` remains the heaviest stage skill, but this release makes that weight more honest by putting the most frequently needed rules back in the main file instead of treating them as optional reference material.
+
 ## v0.3.1
 
 ### Fixes
