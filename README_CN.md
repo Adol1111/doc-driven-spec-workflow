@@ -16,13 +16,13 @@
 
 阶段链路是：
 
-`doc-driven-spec-workflow -> docs-workflow-bootstrap -> brainstorming -> milestone-planning -> task-spec-execution`
+`doc-driven-spec-workflow -> docs-workflow-bootstrap -> superpowers:brainstorming -> milestone-planning -> task-spec-execution`
 
 并不是每次都要走完整链路：
 
 - 当你不确定现在该进入哪个阶段时，从 `doc-driven-spec-workflow` 开始。
 - 当仓库还没有最小 docs scaffold 时，使用 `docs-workflow-bootstrap`。
-- 当目标、范围或成功标准还不清楚时，才进入 `brainstorming`。
+- 当目标、范围或成功标准还不清楚时，才进入 `superpowers:brainstorming`。
 - 当 roadmap shape 还不清楚，需要决定 milestones、modules 和 tasks 时，使用 `milestone-planning`。
 - 当当前 concrete task 已经确定，并准备进入 task-local spec 和实现治理时，使用 `task-spec-execution`。
 
@@ -38,7 +38,7 @@ root skill 不拥有模板或实现细节。它只负责路由、交接上下文
 | `docs-workflow-bootstrap` | 初始化最小 docs scaffold | 当核心 docs 入口创建完成 |
 | `milestone-planning` | 把范围拆成 `Milestone -> 可选 Module -> Task` | 当 roadmap docs 更新完成，或当前 task 已选出 |
 | `task-spec-execution` | 执行已选 task 的 `spec -> 可选 plan -> readiness -> implementation` | 当当前 task checkpoint 和 branch closing 处理完成 |
-| `brainstorming` | 在 planning 或 spec work 之前澄清模糊意图 | 当 scope 和 success criteria 已足够清晰 |
+| `superpowers:brainstorming` | 在 planning 或 spec work 之前澄清模糊意图 | 当 scope 和 success criteria 已足够清晰 |
 
 roadmap planning 和 task reshaping 都属于 docs governance，它们不会自动授权进入 spec 或代码实现。
 
@@ -140,7 +140,7 @@ Claude Code 也可以直接调用各个已安装的 skill：
 
 1. 用 `doc-driven-spec-workflow` 判断当前请求属于哪个阶段。
 2. 如果仓库还没有最小 docs scaffold，使用 `docs-workflow-bootstrap` 初始化。
-3. 需要时，用 `brainstorming` 或等价澄清流程明确模糊意图。
+3. 需要时，用 `superpowers:brainstorming` 或等价澄清流程明确模糊意图。
 4. 当 roadmap shape 还不清楚时，用 `milestone-planning` 决定 milestone、module 和 task 结构。
 5. 在 `docs/tasks/` 下选定当前 concrete task。
 6. 用 `task-spec-execution` 编写或更新 task-local `spec.md`。
@@ -200,22 +200,22 @@ module 层是可选的。当 milestone 只有一个真实能力域时，使用 `
 
 current-task execution skill 在 concrete task 已经存在后可以独立使用，但这个仓库的整体 workflow 设计上会和 [obra/superpowers](https://github.com/obra/superpowers) 中的可选澄清与执行安全 skills 组合：
 
-- `brainstorming`：在 roadmap decomposition 或 current-task spec work 之前，澄清模糊的 feature、behavior 或 task intent。
-- `using-git-worktrees`：当 workspace dirty、shared、风险较高或可能冲突时，创建安全的 branch/worktree isolation。
-- `finishing-a-development-branch`：当实现完成后，处理 Git integration 选择，包括本地 merge、创建 PR、保留 branch、丢弃 work，以及 branch/worktree cleanup。
+- `superpowers:brainstorming`：在 roadmap decomposition 或 current-task spec work 之前，澄清模糊的 feature、behavior 或 task intent。
+- `superpowers:using-git-worktrees`：当 workspace dirty、shared、风险较高或可能冲突时，创建安全的 branch/worktree isolation。
+- `superpowers:finishing-a-development-branch`：当实现完成后，处理 Git integration 选择，包括本地 merge、创建 PR、保留 branch、丢弃 work，以及 branch/worktree cleanup。
 
 如果你的 agent 环境没有这些 skills，请使用等价的 clarification、git isolation 和 branch finishing workflows。需要保留相同安全规则：在锁定 roadmap structure 或 spec 前澄清不明确意图，不要在不安全的当前分支上开始具体实现，不要在没有明确 closing decision 的情况下删除或合并 branches/worktrees。删除 worktree 不等于删除 task branch；只有 merged branch 被明确删除或明确保留后，branch closing 才算完成。
 
 ## 为什么不直接使用 Superpowers？
 
-Superpowers 是更完整的软件开发方法论，包含 brainstorming、planning、TDD、subagents、code review、verification、branch finishing 等一组可组合 skills。这个 workflow 刻意更窄：
+Superpowers 是更完整的软件开发方法论，包含 `superpowers:brainstorming`、planning、TDD、subagents、code review、verification、branch finishing 等一组可组合 skills。这个 workflow 刻意更窄：
 
 - 它围绕项目长期文档结构组织：`docs/architecture/`、`docs/tasks/`、`docs/context/`、task-local `spec.md` 和可选 `plan.md`。
 - 它把 `docs/tasks/` 当作 roadmap decomposition 和选择具体工作的 source of truth，避免 agent 直接从 architecture notes 发明实现任务。
 - 它区分 docs governance 和 implementation permission，因此 architecture edits、roadmap reshaping 和 index maintenance 不会自动授权写代码。
 - 它把 workflow routing、roadmap planning 和 current-task execution 拆成不同 skills，而不是堆进一个过大的说明文件里。
 - 它不强制 TDD、heavyweight planning 或 subagent workflows，更适合只想采用 spec-first coordination、但不想引入完整 Superpowers 方法论的项目。
-- 它仍然可以和 Superpowers 组合使用，尤其是模糊 scope 前的 `brainstorming`、高风险实现前的 `using-git-worktrees`，以及 task branch 需要 merge、PR、keep、discard 或 cleanup 决策时的 `finishing-a-development-branch`。
+- 它仍然可以和 Superpowers 组合使用，尤其是模糊 scope 前的 `superpowers:brainstorming`、高风险实现前的 `superpowers:using-git-worktrees`，以及 task branch 需要 merge、PR、keep、discard 或 cleanup 决策时的 `superpowers:finishing-a-development-branch`。
 
 如果你想要完整的端到端 agentic development methodology，使用 Superpowers。如果你的主要目标是让 agent 对齐 docs-driven architecture、task roadmap 和 spec approval process，使用这个 workflow。
 

@@ -39,7 +39,7 @@ This skill decides `Milestone -> optional Module -> Task` shape. It owns roadmap
 
 | Situation | Action |
 |-----------|--------|
-| Empty `Open Milestones` | Use `brainstorming` first |
+| Empty `Open Milestones` | Use `superpowers:brainstorming` first |
 | `Roadmap confirmed: no` | Treat tasks as candidates only |
 | Cross-milestone movement | Resolve previous milestone closure first |
 
@@ -50,8 +50,8 @@ This skill decides `Milestone -> optional Module -> Task` shape. It owns roadmap
 - Explain why each milestone, module, and task boundary exists. Structure without rationale is incomplete.
 - Ask the planning mode question first when it is still unclear whether the user needs roadmap alignment or direct decomposition.
 - Treat an empty `Open Milestones` list as a routing signal, not enough information to decompose by itself.
-- Use `brainstorming` first when goals, constraints, success criteria, or roadmap alignment are still unclear.
-- Skip `brainstorming` and decompose directly when the user already has a concrete short-term target.
+- Use `superpowers:brainstorming` first when goals, constraints, success criteria, or roadmap alignment are still unclear.
+- Skip `superpowers:brainstorming` and decompose directly when the user already has a concrete short-term target.
 - Treat milestone confirmation as the primary routing signal for task decomposition.
 - Treat tasks inside a milestone marked `Roadmap confirmed: no` as provisional planning output, not formally selected execution work.
 - Treat milestone/module/task creation or reshaping as docs governance only. It does not authorize spec writing or implementation.

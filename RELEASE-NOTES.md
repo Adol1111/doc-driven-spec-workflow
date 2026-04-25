@@ -25,6 +25,7 @@ This project follows Conventional Commits for commit history, but release notes 
 ### Notes
 
 - This release is primarily a skill-boundary and discoverability refinement rather than a new workflow stage.
+- Docs and tests now refer to upstream Superpowers skills by canonical names such as `superpowers:brainstorming`.
 - The main intent is to make the high-frequency rules visible in each stage's primary `SKILL.md` while keeping low-frequency examples, anti-patterns, and templates in `references/`.
 - In practice, this should reduce the chance that an agent loads a stage skill, misses a critical approval gate, and only discovers the real rule after diving into a reference file.
 - `milestone-planning` is now closer to a stable split:
@@ -69,14 +70,14 @@ This project follows Conventional Commits for commit history, but release notes 
 ### Features
 
 - `milestone-planning` now asks whether the user needs mid/long-term roadmap alignment or decomposition of an already-defined target before it proposes milestone structure.
-- When `Open Milestones` is empty because roadmap goals are not aligned yet, `milestone-planning` now routes to `brainstorming` first and prefers shaping at least three milestones before detailed decomposition.
-- When the user already has a concrete short-term goal, especially in enterprise or iteration-driven scenarios with a clear case, `milestone-planning` now skips `brainstorming` and decomposes the current iteration directly.
+- When `Open Milestones` is empty because roadmap goals are not aligned yet, `milestone-planning` now routes to `superpowers:brainstorming` first and prefers shaping at least three milestones before detailed decomposition.
+- When the user already has a concrete short-term goal, especially in enterprise or iteration-driven scenarios with a clear case, `milestone-planning` now skips `superpowers:brainstorming` and decomposes the current iteration directly.
 - `milestone-planning` now treats milestone confirmation as an explicit routing signal for task decomposition. Use `Roadmap confirmed: no` on a milestone to force a routing question before decomposing tasks, and flip it once the user confirms staying on that path.
 
 ### Notes
 
 - An empty `Open Milestones` list is now treated as a decision point, not an automatic signal to decompose immediately.
-- The new default is: first determine whether the user needs roadmap alignment or execution planning, then choose `brainstorming` or direct milestone decomposition accordingly.
+- The new default is: first determine whether the user needs roadmap alignment or execution planning, then choose `superpowers:brainstorming` or direct milestone decomposition accordingly.
 - Explicit unconfirmed milestones now behave like a guarded handoff: ask whether to re-evaluate the milestone structure or continue on the current route before task breakdown starts.
 
 ## v0.2.2
@@ -96,12 +97,12 @@ This project follows Conventional Commits for commit history, but release notes 
 ### Fixes
 
 - `task-spec-execution` now treats branch closing as unresolved until a merged task branch is explicitly deleted or explicitly kept, even after worktree cleanup.
-- `task-spec-execution` now points to `finishing-a-development-branch` for merge, PR, keep, discard, and cleanup decisions after implementation is complete.
+- `task-spec-execution` now points to `superpowers:finishing-a-development-branch` for merge, PR, keep, discard, and cleanup decisions after implementation is complete.
 
 ### Notes
 
 - Removing a worktree does not remove its merged task branch.
-- If implementation is complete and Git integration remains, prefer using `task-spec-execution` together with `finishing-a-development-branch`.
+- If implementation is complete and Git integration remains, prefer using `task-spec-execution` together with `superpowers:finishing-a-development-branch`.
 
 ## v0.2.0
 
@@ -110,7 +111,7 @@ This project follows Conventional Commits for commit history, but release notes 
 - The workflow moved from one combined skill to a staged model:
 
   ```text
-  doc-driven-spec-workflow -> docs-workflow-bootstrap -> brainstorming -> milestone-planning -> task-spec-execution
+  doc-driven-spec-workflow -> docs-workflow-bootstrap -> superpowers:brainstorming -> milestone-planning -> task-spec-execution
   ```
 
 - Added `docs-workflow-bootstrap` for minimum docs scaffold initialization.

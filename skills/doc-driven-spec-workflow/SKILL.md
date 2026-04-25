@@ -24,7 +24,7 @@ This is analogous to `using-superpowers`: it makes the agent choose and respect 
 
 Default chain:
 
-`docs-workflow-bootstrap -> brainstorming -> milestone-planning -> task-spec-execution`
+`docs-workflow-bootstrap -> superpowers:brainstorming -> milestone-planning -> task-spec-execution`
 
 Not every request uses every stage. Skip stages only when their decision is already settled.
 
@@ -33,7 +33,7 @@ Not every request uses every stage. Skip stages only when their decision is alre
 Choose the next skill by the user's current uncertainty:
 
 - "We need the minimum docs scaffold first." -> `docs-workflow-bootstrap`
-- "We still do not understand what we are building." -> `brainstorming`
+- "We still do not understand what we are building." -> `superpowers:brainstorming`
 - "We understand the request, but not the milestone/module/task shape." -> `milestone-planning`
 - "We know the current concrete task and need spec-first execution." -> `task-spec-execution`
 
@@ -44,7 +44,7 @@ Use `docs-workflow-bootstrap` when the repository lacks:
 - `docs/tasks/index.md`
 - `docs/context/index.md`
 
-Use `brainstorming` when goals, constraints, success criteria, or "now versus later" boundaries are still ambiguous.
+Use `superpowers:brainstorming` when goals, constraints, success criteria, or "now versus later" boundaries are still ambiguous.
 
 Use `milestone-planning` when the user needs milestone count, module grouping, task breakdown, delivery order, or stage boundaries.
 
@@ -56,8 +56,8 @@ Do not keep using `milestone-planning` after the question becomes current-task e
 
 ## Handoff Rules
 
-- `docs-workflow-bootstrap -> brainstorming or milestone-planning`: after the minimum docs scaffold exists
-- `brainstorming -> milestone-planning`: after scope, boundaries, and success criteria are clear enough to plan delivery structure
+- `docs-workflow-bootstrap -> superpowers:brainstorming or milestone-planning`: after the minimum docs scaffold exists
+- `superpowers:brainstorming -> milestone-planning`: after scope, boundaries, and success criteria are clear enough to plan delivery structure
 - `milestone-planning -> task-spec-execution`: after the current concrete task is selected and the user wants to enter spec-first execution
 
 At each handoff, briefly restate:

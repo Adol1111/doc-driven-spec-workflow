@@ -25,7 +25,7 @@ Low-frequency execution details and stop conditions for task spec execution. Rea
 - Write task-local specs/plans directly in this repository's compact local format.
 - Treat tests and verification as delivery checks, not as a mandatory test-first workflow.
 
-- If a worktree is needed, prefer `using-git-worktrees`; if it is unavailable, use the environment's equivalent git worktree workflow and preserve the same safety checks.
+- If a worktree is needed, prefer `superpowers:using-git-worktrees`; if it is unavailable, use the environment's equivalent git worktree workflow and preserve the same safety checks.
 - Before the first implementation edit, tell the user: `Spec/plan is approved and checkpointed. I am handling branch isolation now before coding.`
 
 ## Task And Status Rules

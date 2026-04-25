@@ -2,7 +2,7 @@
 
 Use for non-roadmap `docs/` index files to explain directory purpose, entry points, and usage.
 
-Roadmap-layer `docs/tasks/` indexes belong to `milestone-planning/references/roadmap-template.md`.
+Roadmap-layer `docs/tasks/` indexes belong to `skills/milestone-planning/references/roadmap-template.md`.
 
 ## `docs/index.md`
 
@@ -125,4 +125,4 @@ This directory stores detailed implementation plans for complex tasks.
 
 - `index.md` should explain what the directory is, what it contains, and how to use it.
 - `index.md` is for navigation and conventions, not detailed implementation for a single task.
-- Use `milestone-planning/references/roadmap-template.md` for `docs/tasks/index.md`, milestone indexes, and module indexes.
+- Use `skills/milestone-planning/references/roadmap-template.md` for `docs/tasks/index.md`, milestone indexes, and module indexes.

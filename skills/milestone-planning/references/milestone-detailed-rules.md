@@ -23,8 +23,8 @@ Detailed mandatory rules for milestone planning. See SKILL.md for core framework
 - Treat placeholder names or other provisional milestone markers as fallback routing signals only when no explicit confirmation flag exists.
 - Ask a routing question before recommending a path whenever it is still unclear whether the user needs roadmap alignment or direct decomposition.
 - Treat that routing question as the required first response in ambiguous cases. Do not explain the recommended route, propose next steps, or start decomposition before the user answers.
-- Use `brainstorming` first when goals, constraints, success criteria, or roadmap alignment are still unclear. If `Open Milestones` is empty because mid/long-term goals are not aligned, use `brainstorming` to align direction and prefer at least three milestones before detailed decomposition.
-- Skip `brainstorming` and decompose directly when the user already has a concrete short-term target, especially in enterprise or iteration-driven work with a clear case, scope, or delivery outcome.
+- Use `superpowers:brainstorming` first when goals, constraints, success criteria, or roadmap alignment are still unclear. If `Open Milestones` is empty because mid/long-term goals are not aligned, use `superpowers:brainstorming` to align direction and prefer at least three milestones before detailed decomposition.
+- Skip `superpowers:brainstorming` and decompose directly when the user already has a concrete short-term target, especially in enterprise or iteration-driven work with a clear case, scope, or delivery outcome.
 - Hand off to `task-spec-execution` only after the current concrete task is chosen.
 - Treat milestone/module/task creation or reshaping as docs governance. Updating roadmap structure does not by itself authorize spec writing or implementation.
 - Close a milestone when its original exit criteria are satisfied, even if the work surfaced new follow-up findings for later milestones. Record those findings as handoff context or new roadmap items instead of keeping the finished milestone artificially open.

@@ -68,14 +68,14 @@ For each case:
 - `branch-closing-after-worktree.md`: merged task branches must be explicitly deleted or kept after worktree cleanup.
 - `bootstrap-needed.md`: missing docs scaffold should route to `docs-workflow-bootstrap`.
 - `bootstrap-overreach-request.md`: even when the user bundles roadmap, task selection, and `spec.md` requests into bootstrap, the workflow should still stop at minimum scaffold creation.
-- `empty-open-milestones-needs-alignment.md`: an empty `Open Milestones` list plus unclear roadmap goals should route to `brainstorming` before decomposition.
+- `empty-open-milestones-needs-alignment.md`: an empty `Open Milestones` list plus unclear roadmap goals should route to `superpowers:brainstorming` before decomposition.
 - `empty-open-milestones-asks-routing-question.md`: an empty `Open Milestones` list without enough context should trigger a routing question before any recommendation.
   These two cases are the same routing family with different pressure sources: one should ask a routing question, the other should route to alignment.
 - `cross-milestone-transition-requires-closure.md`: finishing one milestone does not authorize jumping into the next milestone while closure and roadmap confirmation are still unresolved.
 - `milestone-close-handoff-notes-gate.md`: paired closure gate cases for `Handoff Notes`:
   - Scenario A: a milestone must not close while `Handoff Notes` still contains unresolved transfer items.
   - Scenario B: a milestone may close once its own work is done and `Handoff Notes` has been cleared after transfer.
-- `iteration-breakdown.md`: a concrete iteration target should route directly to `milestone-planning` without detouring through `brainstorming`.
+- `iteration-breakdown.md`: a concrete iteration target should route directly to `milestone-planning` without detouring through `superpowers:brainstorming`.
 - `placeholder-milestone-asks-routing-question.md`: a placeholder open milestone should trigger a routing question before direct decomposition.
 - `placeholder-milestone-asks-routing-question.md` and `unconfirmed-milestone-asks-routing-question.md` are the same guarded-decomposition family with different signals: placeholder naming versus explicit `Roadmap confirmed: no`.
 - `roadmap-needed.md`: broad product scope should route to `milestone-planning`.

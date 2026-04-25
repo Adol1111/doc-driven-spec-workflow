@@ -8,12 +8,12 @@ Our `docs/tasks/` index has no `Open Milestones` right now. We have a rough idea
 
 ## Expected Skill
 
-`brainstorming`
+`superpowers:brainstorming`
 
 ## Expected Behavior
 
 - Recognizes that `Open Milestones` is empty because roadmap goals and phase boundaries are not aligned yet.
-- Routes to `brainstorming` before roadmap decomposition.
+- Routes to `superpowers:brainstorming` before roadmap decomposition.
 - Frames the next step as clarifying mid/long-term goals and `now versus later` boundaries.
 - Does not jump straight into milestone or task decomposition.
 

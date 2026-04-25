@@ -53,7 +53,7 @@ Before code edits:
 
 | Situation | Action |
 |-----------|--------|
-| Workspace dirty, shared, risky, or likely to conflict | Use `using-git-worktrees` or equivalent safe worktree workflow |
+| Workspace dirty, shared, risky, or likely to conflict | Use `superpowers:using-git-worktrees` or equivalent safe worktree workflow |
 | Workspace clean and isolation risk is low | Create dedicated task branch in place |
 | User explicitly asks to stay on current branch | Only with explicit user choice |
 
@@ -74,8 +74,8 @@ Default: never start implementation on current branch. Do not carry approved-but
 ### Branch Closing
 
 - After completing concrete `docs/tasks/*` task, do not start another task until branch closing is resolved.
-- Use `finishing-a-development-branch` for merge/PR/keep/discard options.
-- Use `using-git-worktrees` cleanup rules for worktree cleanup.
+- Use `superpowers:finishing-a-development-branch` for merge/PR/keep/discard options.
+- Use `superpowers:using-git-worktrees` cleanup rules for worktree cleanup.
 - Removing a worktree does not remove its task branch.
 - If the user chooses merge and cleanup, confirm whether cleanup includes deleting the fully merged task branch before deleting it.
 - Never delete branch or worktree without confirming closing decision.
@@ -124,7 +124,7 @@ For stop conditions, low-frequency execution details, and template-loading guida
 
 Follow this order unless the user explicitly asks for something different:
 
-1. If the user's feature, behavior, or task intent is ambiguous, use `brainstorming` when available, or an equivalent clarification workflow, before selecting or creating a concrete task.
+1. If the user's feature, behavior, or task intent is ambiguous, use `superpowers:brainstorming` when available, or an equivalent clarification workflow, before selecting or creating a concrete task.
 2. If the main uncertainty is roadmap shape rather than current-task design, use `milestone-planning` before continuing here.
 3. Read `docs/index.md` and the relevant docs index files.
 4. Read the relevant `docs/architecture/` documents for behavior boundaries.
