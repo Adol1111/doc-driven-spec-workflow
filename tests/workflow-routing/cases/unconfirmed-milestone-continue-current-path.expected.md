@@ -1,17 +1,5 @@
 # Unconfirmed Milestone Continue Current Path
 
-## Prompt
-
-Use doc-driven-spec-workflow.
-
-`docs/tasks/team-invitations/index.md` exists and its status section says `Roadmap confirmed: no`.
-
-The agent already asked whether to re-evaluate milestone structure first or keep the current route and decompose tasks within it anyway.
-
-The user now answers:
-
-Keep the current route. Stay on this milestone path and decompose the tasks.
-
 ## Expected Skill
 
 `milestone-planning`
@@ -21,7 +9,7 @@ Keep the current route. Stay on this milestone path and decompose the tasks.
 - Recognizes that the user has now explicitly chosen to keep the current milestone path.
 - Proceeds with milestone-planning rather than asking the same routing question again.
 - Treats the next step as milestone-entry governance plus roadmap decomposition, not task-local execution.
-- Completes or proposes the milestone-entry docs update needed to make the current path formally active before any later handoff to `task-spec-execution`.
+- Completes or proposes the milestone-entry docs update that records the routing decision before any later handoff to `task-spec-execution`. `Roadmap confirmed` stays `no` unless the user explicitly confirms the roadmap; the tasks remain provisional candidates.
 
 ## Expected File Changes
 
@@ -33,7 +21,7 @@ None.
 - Must not route directly to `task-spec-execution`.
 - Must not write task-local `spec.md`.
 - Must not start implementation.
-- Must not leave the milestone permanently in ambiguous candidate-task state after the user explicitly chose to continue on the current route.
+- Must not leave the routing question unresolved after the user explicitly chose to continue on the current route. The milestone may still be unconfirmed (`Roadmap confirmed: no`) and its tasks still provisional candidates — that is the correct intermediate state until roadmap confirmation.
 
 ## Self-Check
 

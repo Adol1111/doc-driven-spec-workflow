@@ -21,6 +21,10 @@ This project follows Conventional Commits for commit history, but release notes 
 - `task-spec-execution` now makes it explicit that bootstrap-created docs may be maintained during execution, but bootstrap ownership still belongs to `docs-workflow-bootstrap`.
 - branch-closing guidance now explicitly covers the case where a user chooses merge plus cleanup and clarifies that deleting a worktree does not by itself resolve task-branch cleanup.
 - `milestone-planning` template guidance now distinguishes document shape from workflow policy more clearly: milestone confirmation, `Handoff Notes`, closure gates, and task-list semantics are documented as rules rather than buried inside the template text.
+- `task-spec-execution` now requires resolving the task-planning docs checkpoint before entering task-local `spec.md` work when `milestone-planning` has just created or reshaped roadmap/task docs and stopped with an unresolved checkpoint.
+- When `milestone-planning` creates the first concrete task in a milestone, the resulting task docs are treated as planning-governance output first, not as automatic permission to draft the first task spec.
+- Two `continue` steps are now required across the planning-to-execution handoff: first `continue` resolves the task-planning docs checkpoint (commit the new planning docs), second `continue` enters `task-spec-execution` and begins drafting `spec.md`.
+- Reporting milestone-entry governance changes in `task-spec-execution` no longer substitutes for resolving the task-planning docs checkpoint created by `milestone-planning`.
 
 ### Notes
 
@@ -33,6 +37,9 @@ This project follows Conventional Commits for commit history, but release notes 
   - `milestone-detailed-rules.md` for finer routing/closure policy
   - `roadmap-template.md` for file shape
 - `task-spec-execution` remains the heaviest stage skill, but this release makes that weight more honest by putting the most frequently needed rules back in the main file instead of treating them as optional reference material.
+- The test suite under `tests/workflow-routing/` has been restructured: each test case is now split into a `.prompt.md` (simulated user input) and a `.expected.md` (expected skill, behavior, file changes, and forbidden behaviors).
+- Three new test cases were added: `first-task-in-new-milestone-needs-explicit-selection` (two-`continue` sequencing across planning checkpoint and spec drafting), `milestone-close-handoff-notes-blocked` (non-empty `Handoff Notes` blocks milestone closure), and `milestone-close-handoff-notes-cleared` (cleared `Handoff Notes` allows milestone closure).
+- The existing test case `milestone-close-handoff-notes-gate` was removed; its coverage is now split across the two new handoff-notes cases above.
 
 ## v0.3.1
 

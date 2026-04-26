@@ -15,6 +15,7 @@ Low-frequency execution details and stop conditions for task spec execution. Rea
 - Creating multiple specs for one task instead of revising the existing spec or splitting the task first.
 - Adding work to a completed milestone.
 - Auto-committing docs-only/governance changes before reporting the result or before user commit confirmation.
+- Starting task-local `spec.md` work while a task-planning docs checkpoint from `milestone-planning` is still unresolved.
 - Starting another task before resolving branch closing for the current task.
 - Starting a task in milestone `M(n+1)` while `M(n)` still appears open and unclosed, or while the target milestone is still explicitly unconfirmed.
 - Assuming the workspace is clean or staying on the current branch without explicit user choice.
@@ -24,6 +25,9 @@ Low-frequency execution details and stop conditions for task spec execution. Rea
 - Do not default to TDD, plan-driven execution, or heavyweight shared workflows unless the user explicitly asks.
 - Write task-local specs/plans directly in this repository's compact local format.
 - Treat tests and verification as delivery checks, not as a mandatory test-first workflow.
+- If `milestone-planning` just created the selected task or reshaped its roadmap docs, treat the next stop as a planning docs checkpoint first.
+- In that state, a user `continue` should advance the unresolved planning checkpoint, not jump straight into `spec.md`, `plan.md`, or implementation.
+- After the planning checkpoint is resolved, the next `continue` may begin drafting task-local `spec.md`.
 
 - If a worktree is needed, prefer `superpowers:using-git-worktrees`; if it is unavailable, use the environment's equivalent git worktree workflow and preserve the same safety checks.
 - Before the first implementation edit, tell the user: `Spec/plan is approved and checkpointed. I am handling branch isolation now before coding.`

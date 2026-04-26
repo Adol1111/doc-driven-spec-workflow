@@ -66,6 +66,9 @@ Default: never start implementation on current branch. Do not carry approved-but
 | Default | `spec -> user confirms -> docs checkpoint -> code` |
 | Complex | `spec -> user confirms -> plan -> user confirms -> docs checkpoint -> code` |
 
+- When `milestone-planning` has just created or reshaped roadmap/task docs and stopped with a docs checkpoint still unresolved, that planning checkpoint must be resolved before entering task-local `spec.md` work.
+- If `milestone-planning` creates the first concrete task in a milestone, treat the resulting task docs as planning-governance output first, not as automatic permission to draft the first task spec.
+- In that situation, the first user `continue` should resolve the task-planning docs checkpoint. Only after that checkpoint is resolved may a later `continue` enter task-local `spec.md` drafting.
 - Hard pause at concrete task: report verification/docs updates, resolve commit or approved uncommitted checkpoint, resolve branch closing, then stop.
 - Milestone completion is hard boundary: frozen after move to `Completed Milestones`.
 - Crossing milestones: resolve previous milestone closure and new milestone confirmation first.
@@ -106,6 +109,7 @@ Default: never start implementation on current branch. Do not carry approved-but
 - Tasks in a milestone still marked `Roadmap confirmed: no` remain candidate tasks only until milestone entry is explicitly confirmed.
 - Resolve the previous task checkpoint before starting another concrete task.
 - Report milestone-entry governance changes before drafting the first task spec in that milestone.
+- Reporting milestone-entry governance changes does not replace the need to resolve any outstanding task-planning docs checkpoint created by `milestone-planning`.
 
 ## Docs Boundaries
 
@@ -132,14 +136,15 @@ Follow this order unless the user explicitly asks for something different:
 6. Use `docs/context/` only for supporting research or unstable reference material.
 7. If there is no suitable open task because the roadmap shape itself is missing or unclear, stop and use `milestone-planning`.
 8. If the next candidate task is in a new milestone, first verify that the previous milestone checkpoint is closed and the target milestone is explicitly confirmed for entry. If not, stop and resolve milestone governance first.
-9. If implementing one concrete task, create or update its task directory and write one focused `spec.md` inside it.
-10. Stop after writing the spec; do not code until the user explicitly confirms it in the current thread.
-11. Create `plan.md` inside the task directory only for genuinely complex or multi-step work; if created, stop again for user confirmation before coding.
-12. After spec approval, and after plan approval when a plan exists, resolve a docs checkpoint for the approved task-local docs before implementation isolation.
-13. Before implementation edits, announce and run the readiness checkpoint.
-14. Implement from the approved spec or plan, then verify, update docs/status, and resolve branch closing.
-15. Stop after one concrete task. Continue only when the user explicitly asks in the current thread.
-16. Add an `index.md` for every new major documentation section.
+9. If `milestone-planning` just created or updated roadmap/task docs for the selected task and left a docs checkpoint unresolved, resolve that checkpoint before starting task-local `spec.md` work.
+10. If implementing one concrete task, create or update its task directory and write one focused `spec.md` inside it.
+11. Stop after writing the spec; do not code until the user explicitly confirms it in the current thread.
+12. Create `plan.md` inside the task directory only for genuinely complex or multi-step work; if created, stop again for user confirmation before coding.
+13. After spec approval, and after plan approval when a plan exists, resolve a docs checkpoint for the approved task-local docs before implementation isolation.
+14. Before implementation edits, announce and run the readiness checkpoint.
+15. Implement from the approved spec or plan, then verify, update docs/status, and resolve branch closing.
+16. Stop after one concrete task. Continue only when the user explicitly asks in the current thread.
+17. Add an `index.md` for every new major documentation section.
 
 ## When To Use
 
