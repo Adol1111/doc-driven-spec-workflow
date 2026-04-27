@@ -1,6 +1,6 @@
 # Plan Template
 
-Create a plan only when the task is genuinely complex or multi-step. Prefer a compact structure:
+Create a plan only when a plan trigger is present. Prefer a compact structure:
 
 ```md
 # <Task Name> Implementation Plan

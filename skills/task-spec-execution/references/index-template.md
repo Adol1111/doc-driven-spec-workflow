@@ -18,7 +18,7 @@ Roadmap-layer `docs/tasks/` indexes belong to `skills/milestone-planning/referen
 - [Specs](./specs/index.md)
   Working specs for the current task before implementation.
 - [Plans](./plans/index.md)
-  Optional implementation plans for genuinely complex tasks.
+  Optional implementation plans for tasks with a plan trigger.
 - [Tasks](./tasks/index.md)
   Project-level milestones, modules, task status, dependencies, and history.
 - [Context](./context/index.md)
@@ -30,7 +30,7 @@ Roadmap-layer `docs/tasks/` indexes belong to `skills/milestone-planning/referen
 - Read `tasks/` first when you need roadmap, task status, or next-step guidance.
 - Read `context/` for research notes or external references.
 - Read or write `specs/` before starting implementation.
-- Create `plans/` only when the task is genuinely complex or multi-step.
+- Create `plans/` only when a task has a plan trigger.
 ```
 
 ## `docs/architecture/index.md`
@@ -90,7 +90,7 @@ This directory stores design specs created before implementation begins.
 ## Lifecycle
 
 - Create new specs before implementation starts, and get user approval before coding.
-- Create a corresponding `docs/plans/` document only when the task is genuinely complex or multi-step.
+- Create a corresponding `docs/plans/` document only when a task has a plan trigger.
 ```
 
 ## `docs/plans/index.md`
@@ -98,7 +98,7 @@ This directory stores design specs created before implementation begins.
 ```md
 # Working Plans
 
-This directory stores detailed implementation plans for complex tasks.
+This directory stores detailed implementation plans for tasks with a plan trigger.
 
 ## Naming
 
@@ -108,7 +108,7 @@ This directory stores detailed implementation plans for complex tasks.
 
 ## Role
 
-- Create plans only when the task is genuinely complex or multi-step.
+- Create plans only when a task has a plan trigger.
 - Use plans to break down implementation slices, file scope, and verification without repeating the approved spec.
 - Follow the `task-spec-execution` skill and its reference templates for task-local plan structure and writing guidance.
 
