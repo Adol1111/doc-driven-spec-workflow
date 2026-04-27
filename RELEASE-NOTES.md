@@ -19,6 +19,7 @@ This project follows Conventional Commits for commit history, but release notes 
 ### Fixes
 
 - `task-spec-execution` now makes it explicit that bootstrap-created docs may be maintained during execution, but bootstrap ownership still belongs to `docs-workflow-bootstrap`.
+- `task-spec-execution` now clarifies that compact task specs still need enough boundary detail to prevent another agent from misreading implementation intent. Ambiguous tasks should capture allowed minimal implementation, forbidden shortcuts, and boundary decisions inside existing sections such as `Goals`, `Non-goals`, `Design`, and `Testing and Verification`.
 - branch-closing guidance now explicitly covers the case where a user chooses merge plus cleanup and clarifies that deleting a worktree does not by itself resolve task-branch cleanup.
 - `milestone-planning` template guidance now distinguishes document shape from workflow policy more clearly: milestone confirmation, `Handoff Notes`, closure gates, and task-list semantics are documented as rules rather than buried inside the template text.
 - `task-spec-execution` now requires resolving the task-planning docs checkpoint before entering task-local `spec.md` work when `milestone-planning` has just created or reshaped roadmap/task docs and stopped with an unresolved checkpoint.

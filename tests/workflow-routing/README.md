@@ -140,6 +140,7 @@ Each case below refers to a `<case-name>.prompt.md` + `<case-name>.expected.md` 
 - `roadmap-no-mechanical-split`: implementation-mechanical task requests should be corrected into capability-level roadmap tasks.
 - `roadmap-small-output`: small roadmap scope should route to `milestone-planning` and generate inspectable roadmap-layer task docs.
 - `selected-task-spec`: selected concrete task should route to `task-spec-execution`.
+- `selected-task-spec-boundary-clarity`: compact task specs should still preserve boundary intent and forbid tempting inference shortcuts when implementation intent could be misread.
 - `selected-task-skip-spec-and-code`: a selected concrete task still must not skip task-local spec work just because the user wants to code immediately.
 - `task-too-broad`: too-broad task should return to `milestone-planning`.
 - `unconfirmed-milestone-asks-routing-question`: an explicit `Roadmap confirmed: no` milestone should trigger a routing question before direct decomposition.

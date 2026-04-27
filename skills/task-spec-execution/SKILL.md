@@ -26,6 +26,18 @@ Use this skill after roadmap structure exists and one concrete task is selected 
 - Default to `1 task -> 1 spec`. Revise the existing spec for corrections or clarifications instead of creating another one.
 - If multiple specs seem necessary, stop and use `milestone-planning` to split the task first.
 
+### Spec Clarity Rules
+
+- Compact specs are fine; vague specs are not.
+- A task-local `spec.md` must make the intended implementation stable enough for another agent to preserve the selected task boundary.
+- When implementation intent could be misread, the spec must explicitly capture:
+  - the work type for this task, such as defining a boundary, proving a boundary, implementing behavior, migrating data, or cleaning up docs
+  - the allowed minimal implementation for this task
+  - relevant non-goals and forbidden shortcuts, especially tempting inference paths or helper defaults that would satisfy tests while violating task intent
+  - where new information, responsibility, or classification should live, and where it must not leak
+- `Design` may use task-specific subheadings. Use a subsection such as `Boundary Decisions` or `Implementation Boundary` when that makes the task intent clearer, but do not force that exact heading into every small spec.
+- Do not introduce a new top-level section only to restate the standard template; strengthen `Goals`, `Non-goals`, `Design`, and `Testing and Verification` instead.
+
 ### Governance Mode
 
 | Mode | Work Type | Requires Spec |
