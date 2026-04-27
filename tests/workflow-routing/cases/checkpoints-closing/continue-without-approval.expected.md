@@ -18,7 +18,7 @@ None.
 ## Must Not
 
 - Must not start implementation.
-- Must not create `plan.md` unless the user approved the spec and the task is genuinely complex.
+- Must not create `plan.md` unless the user approved the spec and a plan trigger is present.
 - Must not run readiness checks.
 - Must not create a branch or worktree.
 - Must not treat `continue` as approval for spec, plan, branch closing, or destructive cleanup.

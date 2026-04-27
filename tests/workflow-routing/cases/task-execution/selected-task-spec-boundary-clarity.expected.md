@@ -6,7 +6,7 @@
 
 ## Expected Behavior
 
-- Recognizes that a concrete task already exists and is selected.
+- Recognizes that a concrete task is selected from confirmed roadmap state with no blocking dependencies or prior checkpoints.
 - Routes to `task-spec-execution`.
 - Writes or proposes one compact task-local `spec.md`.
 - Makes clear that compact does not mean vague: the spec preserves implementation intent by naming boundary decisions and forbidden inference paths.
@@ -39,7 +39,7 @@ The spec should explicitly capture:
 
 ## Expected File Changes
 
-When running a file-generating check, create or propose only this task-local spec under `tests/workflow-routing/expected/selected-task-spec-boundary-clarity/`:
+When running a file-generating check, create or propose only this task-local spec under `tests/workflow-routing/expected/task-execution/selected-task-spec-boundary-clarity/`:
 
 - `docs/tasks/m1-private-beta/handoff/01-source-eligibility-boundary/spec.md`
 

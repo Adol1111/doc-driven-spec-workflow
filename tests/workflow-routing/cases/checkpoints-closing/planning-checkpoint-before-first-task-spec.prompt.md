@@ -1,4 +1,4 @@
-# Two Continues Must Advance The Right Next Step
+# Planning Checkpoint Before First Task Spec
 
 Use doc-driven-spec-workflow.
 

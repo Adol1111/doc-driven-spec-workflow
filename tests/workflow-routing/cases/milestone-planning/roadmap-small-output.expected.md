@@ -16,12 +16,16 @@
 
 ## Expected File Changes
 
-When running a file-generating check, create only these roadmap-layer files under `tests/workflow-routing/expected/roadmap-small-output/`:
+When running a file-generating check, create only roadmap-layer files under `tests/workflow-routing/expected/milestone-planning/roadmap-small-output/`.
+
+Required shape:
 
 - `docs/tasks/index.md`
 - `docs/tasks/team-invitations/index.md`
-- `docs/tasks/team-invitations/01-invite-by-email/task.md`
-- `docs/tasks/team-invitations/02-manage-pending-invitations/task.md`
+- `docs/tasks/team-invitations/<invite-by-email-task>/task.md`
+- `docs/tasks/team-invitations/<manage-pending-invitations-task>/task.md`
+
+The exact task directory slugs may vary. They should be accepted when the task files represent the expected capability boundaries: inviting by email, and managing pending invitations including revoke.
 
 ## Must Not
 

@@ -1,99 +1,210 @@
 # Workflow Routing Tests
 
-These are lightweight behavior tests for the docs-driven workflow skills.
+Prompt-based pressure tests for the docs-driven workflow skills. They check skill routing, stop points, approval gates, checkpoint behavior, and ownership boundaries.
 
-They are not unit tests. They are prompt-based scenarios for checking whether an agent routes to the right stage skill, stops at the right checkpoint, and avoids crossing ownership boundaries.
+## Layout
 
-## How To Run Manually
+Cases live under `tests/workflow-routing/cases/<group>/` as paired files:
 
-Run each case in a fresh agent conversation when possible.
+- `<case-name>.prompt.md`
+- `<case-name>.expected.md`
 
-Use this prompt for routing-only checks:
+Current groups:
+
+- `bootstrap`
+- `planning-inbox`
+- `milestone-planning`
+- `task-execution`
+- `checkpoints-closing`
+
+Use a group directory as the default run boundary. Do not choose arbitrary numeric batches such as "five cases at a time"; if a group becomes too large, split that group into smaller semantic subdirectories first.
+
+## Single Case Prompt
 
 ```text
 Use doc-driven-spec-workflow.
 
-Run the workflow-routing test case prompt in tests/workflow-routing/cases/<case-name>.prompt.md.
+Run the workflow-routing test case prompt in tests/workflow-routing/cases/<group>/<case-name>.prompt.md.
 Treat it as an isolated simulated conversation.
 Do not edit repository files unless the test case explicitly expects file changes.
 
 IMPORTANT — preserve context isolation:
-1. First, clear any previous output by writing an empty result file:
-   Write an empty string to tests/workflow-routing/expected/result.md.
-   Do NOT read tests/workflow-routing/expected/result.md before writing — you must not see previous run output.
-2. Read the prompt file at tests/workflow-routing/cases/<case-name>.prompt.md.
-3. Produce the simulated agent response and write it to tests/workflow-routing/expected/result.md.
-   Do NOT read tests/workflow-routing/cases/<case-name>.expected.md yet.
-4. Only after step 3 is complete, read tests/workflow-routing/cases/<case-name>.expected.md.
-5. Compare the output in result.md against Expected Skill, Expected Behavior, and Must Not.
-   Output PASS, WARN, or FAIL with evidence.
+1. Clear previous output first:
+   Delete and recreate tests/workflow-routing/expected/<group>/.
+   Do NOT only clear tests/workflow-routing/expected/<group>/result.md; stale generated case directories must be removed too.
+   Do NOT read anything under tests/workflow-routing/expected/<group>/ before clearing it.
+2. Read tests/workflow-routing/cases/<group>/<case-name>.prompt.md.
+3. Produce the simulation output in tests/workflow-routing/expected/<group>/result.md before reading the expected file.
+   Do NOT read tests/workflow-routing/cases/<group>/<case-name>.expected.md yet.
+   Do NOT write PASS, WARN, FAIL, Status, Result, or Reason yet.
+4. Only after the selected simulation output is complete, read tests/workflow-routing/cases/<group>/<case-name>.expected.md.
+5. Compare against Expected Skill, Expected Behavior, Expected File Changes if present, and Must Not.
+6. Append the concise comparison table to the end of tests/workflow-routing/expected/<group>/result.md using the Result Output Template.
+   Do NOT reposition an existing `## Comparison Results` section. If it is not at the end, leave it in place and append any new comparison output at EOF.
 ```
 
-Use this prompt when you want to inspect generated files:
+## Group Prompt
 
 ```text
 Use doc-driven-spec-workflow.
 
-Run the workflow-routing test case prompt in tests/workflow-routing/cases/<case-name>.prompt.md.
-Treat it as an isolated simulated conversation.
+Run one workflow-routing case group, for example tests/workflow-routing/cases/task-execution/*.prompt.md.
+Treat each prompt as an isolated simulated conversation.
+Do not edit repository files unless a test case explicitly expects file changes.
 
-IMPORTANT — preserve context isolation:
-1. First, clean the output directory:
-   Delete tests/workflow-routing/expected/<case-name>/ if it exists, then recreate it empty.
-   Do NOT read any files under tests/workflow-routing/expected/<case-name>/ before writing — you must not see previous run output.
-2. Read the prompt file at tests/workflow-routing/cases/<case-name>.prompt.md.
-3. Produce the simulated agent response. When the test case expects file changes, write them under
-   tests/workflow-routing/expected/<case-name>/ as the simulated repository root instead of editing the real repository root.
-   Also write the agent's text response to tests/workflow-routing/expected/<case-name>/response.md.
-   Do NOT read tests/workflow-routing/cases/<case-name>.expected.md yet.
-4. Only after step 3 is complete, read tests/workflow-routing/cases/<case-name>.expected.md.
-5. Compare the output against Expected Skill, Expected Behavior, Must Not, and Expected File Changes.
-   Output PASS, WARN, or FAIL with evidence.
+IMPORTANT — preserve expected isolation:
+1. Clear previous group output first:
+   Delete and recreate tests/workflow-routing/expected/<group>/.
+   Do NOT only clear tests/workflow-routing/expected/<group>/result.md; stale generated case directories must be removed too.
+   Do NOT read anything under tests/workflow-routing/expected/<group>/ before clearing it.
+   Do NOT read any tests/workflow-routing/cases/<group>/*.expected.md yet.
+2. Read all tests/workflow-routing/cases/<group>/*.prompt.md files first.
+   If the group is too large to read at once, stop and split it into smaller semantic subdirectories before running it.
+3. Produce every simulation output in tests/workflow-routing/expected/<group>/result.md.
+   For file-generating checks, write each case under tests/workflow-routing/expected/<group>/<case-name>/ and include response.md.
+   Do NOT write PASS, WARN, FAIL, Status, Result, or Reason yet.
+4. Only after all selected simulation outputs are complete, read matching tests/workflow-routing/cases/<group>/*.expected.md files.
+5. Compare each case against Expected Skill, Expected Behavior, Expected File Changes if present, and Must Not.
+6. Append the concise comparison table to the end of tests/workflow-routing/expected/<group>/result.md using the Result Output Template.
+   Do NOT reposition an existing `## Comparison Results` section. If it is not at the end, leave it in place and append any new comparison output at EOF.
 ```
 
-## Test Protocol
+## All Groups Prompt
 
-For each case, the agent must follow this sequence strictly to prevent context pollution:
+```text
+Use doc-driven-spec-workflow.
 
-### Routing-only cases
+Run all workflow-routing case groups under tests/workflow-routing/cases/*/*.prompt.md.
+Treat each prompt as an isolated simulated conversation.
+Do not edit repository files unless a test case explicitly expects file changes.
 
-1. **Clear output:** Write an empty string to `tests/workflow-routing/expected/result.md`. Do NOT read the file first — stale output from a previous run must not enter context.
-2. **Read prompt:** Read `tests/workflow-routing/cases/<case-name>.prompt.md` as the simulated user request.
-3. **Write response:** Produce the simulated agent response using only the prompt file and the loaded workflow skill instructions. Write it to `tests/workflow-routing/expected/result.md`. Do NOT read `tests/workflow-routing/cases/<case-name>.expected.md` yet.
-4. **Read expected:** Only after step 3 is complete, read `tests/workflow-routing/cases/<case-name>.expected.md`.
-5. **Compare and grade:** Compare the response against `Expected Skill`, `Expected Behavior`, and `Must Not` from the expected file. Mark as `PASS`, `WARN`, or `FAIL`.
+IMPORTANT — preserve expected isolation:
+1. Clear previous all-groups output first:
+   Delete and recreate tests/workflow-routing/expected/.
+   Do NOT only clear tests/workflow-routing/expected/result.md or group result.md files; stale generated case directories must be removed too.
+   Do NOT read anything under tests/workflow-routing/expected/ before clearing it.
+2. Treat each tests/workflow-routing/cases/<group>/ directory as a separate run boundary.
+3. For each group, repeat the Group Prompt flow except its clearing step:
+   - create tests/workflow-routing/expected/<group>/ if needed
+   - do NOT delete tests/workflow-routing/expected/<group>/ again during an all-groups run, because tests/workflow-routing/expected/ was already deleted and recreated in step 1
+   - read only that group's *.prompt.md files
+   - produce that group's simulation output in tests/workflow-routing/expected/<group>/result.md
+   - only then read that group's *.expected.md files
+   - append that group's concise comparison table
+4. After every group has been evaluated, write only an overall summary to tests/workflow-routing/expected/result.md.
+   The top-level result.md should contain group names, case counts, PASS/WARN/FAIL counts, and links to tests/workflow-routing/expected/<group>/result.md.
+   It must not contain per-case simulation output or per-case evaluation detail.
+5. Do NOT create tests/workflow-routing/expected/all-groups/.
+```
 
-### File-generating cases
+## Rules
 
-1. **Clean output directory:** Delete `tests/workflow-routing/expected/<case-name>/` if it exists, then recreate it empty. Do NOT read any files in it first.
-2. **Read prompt:** Read `tests/workflow-routing/cases/<case-name>.prompt.md`.
-3. **Write files + response:** Write generated files under `tests/workflow-routing/expected/<case-name>/` as the simulated repository root. Write the agent's text response to `tests/workflow-routing/expected/<case-name>/response.md`. Do NOT read `tests/workflow-routing/cases/<case-name>.expected.md` yet.
-4. **Read expected:** Only after step 3 is complete, read `tests/workflow-routing/cases/<case-name>.expected.md`.
-5. **Compare and grade:** Compare the response and generated files against `Expected Skill`, `Expected Behavior`, `Must Not`, and `Expected File Changes`. Mark as `PASS`, `WARN`, or `FAIL`.
+- Prefer one fresh conversation per case when possible.
+- Always clear by deleting and recreating the relevant expected output directory before a run. Do not rely on truncating `result.md`, because generated `response.md` files and simulated docs can otherwise survive from older runs. For an all-groups run, the relevant output directory is `tests/workflow-routing/expected/` itself; after that top-level clear, create group directories as needed but do not delete them again.
+- Never read a group's `result.md`, prior generated case output, or any `*.expected.md` before clearing and writing that group's current output.
+- Batch only by group directory. If a group is too large, split the directory by semantic subgroups.
+- `tests/workflow-routing/expected/<group>/result.md` is the group run report. It contains per-case simulation output first, then one concise comparison table with case names, status, and reason only.
+- Comparison output is append-only at EOF. Do not move, rewrite, or reorder existing result sections just to place `## Comparison Results` in a different location.
+- `tests/workflow-routing/expected/result.md` is only the multi-group summary report. It must not contain detailed simulation output or detailed per-case grading when more than one group is run.
+- A case is file-generating when the prompt asks to create, write, update, initialize, bootstrap, scaffold, close, or otherwise change docs/files, or when the relevant skill stage normally owns that requested document output.
+- File-generating checks write generated files under `tests/workflow-routing/expected/<group>/<case-name>/` as a disposable simulated repo root.
+- File-generating checks must include `tests/workflow-routing/expected/<group>/<case-name>/response.md`; that file contains only the simulated response for that case, not grading.
+- Do not create group aggregate output directories such as `tests/workflow-routing/expected/all-groups/`; use the top-level `result.md` only as a summary index.
+- `tests/workflow-routing/expected/` is ignored by Git and may be cleaned before runs.
 
-### Grading rules
+## Simulation Output
 
-- `PASS`: correct skill, correct stop point, no forbidden behavior
-- `WARN`: mostly correct, but wording or handoff could confuse users
-- `FAIL`: wrong skill, skipped an approval gate, or performed forbidden behavior
+Produce simulation output before reading any `*.expected.md` file. The simulation output must be written to `tests/workflow-routing/expected/<group>/result.md` so there is a visible basis for later comparison, but it must not contain grading language.
 
-## Self-Check Discipline
+For file-generating cases, also write the full simulated response to `tests/workflow-routing/expected/<group>/<case-name>/response.md` and list every generated file in the group `result.md` before reading expected files:
 
-- Self-checks must compare the initial response against `Expected Behavior` item by item, not by overall impression.
-- A response must not be marked `PASS` unless every `Expected Behavior` item is explicitly satisfied.
-- If a response is broadly on track but misses one or more required actions from `Expected Behavior`, mark it `WARN`, not `PASS`.
-- If any `Must Not` item is violated, mark it `FAIL`.
-- If `Expected File Changes` are required and missing or incorrect, do not mark the result `PASS`.
-- The self-check should quote or summarize concrete evidence from the response for each expected item.
+- milestone-planning roadmap docs use `milestone-planning/references/roadmap-template.md`
+- task-local `spec.md` uses `task-spec-execution/references/spec-template.md`
+- task-local `plan.md` uses `task-spec-execution/references/plan-template.md`
 
-Use this self-check shape:
+Before expected files are read, simulation output must not include:
+
+- `PASS`
+- `WARN`
+- `FAIL`
+- `Status`
+- `Result`
+- `Reason`
+
+## Result Output Template
+
+Use this shape for `tests/workflow-routing/expected/<group>/result.md`. Write the `Simulation Outputs` section before reading any matching `*.expected.md` files. Append the `Comparison Results` table at EOF only after every selected simulation output is complete and the matching `*.expected.md` files have been read. If `## Comparison Results` is already present but not at EOF, do not reposition it; leave the existing content alone and append new comparison output to the file end.
+
+```md
+# Workflow Routing Result
+
+## Simulation Outputs
+
+### <case-name>
+
+<simulated agent response>
+
+Generated files:
+
+- None
+
+### <case-name>
+
+<simulated agent response>
+
+Generated files:
+
+- tests/workflow-routing/expected/<group>/<case-name>/response.md
+- tests/workflow-routing/expected/<group>/<case-name>/docs/...
+
+## Comparison Results
+
+| Case | Status | Reason |
+| --- | --- | --- |
+| <case-name> | PASS | |
+| <case-name> | WARN | <short reason> |
+| <case-name> | FAIL | <short reason> |
+```
+
+Use an empty reason for `PASS`. For `WARN` and `FAIL`, keep the reason short and only state what differed from the expected behavior or file changes. Do not repeat the Expected Behavior, Must Not, or Expected File Changes lists from `*.expected.md`.
+
+Any PASS/WARN/FAIL, status table, or reason written before expected files are read is a workflow violation. After expected files are read, the comparison output should be only the table above; do not append detailed per-item evaluation checklists.
+
+## Multi-Group Summary Template
+
+When running more than one group, write only this summary shape to `tests/workflow-routing/expected/result.md` after all group-local result files are complete:
+
+```md
+# Workflow Routing Summary
+
+## Results
+
+| Group | Cases | PASS | WARN | FAIL | Details |
+| --- | ---: | ---: | ---: | ---: | --- |
+| <group> | <count> | <count> | <count> | <count> | [result.md](<group>/result.md) |
+
+## Totals
+
+- Cases: <count>
+- PASS: <count>
+- WARN: <count>
+- FAIL: <count>
+```
+
+Do not copy group-local simulation output or group-local evaluation sections into the top-level summary.
+
+## Grading
+
+- `PASS`: correct skill, correct stop point, every expected behavior met, no forbidden behavior.
+- `WARN`: mostly correct, but missing an expected behavior or wording could confuse users.
+- `FAIL`: wrong skill, skipped an approval/checkpoint gate, or violated any Must Not.
+- `*.expected.md` must not require behavior that is stricter than the active skill, its loaded reference templates, or the case prompt. If a case needs stricter behavior, first add that behavior to the relevant skill/template or make the case prompt explicitly require it.
+
+Self-check each expected item internally, but do not copy the checklist into `result.md`:
 
 ```text
 Expected Behavior Check
 1. <expected item>: MET / NOT MET
-Evidence: <quote or short explanation>
-
-2. <expected item>: MET / NOT MET
 Evidence: <quote or short explanation>
 
 Must Not Check
@@ -108,41 +219,45 @@ Result: PASS/WARN/FAIL
 Reason:
 ```
 
-## Isolation Notes
-
-- Prefer one fresh conversation per case.
-- If running several cases in one conversation, explicitly say each case is isolated.
-- Do not let a previous case's simulated repository state affect the next case.
-- Routing-only checks do not edit repository files.
-- File-generating checks use `tests/workflow-routing/expected/<case-name>/` as each case's disposable simulated repository root.
-- `tests/workflow-routing/expected/` is ignored by Git and should be cleaned once before each file-generating run.
-- Keep case outputs until the next run so generated files remain inspectable.
-
 ## Cases
 
-Each case below refers to a `<case-name>.prompt.md` + `<case-name>.expected.md` pair.
+### Bootstrap
 
-- `approved-spec-needs-checkpoint`: approved task-local docs must be checkpointed before branch/worktree isolation for implementation.
-- `branch-closing-after-worktree`: merged task branches must be explicitly deleted or kept after worktree cleanup.
 - `bootstrap-needed`: missing docs scaffold should route to `docs-workflow-bootstrap`.
-- `bootstrap-overreach-request`: even when the user bundles roadmap, task selection, and `spec.md` requests into bootstrap, the workflow should still stop at minimum scaffold creation.
-- `empty-open-milestones-needs-alignment`: an empty `Open Milestones` list plus unclear roadmap goals should route to `superpowers:brainstorming` before decomposition.
-- `empty-open-milestones-asks-routing-question`: an empty `Open Milestones` list without enough context should trigger a routing question before any recommendation.
-  These two cases are the same routing family with different pressure sources: one should ask a routing question, the other should route to alignment.
-- `cross-milestone-transition-requires-closure`: finishing one milestone does not authorize jumping into the next milestone while closure and roadmap confirmation are still unresolved.
-- `first-task-in-new-milestone-needs-explicit-selection`: after `milestone-planning` creates the first concrete task in a new milestone, one case should explain that the first `continue` resolves the task-planning checkpoint and the second `continue` begins drafting `spec.md` only.
-- `milestone-close-handoff-notes-blocked`: a milestone must not close while `Handoff Notes` still contains unresolved transfer items.
-- `milestone-close-handoff-notes-cleared`: a milestone may close once its own work is done and `Handoff Notes` has been cleared after transfer.
-- `iteration-breakdown`: a concrete iteration target should route directly to `milestone-planning` without detouring through `superpowers:brainstorming`.
-- `placeholder-milestone-asks-routing-question`: a placeholder open milestone should trigger a routing question before direct decomposition.
-- `placeholder-milestone-asks-routing-question` and `unconfirmed-milestone-asks-routing-question` are the same guarded-decomposition family with different signals: placeholder naming versus explicit `Roadmap confirmed: no`.
-- `roadmap-needed`: broad product scope should route to `milestone-planning`.
-- `roadmap-no-mechanical-split`: implementation-mechanical task requests should be corrected into capability-level roadmap tasks.
-- `roadmap-small-output`: small roadmap scope should route to `milestone-planning` and generate inspectable roadmap-layer task docs.
-- `selected-task-spec`: selected concrete task should route to `task-spec-execution`.
-- `selected-task-spec-boundary-clarity`: compact task specs should still preserve boundary intent and forbid tempting inference shortcuts when implementation intent could be misread.
-- `selected-task-skip-spec-and-code`: a selected concrete task still must not skip task-local spec work just because the user wants to code immediately.
-- `task-too-broad`: too-broad task should return to `milestone-planning`.
-- `unconfirmed-milestone-asks-routing-question`: an explicit `Roadmap confirmed: no` milestone should trigger a routing question before direct decomposition.
-- `unconfirmed-milestone-continue-current-path`: after the user explicitly chooses to keep the current milestone path, `milestone-planning` should continue with governance and decomposition instead of re-asking the routing question or jumping into execution.
+- `bootstrap-overreach-request`: bundled roadmap/task/spec requests must not overrun bootstrap.
+
+### Planning Inbox And Top-Level Routing
+
+- `empty-open-milestones-asks-routing-question`: empty `Open Milestones` without evidence asks a routing question.
+- `empty-open-milestones-needs-alignment`: inbox candidate `needs alignment` routes to `superpowers:brainstorming`.
+- `planning-inbox-ready-to-decompose`: inbox candidate `ready to decompose` routes to `milestone-planning`.
+- `iteration-breakdown`: concrete iteration target routes directly to `milestone-planning`.
+- `roadmap-needed`: broad product scope routes to `milestone-planning`.
+
+### Milestone Planning
+
+- `roadmap-small-output`: small roadmap scope creates inspectable roadmap-layer task docs.
+- `roadmap-no-mechanical-split`: implementation-mechanical requests become capability-level tasks.
+- `task-too-broad`: too-broad task returns to `milestone-planning`.
+- `unconfirmed-milestone-asks-routing-question`: `Roadmap confirmed: no` asks before decomposition.
+- `unconfirmed-milestone-continue-current-path`: explicit current-path choice continues provisional planning.
+- `cross-milestone-transition-requires-closure`: crossing milestones requires closure/confirmation first.
+- `milestone-close-handoff-notes-blocked`: non-empty `Handoff Notes` blocks closure.
+- `milestone-close-handoff-notes-cleared`: cleared handoff notes allow closure governance.
+- `completed-milestone-frozen-followup`: completed milestone follow-up moves to new governance/backlog/inbox.
+
+### Task Execution
+
+- `selected-task-spec`: simple selected task writes `spec.md` and skips `plan.md`.
+- `selected-task-spec-boundary-clarity`: compact specs must preserve boundary intent.
+- `selected-task-skip-spec-and-code`: user urgency must not skip task-local spec work.
+- `complex-selected-task-needs-plan`: clear plan triggers create `plan.md` and stop for approval.
+- `uncertain-plan-trigger-asks-before-plan`: uncertain plan trigger asks before writing `plan.md`.
+
+### Checkpoints And Closing
+
+- `approved-spec-needs-checkpoint`: approved docs need checkpoint before implementation isolation.
+- `approved-spec-keep-uncommitted-explicitly`: explicit uncommitted checkpoint must report files and gate.
+- `branch-closing-after-worktree`: removed worktree does not delete or resolve task branch.
 - `continue-without-approval`: `continue` must not skip approval gates.
+- `planning-checkpoint-before-first-task-spec`: first `continue` resolves planning docs; second may draft `spec.md`.

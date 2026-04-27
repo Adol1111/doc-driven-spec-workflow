@@ -13,11 +13,12 @@
 
 ## Expected File Changes
 
-When running a file-generating check, create only these files under `tests/workflow-routing/expected/bootstrap-overreach-request/`:
+When running a file-generating check, create only these files under `tests/workflow-routing/expected/bootstrap/bootstrap-overreach-request/`:
 
 - `docs/index.md`
 - `docs/architecture/index.md`
 - `docs/tasks/index.md`
+- `docs/tasks/planning-inbox.md`
 - `docs/context/index.md`
 
 ## Must Not

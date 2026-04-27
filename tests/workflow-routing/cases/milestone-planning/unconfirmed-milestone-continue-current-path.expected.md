@@ -13,7 +13,15 @@
 
 ## Expected File Changes
 
-None.
+When running a file-generating check, create or propose provisional milestone-entry planning files under `tests/workflow-routing/expected/milestone-planning/unconfirmed-milestone-continue-current-path/`.
+
+Required shape:
+
+- `docs/tasks/team-invitations/index.md`
+- `docs/tasks/team-invitations/<candidate-capability-task>/task.md`
+- `docs/tasks/team-invitations/<candidate-capability-task>/task.md`
+
+The exact number, titles, and directory slugs may vary. Accept outputs when the task files are provisional roadmap-layer candidate tasks under the current `team-invitations` milestone and the milestone remains `Roadmap confirmed: no` unless the user explicitly confirms it.
 
 ## Must Not
 

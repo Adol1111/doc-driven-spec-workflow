@@ -6,9 +6,9 @@
 
 ## Expected Behavior
 
-- Recognizes that `Open Milestones` is empty because roadmap goals and phase boundaries are not aligned yet.
+- Recognizes that `Open Milestones` is empty and `planning-inbox.md` has a candidate marked `needs alignment`.
 - Routes to `superpowers:brainstorming` before roadmap decomposition.
-- Frames the next step as clarifying mid/long-term goals and `now versus later` boundaries.
+- Frames the next step as clarifying the inbox candidate's goal, first coherent roadmap stage, and `now versus later` boundaries.
 - Does not jump straight into milestone or task decomposition.
 
 ## Expected File Changes

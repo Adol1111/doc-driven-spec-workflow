@@ -1,4 +1,4 @@
-# Two Continues Must Advance The Right Next Step
+# Planning Checkpoint Before First Task Spec
 
 ## Expected Skill
 
@@ -14,9 +14,7 @@
 
 ## Expected File Changes
 
-When running a file-generating check, create or propose only evidence of task-local spec drafting under `tests/workflow-routing/expected/first-task-in-new-milestone-needs-explicit-selection/`:
-
-- `docs/tasks/m2-private-beta/authentication/01-login-session/spec.md`
+None. This case checks checkpoint sequencing only; the prompt explicitly says not to draft the document body.
 
 ## Must Not
 

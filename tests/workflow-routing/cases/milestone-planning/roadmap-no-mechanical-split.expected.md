@@ -15,12 +15,14 @@
 
 ## Expected File Changes
 
-When running a file-generating check, create only these roadmap-layer files under `tests/workflow-routing/expected/roadmap-no-mechanical-split/`:
+When running a file-generating check, create or propose only roadmap-layer planning files under `tests/workflow-routing/expected/milestone-planning/roadmap-no-mechanical-split/`.
 
-- `docs/tasks/index.md`
+Required shape:
+
 - `docs/tasks/team-invitations/index.md`
-- `docs/tasks/team-invitations/01-invite-by-email/task.md`
-- `docs/tasks/team-invitations/02-manage-pending-invitations/task.md`
+- `docs/tasks/team-invitations/<capability-task>/task.md`
+
+The exact number, titles, and directory slugs may vary when the task boundaries are capability-level and independently reviewable. A single capability task is acceptable when the prompt only establishes one coherent capability and the proposed task keeps database tables, API endpoints, UI components, tests, docs updates, and code review inside the relevant implementation task instead of making them standalone roadmap tasks.
 
 ## Must Not
 

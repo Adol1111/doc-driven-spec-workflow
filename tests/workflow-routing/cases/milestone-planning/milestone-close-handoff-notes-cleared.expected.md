@@ -13,7 +13,10 @@
 
 ## Expected File Changes
 
-None.
+When running a file-generating check, create or propose only these milestone-closure governance files under `tests/workflow-routing/expected/milestone-planning/milestone-close-handoff-notes-cleared/`:
+
+- `docs/tasks/index.md`
+- `docs/tasks/m1/index.md`
 
 ## Must Not
 
