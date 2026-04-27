@@ -20,7 +20,8 @@ This skill is only for repository documentation bootstrap. It does not plan mile
 
 - MUST keep bootstrap work in docs governance mode.
 - MUST create only the minimum docs entry points unless the user explicitly asks for more.
-- MUST NOT create implementation tasks unless the user provides an actual milestone/task.
+- MUST NOT create implementation tasks during bootstrap.
+- If the user provides actual roadmap or task content during bootstrap, record it only as compact `planning-inbox.md` candidate context when explicitly requested, then hand off to `milestone-planning`.
 - MUST NOT create `docs/specs/` or `docs/plans/` by default.
 - MUST NOT write task-local `spec.md` or `plan.md`.
 - MUST report created or changed files and stop.
@@ -32,6 +33,7 @@ Create these files when missing:
 - `docs/index.md`
 - `docs/architecture/index.md`
 - `docs/tasks/index.md`
+- `docs/tasks/planning-inbox.md`
 - `docs/context/index.md`
 
 Use the repository's documentation language instructions when available. Otherwise follow the user's current language request.
@@ -42,7 +44,8 @@ Keep generated files compact:
 
 - `docs/index.md`: explain the docs entry point and link to architecture, tasks, and context
 - `docs/architecture/index.md`: explain stable design and behavior boundaries
-- `docs/tasks/index.md`: explain roadmap/task tracking and include `Open Milestones` and `Completed Milestones`
+- `docs/tasks/index.md`: explain roadmap/task tracking; include `Open Milestones`, `Completed Milestones`, and a link to `Planning Inbox`
+- `docs/tasks/planning-inbox.md`: explain that unconfirmed goals, opportunities, and roadmap candidates live there until promoted into a milestone, moved to backlog, or discarded
 - `docs/context/index.md`: explain research notes and supporting context
 
 Do not create roadmap details during bootstrap unless the user supplies actual roadmap content.
@@ -53,6 +56,6 @@ After bootstrap:
 
 - Return to `doc-driven-spec-workflow` so it can choose the next stage.
 - Continue directly to `milestone-planning` only when the user explicitly asks to plan milestones, modules, and tasks.
-- Continue directly to `task-spec-execution` only when the user explicitly asks and a concrete task already exists or is selected.
+- Continue directly to `task-spec-execution` only when the user explicitly asks, a concrete task is selected from confirmed roadmap state, and dependencies and prior checkpoints are clear.
 
 Stop after reporting the bootstrap result unless the user explicitly asks to continue.

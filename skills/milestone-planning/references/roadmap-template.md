@@ -24,9 +24,14 @@ This directory stores project-level task documents grouped by milestone, optiona
 
 - Optional: [Backlog](./backlog.md)
 
+## Planning Inbox
+
+- [Planning Inbox](./planning-inbox.md)
+
 ## Conventions
 
 - Each milestone directory has its own `index.md`
+- `planning-inbox.md` stores unconfirmed goals, opportunities, and roadmap candidates until they are promoted into a milestone, moved to backlog, or discarded
 - `backlog.md` is optional and stores roadmap items that are not yet attached to a milestone
 - Module directories are optional; use them only when a milestone has multiple meaningful capability areas
 - Task directories contain `task.md`, task-local `spec.md`, and optional `plan.md`
@@ -135,10 +140,29 @@ This file stores candidate roadmap items that are not yet attached to a mileston
   Notes: waiting for milestone assignment
 ```
 
+## `docs/tasks/planning-inbox.md`
+
+```md
+# Planning Inbox
+
+Unconfirmed goals, opportunities, and roadmap candidates live here until they are promoted into a milestone, moved to backlog, or discarded.
+
+## Candidates
+
+### <Candidate Name>
+
+- Status: needs alignment | ready to decompose | parked | discarded
+- Source: <user request, research note, handoff, or other origin>
+- Problem: <what need or opportunity this represents>
+- Current question: <what must be decided next>
+- Next routing: brainstorming | milestone-planning | backlog | discard
+```
+
 ## Rules
 
-- `docs/tasks/index.md` lists `Open Milestones` and `Completed Milestones`; it may also link an optional `Backlog`.
+- `docs/tasks/index.md` lists `Open Milestones` and `Completed Milestones`; it should link `Planning Inbox` and may also link an optional `Backlog`.
 - Completed milestones are frozen; add follow-up work to a new open milestone.
+- `docs/tasks/planning-inbox.md` is the routing source for goals that are not yet milestone-shaped.
 - `docs/tasks/backlog.md` is optional. Use it for roadmap items that are not yet attached to a milestone.
 - Modules are optional durable capability areas, not one-off buckets.
 - If a proposed module has fewer than three likely tasks, merge it unless it has a distinct long-term domain, owner, lifecycle, risk profile, release boundary, or acceptance boundary.

@@ -5,42 +5,31 @@ description: Use when a request or repository needs roadmap decomposition before
 
 # Milestone Planning
 
-Plan roadmap structure before task-local spec work begins.
-
-This skill decides `Milestone -> optional Module -> Task` shape. It owns roadmap-layer `docs/tasks/` structure and governance, not task-local specs or implementation flow.
+Plan roadmap structure before task-local spec work. This skill owns `Milestone -> optional Module -> Task` docs governance, not task-local specs or implementation.
 
 ## Composition
 
 - **Entry**: reached from `doc-driven-spec-workflow` after scope is clear enough to plan delivery structure.
 - **Owns**: milestone boundaries, optional module grouping, roadmap-layer task breakdown, backlog/handoff governance, planning-stage `docs/tasks/` documents.
 - **Does not own**: repository scaffold bootstrap, task-local `spec.md`, task-local `plan.md`, readiness checks, implementation, verification, branch closing.
-- **Handoff**: use `task-spec-execution` only after the current concrete task is selected and the user wants to enter spec-first execution.
+- **Handoff**: stop at a planning docs checkpoint after roadmap/task docs change; use `task-spec-execution` only after that checkpoint is resolved, the current concrete task is selected from confirmed roadmap state, and the user wants to enter spec-first execution.
 
 ## Core Rules
 
-### Delivery Boundary
-
-- **Start from**: release goal, phase boundary, acceptance boundary — not feature count.
-- **One milestone**: same delivery goal + same completion definition + no meaningful stage boundary.
-- **Multiple milestones**: clear phase boundaries, different exit criteria, different release timing, or frozen history needed.
-
-### Module Rules
-
-- Modules are **optional**. Use only when a milestone has multiple durable capability areas with distinct ownership, dependency graphs, risk profiles, release boundaries, or acceptance criteria.
-- Skip modules when there is only one real capability area.
-
-### Task Rules
-
-- One independently reviewable implementation round.
-- Delivers one coherent capability outcome: implementation, tests, docs/status updates, verification.
-- Keep inside the task: tests, migrations, docs updates, refactors required for the capability.
+| Boundary | Rule |
+|----------|------|
+| Milestone | Start from release goal, phase boundary, or acceptance boundary, not feature count. Use one milestone for the same delivery goal plus same completion definition and no meaningful stage boundary; split when phase boundaries, exit criteria, release timing, or frozen history differ. |
+| Module | Optional. Use only for multiple durable capability areas with distinct ownership, dependency graphs, risk profiles, release boundaries, or acceptance criteria. |
+| Task | One independently reviewable implementation round delivering one coherent capability outcome, including required tests, migrations, docs/status updates, refactors, and verification. |
 
 ### Routing
 
 | Situation | Action |
 |-----------|--------|
-| Empty `Open Milestones` | Use `superpowers:brainstorming` first |
-| `Roadmap confirmed: no` | Treat tasks as candidates only |
+| Empty `Open Milestones` and no docs/prompt evidence gives a concrete target or roadmap misalignment | Ask the planning mode question first |
+| Empty `Open Milestones` and docs/prompt evidence gives a concrete short-term target | Decompose directly with `milestone-planning` |
+| Empty `Open Milestones` and docs/prompt evidence says roadmap direction, goals, or phase boundaries are not aligned | Use `superpowers:brainstorming` first |
+| `Roadmap confirmed: no` and user asks to decompose or start work | Ask whether to re-evaluate milestone structure or continue on the current milestone path; keep tasks provisional |
 | Cross-milestone movement | Resolve previous milestone closure first |
 
 **Planning mode question**: *"Do you already have a concrete short-term target for this iteration, or do we need to realign the next stage of the roadmap first?"*
@@ -48,14 +37,14 @@ This skill decides `Milestone -> optional Module -> Task` shape. It owns roadmap
 ### Mandatory Behavior
 
 - Explain why each milestone, module, and task boundary exists. Structure without rationale is incomplete.
-- Ask the planning mode question first when it is still unclear whether the user needs roadmap alignment or direct decomposition.
-- Treat an empty `Open Milestones` list as a routing signal, not enough information to decompose by itself.
-- Use `superpowers:brainstorming` first when goals, constraints, success criteria, or roadmap alignment are still unclear.
-- Skip `superpowers:brainstorming` and decompose directly when the user already has a concrete short-term target.
-- Treat milestone confirmation as the primary routing signal for task decomposition.
-- Treat tasks inside a milestone marked `Roadmap confirmed: no` as provisional planning output, not formally selected execution work.
+- Empty `Open Milestones` is a routing signal, not enough information to decompose by itself. Check `docs/tasks/planning-inbox.md`, `docs/tasks/backlog.md`, relevant task docs, and the prompt before choosing a path.
+- Ask the planning mode question when no evidence identifies either a concrete short-term target or roadmap misalignment.
+- Use `superpowers:brainstorming` first only when docs or prompt evidence says goals, constraints, success criteria, roadmap direction, or phase boundaries are not aligned.
+- Decompose directly when the user already has a concrete short-term target.
+- Treat milestone confirmation as the primary routing signal. Tasks in `Roadmap confirmed: no` milestones are provisional planning output, not formally selected execution work.
 - Treat milestone/module/task creation or reshaping as docs governance only. It does not authorize spec writing or implementation.
-- Hand off to `task-spec-execution` only after the current concrete task is chosen.
+- Stop at a planning docs checkpoint after creating or reshaping roadmap/task docs. Default checkpoint resolution is to commit those docs when the user asks to resolve the checkpoint; the user may explicitly approve keeping them uncommitted.
+- Hand off to `task-spec-execution` only after the planning docs checkpoint is resolved and the current concrete task is chosen from confirmed roadmap state.
 
 ## Handoff and Closure
 
