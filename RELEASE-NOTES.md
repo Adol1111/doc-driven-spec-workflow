@@ -4,6 +4,23 @@ User-facing workflow, installation, and migration changes are documented here.
 
 This project follows Conventional Commits for commit history, but release notes focus on what users need to know when adopting or upgrading the workflow.
 
+## v0.5.0
+
+### Features
+
+- The minimum docs scaffold now includes `docs/tasks/planning-inbox.md` so unconfirmed goals, opportunities, and roadmap candidates survive across fresh agent conversations.
+- `milestone-planning` now treats `docs/tasks/planning-inbox.md` as the routing source for goals that are not yet milestone-shaped.
+- Workflow routing tests now document batch-run protocols that write all result files before reading any expected files, preventing expected-output context from leaking into simulated responses.
+
+### Fixes
+
+- `milestone-planning` now distinguishes an empty `Open Milestones` list with no routing evidence from one that has `planning-inbox.md`, docs, or prompt evidence for either a concrete short-term target or misaligned roadmap goals.
+- Root routing and `task-spec-execution` now require concrete docs or prompt evidence before treating ambiguous intent as a `superpowers:brainstorming` case.
+- `docs-workflow-bootstrap` now explicitly refuses to create implementation tasks; roadmap or task-like input belongs in planning inbox context and later `milestone-planning`.
+- `task-spec-execution` now defines when a task is selectable for execution and replaces vague task complexity with explicit plan triggers for deciding when `plan.md` is justified.
+- Checkpoint semantics are now explicit: approved planning/spec/plan docs are committed by default, while uncommitted continuation requires explicit user approval and a file-level report.
+- Selectable-task and explicit-approval semantics are now defined so vague replies like `ok`, `looks good`, or `go ahead` do not accidentally cross approval gates.
+
 ## v0.4.0
 
 ### Features
