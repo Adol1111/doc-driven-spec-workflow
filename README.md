@@ -1,6 +1,6 @@
 # Doc-Driven Spec Workflow
 
-[中文说明](./README_CN.md) · [Release Notes](./RELEASE-NOTES.md)
+[中文说明](./README_CN.md) · [Workflow Structure](./WORKFLOW-STRUCTURE.md) · [Release Notes](./RELEASE-NOTES.md)
 
 A docs-driven workflow methodology for AI coding agents.
 
@@ -24,7 +24,7 @@ Not every request uses every stage:
 - Use `docs-workflow-bootstrap` when the repository needs the minimum docs scaffold.
 - Use `superpowers:brainstorming` only when goals, scope, or success criteria are still unclear.
 - Use `milestone-planning` when the roadmap shape is unclear and you need to decide milestones, modules, and tasks.
-- Use `task-spec-execution` after the current concrete task is chosen and you want to write the task-local spec and move toward implementation.
+- Use `task-spec-execution` after the current concrete task is selected from confirmed roadmap state and prior checkpoints are clear.
 
 The root skill does not own templates or implementation details. It routes, hands off context, and protects approval gates. Stage-specific skills own their own rules, templates, and stop points.
 
@@ -68,12 +68,17 @@ docs/
 ├── architecture/
 │   └── index.md
 ├── tasks/
-│   └── index.md
+│   ├── index.md
+│   └── planning-inbox.md
 └── context/
     └── index.md
 ```
 
+`docs/tasks/planning-inbox.md` keeps unconfirmed goals, opportunities, and roadmap candidates visible across fresh agent conversations until they are promoted into a milestone, moved to backlog, or discarded.
+
 The workflow does not create `docs/specs/` or `docs/plans/` by default. Task-local `spec.md` and `plan.md` files should be created under `docs/tasks/<milestone>/<task>/` when there is a concrete task. Global `docs/specs/` and `docs/plans/` are reserved for standalone or cross-task documents.
+
+A plan trigger is a concrete execution-sequencing risk, such as ordered changes across several major files or modules, migrations or data changes, public compatibility boundaries, cross-module coordination, phased rollout, non-obvious verification order, multiple implementation slices that still belong to one task, or a required spike before implementation edits.
 
 ## Template Language
 
@@ -119,7 +124,7 @@ Use the roadmap decomposition skill directly when the main question is milestone
 Use milestone-planning to break this scope into milestones, modules, and tasks.
 ```
 
-Use the current-task execution skill directly when the concrete task already exists or is already chosen:
+Use the current-task execution skill directly when the concrete task is selected from confirmed roadmap state and dependencies and prior checkpoints are clear:
 
 ```text
 Use task-spec-execution to pick the next task and write the spec.
@@ -145,7 +150,7 @@ These skills are designed for repositories that use `docs/architecture/`, `docs/
 5. Select the current concrete task under `docs/tasks/`.
 6. Use `task-spec-execution` to write or update the task-local `spec.md`.
 7. Stop for user approval before implementation.
-8. Create `plan.md` only when the task is genuinely complex.
+8. Create `plan.md` only when a plan trigger is present.
 9. Run the readiness checkpoint and isolate work with a branch or worktree.
 10. Implement, verify, update docs/status, and resolve branch closing.
 
@@ -153,7 +158,7 @@ These skills are designed for repositories that use `docs/architecture/`, `docs/
 
 - Treats `docs/tasks/` as the source of truth for roadmap and concrete implementation work.
 - Separates the root routing protocol, roadmap decomposition, and current-task execution into distinct skills.
-- Requires task-local specs before implementation and optional plans for complex work.
+- Requires task-local specs before implementation and optional plans when a plan trigger is present.
 - Keeps architecture, task tracking, specs, and status updates aligned.
 - Separates docs governance from implementation permission.
 - Enforces readiness checkpoints before code edits, including branch or worktree isolation.
@@ -198,7 +203,7 @@ The module layer is optional. Use `docs/tasks/<milestone>/<task>/` when a milest
 
 ## Compatibility Notes
 
-The current-task execution skill can work on its own after a concrete task exists, but this repository is designed to compose with optional clarification and execution-safety skills from [obra/superpowers](https://github.com/obra/superpowers):
+The current-task execution skill can work on its own after a concrete task is selected from confirmed roadmap state with dependencies and prior checkpoints clear, but this repository is designed to compose with optional clarification and execution-safety skills from [obra/superpowers](https://github.com/obra/superpowers):
 
 - `superpowers:brainstorming`: Clarifies ambiguous feature, behavior, or task intent before roadmap decomposition or current-task spec work.
 - `superpowers:using-git-worktrees`: Creates safe branch/worktree isolation when a workspace is dirty, shared, risky, or likely to conflict.

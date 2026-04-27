@@ -1,6 +1,6 @@
 # Doc-Driven Spec Workflow
 
-[English](./README.md) · [Release Notes](./RELEASE-NOTES.md)
+[English](./README.md) · [Workflow Structure](./WORKFLOW-STRUCTURE.md) · [Release Notes](./RELEASE-NOTES.md)
 
 一套面向 AI coding agents 的 docs-driven workflow methodology。
 
@@ -24,7 +24,7 @@
 - 当仓库还没有最小 docs scaffold 时，使用 `docs-workflow-bootstrap`。
 - 当目标、范围或成功标准还不清楚时，才进入 `superpowers:brainstorming`。
 - 当 roadmap shape 还不清楚，需要决定 milestones、modules 和 tasks 时，使用 `milestone-planning`。
-- 当当前 concrete task 已经确定，并准备进入 task-local spec 和实现治理时，使用 `task-spec-execution`。
+- 当当前 concrete task 已从已确认 roadmap state 中选定，并且 prior checkpoints 已清理后，使用 `task-spec-execution`。
 
 root skill 不拥有模板或实现细节。它只负责路由、交接上下文和保护 approval gates。具体阶段的规则、模板和停止点由对应 stage skill 负责。
 
@@ -68,12 +68,17 @@ docs/
 ├── architecture/
 │   └── index.md
 ├── tasks/
-│   └── index.md
+│   ├── index.md
+│   └── planning-inbox.md
 └── context/
     └── index.md
 ```
 
+`docs/tasks/planning-inbox.md` 用来保存还没有进入 milestone 的目标、机会和 roadmap candidates，避免新会话丢失这些 planning 信号；后续可以把它们提升到 milestone、移入 backlog，或明确丢弃。
+
 默认不会创建 `docs/specs/` 或 `docs/plans/`。当存在具体 task 时，task-local `spec.md` 和 `plan.md` 应该创建在 `docs/tasks/<milestone>/<task>/` 下。全局 `docs/specs/` 和 `docs/plans/` 只用于 standalone 或 cross-task 文档。
+
+Plan trigger 指具体的 execution sequencing 风险，例如多个主要文件或模块需要按顺序修改、migration 或数据变更、public compatibility boundary、跨模块协作、分阶段 rollout、非显然的验证顺序、多个 implementation slices 仍属于同一个 task，或实现前必须先做 spike 降低风险。
 
 ## 模板语言
 
@@ -119,7 +124,7 @@ Use doc-driven-spec-workflow to decide whether this request needs bootstrap, cla
 Use milestone-planning to break this scope into milestones, modules, and tasks.
 ```
 
-当 concrete task 已经存在或已经明确时，可以直接进入 current-task execution skill：
+当 concrete task 已从已确认 roadmap state 中选定，并且 dependencies 和 prior checkpoints 都清楚时，可以直接进入 current-task execution skill：
 
 ```text
 Use task-spec-execution to pick the next task and write the spec.
@@ -145,7 +150,7 @@ Claude Code 也可以直接调用各个已安装的 skill：
 5. 在 `docs/tasks/` 下选定当前 concrete task。
 6. 用 `task-spec-execution` 编写或更新 task-local `spec.md`。
 7. 停下来等待用户批准，不直接进入实现。
-8. 只有任务确实复杂时才创建 `plan.md`。
+8. 只有命中 plan trigger 时才创建 `plan.md`。
 9. 运行 readiness checkpoint，并用 branch 或 worktree 隔离实现工作。
 10. 实现、验证、更新 docs/status，并处理 branch closing。
 
@@ -153,7 +158,7 @@ Claude Code 也可以直接调用各个已安装的 skill：
 
 - 把 `docs/tasks/` 作为 roadmap 和具体实现工作的 source of truth。
 - 把 root routing protocol、roadmap decomposition 和 current-task execution 分成独立 skills。
-- 实现前要求 task-local spec，复杂任务可选 plan。
+- 实现前要求 task-local spec；命中 plan trigger 时才创建可选 plan。
 - 保持 architecture、task tracking、spec 和 status updates 对齐。
 - 区分 docs governance 和 implementation permission。
 - 在写代码前执行 readiness checkpoint，包括 branch/worktree isolation。
@@ -198,7 +203,7 @@ module 层是可选的。当 milestone 只有一个真实能力域时，使用 `
 
 ## 兼容说明
 
-current-task execution skill 在 concrete task 已经存在后可以独立使用，但这个仓库的整体 workflow 设计上会和 [obra/superpowers](https://github.com/obra/superpowers) 中的可选澄清与执行安全 skills 组合：
+current-task execution skill 在 concrete task 已从已确认 roadmap state 中选定、dependencies 和 prior checkpoints 都清楚后可以独立使用，但这个仓库的整体 workflow 设计上会和 [obra/superpowers](https://github.com/obra/superpowers) 中的可选澄清与执行安全 skills 组合：
 
 - `superpowers:brainstorming`：在 roadmap decomposition 或 current-task spec work 之前，澄清模糊的 feature、behavior 或 task intent。
 - `superpowers:using-git-worktrees`：当 workspace dirty、shared、风险较高或可能冲突时，创建安全的 branch/worktree isolation。
