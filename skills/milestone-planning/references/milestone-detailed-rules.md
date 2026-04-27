@@ -9,6 +9,8 @@ Detailed mandatory rules for milestone planning. See SKILL.md for core framework
 - Split into multiple milestones when the work has clear phase boundaries, different exit criteria, different release timing, or follow-up work that should remain frozen history after an earlier stage completes.
 - Treat modules as optional. Use modules only when one milestone contains multiple durable capability areas with distinct ownership, dependency graphs, risk profiles, release boundaries, or acceptance criteria.
 - Treat tasks as independently reviewable implementation rounds. A task should deliver one coherent capability outcome, including implementation, tests, docs/status updates, and verification.
+- When the user asks for roadmap-level tasks so the first implementation task can be chosen, split by user-visible or operator-visible capability boundaries when those capabilities can be independently reviewed. Do not bundle multiple independently selectable capabilities into a vague `core`, `MVP`, `foundation`, or `polish` task just because the total feature is small.
+- Keep docs, verification, review follow-up, and planning-state updates inside the relevant capability tasks. Create a standalone release-readiness or polish task only when that governance/release work is itself the independently reviewable delivery outcome, not as a catch-all for leftovers.
 - Explain why each milestone, module, and task boundary exists. Output structure without rationale is incomplete.
 - First determine whether the user needs roadmap alignment or decomposition of an already-defined target whenever the current situation is unclear.
 - Treat an empty `Open Milestones` list as a routing signal, not enough information to decompose by itself.

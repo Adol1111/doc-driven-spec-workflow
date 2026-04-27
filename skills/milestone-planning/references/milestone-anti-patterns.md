@@ -18,6 +18,7 @@ Stop and reshape if the output looks like any of these.
 
 - Tasks named after files, endpoints, tests, migrations, or refactor slices
 - Implementation or verification split into separate tasks ("code review", "write unit tests", "add repository file", "update handler", "write migration")
+- Vague `core`, `MVP`, `foundation`, `polish`, or `release readiness` tasks that bundle multiple independently selectable capabilities or collect docs, verification, review follow-up, and planning updates as leftovers
 - Tiny modules as buckets for one-off tasks
 - One catch-all module when tasks should live directly under the milestone
 

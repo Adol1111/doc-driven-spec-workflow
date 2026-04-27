@@ -20,7 +20,7 @@ Plan roadmap structure before task-local spec work. This skill owns `Milestone -
 |----------|------|
 | Milestone | Start from release goal, phase boundary, or acceptance boundary, not feature count. Use one milestone for the same delivery goal plus same completion definition and no meaningful stage boundary; split when phase boundaries, exit criteria, release timing, or frozen history differ. |
 | Module | Optional. Use only for multiple durable capability areas with distinct ownership, dependency graphs, risk profiles, release boundaries, or acceptance criteria. |
-| Task | One independently reviewable implementation round delivering one coherent capability outcome, including required tests, migrations, docs/status updates, refactors, and verification. |
+| Task | One independently reviewable implementation round delivering one coherent capability outcome, including required tests, migrations, docs/status updates, refactors, and verification. When the user asks for roadmap-level tasks so a first implementation task can be chosen, prefer user-visible or operator-visible capability boundaries; do not hide multiple independently selectable capabilities inside a vague `core`, `MVP`, `foundation`, or `polish` task. |
 
 ### Routing
 
