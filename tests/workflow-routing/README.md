@@ -250,6 +250,8 @@ Reason:
 
 - `selected-task-spec`: simple selected task writes `spec.md` and skips `plan.md`.
 - `selected-task-spec-boundary-clarity`: compact specs must preserve boundary intent.
+- `selected-task-spec-handoff-ready`: explicit direct handoff readiness requires concrete anchors inside a compact spec.
+- `selected-task-spec-subagent-handoff-default`: subagent delegation defaults a compact spec to handoff-ready without an extra route-selection question.
 - `selected-task-skip-spec-and-code`: user urgency must not skip task-local spec work.
 - `complex-selected-task-needs-plan`: clear plan triggers create `plan.md` and stop for approval.
 - `uncertain-plan-trigger-asks-before-plan`: uncertain plan trigger asks before writing `plan.md`.

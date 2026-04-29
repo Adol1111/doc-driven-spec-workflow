@@ -49,7 +49,7 @@ Plan triggers:
 
 Do not create `plan.md` for a small single-capability task with straightforward implementation order. If multiple specs seem necessary, stop and use `milestone-planning` to split the task first.
 
-Compact specs are fine; vague specs are not. When implementation intent could be misread, `spec.md` must capture work type, allowed minimal implementation, relevant non-goals or forbidden shortcuts, and where new responsibility should or must not live. Use task-specific subheadings when helpful, but do not add top-level sections only to restate the template.
+Compact specs are fine; vague specs are not. When implementation intent could be misread, `spec.md` must capture work type, allowed minimal implementation, relevant non-goals or forbidden shortcuts, and where new responsibility should or must not live. Choose the spec strictness from the expected execution mode: same agent continuing in the current session may use an author-ready compact spec; another agent, subagent, model, or fresh conversation defaults to handoff-ready and must include enough concrete anchors for implementation without a clarification round. Those anchors are preferred proof samples or evidence sources, preferred implementation surface, and case-level acceptance signals. If the execution mode cannot be inferred reliably and the difference matters, ask which route the user wants before drafting. Use task-specific subheadings when helpful, but do not add top-level sections only to restate the template.
 
 ## Checkpoints and Branches
 

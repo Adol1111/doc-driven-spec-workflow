@@ -18,8 +18,17 @@ This project follows Conventional Commits for commit history, but release notes 
 - Root routing and `task-spec-execution` now require concrete docs or prompt evidence before treating ambiguous intent as a `superpowers:brainstorming` case.
 - `docs-workflow-bootstrap` now explicitly refuses to create implementation tasks; roadmap or task-like input belongs in planning inbox context and later `milestone-planning`.
 - `task-spec-execution` now defines when a task is selectable for execution and replaces vague task complexity with explicit plan triggers for deciding when `plan.md` is justified.
+- `task-spec-execution` now distinguishes author-ready versus handoff-ready compact specs by expected execution mode instead of requiring an explicit handoff request every time. Same-agent continuation may stay compact, while subagents, other agents/models, and fresh conversations now default to handoff-ready anchors inside the existing spec sections.
 - Checkpoint semantics are now explicit: approved planning/spec/plan docs are committed by default, while uncommitted continuation requires explicit user approval and a file-level report.
 - Selectable-task and explicit-approval semantics are now defined so vague replies like `ok`, `looks good`, or `go ahead` do not accidentally cross approval gates.
+
+### Notes
+
+- When execution mode is already clear, `task-spec-execution` should not ask a redundant route-selection question before drafting `spec.md`.
+- Handoff-ready compact specs now require three concrete anchors when another execution context is expected:
+  - preferred proof samples or evidence sources
+  - preferred implementation surface or first modification target
+  - case-level acceptance signals
 
 ## v0.4.0
 
