@@ -14,7 +14,8 @@ Current groups:
 - `bootstrap`
 - `planning-inbox`
 - `milestone-planning`
-- `task-execution`
+- `task-preparation`
+- `task-execution-simple`
 - `checkpoints-closing`
 
 Use a group directory as the default run boundary. Do not choose arbitrary numeric batches such as "five cases at a time"; if a group becomes too large, split that group into smaller semantic subdirectories first.
@@ -48,7 +49,7 @@ IMPORTANT — preserve context isolation:
 ```text
 Use doc-driven-spec-workflow.
 
-Run one workflow-routing case group, for example tests/workflow-routing/cases/task-execution/*.prompt.md.
+Run one workflow-routing case group, for example tests/workflow-routing/cases/task-preparation/*.prompt.md.
 Treat each prompt as an isolated simulated conversation.
 Do not edit repository files unless a test case explicitly expects file changes.
 
@@ -247,20 +248,22 @@ Reason:
 - `milestone-close-handoff-notes-cleared`: cleared handoff notes allow closure governance.
 - `completed-milestone-frozen-followup`: completed milestone follow-up moves to new governance/backlog/inbox.
 
-### Task Execution
+### Task Preparation
 
 - `selected-task-spec`: simple selected task writes `spec.md` and skips `plan.md`.
 - `selected-task-spec-boundary-clarity`: compact specs must preserve boundary intent.
-- `selected-task-spec-handoff-ready`: explicit direct handoff readiness requires concrete anchors inside a compact spec.
 - `selected-task-spec-subagent-handoff-default`: subagent delegation defaults a compact spec to handoff-ready without an extra route-selection question.
 - `selected-task-skip-spec-and-code`: user urgency must not skip task-local spec work.
 - `complex-selected-task-needs-plan`: clear plan triggers create `plan.md` and stop for approval.
 - `uncertain-plan-trigger-asks-before-plan`: uncertain plan trigger asks before writing `plan.md`.
 
+### Task Execution Simple
+
+- `branch-closing-after-worktree`: merged branch still needs explicit branch-closing handling after worktree removal.
+
 ### Checkpoints And Closing
 
 - `approved-spec-needs-checkpoint`: approved docs need checkpoint before implementation isolation.
 - `approved-spec-keep-uncommitted-explicitly`: explicit uncommitted checkpoint must report files and gate.
-- `branch-closing-after-worktree`: removed worktree does not delete or resolve task branch.
 - `continue-without-approval`: `continue` after a review pause should advance to the recommended non-destructive next step.
 - `planning-checkpoint-before-first-task-spec`: first `continue` resolves planning docs; second may draft `spec.md`.

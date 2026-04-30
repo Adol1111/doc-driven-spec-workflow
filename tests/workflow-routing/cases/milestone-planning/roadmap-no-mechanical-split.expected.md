@@ -19,10 +19,10 @@ When running a file-generating check, create or propose only roadmap-layer plann
 
 Required shape:
 
-- `docs/tasks/team-invitations/index.md`
-- `docs/tasks/team-invitations/<capability-task>/task.md`
+- `docs/tasks/<milestone-or-capability-slug>/index.md`
+- `docs/tasks/<milestone-or-capability-slug>/<capability-task>/task.md`
 
-The exact number, titles, and directory slugs may vary when the task boundaries are capability-level and independently reviewable. A single capability task is acceptable when the prompt only establishes one coherent capability and the proposed task keeps database tables, API endpoints, UI components, tests, docs updates, and code review inside the relevant implementation task instead of making them standalone roadmap tasks.
+The exact number, titles, and directory slugs may vary when the task boundaries are capability-level and independently reviewable. Accept either a neutral capability slug such as `team-invitations` or a milestone-prefixed slug such as `m1-team-invitations`, as long as the output stays at the roadmap layer and keeps database tables, API endpoints, UI components, tests, docs updates, and code review inside the relevant implementation task instead of making them standalone roadmap tasks. A single capability task is acceptable when the prompt only establishes one coherent capability.
 
 ## Must Not
 

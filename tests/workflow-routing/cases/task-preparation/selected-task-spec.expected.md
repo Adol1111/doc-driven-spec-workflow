@@ -34,7 +34,7 @@ The `## Design` section may use task-specific subheadings. Boundary-oriented des
 
 ## Expected File Changes
 
-When running a file-generating check, create or propose only this task-local spec under `tests/workflow-routing/expected/task-execution/selected-task-spec/`:
+When running a file-generating check, create or propose only this task-local spec under `tests/workflow-routing/expected/task-preparation/selected-task-spec/`:
 
 - `docs/tasks/m1-private-beta/authentication/01-login-session/spec.md`
 

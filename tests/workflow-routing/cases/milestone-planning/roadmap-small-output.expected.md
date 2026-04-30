@@ -21,11 +21,11 @@ When running a file-generating check, create only roadmap-layer files under `tes
 Required shape:
 
 - `docs/tasks/index.md`
-- `docs/tasks/team-invitations/index.md`
-- `docs/tasks/team-invitations/<invite-by-email-task>/task.md`
-- `docs/tasks/team-invitations/<manage-pending-invitations-task>/task.md`
+- `docs/tasks/<milestone-or-capability-slug>/index.md`
+- `docs/tasks/<milestone-or-capability-slug>/<invite-by-email-task>/task.md`
+- `docs/tasks/<milestone-or-capability-slug>/<manage-pending-invitations-task>/task.md`
 
-The exact task directory slugs may vary. They should be accepted when the task files represent the expected capability boundaries: inviting by email, and managing pending invitations including revoke.
+The exact task directory slugs may vary. Accept either a neutral capability slug such as `team-invitations` or a milestone-prefixed slug such as `m1-team-invitations`, as long as the task files represent the expected capability boundaries: inviting by email, and managing pending invitations including revoke.
 
 ## Must Not
 
