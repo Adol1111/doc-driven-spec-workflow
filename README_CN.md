@@ -129,7 +129,7 @@ Use milestone-planning to break this scope into milestones, modules, and tasks.
 当 concrete task 已从已确认 roadmap state 中选定，并且 dependencies 和 prior hard gates 都清楚时，可以直接进入 task preparation skill：
 
 ```text
-Use task-preparation to pick the next task and write the spec.
+Use task-preparation to prepare the selected task by writing the spec.
 ```
 
 当 task-local docs 已准备好，且下一步是直接实现时，可以直接进入 simple execution skill：

@@ -64,3 +64,15 @@ Use the existing execution references when needed:
 ## When To Use
 
 Use when a concrete task already has its task-local `spec.md` and optional `plan.md`, and the next work is direct implementation through the repository's simple execution path rather than delegated or specialized execution. Do not use before task-local docs are ready.
+
+Do not use when:
+
+- milestone/module/task structure is still being decided; use `milestone-planning`
+- task-local `spec.md` or `plan.md` work still needs to be written or reviewed; use `task-preparation`
+- the repository needs a delegated or specialized execution path instead of the simple direct path
+
+## Common Mistakes
+
+- Starting implementation before branch/worktree isolation is complete
+- Treating a normal forward-motion message as approval for destructive cleanup
+- Rewriting roadmap or task structure here instead of routing back to `milestone-planning`

@@ -42,7 +42,6 @@ Default flow:
 | No trigger | `spec -> review pause -> auto follow-up -> execution handoff` |
 | Trigger present | `spec -> review pause -> plan -> review pause -> auto follow-up -> execution handoff` |
 
-- A review pause means the workflow can safely resume in a fresh conversation without relying on chat memory.
 - If the agent has just drafted `spec.md` and stopped for its review pause, a user reply such as `continue`, `next`, or other clear forward-motion language counts as approval to leave that review pause and follow the recommended safe next step.
 - Review approval and routine commit approval are merged by default. If the user reviews `spec.md` or `plan.md` and says `continue`, the agent may commit those reviewed docs when that is the recommended next operational step.
 - If the agent intentionally continues with reviewed changes uncommitted, it must say so explicitly and report the affected files.
@@ -53,9 +52,8 @@ Default flow:
 ## Task And Status Rules
 
 - Use `docs/tasks/` as the only source of truth for concrete next work, not `docs/context/` or architecture alone.
-- A task file exists only as a candidate until it satisfies the selectable-task gate. Tasks in `Roadmap confirmed: no` milestones remain provisional.
+- Tasks in `Roadmap confirmed: no` milestones remain provisional until the selectable-task gate is satisfied.
 - Respect task sizing, dependencies, and status exactly. If the candidate is too small, too broad, only a sub-step, or implies a missing roadmap shape, stop and use `milestone-planning`.
-- Completed milestones are frozen; add follow-up work to a new open milestone.
 - Each concrete task already has a directory with `task.md`; task preparation adds task-local `spec.md` and optional `plan.md` there. `task.md` tracks status, dependencies, and acceptance points, not detailed implementation steps.
 - Keep implementation steps inside `spec.md`, optional `plan.md`, or checklist items; do not promote them into tasks.
 - If a planning stage just changed roadmap docs, report and review that planning output before drafting the first task spec.
@@ -70,18 +68,12 @@ Use the task-local references when needed:
 - `references/architecture-template.md`
 - `references/context-template.md`
 
-## Workflow
-
-Follow this order unless the user explicitly asks for something different:
-
-1. If docs or prompt evidence shows task intent is ambiguous, use `superpowers:brainstorming`; do not infer ambiguity from missing docs alone.
-2. If the uncertainty is roadmap shape, use `milestone-planning`.
-3. Read the relevant `docs/tasks/` milestone/module/task docs plus supporting architecture/context only as needed.
-4. If no suitable open task exists, or the next task is blocked by milestone closure/confirmation, stop and resolve that governance first.
-5. Write or update one focused task-local `spec.md`, then stop for review.
-6. If plan triggers are present, write task-local `plan.md` and stop for review; if trigger status is uncertain, ask before writing.
-7. After review approval, handle routine follow-up such as committing reviewed docs or reporting intentional uncommitted state, then hand off to an execution skill.
-
 ## When To Use
 
-Use when the repository has the docs-driven layout and the current concrete task is selected or ready to select from confirmed roadmap state, and the next work is task-local `spec.md` or `plan.md` preparation before code execution. Use `milestone-planning` first when milestone/module/task structure is still being decided. Do not use for repositories without this layout.
+Use when the repository has the docs-driven layout and the current concrete task is selected or ready to select from confirmed roadmap state, and the next work is task-local `spec.md` or `plan.md` preparation before code execution.
+
+Do not use when:
+
+- milestone/module/task structure is still being decided; use `milestone-planning` first
+- the next work is direct implementation, verification, or branch closing; use `task-execution-simple`
+- the repository does not use this docs-driven layout

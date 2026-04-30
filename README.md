@@ -129,7 +129,7 @@ Use milestone-planning to break this scope into milestones, modules, and tasks.
 Use the task-preparation skill directly when the concrete task is selected from confirmed roadmap state and dependencies and prior hard gates are clear:
 
 ```text
-Use task-preparation to pick the next task and write the spec.
+Use task-preparation to prepare the selected task by writing the spec.
 ```
 
 Use the simple execution skill directly when task-local docs are ready and the next work is direct implementation:

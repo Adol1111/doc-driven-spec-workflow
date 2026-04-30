@@ -8,14 +8,15 @@ This project follows Conventional Commits for commit history, but release notes 
 
 ### Breaking Changes
 
-- The execution-stage split is in progress: `task-spec-execution` is being replaced by `task-preparation` and `task-execution-simple`.
+- The execution-stage split is complete: the main workflow now routes through `task-preparation` and `task-execution-simple` instead of the old combined `task-spec-execution` stage.
 - `task-preparation` owns task-local `spec.md`, optional `plan.md`, review pauses, and routine follow-up such as reviewed-doc commits.
 - `task-execution-simple` owns branch/worktree isolation, readiness, implementation, verification, implementation review, and branch-closing hard gates.
-- During migration, remove the old `task-spec-execution` skill after switching your prompts and routing to the new names, otherwise old and new stage names may conflict.
+- During migration, the legacy `task-spec-execution` skill may remain installed as a compatibility facade while prompts, habits, and tests transition to the new stage names.
 
 ### Notes
 
-- `task-spec-execution` is now a thin compatibility facade only. Task-local templates live under `skills/task-preparation/references/`, and simple execution rules live under `skills/task-execution-simple/references/`.
+- `task-spec-execution` is now a thin compatibility facade only. Keep it only for older prompts or habits; new workflows should route directly to `task-preparation` and `task-execution-simple`.
+- Task-local templates live under `skills/task-preparation/references/`, and simple execution rules live under `skills/task-execution-simple/references/`.
 - Workflow-routing expectations are being updated in parallel with the stage rename.
 
 ## v0.5.1
