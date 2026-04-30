@@ -28,6 +28,7 @@ After a review pause, treat any clear forward-motion message as approval to foll
 Create or update task-local docs only for concrete implementation work on an existing task. Pure docs governance, such as architecture edits, task/module reshaping, milestone changes, task creation, or index maintenance, does not create an implementation spec or code permission.
 
 - Default to writing `spec.md`.
+- If the user asks to skip `spec.md`, refuse and stop; do not draft `spec.md` in the same response.
 - Default to no `plan.md`; create it only when ordering, compatibility, migration, cross-module coordination, rollout, or verification complexity makes implementation sequencing non-obvious.
 - If multiple specs seem necessary, stop and use `milestone-planning` to split the task first.
 - Compact specs are fine; vague specs are not. If implementation intent could be misread, make boundaries, non-goals, and allowed minimal implementation explicit.

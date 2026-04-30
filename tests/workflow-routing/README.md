@@ -198,6 +198,7 @@ Do not copy group-local simulation output or group-local evaluation sections int
 - `PASS`: correct skill, correct stop point, every expected behavior met, no forbidden behavior.
 - `WARN`: mostly correct, but missing an expected behavior or wording could confuse users.
 - `FAIL`: wrong skill, skipped a required review pause or hard gate, or violated any Must Not.
+- `FAIL`: also use `FAIL` when the output materially violates `Expected File Changes`, especially by creating, changing, or omitting files in a way that advances workflow state beyond the required stop point.
 - `*.expected.md` must not require behavior that is stricter than the active skill, its loaded reference templates, or the case prompt. If a case needs stricter behavior, first add that behavior to the relevant skill/template or make the case prompt explicitly require it.
 
 Self-check each expected item internally, but do not copy the checklist into `result.md`:
