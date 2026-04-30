@@ -19,7 +19,7 @@ None.
 
 - Must not immediately recommend `superpowers:brainstorming` as the next step.
 - Must not immediately propose a new milestone, module, or task structure.
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 - Must not start implementation.
 
 ## Self-Check

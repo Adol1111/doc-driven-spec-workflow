@@ -19,7 +19,7 @@ None.
 ## Must Not
 
 - Must not add new work to a completed milestone.
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 - Must not write task-local `spec.md`.
 - Must not start implementation.
 - Must not treat "start the task" as permission to bypass completed-milestone governance.

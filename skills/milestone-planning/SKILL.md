@@ -12,7 +12,7 @@ Plan roadmap structure before task-local spec work. This skill owns `Milestone -
 - **Entry**: reached from `doc-driven-spec-workflow` after scope is clear enough to plan delivery structure.
 - **Owns**: milestone boundaries, optional module grouping, roadmap-layer task breakdown, backlog/handoff governance, planning-stage `docs/tasks/` documents.
 - **Does not own**: repository scaffold bootstrap, task-local `spec.md`, task-local `plan.md`, readiness checks, implementation, verification, branch closing.
-- **Handoff**: stop at a planning review pause after roadmap/task docs change; once the user continues, the agent may commit those reviewed docs as part of the normal handoff into `task-spec-execution`.
+- **Handoff**: stop at a planning review pause after roadmap/task docs change; once the user continues, the agent may commit those reviewed docs as part of the normal handoff into `task-preparation`.
 
 ## Core Rules
 
@@ -45,7 +45,7 @@ Plan roadmap structure before task-local spec work. This skill owns `Milestone -
 - Treat milestone/module/task creation or reshaping as docs governance only. It does not authorize spec writing or implementation.
 - Stop at a planning review pause after creating or reshaping roadmap/task docs.
 - When the user clearly indicates they want to move forward after reviewing planning docs, treat that as approval to follow the recommended next step, including committing the reviewed planning docs when appropriate.
-- Hand off to `task-spec-execution` only after the current concrete task is chosen from confirmed roadmap state and no hard gate blocks the handoff.
+- Hand off to `task-preparation` only after the current concrete task is chosen from confirmed roadmap state and no hard gate blocks the handoff.
 
 ## Handoff and Closure
 

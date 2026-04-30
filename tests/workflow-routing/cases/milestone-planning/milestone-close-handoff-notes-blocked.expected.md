@@ -19,7 +19,7 @@ None.
 
 - Must not close `M1` while `Handoff Notes` is still non-empty.
 - Must not treat the handoff note as already resolved without a recorded destination.
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 - Must not start implementation work.
 
 ## Self-Check

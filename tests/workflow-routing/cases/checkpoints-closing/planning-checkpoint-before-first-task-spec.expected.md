@@ -2,7 +2,7 @@
 
 ## Expected Skill
 
-`doc-driven-spec-workflow`, with correct review-pause sequencing across `milestone-planning` and `task-spec-execution`.
+`doc-driven-spec-workflow`, with correct review-pause sequencing across `milestone-planning` and `task-preparation`.
 
 ## Expected Behavior
 

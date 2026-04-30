@@ -17,7 +17,7 @@ None.
 
 ## Must Not
 
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 - Must not start writing roadmap-layer tasks as if priorities were already aligned.
 - Must not split work into implementation mechanics such as files, endpoints, tests, migrations, or code review tasks.
 

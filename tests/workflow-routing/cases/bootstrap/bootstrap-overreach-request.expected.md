@@ -26,7 +26,7 @@ When running a file-generating check, create only these files under `tests/workf
 - Must not create milestones or roadmap tasks just because the user bundled them into the bootstrap request.
 - Must not create task-local `spec.md`.
 - Must not create task-local `plan.md`.
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 - Must not start implementation.
 
 ## Self-Check

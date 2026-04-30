@@ -1,4 +1,4 @@
 interface:
-  display_name: "Task Spec Execution"
-  short_description: "Execute a concrete task through spec, readiness, implementation, and closing"
-  default_prompt: "Use $task-spec-execution to execute the current docs/tasks task through spec, optional plan, readiness checkpoints, implementation, verification, and branch closing."
+  display_name: "Task Spec Execution (Deprecated)"
+  short_description: "Compatibility shim that redirects old task-spec-execution calls into split stages"
+  default_prompt: "Use $task-spec-execution only as a compatibility shim. Redirect spec or plan work to $task-preparation, and redirect direct implementation work to $task-execution-simple."

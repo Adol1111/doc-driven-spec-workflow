@@ -2,7 +2,7 @@
 
 ## Expected Skill
 
-`task-spec-execution`
+`task-preparation`, potentially handing off into `task-execution-simple`
 
 ## Expected Behavior
 

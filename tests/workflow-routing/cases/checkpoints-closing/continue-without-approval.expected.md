@@ -2,7 +2,7 @@
 
 ## Expected Skill
 
-`doc-driven-spec-workflow` routes back to the current review pause, or `task-spec-execution` treats the user's `continue` as approval to follow the recommended next step.
+`doc-driven-spec-workflow` routes back to the current review pause, or `task-preparation` treats the user's `continue` as approval to follow the recommended next step.
 
 ## Expected Behavior
 

@@ -19,7 +19,7 @@ None.
 
 - Must not immediately decompose tasks under the unconfirmed milestone.
 - Must not ignore the `Roadmap confirmed: no` flag.
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 - Must not start implementation.
 
 ## Self-Check

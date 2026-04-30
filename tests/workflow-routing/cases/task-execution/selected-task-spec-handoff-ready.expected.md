@@ -2,12 +2,12 @@
 
 ## Expected Skill
 
-`task-spec-execution`
+`task-preparation`
 
 ## Expected Behavior
 
 - Recognizes that a concrete task is selected from confirmed roadmap state with no blocking dependencies or prior checkpoints.
-- Routes to `task-spec-execution`.
+- Routes to `task-preparation`.
 - Writes or proposes one focused task-local `spec.md`.
 - Keeps the spec compact while treating explicit handoff readiness as an additional clarity requirement, not as a reason to create `plan.md`.
 - Makes the spec concrete enough for another agent to implement without a follow-up clarification round.

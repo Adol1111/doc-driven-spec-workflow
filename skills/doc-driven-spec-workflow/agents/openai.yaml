@@ -1,4 +1,4 @@
 interface:
   display_name: "Doc-Driven Spec Workflow"
   short_description: "Select the right stage skill for docs-driven workflow work"
-  default_prompt: "Use $doc-driven-spec-workflow to decide whether this docs-driven request should go to docs-workflow-bootstrap, superpowers:brainstorming, milestone-planning, or task-spec-execution next."
+  default_prompt: "Use $doc-driven-spec-workflow to decide whether this docs-driven request should go to docs-workflow-bootstrap, superpowers:brainstorming, milestone-planning, task-preparation, or task-execution-simple next."

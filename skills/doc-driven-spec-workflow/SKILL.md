@@ -20,7 +20,7 @@ Use this root skill only to select and coordinate the next docs-driven stage. St
 
 ## Routing Rules
 
-Default chain: `docs-workflow-bootstrap -> superpowers:brainstorming -> milestone-planning -> task-spec-execution`. Skip stages only when their decision is already settled.
+Default chain: `docs-workflow-bootstrap -> superpowers:brainstorming -> milestone-planning -> task-preparation -> task-execution-simple`. Skip stages only when their decision is already settled.
 
 Choose the next skill by the user's current uncertainty:
 
@@ -29,13 +29,13 @@ Choose the next skill by the user's current uncertainty:
 | Minimum docs scaffold is missing | `docs-workflow-bootstrap` |
 | Goals, constraints, success criteria, or "now versus later" boundaries are unresolved by docs or prompt evidence | `superpowers:brainstorming` |
 | Milestone count, module grouping, task breakdown, delivery order, or stage boundaries are unclear | `milestone-planning` |
-| A concrete task is selected or selectable from confirmed roadmap state | `task-spec-execution` |
+| A concrete task is selected or selectable from confirmed roadmap state | `task-preparation` |
 
 Use `docs-workflow-bootstrap` when any minimum scaffold file is missing: `docs/index.md`, `docs/architecture/index.md`, `docs/tasks/index.md`, `docs/tasks/planning-inbox.md`, or `docs/context/index.md`.
 
 Use `superpowers:brainstorming` for positive ambiguity evidence only. Missing or stale docs alone route to bootstrap or planning.
 
-Use `task-spec-execution` only when the task milestone has `Roadmap confirmed: yes`, previous milestone closure is resolved when crossing milestones, status is `planned` or `in_progress`, dependencies are satisfied or waived, no prior hard gate remains unresolved, and the user selected it or `docs/tasks/` clearly identifies it as next by order/status.
+Use `task-preparation` only when the task milestone has `Roadmap confirmed: yes`, previous milestone closure is resolved when crossing milestones, status is `planned` or `in_progress`, dependencies are satisfied or waived, no prior hard gate remains unresolved, and the user selected it or `docs/tasks/` clearly identifies it as next by order/status.
 
 Do not skip from ambiguous scope to spec writing, use task execution to invent roadmap structure, or keep planning after the question is current-task execution.
 
@@ -43,7 +43,8 @@ Do not skip from ambiguous scope to spec writing, use task execution to invent r
 
 - Bootstrap -> brainstorming or planning: minimum docs scaffold exists.
 - Brainstorming -> planning: scope, boundaries, and success criteria are clear enough to plan delivery structure.
-- Planning -> task execution: selected concrete task is in confirmed roadmap state, dependencies and prior hard gates are clear, and the user wants spec-first execution.
+- Planning -> task preparation: selected concrete task is in confirmed roadmap state, dependencies and prior hard gates are clear, and the user wants spec-first execution.
+- Task preparation -> simple execution: task-local docs and routine follow-up are complete, and the next work is straightforward direct implementation.
 
 At each handoff, briefly restate:
 

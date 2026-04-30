@@ -36,7 +36,7 @@ The exact number, titles, and directory slugs may vary when the task boundaries 
 - Must not write task-local `spec.md`.
 - Must not write task-local `plan.md`.
 - Must not start implementation.
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 
 ## Self-Check
 

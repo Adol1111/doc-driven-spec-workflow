@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task Preparation"
+  short_description: "Prepare a concrete task through spec, optional plan, review, and handoff"
+  default_prompt: "Use $task-preparation to prepare the current docs/tasks task through spec, optional plan, review pauses, routine follow-up, and execution handoff."

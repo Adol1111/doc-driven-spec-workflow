@@ -22,7 +22,7 @@ When running a file-generating check, create or propose only these milestone-clo
 
 - Must not block closure just because follow-up work exists elsewhere now.
 - Must not require historical handoff residue to stay in `M1`.
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 - Must not start implementation work.
 
 ## Self-Check

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task Execution Simple"
+  short_description: "Implement a prepared task through the simple direct execution path"
+  default_prompt: "Use $task-execution-simple to implement the current prepared docs/tasks task through branch isolation, readiness, implementation, verification, implementation review, and branch closing."

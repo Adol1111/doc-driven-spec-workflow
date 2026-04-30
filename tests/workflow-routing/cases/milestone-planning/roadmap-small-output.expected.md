@@ -34,7 +34,7 @@ The exact task directory slugs may vary. They should be accepted when the task f
 - Must not start implementation.
 - Must not create modules for this small scope.
 - Must not split work into implementation mechanics such as files, endpoints, migrations, tests, or code review tasks.
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 
 ## Self-Check
 

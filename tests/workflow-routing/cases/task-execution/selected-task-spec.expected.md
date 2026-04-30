@@ -2,12 +2,12 @@
 
 ## Expected Skill
 
-`task-spec-execution`
+`task-preparation`
 
 ## Expected Behavior
 
 - Recognizes that a concrete task is selected from confirmed roadmap state with no blocking dependencies or prior checkpoints.
-- Routes to `task-spec-execution`.
+- Routes to `task-preparation`.
 - Uses the selected task and provided workflow context as the basis for the simulated spec output.
 - Does not require extra document reads in this isolated simulated case when the prompt already provides the task selection, milestone confirmation, dependency, and checkpoint state.
 - Writes or proposes one focused task-local `spec.md`.

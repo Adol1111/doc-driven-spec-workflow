@@ -26,16 +26,18 @@ flowchart LR
     Bootstrap[docs-workflow-bootstrap]
     Brainstorm[superpowers:brainstorming]
     Milestone[milestone-planning]
-    Execution[task-spec-execution]
+    Preparation[task-preparation]
+    SimpleExecution[task-execution-simple]
 
     Root --> Bootstrap
     Root --> Brainstorm
     Root --> Milestone
-    Root --> Execution
+    Root --> Preparation
     Bootstrap --> Root
     Brainstorm --> Milestone
-    Milestone --> Execution
-    Execution --> Root
+    Milestone --> Preparation
+    Preparation --> SimpleExecution
+    SimpleExecution --> Root
 ```
 
 The root skill chooses one stage skill. Stage skills own their own templates, edits, and stop points.
@@ -52,7 +54,7 @@ flowchart TD
     Bootstrap[Use docs-workflow-bootstrap]
     Brainstorm[Use superpowers:brainstorming]
     Milestone[Use milestone-planning]
-    Execution[Use task-spec-execution]
+    Preparation[Use task-preparation]
     Ask[Ask the smallest routing question]
 
     Start --> Scaffold
@@ -62,7 +64,7 @@ flowchart TD
     Ambiguous -- No --> Roadmap
     Roadmap -- Yes --> Milestone
     Roadmap -- No --> TaskReady
-    TaskReady -- Yes --> Execution
+    TaskReady -- Yes --> Preparation
     TaskReady -- No --> Ask
 ```
 
@@ -191,9 +193,9 @@ flowchart TD
 
 Completed milestones are frozen. Follow-up work belongs in a later milestone, backlog, or planning inbox.
 
-## Task Execution
+## Task Preparation
 
-`task-spec-execution` begins only when a concrete task is selected or selectable from confirmed roadmap state, with dependencies and prior hard gates clear.
+`task-preparation` begins only when a concrete task is selected or selectable from confirmed roadmap state, with dependencies and prior hard gates clear.
 
 A task is selectable only when all of these are true:
 
@@ -204,6 +206,17 @@ A task is selectable only when all of these are true:
 - no previous branch-closing or milestone-transition hard gate is unresolved
 - the user selected it, or `docs/tasks/` clearly identifies it as next by order and status
 
+`task-preparation` owns:
+
+- planning-entry review when `milestone-planning` has just created or reshaped roadmap/task docs
+- task-local `spec.md`
+- optional task-local `plan.md`
+- review pauses for `spec.md` and `plan.md`
+- routine follow-up after review, such as committing reviewed docs or reporting intentional uncommitted state
+- handoff context into an execution skill
+
+It does not own implementation edits, branch/worktree isolation, readiness, code verification, docs/status updates after code changes, or branch closing.
+
 ```mermaid
 flowchart TD
     Selected{Task selected from confirmed roadmap state?}
@@ -213,13 +226,8 @@ flowchart TD
     NeedsPlan{Plan trigger present?}
     Plan[Write task-local plan.md]
     PlanReview[Stop for plan review]
-    AutoOps[Auto-run next operational steps such as commit, status update, or branch isolation]
-    Isolation[Create branch or worktree isolation]
-    Readiness[Run readiness checkpoint]
-    Code[Implement one task]
-    Verify[Verify and update docs/status]
-    WrapReview[Stop for implementation review]
-    Closing[Resolve branch closing only if destructive cleanup or keep/delete decision remains]
+    AutoOps[Auto-run routine follow-up such as commit or explicit uncommitted report]
+    Handoff[Hand off to task-execution-simple]
     Stop[Stop]
 
     Selected -- No --> Stop
@@ -231,13 +239,8 @@ flowchart TD
     NeedsPlan -- No --> AutoOps
     Plan --> PlanReview
     PlanReview --> AutoOps
-    AutoOps --> Isolation
-    Isolation --> Readiness
-    Readiness --> Code
-    Code --> Verify
-    Verify --> WrapReview
-    WrapReview --> Closing
-    Closing --> Stop
+    AutoOps --> Handoff
+    Handoff --> Stop
 ```
 
 Default to no `plan.md`. Create `plan.md` only when at least one plan trigger is present:
@@ -252,6 +255,40 @@ Default to no `plan.md`. Create `plan.md` only when at least one plan trigger is
 - exploratory spike or risk-reduction step is required before implementation edits
 
 Do not create `plan.md` for a small single-capability task with straightforward implementation order. If plan trigger status is uncertain, name the suspected trigger and ask before writing `plan.md`.
+
+## Simple Execution
+
+`task-execution-simple` begins after `task-preparation` has finished its task-local docs and routine follow-up, and the task is ready for straightforward direct execution.
+
+`task-execution-simple` owns:
+
+- branch/worktree isolation
+- readiness checks
+- implementation edits
+- verification
+- docs/status updates caused by implementation
+- implementation review pause
+- branch closing and cleanup hard gates
+
+```mermaid
+flowchart TD
+    Ready[Preparation complete]
+    Isolation[Create branch or worktree isolation]
+    Readiness[Run readiness checkpoint]
+    Code[Implement one task]
+    Verify[Verify and update docs/status]
+    WrapReview[Stop for implementation review]
+    Closing[Resolve branch closing only if destructive cleanup or keep/delete decision remains]
+    Stop[Stop]
+
+    Ready --> Isolation
+    Isolation --> Readiness
+    Readiness --> Code
+    Code --> Verify
+    Verify --> WrapReview
+    WrapReview --> Closing
+    Closing --> Stop
+```
 
 ## Pause Semantics
 

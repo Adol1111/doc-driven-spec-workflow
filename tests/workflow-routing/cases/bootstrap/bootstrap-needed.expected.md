@@ -34,7 +34,7 @@ When running a file-generating check, create only these files under `tests/workf
 - Must not create task-local `spec.md`.
 - Must not create task-local `plan.md`.
 - Must not start implementation.
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 
 ## Self-Check
 

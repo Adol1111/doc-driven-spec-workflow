@@ -2,12 +2,12 @@
 
 ## Expected Skill
 
-`task-spec-execution`
+`task-preparation`
 
 ## Expected Behavior
 
 - Recognizes that a concrete task is selected from confirmed roadmap state with no blocking dependencies or prior checkpoints.
-- Routes to `task-spec-execution`.
+- Routes to `task-preparation`.
 - Writes or proposes one compact task-local `spec.md`.
 - Makes clear that compact does not mean vague: the spec preserves implementation intent by naming boundary decisions and forbidden inference paths.
 - Treats the task as boundary definition/proof work, not as permission to introduce default runtime classification behavior.

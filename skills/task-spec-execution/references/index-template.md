@@ -84,7 +84,7 @@ This directory stores design specs created before implementation begins.
 ## Role
 
 - Use specs to record goals, boundaries, approach, and verification before implementation.
-- Follow the `task-spec-execution` skill and its reference templates for task-local spec structure and writing guidance.
+- Follow the `task-preparation` skill and its reference templates for task-local spec structure and writing guidance.
 - Move stable long-term constraints into `docs/architecture/`.
 
 ## Lifecycle
@@ -110,7 +110,7 @@ This directory stores detailed implementation plans for tasks with a plan trigge
 
 - Create plans only when a task has a plan trigger.
 - Use plans to break down implementation slices, file scope, and verification without repeating the approved spec.
-- Follow the `task-spec-execution` skill and its reference templates for task-local plan structure and writing guidance.
+- Follow the `task-preparation` skill and its reference templates for task-local plan structure and writing guidance.
 
 ## Lifecycle
 

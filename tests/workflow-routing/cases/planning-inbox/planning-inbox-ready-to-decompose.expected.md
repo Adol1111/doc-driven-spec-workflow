@@ -20,7 +20,7 @@ None.
 
 - Must not ask the generic planning mode question.
 - Must not route to `superpowers:brainstorming`.
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 - Must not write task-local `spec.md`.
 - Must not start implementation.
 

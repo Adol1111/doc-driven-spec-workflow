@@ -32,13 +32,13 @@ Detailed mandatory rules for milestone planning. See SKILL.md for core framework
 - Skip `superpowers:brainstorming` and decompose directly when the user already has a concrete short-term target, especially in enterprise or iteration-driven work with a clear case, scope, or delivery outcome.
 - Stop at a planning review pause after creating or reshaping roadmap/task docs.
 - If the user clearly indicates they want to move forward after reviewing those planning docs, treat that as approval to follow the recommended next step, including committing the reviewed docs when appropriate.
-- Hand off to `task-spec-execution` only after the current concrete task is chosen from confirmed roadmap state and no hard gate blocks the handoff.
+- Hand off to `task-preparation` only after the current concrete task is chosen from confirmed roadmap state and no hard gate blocks the handoff.
 - Treat milestone/module/task creation or reshaping as docs governance. Updating roadmap structure does not by itself authorize spec writing or implementation.
 - Close a milestone when its original exit criteria are satisfied, even if the work surfaced new follow-up findings for later milestones. Record those findings as handoff context or new roadmap items instead of keeping the finished milestone artificially open.
 - Clear `Handoff Notes` before milestone closure by resolving each item into exactly one outcome: current-milestone open work, a later milestone, `docs/tasks/backlog.md`, or removal if it is no longer worth tracking.
 - Remove any item kept in the current milestone from `Handoff Notes` and express it through open task state, new task creation, or `Exit Criteria` instead.
 - Revisit backlog during roadmap planning and when changing `Roadmap confirmed: no` to `yes`; once an item clearly belongs to a milestone or task, attach it there and remove it from backlog.
-- Keep its document output focused on roadmap structure and task selection. Task-local `spec.md`, `plan.md`, readiness, and implementation guidance belong to `task-spec-execution`.
+- Keep its document output focused on roadmap structure and task selection. Task-local `spec.md` and `plan.md` belong to `task-preparation`; readiness and implementation guidance belong to an execution skill such as `task-execution-simple`.
 
 ## Document Shape Rules
 

@@ -2,7 +2,7 @@
 
 ## Expected Skill
 
-`milestone-planning`, or `doc-driven-spec-workflow` routing back to milestone governance before task execution.
+`milestone-planning`, or `doc-driven-spec-workflow` routing back to milestone governance before task preparation.
 
 ## Expected Behavior
 
@@ -20,7 +20,7 @@ None.
 
 - Must not immediately select `M2/01` as the next task.
 - Must not treat "start the next task" as automatic permission to cross into the next milestone.
-- Must not route directly to `task-spec-execution`.
+- Must not route directly to `task-preparation`.
 - Must not start implementation.
 - Must not skip milestone closure review for `M1`.
 - Must not ignore the `Roadmap confirmed: no` flag on `M2`.

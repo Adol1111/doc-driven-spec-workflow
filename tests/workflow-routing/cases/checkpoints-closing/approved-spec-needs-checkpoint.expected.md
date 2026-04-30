@@ -2,7 +2,7 @@
 
 ## Expected Skill
 
-`task-spec-execution`
+`task-preparation`, potentially handing off into `task-execution-simple`
 
 ## Expected Behavior
 
@@ -10,7 +10,7 @@
 - Does not start implementation.
 - May commit the reviewed `spec.md` as part of normal continuation.
 - If it does not commit yet, it must make that choice explicit rather than asking for a redundant commit approval.
-- Proceeds only to the next non-destructive task-execution step, such as branch/worktree isolation or plan evaluation.
+- Proceeds only to the next non-destructive preparation or execution handoff step, such as a final docs follow-up, branch/worktree isolation, or plan evaluation.
 
 ## Expected File Changes
 

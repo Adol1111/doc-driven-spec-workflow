@@ -16,7 +16,7 @@
 
 阶段链路是：
 
-`doc-driven-spec-workflow -> docs-workflow-bootstrap -> superpowers:brainstorming -> milestone-planning -> task-spec-execution`
+`doc-driven-spec-workflow -> docs-workflow-bootstrap -> superpowers:brainstorming -> milestone-planning -> task-preparation -> task-execution-simple`
 
 并不是每次都要走完整链路：
 
@@ -24,20 +24,22 @@
 - 当仓库还没有最小 docs scaffold 时，使用 `docs-workflow-bootstrap`。
 - 当目标、范围或成功标准还不清楚时，才进入 `superpowers:brainstorming`。
 - 当 roadmap shape 还不清楚，需要决定 milestones、modules 和 tasks 时，使用 `milestone-planning`。
-- 当当前 concrete task 已从已确认 roadmap state 中选定，并且没有 prior hard gate 阻塞时，使用 `task-spec-execution`。
+- 当当前 concrete task 已从已确认 roadmap state 中选定，并且没有 prior hard gate 阻塞 task-local spec/plan 工作时，使用 `task-preparation`。
+- 当 task-local docs 和 review follow-up 都准备好之后，使用 `task-execution-simple` 进行直接实现。
 
 root skill 不拥有模板或实现细节。它只负责路由、交接上下文，并区分 review pause 和 hard gate。具体阶段的规则、模板和停止点由对应 stage skill 负责。
 
 ## Skills Library
 
-这个仓库目前包含四个 workflow skills，以及一个可选的上游澄清 skill：
+这个仓库目前包含五个 workflow skills，以及一个可选的上游澄清 skill：
 
 | Skill | 负责内容 | 停止点 |
 | --- | --- | --- |
 | `doc-driven-spec-workflow` | 路由到正确的 workflow 阶段 | 当下一阶段已经明确 |
 | `docs-workflow-bootstrap` | 初始化最小 docs scaffold | 当核心 docs 入口创建完成 |
 | `milestone-planning` | 把范围拆成 `Milestone -> 可选 Module -> Task` | 当 roadmap docs 更新完成，或当前 task 已选出 |
-| `task-spec-execution` | 执行已选 task 的 `spec -> 可选 plan -> readiness -> implementation` | 当当前 task review pause 或剩余 hard gate 处理完成 |
+| `task-preparation` | 通过 `spec -> 可选 plan -> review -> routine follow-up` 准备已选 task | 当 task-local docs 已准备好交给执行层 |
+| `task-execution-simple` | 通过简单直接的执行路径实现已准备好的 task | 当当前 implementation review pause 或剩余 hard gate 处理完成 |
 | `superpowers:brainstorming` | 在 planning 或 spec work 之前澄清模糊意图 | 当 scope 和 success criteria 已足够清晰 |
 
 roadmap planning 和 task reshaping 都属于 docs governance，它们不会自动授权进入 spec 或代码实现。
@@ -113,7 +115,7 @@ Use docs-workflow-bootstrap to initialize the docs workflow scaffold for this re
 当你不确定现在应该进入哪个阶段时，推荐从总控 skill 开始：
 
 ```text
-Use doc-driven-spec-workflow to decide whether this request needs bootstrap, clarification, milestone planning, or current-task spec execution.
+Use doc-driven-spec-workflow to decide whether this request needs bootstrap, clarification, milestone planning, task preparation, or simple task execution.
 ```
 
 从 `doc-driven-spec-workflow` 进入后，只要用户明确表达了“从这里往前推进”的意思，通常就可以按阶段继续。root skill 应该一次只路由到一个阶段 skill，并携带 handoff context。在 review pause 之后，这种推进意图默认表示“按推荐路径继续”，包括需要的话先 commit 已 review 的文档、更新状态、创建 branch/worktree isolation。只有 hard gate 仍然需要单独显式确认，例如保持一个明确未确认的 roadmap 结构、留在有风险的当前分支，或删除 branch/worktree。
@@ -124,10 +126,16 @@ Use doc-driven-spec-workflow to decide whether this request needs bootstrap, cla
 Use milestone-planning to break this scope into milestones, modules, and tasks.
 ```
 
-当 concrete task 已从已确认 roadmap state 中选定，并且 dependencies 和 prior hard gates 都清楚时，可以直接进入 current-task execution skill：
+当 concrete task 已从已确认 roadmap state 中选定，并且 dependencies 和 prior hard gates 都清楚时，可以直接进入 task preparation skill：
 
 ```text
-Use task-spec-execution to pick the next task and write the spec.
+Use task-preparation to pick the next task and write the spec.
+```
+
+当 task-local docs 已准备好，且下一步是直接实现时，可以直接进入 simple execution skill：
+
+```text
+Use task-execution-simple to implement the prepared task.
 ```
 
 Claude Code 也可以直接调用各个已安装的 skill：
@@ -136,7 +144,8 @@ Claude Code 也可以直接调用各个已安装的 skill：
 /doc-driven-spec-workflow
 /docs-workflow-bootstrap
 /milestone-planning
-/task-spec-execution
+/task-preparation
+/task-execution-simple
 ```
 
 这些 skills 主要面向使用 `docs/architecture/`、`docs/tasks/`、`docs/context/`、task-local `spec.md` 和可选 `plan.md` 的仓库。
@@ -148,22 +157,22 @@ Claude Code 也可以直接调用各个已安装的 skill：
 3. 需要时，用 `superpowers:brainstorming` 或等价澄清流程明确模糊意图。
 4. 当 roadmap shape 还不清楚时，用 `milestone-planning` 决定 milestone、module 和 task 结构。
 5. 在 `docs/tasks/` 下选定当前 concrete task。
-6. 用 `task-spec-execution` 编写或更新 task-local `spec.md`。
+6. 用 `task-preparation` 编写或更新 task-local `spec.md`。
 7. 在 `spec.md` 后停下来给用户 review；如果需要 `plan.md`，也在它写完后停下来 review。
-8. 用户只要明确表达“继续往前走”的意思，agent 就默认处理后续常规动作，比如 commit 已 review 的文档、创建 branch/worktree isolation。
-9. 实现、验证、更新 docs/status，并在需要 destructive cleanup 前再次停下来 review。
-10. 只对剩余 hard gate 单独确认，比如是否删除已合并 branch。
+8. 用户只要明确表达“继续往前走”的意思，`task-preparation` 就默认处理后续常规动作，比如 commit 已 review 的文档。
+9. 然后交给 `task-execution-simple` 做 branch/worktree isolation、实现、验证和 docs/status 更新。
+10. 在需要 destructive cleanup 前再次停下来 review，并只对剩余 hard gate 单独确认，比如是否删除已合并 branch。
 
 ## 它做什么
 
 - 把 `docs/tasks/` 作为 roadmap 和具体实现工作的 source of truth。
-- 把 root routing protocol、roadmap decomposition 和 current-task execution 分成独立 skills。
+- 把 root routing protocol、roadmap decomposition、task preparation 和 simple task execution 分成独立 skills。
 - 实现前要求 task-local spec；命中 plan trigger 时才创建可选 plan。
 - 保持 architecture、task tracking、spec 和 status updates 对齐。
 - 区分 docs governance 和 implementation permission。
 - 在写代码前执行 readiness 准备，包括 branch/worktree isolation。
 - 默认把 review approval 和常规 continuation approval 合并，所以 review 之后用户只要表达推进意图，就不会再被单独追问一次是否 commit。
-- 模板跟随所属阶段：roadmap 模板归 `milestone-planning`，execution 模板归 `task-spec-execution`。
+- 模板跟随所属阶段：roadmap 模板归 `milestone-planning`，task-local spec/plan 模板归 `task-preparation`，执行参考归 simple execution 路径共享。
 
 ## 期望的 Docs 结构
 
@@ -204,7 +213,7 @@ module 层是可选的。当 milestone 只有一个真实能力域时，使用 `
 
 ## 兼容说明
 
-current-task execution skill 在 concrete task 已从已确认 roadmap state 中选定、dependencies 和 prior hard gates 都清楚后可以独立使用，但这个仓库的整体 workflow 设计上会和 [obra/superpowers](https://github.com/obra/superpowers) 中的可选澄清与执行安全 skills 组合：
+`task-preparation` 和 `task-execution-simple` 在 concrete task 已从已确认 roadmap state 中选定、dependencies 和 prior hard gates 都清楚后可以独立使用，但这个仓库的整体 workflow 设计上会和 [obra/superpowers](https://github.com/obra/superpowers) 中的可选澄清与执行安全 skills 组合：
 
 - `superpowers:brainstorming`：在 roadmap decomposition 或 current-task spec work 之前，澄清模糊的 feature、behavior 或 task intent。
 - `superpowers:using-git-worktrees`：当 workspace dirty、shared、风险较高或可能冲突时，创建安全的 branch/worktree isolation。

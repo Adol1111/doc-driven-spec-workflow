@@ -23,7 +23,7 @@ None.
 - Must not write task-local `spec.md`.
 - Must not write task-local `plan.md`.
 - Must not start implementation.
-- Must not use `task-spec-execution` as the primary place to invent task structure.
+- Must not use `task-preparation` as the primary place to invent task structure.
 - Must not split work into implementation mechanics such as files, endpoints, migrations, tests, or code review tasks.
 
 ## Self-Check

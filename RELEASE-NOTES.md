@@ -4,6 +4,20 @@ User-facing workflow, installation, and migration changes are documented here.
 
 This project follows Conventional Commits for commit history, but release notes focus on what users need to know when adopting or upgrading the workflow.
 
+## Unreleased
+
+### Breaking Changes
+
+- The execution-stage split is in progress: `task-spec-execution` is being replaced by `task-preparation` and `task-execution-simple`.
+- `task-preparation` owns task-local `spec.md`, optional `plan.md`, review pauses, and routine follow-up such as reviewed-doc commits.
+- `task-execution-simple` owns branch/worktree isolation, readiness, implementation, verification, implementation review, and branch-closing hard gates.
+- During migration, remove the old `task-spec-execution` skill after switching your prompts and routing to the new names, otherwise old and new stage names may conflict.
+
+### Notes
+
+- The underlying task-local templates still live under `skills/task-spec-execution/references/` during this transition.
+- Workflow-routing expectations are being updated in parallel with the stage rename.
+
 ## v0.5.1
 
 ### Fixes
