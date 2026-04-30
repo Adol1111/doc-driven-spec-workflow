@@ -119,8 +119,8 @@ Produce simulation output before reading any `*.expected.md` file. The simulatio
 For file-generating cases, also write the full simulated response to `tests/workflow-routing/expected/<group>/<case-name>/response.md` and list every generated file in the group `result.md` before reading expected files:
 
 - milestone-planning roadmap docs use `milestone-planning/references/roadmap-template.md`
-- task-local `spec.md` uses `task-spec-execution/references/spec-template.md`
-- task-local `plan.md` uses `task-spec-execution/references/plan-template.md`
+- task-local `spec.md` uses `task-preparation/references/spec-template.md`
+- task-local `plan.md` uses `task-preparation/references/plan-template.md`
 
 Before expected files are read, simulation output must not include:
 

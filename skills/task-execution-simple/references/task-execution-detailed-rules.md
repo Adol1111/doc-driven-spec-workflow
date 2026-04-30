@@ -1,6 +1,6 @@
-# Task Spec Execution Detailed Rules
+# Task Execution Simple Detailed Rules
 
-Low-frequency execution details and stop conditions for task spec execution. Read this when the main `SKILL.md` leaves a concrete execution edge case unresolved.
+Low-frequency execution details and stop conditions for simple task execution. Read this when the main `SKILL.md` leaves a concrete execution edge case unresolved.
 
 ## Violations That Require Stopping Immediately
 
@@ -61,7 +61,6 @@ Load only the relevant reference:
 - `docs/architecture/`: `references/architecture-template.md`
 - `docs/context/`: `references/context-template.md`
 - non-roadmap docs indexes: `references/index-template.md`
-- selected task directory or `task.md`: `references/task-execution-template.md`
 - task-local `spec.md`: `references/spec-template.md`
 - task-local `plan.md`: `references/plan-template.md`
 

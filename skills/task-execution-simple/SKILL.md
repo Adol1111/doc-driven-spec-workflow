@@ -50,8 +50,7 @@ Code is source of truth when code and docs diverge. If implementation changes be
 
 Use the existing execution references when needed:
 
-- `../task-spec-execution/references/task-execution-detailed-rules.md`
-- `../task-spec-execution/references/task-execution-template.md`
+- `references/task-execution-detailed-rules.md`
 
 ## Workflow
 

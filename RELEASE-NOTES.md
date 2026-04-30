@@ -15,7 +15,7 @@ This project follows Conventional Commits for commit history, but release notes 
 
 ### Notes
 
-- The underlying task-local templates still live under `skills/task-spec-execution/references/` during this transition.
+- `task-spec-execution` is now a thin compatibility facade only. Task-local templates live under `skills/task-preparation/references/`, and simple execution rules live under `skills/task-execution-simple/references/`.
 - Workflow-routing expectations are being updated in parallel with the stage rename.
 
 ## v0.5.1
