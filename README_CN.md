@@ -4,11 +4,11 @@
 
 一套面向 AI coding agents 的 docs-driven workflow methodology。
 
-这个仓库提供一套可复用的方法论，用来让 agent 在实现代码前先对齐项目文档。它适合使用 architecture docs、task roadmap、task-local specs、可选 plans，以及实现前 readiness checkpoint 的项目。
+这个仓库提供一套可复用的方法论，用来让 agent 在实现代码前先对齐项目文档。它适合使用 architecture docs、task roadmap、task-local specs、可选 plans，以及实现前 readiness check 的项目。
 
 > 有明确立场的 workflow methodology
 >
-> 这个项目专注于 docs-driven repositories。它不是所有 agent 开发流程的通用替代品，而是一套轻量方式，用来让 agent 尊重 architecture docs、task tracking、roadmap decomposition、spec approval 和 branch readiness，再进入实现。
+> 这个项目专注于 docs-driven repositories。它不是所有 agent 开发流程的通用替代品，而是一套轻量方式，用来让 agent 尊重 architecture docs、task tracking、roadmap decomposition、review pause 和 branch readiness，再进入实现。
 
 ## 工作方式
 
@@ -24,9 +24,9 @@
 - 当仓库还没有最小 docs scaffold 时，使用 `docs-workflow-bootstrap`。
 - 当目标、范围或成功标准还不清楚时，才进入 `superpowers:brainstorming`。
 - 当 roadmap shape 还不清楚，需要决定 milestones、modules 和 tasks 时，使用 `milestone-planning`。
-- 当当前 concrete task 已从已确认 roadmap state 中选定，并且 prior checkpoints 已清理后，使用 `task-spec-execution`。
+- 当当前 concrete task 已从已确认 roadmap state 中选定，并且没有 prior hard gate 阻塞时，使用 `task-spec-execution`。
 
-root skill 不拥有模板或实现细节。它只负责路由、交接上下文和保护 approval gates。具体阶段的规则、模板和停止点由对应 stage skill 负责。
+root skill 不拥有模板或实现细节。它只负责路由、交接上下文，并区分 review pause 和 hard gate。具体阶段的规则、模板和停止点由对应 stage skill 负责。
 
 ## Skills Library
 
@@ -37,7 +37,7 @@ root skill 不拥有模板或实现细节。它只负责路由、交接上下文
 | `doc-driven-spec-workflow` | 路由到正确的 workflow 阶段 | 当下一阶段已经明确 |
 | `docs-workflow-bootstrap` | 初始化最小 docs scaffold | 当核心 docs 入口创建完成 |
 | `milestone-planning` | 把范围拆成 `Milestone -> 可选 Module -> Task` | 当 roadmap docs 更新完成，或当前 task 已选出 |
-| `task-spec-execution` | 执行已选 task 的 `spec -> 可选 plan -> readiness -> implementation` | 当当前 task checkpoint 和 branch closing 处理完成 |
+| `task-spec-execution` | 执行已选 task 的 `spec -> 可选 plan -> readiness -> implementation` | 当当前 task review pause 或剩余 hard gate 处理完成 |
 | `superpowers:brainstorming` | 在 planning 或 spec work 之前澄清模糊意图 | 当 scope 和 success criteria 已足够清晰 |
 
 roadmap planning 和 task reshaping 都属于 docs governance，它们不会自动授权进入 spec 或代码实现。
@@ -116,7 +116,7 @@ Use docs-workflow-bootstrap to initialize the docs workflow scaffold for this re
 Use doc-driven-spec-workflow to decide whether this request needs bootstrap, clarification, milestone planning, or current-task spec execution.
 ```
 
-从 `doc-driven-spec-workflow` 进入后，通常可以通过 `继续` 这样的消息按阶段往下推进。root skill 应该一次只路由到一个阶段 skill，并携带 handoff context。但遇到明确审批点时，仍然需要显式确认，例如 roadmap 结构确认、`spec.md` 批准、`plan.md` 批准，以及 branch closing 决策。
+从 `doc-driven-spec-workflow` 进入后，只要用户明确表达了“从这里往前推进”的意思，通常就可以按阶段继续。root skill 应该一次只路由到一个阶段 skill，并携带 handoff context。在 review pause 之后，这种推进意图默认表示“按推荐路径继续”，包括需要的话先 commit 已 review 的文档、更新状态、创建 branch/worktree isolation。只有 hard gate 仍然需要单独显式确认，例如保持一个明确未确认的 roadmap 结构、留在有风险的当前分支，或删除 branch/worktree。
 
 当主要问题是 milestone 或 task 结构时，可以直接使用 roadmap decomposition skill：
 
@@ -124,7 +124,7 @@ Use doc-driven-spec-workflow to decide whether this request needs bootstrap, cla
 Use milestone-planning to break this scope into milestones, modules, and tasks.
 ```
 
-当 concrete task 已从已确认 roadmap state 中选定，并且 dependencies 和 prior checkpoints 都清楚时，可以直接进入 current-task execution skill：
+当 concrete task 已从已确认 roadmap state 中选定，并且 dependencies 和 prior hard gates 都清楚时，可以直接进入 current-task execution skill：
 
 ```text
 Use task-spec-execution to pick the next task and write the spec.
@@ -149,10 +149,10 @@ Claude Code 也可以直接调用各个已安装的 skill：
 4. 当 roadmap shape 还不清楚时，用 `milestone-planning` 决定 milestone、module 和 task 结构。
 5. 在 `docs/tasks/` 下选定当前 concrete task。
 6. 用 `task-spec-execution` 编写或更新 task-local `spec.md`。
-7. 停下来等待用户批准，不直接进入实现。
-8. 只有命中 plan trigger 时才创建 `plan.md`。
-9. 运行 readiness checkpoint，并用 branch 或 worktree 隔离实现工作。
-10. 实现、验证、更新 docs/status，并处理 branch closing。
+7. 在 `spec.md` 后停下来给用户 review；如果需要 `plan.md`，也在它写完后停下来 review。
+8. 用户只要明确表达“继续往前走”的意思，agent 就默认处理后续常规动作，比如 commit 已 review 的文档、创建 branch/worktree isolation。
+9. 实现、验证、更新 docs/status，并在需要 destructive cleanup 前再次停下来 review。
+10. 只对剩余 hard gate 单独确认，比如是否删除已合并 branch。
 
 ## 它做什么
 
@@ -161,7 +161,8 @@ Claude Code 也可以直接调用各个已安装的 skill：
 - 实现前要求 task-local spec；命中 plan trigger 时才创建可选 plan。
 - 保持 architecture、task tracking、spec 和 status updates 对齐。
 - 区分 docs governance 和 implementation permission。
-- 在写代码前执行 readiness checkpoint，包括 branch/worktree isolation。
+- 在写代码前执行 readiness 准备，包括 branch/worktree isolation。
+- 默认把 review approval 和常规 continuation approval 合并，所以 review 之后用户只要表达推进意图，就不会再被单独追问一次是否 commit。
 - 模板跟随所属阶段：roadmap 模板归 `milestone-planning`，execution 模板归 `task-spec-execution`。
 
 ## 期望的 Docs 结构
@@ -203,7 +204,7 @@ module 层是可选的。当 milestone 只有一个真实能力域时，使用 `
 
 ## 兼容说明
 
-current-task execution skill 在 concrete task 已从已确认 roadmap state 中选定、dependencies 和 prior checkpoints 都清楚后可以独立使用，但这个仓库的整体 workflow 设计上会和 [obra/superpowers](https://github.com/obra/superpowers) 中的可选澄清与执行安全 skills 组合：
+current-task execution skill 在 concrete task 已从已确认 roadmap state 中选定、dependencies 和 prior hard gates 都清楚后可以独立使用，但这个仓库的整体 workflow 设计上会和 [obra/superpowers](https://github.com/obra/superpowers) 中的可选澄清与执行安全 skills 组合：
 
 - `superpowers:brainstorming`：在 roadmap decomposition 或 current-task spec work 之前，澄清模糊的 feature、behavior 或 task intent。
 - `superpowers:using-git-worktrees`：当 workspace dirty、shared、风险较高或可能冲突时，创建安全的 branch/worktree isolation。
@@ -222,7 +223,7 @@ Superpowers 是更完整的软件开发方法论，包含 `superpowers:brainstor
 - 它不强制 TDD、heavyweight planning 或 subagent workflows，更适合只想采用 spec-first coordination、但不想引入完整 Superpowers 方法论的项目。
 - 它仍然可以和 Superpowers 组合使用，尤其是模糊 scope 前的 `superpowers:brainstorming`、高风险实现前的 `superpowers:using-git-worktrees`，以及 task branch 需要 merge、PR、keep、discard 或 cleanup 决策时的 `superpowers:finishing-a-development-branch`。
 
-如果你想要完整的端到端 agentic development methodology，使用 Superpowers。如果你的主要目标是让 agent 对齐 docs-driven architecture、task roadmap 和 spec approval process，使用这个 workflow。
+如果你想要完整的端到端 agentic development methodology，使用 Superpowers。如果你的主要目标是让 agent 对齐 docs-driven architecture、task roadmap 和 review-first spec process，使用这个 workflow。
 
 ## 安装
 

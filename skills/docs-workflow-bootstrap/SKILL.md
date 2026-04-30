@@ -56,6 +56,6 @@ After bootstrap:
 
 - Return to `doc-driven-spec-workflow` so it can choose the next stage.
 - Continue directly to `milestone-planning` only when the user explicitly asks to plan milestones, modules, and tasks.
-- Continue directly to `task-spec-execution` only when the user explicitly asks, a concrete task is selected from confirmed roadmap state, and dependencies and prior checkpoints are clear.
+- Continue directly to `task-spec-execution` only when the user explicitly asks, a concrete task is selected from confirmed roadmap state, and dependencies and prior hard gates are clear.
 
 Stop after reporting the bootstrap result unless the user explicitly asks to continue.

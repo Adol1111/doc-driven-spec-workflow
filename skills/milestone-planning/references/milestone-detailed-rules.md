@@ -30,8 +30,9 @@ Detailed mandatory rules for milestone planning. See SKILL.md for core framework
 - Treat that routing question as the required first response in ambiguous cases. Do not explain the recommended route, propose next steps, or start decomposition before the user answers.
 - Use `superpowers:brainstorming` first when docs or prompt evidence says goals, constraints, success criteria, roadmap direction, or phase boundaries are not aligned. If `Open Milestones` is empty because roadmap direction is not aligned, use `superpowers:brainstorming` to align direction before detailed decomposition.
 - Skip `superpowers:brainstorming` and decompose directly when the user already has a concrete short-term target, especially in enterprise or iteration-driven work with a clear case, scope, or delivery outcome.
-- Stop at a planning docs checkpoint after creating or reshaping roadmap/task docs. Commit those docs by default when the user asks to resolve the checkpoint, or continue only if the user explicitly approves keeping the changed docs uncommitted.
-- Hand off to `task-spec-execution` only after the planning docs checkpoint is resolved and the current concrete task is chosen from confirmed roadmap state.
+- Stop at a planning review pause after creating or reshaping roadmap/task docs.
+- If the user clearly indicates they want to move forward after reviewing those planning docs, treat that as approval to follow the recommended next step, including committing the reviewed docs when appropriate.
+- Hand off to `task-spec-execution` only after the current concrete task is chosen from confirmed roadmap state and no hard gate blocks the handoff.
 - Treat milestone/module/task creation or reshaping as docs governance. Updating roadmap structure does not by itself authorize spec writing or implementation.
 - Close a milestone when its original exit criteria are satisfied, even if the work surfaced new follow-up findings for later milestones. Record those findings as handoff context or new roadmap items instead of keeping the finished milestone artificially open.
 - Clear `Handoff Notes` before milestone closure by resolving each item into exactly one outcome: current-milestone open work, a later milestone, `docs/tasks/backlog.md`, or removal if it is no longer worth tracking.

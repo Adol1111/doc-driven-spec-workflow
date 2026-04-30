@@ -193,7 +193,7 @@ Completed milestones are frozen. Follow-up work belongs in a later milestone, ba
 
 ## Task Execution
 
-`task-spec-execution` begins only when a concrete task is selected or selectable from confirmed roadmap state, with dependencies and prior checkpoints clear.
+`task-spec-execution` begins only when a concrete task is selected or selectable from confirmed roadmap state, with dependencies and prior hard gates clear.
 
 A task is selectable only when all of these are true:
 
@@ -201,43 +201,42 @@ A task is selectable only when all of these are true:
 - previous milestone closure is resolved when crossing milestones
 - task status is `planned` or `in_progress`
 - task dependencies are satisfied or explicitly waived
-- no previous task checkpoint, planning docs checkpoint, or branch closing gate is unresolved
+- no previous branch-closing or milestone-transition hard gate is unresolved
 - the user selected it, or `docs/tasks/` clearly identifies it as next by order and status
 
 ```mermaid
 flowchart TD
     Selected{Task selected from confirmed roadmap state?}
-    PlanningCheckpoint{Planning docs checkpoint unresolved?}
+    PlanningReview[Report planning docs for review]
     Spec[Write or update task-local spec.md]
-    SpecApproved{Spec explicitly approved?}
+    SpecReview[Stop for spec review]
     NeedsPlan{Plan trigger present?}
     Plan[Write task-local plan.md]
-    PlanApproved{Plan explicitly approved?}
-    DocsCheckpoint[Resolve approved task-docs checkpoint]
+    PlanReview[Stop for plan review]
+    AutoOps[Auto-run next operational steps such as commit, status update, or branch isolation]
     Isolation[Create branch or worktree isolation]
     Readiness[Run readiness checkpoint]
     Code[Implement one task]
     Verify[Verify and update docs/status]
-    Closing[Resolve branch closing]
+    WrapReview[Stop for implementation review]
+    Closing[Resolve branch closing only if destructive cleanup or keep/delete decision remains]
     Stop[Stop]
 
     Selected -- No --> Stop
-    Selected -- Yes --> PlanningCheckpoint
-    PlanningCheckpoint -- Yes --> Stop
-    PlanningCheckpoint -- No --> Spec
-    Spec --> SpecApproved
-    SpecApproved -- No --> Stop
-    SpecApproved -- Yes --> NeedsPlan
+    Selected -- Yes --> PlanningReview
+    PlanningReview --> Spec
+    Spec --> SpecReview
+    SpecReview --> NeedsPlan
     NeedsPlan -- Yes --> Plan
-    NeedsPlan -- No --> DocsCheckpoint
-    Plan --> PlanApproved
-    PlanApproved -- No --> Stop
-    PlanApproved -- Yes --> DocsCheckpoint
-    DocsCheckpoint --> Isolation
+    NeedsPlan -- No --> AutoOps
+    Plan --> PlanReview
+    PlanReview --> AutoOps
+    AutoOps --> Isolation
     Isolation --> Readiness
     Readiness --> Code
     Code --> Verify
-    Verify --> Closing
+    Verify --> WrapReview
+    WrapReview --> Closing
     Closing --> Stop
 ```
 
@@ -254,57 +253,55 @@ Default to no `plan.md`. Create `plan.md` only when at least one plan trigger is
 
 Do not create `plan.md` for a small single-capability task with straightforward implementation order. If plan trigger status is uncertain, name the suspected trigger and ask before writing `plan.md`.
 
-## Checkpoint Semantics
+## Pause Semantics
 
-A checkpoint means the workflow can safely resume in a fresh conversation without relying on chat memory.
+This workflow distinguishes three kinds of stops:
 
-Default checkpoint resolutions:
+- Review pause: the agent stops so the user can review the current output.
+- Operational step: the agent may need to commit, update task status, create branch isolation, or perform another routine continuation step before the next stage.
+- Hard gate: the agent must ask before a destructive or high-risk decision.
 
-- Bootstrap checkpoint: report created or changed scaffold files; commit only when the user requested it.
-- Planning docs checkpoint: commit roadmap, milestone, task, inbox, or backlog docs created or changed by `milestone-planning` when the user asks to resolve the checkpoint.
-- Task spec checkpoint: commit the approved task-local `spec.md` when the user asks to resolve the checkpoint.
-- Task plan checkpoint: commit the approved task-local `plan.md` together with the approved `spec.md` when a plan exists and the user asks to resolve the checkpoint.
-- Implementation checkpoint: commit verified code plus docs and task status updates when the user asks to resolve the checkpoint.
-- Branch closing checkpoint: resolve merge, PR, keep, discard, worktree cleanup, and task branch cleanup decisions, or explicitly record which of those are being deferred.
+A review pause means the workflow can safely resume in a fresh conversation without relying on chat memory. It does not, by itself, create a separate approval gate for the follow-up commit or handoff step.
 
-Allowed alternative:
+Default review pauses:
 
-- The user may explicitly approve keeping changes uncommitted.
-- If changes remain uncommitted, the agent must report the affected files and state which checkpoint gate that explicit decision satisfies.
+- Bootstrap review pause: report created or changed scaffold files.
+- Planning review pause: report roadmap, milestone, task, inbox, or backlog docs created or changed by `milestone-planning`.
+- Task spec review pause: report the written or updated task-local `spec.md`.
+- Task plan review pause: report the written or updated task-local `plan.md` when a plan exists.
+- Implementation review pause: report verified code plus docs and task status updates before any destructive cleanup choice.
 
-Content approval and checkpoint resolution are different gates. For example, approving `spec.md` does not by itself resolve the task spec checkpoint. Before implementation isolation, the approved task docs must either be committed or explicitly approved to remain uncommitted.
+Default continuation behavior after a review pause:
 
-Do not auto-commit docs governance changes before reporting the result or before the user confirms checkpoint resolution.
+- If the user clearly expresses an intent to move forward after review, treat that as approval to follow the recommended path. Do not require a specific phrase.
+- The recommended path may include routine operational steps such as committing reviewed docs, updating task status, creating branch/worktree isolation, or moving into the next workflow stage.
+- If the agent chooses to continue with reviewed changes uncommitted, it must say so explicitly and report the affected files.
+- Do not auto-commit before first reporting the result that the user is reviewing.
 
-## Approval Gates
+## Hard Gates
 
-`continue` is not approval for:
+Keep explicit confirmation only for decisions with non-obvious cost or destructive effect.
 
-- roadmap structure
-- spec approval
-- plan approval
-- docs checkpoint decisions
-- branch closing
+`continue` is not enough for:
+
+- roadmap confirmation when the milestone structure itself is still explicitly unconfirmed
+- staying on the current branch when isolation risk is non-trivial
+- deleting a branch or worktree
 - destructive cleanup
+- crossing into a later milestone while an earlier milestone still appears open and not intentionally closed
 
-`continue` may advance only when the current stage is complete and no explicit approval gate is outstanding.
+When a stop is a review pause rather than a hard gate, the user does not need to separately approve both the reviewed artifact and the next routine commit. Review approval and commit approval are merged by default.
 
-Explicit approval must name the artifact or decision being approved, such as:
+Examples of merged approval:
 
-- `approve the spec`
-- `approve plan.md`
-- `confirm this milestone roadmap`
-- `commit the planning docs`
-- `keep these docs uncommitted and continue`
+- User reviews a new `spec.md` and says `continue` -> agent may commit the reviewed spec if that is the recommended next step, then move into plan/readiness/coding as appropriate.
+- User reviews planning docs and says `next step` -> agent may checkpoint those planning docs and then enter task-local spec work if the workflow is otherwise ready.
+
+Examples of hard gates:
+
 - `delete the merged task branch`
-
-These are not explicit approval unless they answer a specific yes/no or either/or approval question:
-
-- `continue`
-- `ok`
-- `looks good`
-- `go ahead`
-- `sure`
+- `stay on the current branch`
+- `keep this milestone unconfirmed and continue with provisional planning`
 
 ## Source Boundaries
 
@@ -333,7 +330,7 @@ Use these scenario families to verify the workflow:
 - unconfirmed milestone where user asks to start work
 - completed milestone with non-empty `Handoff Notes`
 - selected task with unapproved spec
-- approved spec without docs checkpoint
+- approved spec awaiting the next operational step
 - simple selected task where `plan.md` should be skipped
 - complex selected task where `plan.md` is justified
 - completed task with worktree removed but task branch still open

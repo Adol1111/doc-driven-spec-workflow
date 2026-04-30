@@ -4,6 +4,24 @@ User-facing workflow, installation, and migration changes are documented here.
 
 This project follows Conventional Commits for commit history, but release notes focus on what users need to know when adopting or upgrading the workflow.
 
+## v0.5.1
+
+### Fixes
+
+- The workflow now distinguishes ordinary review pauses from hard gates more consistently across `WORKFLOW-STRUCTURE.md`, root routing, milestone planning, and task execution.
+- After a normal review pause, users can now reply with any clear forward-motion intent instead of a specific approval phrase. The agent should treat that as permission to follow the recommended next step.
+- Review approval and routine continuation approval are now merged by default. If the recommended next step after review is to commit reviewed docs, update status, or create branch/worktree isolation, the agent should do that work without asking a second "should I commit?" style question.
+- Explicit approval is now reserved for hard gates such as destructive cleanup, deleting branches or worktrees, staying on a risky current branch, or crossing an unresolved milestone-closure boundary.
+- Workflow-routing expectations were updated so `continue`-style follow-up messages advance through non-destructive post-review steps instead of getting trapped behind redundant checkpoint-approval prompts.
+
+### Notes
+
+- This release softens the workflow's user experience without removing its safety model.
+- The intended interaction is now:
+  - ordinary stop -> user reviews -> user clearly indicates "move forward" -> agent performs the recommended next step
+  - hard gate -> agent asks for explicit confirmation before proceeding
+- If a user explicitly wants reviewed docs to stay uncommitted, the agent should still honor that choice and report the affected files instead of silently carrying them forward.
+
 ## v0.5.0
 
 ### Features

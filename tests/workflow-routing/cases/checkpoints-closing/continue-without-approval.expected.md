@@ -2,14 +2,14 @@
 
 ## Expected Skill
 
-`doc-driven-spec-workflow` routes back to the current approval gate, or `task-spec-execution` enforces the spec approval stop point.
+`doc-driven-spec-workflow` routes back to the current review pause, or `task-spec-execution` treats the user's `continue` as approval to follow the recommended next step.
 
 ## Expected Behavior
 
-- Recognizes that `continue` is not explicit spec approval.
-- Restates that implementation is blocked until the user approves `spec.md`.
-- Asks for explicit approval or requested edits.
-- Keeps the work at the spec approval gate.
+- Recognizes that the current stop is a `spec.md` review pause.
+- Treats `continue` as approval to follow the recommended next step after spec review.
+- Moves into the next task-execution step, which may be plan evaluation or pre-code operational follow-up depending on the task.
+- Keeps implementation safety rules in place, including no code before any required plan or branch-isolation step.
 
 ## Expected File Changes
 
@@ -18,10 +18,10 @@ None.
 ## Must Not
 
 - Must not start implementation.
-- Must not create `plan.md` unless the user approved the spec and a plan trigger is present.
+- Must not create `plan.md` unless a plan trigger is present.
 - Must not run readiness checks.
 - Must not create a branch or worktree.
-- Must not treat `continue` as approval for spec, plan, branch closing, or destructive cleanup.
+- Must not treat `continue` as approval for destructive cleanup or branch deletion.
 
 ## Self-Check
 

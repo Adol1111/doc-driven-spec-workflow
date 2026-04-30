@@ -1,6 +1,6 @@
 # Workflow Routing Tests
 
-Prompt-based pressure tests for the docs-driven workflow skills. They check skill routing, stop points, approval gates, checkpoint behavior, and ownership boundaries.
+Prompt-based pressure tests for the docs-driven workflow skills. They check skill routing, stop points, review-pause behavior, hard-gate behavior, and ownership boundaries.
 
 ## Layout
 
@@ -197,7 +197,7 @@ Do not copy group-local simulation output or group-local evaluation sections int
 
 - `PASS`: correct skill, correct stop point, every expected behavior met, no forbidden behavior.
 - `WARN`: mostly correct, but missing an expected behavior or wording could confuse users.
-- `FAIL`: wrong skill, skipped an approval/checkpoint gate, or violated any Must Not.
+- `FAIL`: wrong skill, skipped a required review pause or hard gate, or violated any Must Not.
 - `*.expected.md` must not require behavior that is stricter than the active skill, its loaded reference templates, or the case prompt. If a case needs stricter behavior, first add that behavior to the relevant skill/template or make the case prompt explicitly require it.
 
 Self-check each expected item internally, but do not copy the checklist into `result.md`:
@@ -261,5 +261,5 @@ Reason:
 - `approved-spec-needs-checkpoint`: approved docs need checkpoint before implementation isolation.
 - `approved-spec-keep-uncommitted-explicitly`: explicit uncommitted checkpoint must report files and gate.
 - `branch-closing-after-worktree`: removed worktree does not delete or resolve task branch.
-- `continue-without-approval`: `continue` must not skip approval gates.
+- `continue-without-approval`: `continue` after a review pause should advance to the recommended non-destructive next step.
 - `planning-checkpoint-before-first-task-spec`: first `continue` resolves planning docs; second may draft `spec.md`.

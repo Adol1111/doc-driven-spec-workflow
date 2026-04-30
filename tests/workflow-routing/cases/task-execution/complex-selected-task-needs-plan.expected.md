@@ -9,8 +9,8 @@
 - Recognizes that the approved spec has multiple plan triggers: persisted format change, migration/transition behavior, public API compatibility boundary, and non-obvious verification order.
 - Creates or proposes a task-local `plan.md` before implementation.
 - Keeps the plan separate from `spec.md`.
-- Stops for explicit plan approval before resolving the docs checkpoint or starting implementation.
-- Does not treat `continue` as approval to skip the plan gate.
+- Stops for plan review before starting implementation.
+- If the user later says `continue`, that should count as approval to follow the recommended post-review next step.
 
 ## Expected File Changes
 
@@ -21,9 +21,9 @@ When running a file-generating check, create or propose only this task-local pla
 ## Must Not
 
 - Must not start implementation.
-- Must not create a branch or worktree before plan approval and docs checkpoint resolution.
+- Must not create a branch or worktree before plan review and any required post-review follow-up.
 - Must not merge plan content into `spec.md` instead of creating `plan.md`.
-- Must not skip plan approval.
+- Must not skip plan review.
 - Must not route to `milestone-planning` unless the task boundary itself is disputed.
 
 ## Self-Check

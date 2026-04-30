@@ -13,8 +13,9 @@ Use this root skill only to select and coordinate the next docs-driven stage. St
 - MUST load exactly one stage skill next unless the user explicitly asks for a comparison or audit.
 - MUST delegate stage behavior to the selected skill instead of restating or bypassing that skill's rules.
 - MUST treat roadmap planning and task reshaping as docs governance. They do not authorize spec writing or implementation by themselves.
-- MUST require explicit approval to name the artifact or decision being approved unless the user is answering a specific yes/no or either/or approval question.
-- MUST stop at approval gates. `continue`, `ok`, `looks good`, `go ahead`, or `sure` are not approval for roadmap structure, spec, plan, docs checkpoints, branch closing, or destructive cleanup.
+- MUST distinguish review pauses from hard gates.
+- MUST treat any clear forward-motion message after a review pause as approval to follow the recommended next step unless the current stop is a hard gate. Do not require specific wording.
+- MUST require explicit confirmation only for hard gates such as destructive cleanup, risky stay-on-current-branch choices, deleting branches/worktrees, or advancing across an unresolved milestone-closure boundary.
 - MUST preserve handoff context when switching skills: what is decided, what is undecided, and why the next skill applies.
 
 ## Routing Rules
@@ -34,7 +35,7 @@ Use `docs-workflow-bootstrap` when any minimum scaffold file is missing: `docs/i
 
 Use `superpowers:brainstorming` for positive ambiguity evidence only. Missing or stale docs alone route to bootstrap or planning.
 
-Use `task-spec-execution` only when the task milestone has `Roadmap confirmed: yes`, previous milestone closure is resolved when crossing milestones, status is `planned` or `in_progress`, dependencies are satisfied or waived, no prior checkpoint or branch closing gate is unresolved, and the user selected it or `docs/tasks/` clearly identifies it as next by order/status.
+Use `task-spec-execution` only when the task milestone has `Roadmap confirmed: yes`, previous milestone closure is resolved when crossing milestones, status is `planned` or `in_progress`, dependencies are satisfied or waived, no prior hard gate remains unresolved, and the user selected it or `docs/tasks/` clearly identifies it as next by order/status.
 
 Do not skip from ambiguous scope to spec writing, use task execution to invent roadmap structure, or keep planning after the question is current-task execution.
 
@@ -42,16 +43,16 @@ Do not skip from ambiguous scope to spec writing, use task execution to invent r
 
 - Bootstrap -> brainstorming or planning: minimum docs scaffold exists.
 - Brainstorming -> planning: scope, boundaries, and success criteria are clear enough to plan delivery structure.
-- Planning -> task execution: selected concrete task is in confirmed roadmap state, dependencies and prior checkpoints are clear, and the user wants spec-first execution.
+- Planning -> task execution: selected concrete task is in confirmed roadmap state, dependencies and prior hard gates are clear, and the user wants spec-first execution.
 
 At each handoff, briefly restate:
 
 - what has already been decided
 - what remains undecided
 - what the next skill is responsible for
-- which explicit approval gate, if any, remains outstanding
+- whether the next stop is a review pause or a hard gate
 
-Treat a user message such as `continue` as permission to advance to the next workflow stage only when the current stage is complete and no explicit approval gate is outstanding.
+Treat any user message that clearly means "move forward" as permission to advance after a review pause. If the recommended next step includes a routine commit, status update, branch isolation, or stage handoff, do that work without asking a second approval question. Stop only when a hard gate is outstanding.
 
 ## Response Shape
 

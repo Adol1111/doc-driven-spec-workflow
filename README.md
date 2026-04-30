@@ -4,11 +4,11 @@
 
 A docs-driven workflow methodology for AI coding agents.
 
-This repository packages a reusable methodology for keeping implementation work aligned with project documentation. It is useful for repositories that organize work around architecture docs, task roadmaps, task-local specs, optional plans, and explicit readiness checkpoints before code changes.
+This repository packages a reusable methodology for keeping implementation work aligned with project documentation. It is useful for repositories that organize work around architecture docs, task roadmaps, task-local specs, optional plans, and explicit readiness checks before code changes.
 
 > Opinionated workflow methodology
 >
-> This project is intentionally focused on docs-driven repositories. It is not a general replacement for every agent development workflow; it is a lightweight way to make agents respect architecture docs, task tracking, roadmap decomposition, spec approval, and branch readiness before implementation.
+> This project is intentionally focused on docs-driven repositories. It is not a general replacement for every agent development workflow; it is a lightweight way to make agents respect architecture docs, task tracking, roadmap decomposition, review pauses, and branch readiness before implementation.
 
 ## How It Works
 
@@ -24,9 +24,9 @@ Not every request uses every stage:
 - Use `docs-workflow-bootstrap` when the repository needs the minimum docs scaffold.
 - Use `superpowers:brainstorming` only when goals, scope, or success criteria are still unclear.
 - Use `milestone-planning` when the roadmap shape is unclear and you need to decide milestones, modules, and tasks.
-- Use `task-spec-execution` after the current concrete task is selected from confirmed roadmap state and prior checkpoints are clear.
+- Use `task-spec-execution` after the current concrete task is selected from confirmed roadmap state and no prior hard gate still blocks execution.
 
-The root skill does not own templates or implementation details. It routes, hands off context, and protects approval gates. Stage-specific skills own their own rules, templates, and stop points.
+The root skill does not own templates or implementation details. It routes, hands off context, and distinguishes review pauses from hard gates. Stage-specific skills own their own rules, templates, and stop points.
 
 ## Skills Library
 
@@ -37,7 +37,7 @@ This repository currently contains four workflow skills plus one optional upstre
 | `doc-driven-spec-workflow` | Route work to the right workflow stage | When the next stage is clear |
 | `docs-workflow-bootstrap` | Initialize the minimum docs scaffold | When core docs entry points are created |
 | `milestone-planning` | Decompose scope into `Milestone -> optional Module -> Task` | When roadmap docs are updated, or the current task is selected |
-| `task-spec-execution` | Execute a selected task via `spec -> optional plan -> readiness -> implementation` | When the current task checkpoint and branch closing are resolved |
+| `task-spec-execution` | Execute a selected task via `spec -> optional plan -> readiness -> implementation` | When the current task review pause or any remaining hard gate is resolved |
 | `superpowers:brainstorming` | Clarify ambiguous intent before planning or spec work | When scope and success criteria are clear enough to continue |
 
 Roadmap planning and task reshaping are docs governance work. They do not automatically authorize spec writing or code changes.
@@ -116,7 +116,7 @@ Recommended entry point when you are unsure which stage comes next:
 Use doc-driven-spec-workflow to decide whether this request needs bootstrap, clarification, milestone planning, or current-task spec execution.
 ```
 
-After entering through `doc-driven-spec-workflow`, you can usually keep moving stage by stage with messages like `continue`. The root skill should route to one stage skill at a time and carry forward handoff context. Explicit approval points still require explicit confirmation, such as roadmap confirmation when needed, `spec.md` approval, `plan.md` approval, and branch-closing decisions.
+After entering through `doc-driven-spec-workflow`, you can usually keep moving stage by stage with any message that clearly expresses "go forward from here." The root skill should route to one stage skill at a time and carry forward handoff context. After a review pause, that forward-motion intent should mean "follow the recommended next step," including routine actions such as committing reviewed docs or creating branch isolation. Explicit confirmation is still reserved for hard gates such as keeping an explicitly unconfirmed roadmap shape, staying on a risky current branch, or deleting branches/worktrees.
 
 Use the roadmap decomposition skill directly when the main question is milestone or task structure:
 
@@ -124,7 +124,7 @@ Use the roadmap decomposition skill directly when the main question is milestone
 Use milestone-planning to break this scope into milestones, modules, and tasks.
 ```
 
-Use the current-task execution skill directly when the concrete task is selected from confirmed roadmap state and dependencies and prior checkpoints are clear:
+Use the current-task execution skill directly when the concrete task is selected from confirmed roadmap state and dependencies and prior hard gates are clear:
 
 ```text
 Use task-spec-execution to pick the next task and write the spec.
@@ -149,10 +149,10 @@ These skills are designed for repositories that use `docs/architecture/`, `docs/
 4. Use `milestone-planning` to decide milestone, module, and task structure when the roadmap shape is still unclear.
 5. Select the current concrete task under `docs/tasks/`.
 6. Use `task-spec-execution` to write or update the task-local `spec.md`.
-7. Stop for user approval before implementation.
-8. Create `plan.md` only when a plan trigger is present.
-9. Run the readiness checkpoint and isolate work with a branch or worktree.
-10. Implement, verify, update docs/status, and resolve branch closing.
+7. Stop for review after `spec.md`, and after `plan.md` when needed.
+8. When the user clearly asks to move forward, handle the routine next step such as committing reviewed docs and creating branch/worktree isolation.
+9. Implement, verify, update docs/status, and stop again for implementation review before any destructive cleanup choice.
+10. Resolve only any remaining hard gate, such as deleting the merged task branch.
 
 ## What It Does
 
@@ -161,7 +161,8 @@ These skills are designed for repositories that use `docs/architecture/`, `docs/
 - Requires task-local specs before implementation and optional plans when a plan trigger is present.
 - Keeps architecture, task tracking, specs, and status updates aligned.
 - Separates docs governance from implementation permission.
-- Enforces readiness checkpoints before code edits, including branch or worktree isolation.
+- Enforces readiness preparation before code edits, including branch or worktree isolation.
+- Merges review approval and routine continuation approval by default, so a normal "move forward" reply after review does not trigger a second commit-approval question.
 - Keeps templates with their owning stage: roadmap templates in `milestone-planning`, execution templates in `task-spec-execution`.
 
 ## Expected Docs Layout
@@ -203,7 +204,7 @@ The module layer is optional. Use `docs/tasks/<milestone>/<task>/` when a milest
 
 ## Compatibility Notes
 
-The current-task execution skill can work on its own after a concrete task is selected from confirmed roadmap state with dependencies and prior checkpoints clear, but this repository is designed to compose with optional clarification and execution-safety skills from [obra/superpowers](https://github.com/obra/superpowers):
+The current-task execution skill can work on its own after a concrete task is selected from confirmed roadmap state with dependencies and prior hard gates clear, but this repository is designed to compose with optional clarification and execution-safety skills from [obra/superpowers](https://github.com/obra/superpowers):
 
 - `superpowers:brainstorming`: Clarifies ambiguous feature, behavior, or task intent before roadmap decomposition or current-task spec work.
 - `superpowers:using-git-worktrees`: Creates safe branch/worktree isolation when a workspace is dirty, shared, risky, or likely to conflict.
@@ -222,7 +223,7 @@ Superpowers is a broader software development methodology with many composable s
 - It keeps TDD, heavyweight planning, and subagent workflows optional instead of mandatory, which makes it easier to use in projects that want spec-first coordination without adopting the full Superpowers methodology.
 - It can still compose with Superpowers where useful, especially `superpowers:brainstorming` before ambiguous scope, `superpowers:using-git-worktrees` before risky implementation work, and `superpowers:finishing-a-development-branch` when a task branch needs merge, PR, keep, discard, or cleanup decisions.
 
-Use Superpowers when you want the full end-to-end agentic development methodology. Use this workflow when your main need is to keep agents aligned with a docs-driven architecture, task roadmap, and spec approval process.
+Use Superpowers when you want the full end-to-end agentic development methodology. Use this workflow when your main need is to keep agents aligned with a docs-driven architecture, task roadmap, and review-first spec process.
 
 ## Installation
 

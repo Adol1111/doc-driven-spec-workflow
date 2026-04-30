@@ -13,7 +13,7 @@ Selectable task gate:
 - previous milestone closure is resolved when crossing milestones
 - task status is `planned` or `in_progress`
 - task dependencies are satisfied or explicitly waived
-- no previous task checkpoint, planning docs checkpoint, or branch closing gate is unresolved
+- no previous branch-closing or milestone-transition hard gate is unresolved
 - the user selected it, or `docs/tasks/` clearly identifies it as next by order and status
 
 Owns task-local `spec.md`, optional `plan.md`, readiness, implementation governance, verification, docs/status updates, and branch closing. Does not own scaffold bootstrap or roadmap-layer planning.
@@ -25,12 +25,12 @@ Owns task-local `spec.md`, optional `plan.md`, readiness, implementation governa
 | Governance mode | Docs governance changes roadmap/docs only and does not authorize code. Implementation governance requires a selected concrete task. |
 | Spec | One task-local `spec.md` defines behavior, scope, exclusions, and tradeoffs. Default `1 task -> 1 spec`; revise instead of duplicating. |
 | Plan | Default no `plan.md`. Create task-local `plan.md` only when a plan trigger is present. Spec and plan are separate documents. |
-| Approval | Before code: spec approval, plan approval when required, branch/worktree isolation, readiness checkpoint. |
-| Checkpoint | Approved docs are not checkpointed until committed or explicitly approved to remain uncommitted. |
+| Review | Stop after writing `spec.md`, and after `plan.md` when required, so the user can review the artifact. |
+| Operational follow-up | After review approval, the agent may handle routine continuation steps such as committing reviewed docs, updating task status, branch/worktree isolation, and readiness without a second approval question. |
 | Branch | Default never implement on the current branch; use a worktree or dedicated task branch unless the user explicitly chooses otherwise. |
-| Closing | After one concrete task, resolve implementation checkpoint and branch closing, then stop. |
+| Closing | After one concrete task, stop for implementation review, then resolve only any remaining hard gate such as branch deletion or destructive cleanup. |
 
-Explicit approval must name the artifact or decision being approved unless the user answers a specific yes/no or either/or approval question. Vague replies such as `continue`, `ok`, `looks good`, `go ahead`, or `sure` are not approval by themselves.
+After a review pause, treat any clear forward-motion message as approval to follow the recommended path. Ask a separate approval question only for hard gates.
 
 ## Spec and Plan
 
@@ -51,21 +51,21 @@ Do not create `plan.md` for a small single-capability task with straightforward 
 
 Compact specs are fine; vague specs are not. When implementation intent could be misread, `spec.md` must capture work type, allowed minimal implementation, relevant non-goals or forbidden shortcuts, and where new responsibility should or must not live. Choose the spec strictness from the expected execution mode: same agent continuing in the current session may use an author-ready compact spec; another agent, subagent, model, or fresh conversation defaults to handoff-ready and must include enough concrete anchors for implementation without a clarification round. Those anchors are preferred proof samples or evidence sources, preferred implementation surface, and case-level acceptance signals. If the execution mode cannot be inferred reliably and the difference matters, ask which route the user wants before drafting. Use task-specific subheadings when helpful, but do not add top-level sections only to restate the template.
 
-## Checkpoints and Branches
+## Review Pauses and Branches
 
-Checkpoint flow:
+Default flow:
 
 | Plan Trigger | Flow |
 |------------|------|
-| No trigger | `spec -> user confirms -> docs checkpoint -> code` |
-| Trigger present | `spec -> user confirms -> plan -> user confirms -> docs checkpoint -> code` |
+| No trigger | `spec -> review pause -> auto follow-up -> code` |
+| Trigger present | `spec -> review pause -> plan -> review pause -> auto follow-up -> code` |
 
-- A checkpoint means the workflow can safely resume in a fresh conversation without relying on chat memory.
-- Content approval and checkpoint resolution are different gates: approved `spec.md` or `plan.md` is not checkpointed until it is committed or the user explicitly approves keeping it uncommitted.
-- Default checkpoint resolution is to commit approved task-local docs, or verified implementation plus docs/status updates, when the user asks to resolve that checkpoint. If the user explicitly approves keeping files uncommitted, report the files and the gate satisfied.
+- A review pause means the workflow can safely resume in a fresh conversation without relying on chat memory.
+- Review approval and routine commit approval are merged by default. If the user reviews `spec.md` or `plan.md` and says `continue`, the agent may commit those reviewed docs when that is the recommended next operational step.
+- If the agent intentionally continues with reviewed changes uncommitted, it must say so explicitly and report the affected files.
 - If plan trigger status is uncertain, name the suspected trigger and ask whether to create `plan.md` before writing it.
-- When `milestone-planning` has just created or reshaped roadmap/task docs and stopped with a docs checkpoint still unresolved, that planning checkpoint must be resolved before entering task-local `spec.md` work.
-- If `milestone-planning` creates the first concrete task in a milestone, the first user `continue` resolves the planning docs checkpoint; only a later `continue` may enter task-local spec drafting.
+- When `milestone-planning` has just created or reshaped roadmap/task docs, report those changes as a planning review pause before entering task-local `spec.md` work.
+- If `milestone-planning` creates the first concrete task in a milestone, the first user `continue` may both accept those planning docs and advance into task-local `spec.md` work if no hard gate blocks the handoff.
 - For docs-only governance work, stop after reporting changed files and key diffs. Do not commit unless the user asked up front or confirms after review.
 
 Branch isolation:
@@ -73,14 +73,14 @@ Branch isolation:
 - Workspace dirty, shared, risky, or likely to conflict: use `superpowers:using-git-worktrees` or equivalent safe worktree workflow.
 - Workspace clean and isolation risk is low: create a dedicated task branch in place.
 - User explicitly asks to stay on current branch: proceed only with explicit user choice.
-- Do not carry approved-but-uncommitted task-local docs into an implementation worktree by default.
+- Do not ask a separate follow-up question just to commit reviewed task docs before branch isolation unless the user has already said they want to keep them uncommitted.
 
 Branch closing:
 
 - Use `superpowers:finishing-a-development-branch` for merge/PR/keep/discard options.
 - Use `superpowers:using-git-worktrees` cleanup rules; removing a worktree does not remove its task branch.
 - Confirm before deleting any branch or worktree. If merge plus cleanup is chosen, confirm whether cleanup includes deleting the fully merged task branch.
-- If user asks to "continue", treat as prompt to resolve branch closing first.
+- If user asks to `continue`, treat that as permission to keep moving through non-destructive wrap-up steps, but stop before deleting a branch or worktree.
 
 ## Task And Status Rules
 
@@ -93,7 +93,7 @@ Branch closing:
 - Keep implementation steps inside `spec.md`, optional `plan.md`, or checklist items; do not promote them into tasks.
 - `docs/tasks/index.md` lists `Open Milestones`, `Completed Milestones`, and supporting planning links such as `Planning Inbox`; it does not list modules, tasks, or counts.
 - When all open tasks complete, report if the milestone appears complete. Use `milestone-planning` before moving milestone state or adding missing work.
-- Report milestone-entry governance changes before drafting the first task spec, and still resolve any outstanding planning docs checkpoint first.
+- Report milestone-entry governance changes before drafting the first task spec, and still give the user a chance to review those planning changes first.
 
 ## Docs Boundaries
 
@@ -110,10 +110,10 @@ Follow this order unless the user explicitly asks for something different:
 1. If docs or prompt evidence shows task intent is ambiguous, use `superpowers:brainstorming`; do not infer ambiguity from missing docs alone.
 2. If the uncertainty is roadmap shape, use `milestone-planning`.
 3. Read `docs/index.md`, relevant docs indexes, relevant `docs/architecture/`, and the relevant `docs/tasks/` milestone/module/task docs. Use `docs/context/` only for supporting research or unstable reference.
-4. If no suitable open task exists, or the next task is blocked by milestone closure/confirmation or a planning docs checkpoint, stop and resolve that governance first.
-5. Write or update one focused task-local `spec.md`, then stop for explicit approval.
-6. Check plan triggers. If present, write task-local `plan.md` and stop for explicit approval; if uncertain, ask before writing.
-7. Resolve the approved docs checkpoint, isolate branch/worktree, run readiness, implement, verify, update docs/status, resolve implementation checkpoint and branch closing, then stop.
+4. If no suitable open task exists, or the next task is blocked by milestone closure/confirmation, stop and resolve that governance first.
+5. Write or update one focused task-local `spec.md`, then stop for review.
+6. Check plan triggers. If present, write task-local `plan.md` and stop for review; if uncertain, ask before writing.
+7. After review approval, handle routine follow-up such as committing reviewed docs, isolating branch/worktree, and running readiness, then implement, verify, update docs/status, and stop again for implementation review before any destructive cleanup choice.
 8. Add an `index.md` for every new major documentation section.
 
 ## When To Use

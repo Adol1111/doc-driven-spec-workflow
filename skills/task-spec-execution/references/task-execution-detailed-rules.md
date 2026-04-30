@@ -15,11 +15,11 @@ Low-frequency execution details and stop conditions for task spec execution. Rea
 - Creating multiple specs for one task instead of revising the existing spec or splitting the task first.
 - Adding work to a completed milestone.
 - Auto-committing docs-only/governance changes before reporting the result or before user commit confirmation.
-- Starting task-local `spec.md` work while a task-planning docs checkpoint from `milestone-planning` is still unresolved.
+- Starting task-local `spec.md` work before reporting freshly changed planning docs for review.
 - Starting another task before resolving branch closing for the current task.
 - Starting a task in milestone `M(n+1)` while `M(n)` still appears open and unclosed, or while the target milestone is still explicitly unconfirmed.
-- Treating a task file as selectable when its milestone is unconfirmed, dependencies are unresolved, a previous checkpoint is open, or branch closing is unresolved.
-- Treating vague replies such as `continue`, `ok`, `looks good`, `go ahead`, or `sure` as approval when they do not answer a specific yes/no or either/or approval question.
+- Treating a task file as selectable when its milestone is unconfirmed, dependencies are unresolved, or branch closing is unresolved.
+- Treating a destructive cleanup choice as implicitly approved by generic forward-motion language.
 - Assuming the workspace is clean or staying on the current branch without explicit user choice.
 
 ## Execution Details
@@ -30,14 +30,13 @@ Low-frequency execution details and stop conditions for task spec execution. Rea
 - Default to no `plan.md`. Create `plan.md` only when a plan trigger is present: ordered changes across 3 or more major files/modules, schema/migration/data changes, public compatibility boundaries, cross-module coordination, phased rollout or flags, non-obvious verification order, multiple slices that remain one task, or a required spike/risk-reduction step.
 - Skip `plan.md` for small single-capability tasks with straightforward implementation order.
 - If plan trigger status is uncertain, name the suspected trigger and ask before writing `plan.md`.
-- If `milestone-planning` just created the selected task or reshaped its roadmap docs, treat the next stop as a planning docs checkpoint first.
-- In that state, a user `continue` should advance the unresolved planning checkpoint, not jump straight into `spec.md`, `plan.md`, or implementation.
-- After the planning checkpoint is resolved, the next `continue` may begin drafting task-local `spec.md`.
-- Content approval is not checkpoint resolution. Commit approved task-local docs by default when the user asks to resolve the checkpoint before implementation isolation, or continue only if the user explicitly approves keeping them uncommitted.
-- When a checkpoint is satisfied by explicitly approved uncommitted changes, report the affected files and the gate that decision satisfies.
+- If `milestone-planning` just created the selected task or reshaped its roadmap docs, report those docs for review before task-local `spec.md` work.
+- In that state, a user `continue` may both accept the planning docs and move into `spec.md` drafting unless a hard gate still blocks the handoff.
+- Review approval and routine commit approval are merged by default. Commit reviewed task-local docs when that is the recommended next step before implementation isolation, unless the user already said to keep them uncommitted.
+- When continuing with reviewed changes uncommitted, report the affected files and say that choice is intentional.
 
 - If a worktree is needed, prefer `superpowers:using-git-worktrees`; if it is unavailable, use the environment's equivalent git worktree workflow and preserve the same safety checks.
-- Before the first implementation edit, tell the user: `Spec/plan is approved and checkpointed. I am handling branch isolation now before coding.`
+- Before the first implementation edit, tell the user: `Spec/plan review is complete. I am handling branch isolation now before coding.`
 
 ## Task And Status Rules
 
