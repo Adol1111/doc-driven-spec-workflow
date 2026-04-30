@@ -20,6 +20,7 @@ Low-frequency execution details and stop conditions for task spec execution. Rea
 - Starting a task in milestone `M(n+1)` while `M(n)` still appears open and unclosed, or while the target milestone is still explicitly unconfirmed.
 - Treating a task file as selectable when its milestone is unconfirmed, dependencies are unresolved, or branch closing is unresolved.
 - Treating a destructive cleanup choice as implicitly approved by generic forward-motion language.
+- Quietly changing the meaning of existing tests, weakening their assertions, deleting them, or marking them skip/xfail/todo without explaining why and getting user confirmation.
 - Assuming the workspace is clean or staying on the current branch without explicit user choice.
 
 ## Execution Details
@@ -34,6 +35,10 @@ Low-frequency execution details and stop conditions for task spec execution. Rea
 - In that state, a user `continue` may both accept the planning docs and move into `spec.md` drafting unless a hard gate still blocks the handoff.
 - Review approval and routine commit approval are merged by default. Commit reviewed task-local docs when that is the recommended next step before implementation isolation, unless the user already said to keep them uncommitted.
 - When continuing with reviewed changes uncommitted, report the affected files and say that choice is intentional.
+- If relevant existing automated tests fail during the task, do not ignore them just because the task does not require adding new unit tests.
+- Prefer fixing production code so existing tests keep expressing the same behavior.
+- If existing tests need semantic changes because the task intentionally changes behavior, explain the reason and get user confirmation before changing what those tests assert.
+- Small test-file repairs that preserve the original assertion intent do not need separate confirmation.
 
 - If a worktree is needed, prefer `superpowers:using-git-worktrees`; if it is unavailable, use the environment's equivalent git worktree workflow and preserve the same safety checks.
 - Before the first implementation edit, tell the user: `Spec/plan review is complete. I am handling branch isolation now before coding.`
