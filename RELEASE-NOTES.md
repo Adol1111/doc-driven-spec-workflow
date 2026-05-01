@@ -18,6 +18,7 @@ This project follows Conventional Commits for commit history, but release notes 
 - `task-spec-execution` is now a thin compatibility facade only. Keep it only for older prompts or habits; new workflows should route directly to `task-preparation` and `task-execution-simple`.
 - Task-local templates live under `skills/task-preparation/references/`, and simple execution rules live under `skills/task-execution-simple/references/`.
 - Workflow-routing expectations are being updated in parallel with the stage rename.
+- Auto follow-up after reviewed task-local docs is now documented more explicitly: committing reviewed `spec.md` and `plan.md` is the default unless the user explicitly says not to commit them, while leaving them uncommitted is an explicit exception that must include a reason and affected files before execution handoff.
 
 ## v0.5.1
 

@@ -18,7 +18,7 @@ Owns task-local `spec.md`, optional `plan.md`, review pauses for those docs, rou
 | Spec | One task-local `spec.md` defines behavior, scope, exclusions, and tradeoffs. Default `1 task -> 1 spec`; revise instead of duplicating. |
 | Plan | Default no `plan.md`. Create it only when a plan trigger is present. |
 | Review | Stop after writing `spec.md`, and after `plan.md` when required, so the user can review the artifact. |
-| Operational follow-up | After review approval, the agent may handle routine continuation steps such as committing reviewed docs or reporting intentional uncommitted state without a second approval question. |
+| Operational follow-up | After review approval, the default routine continuation step is to commit reviewed task-local docs without a second approval question unless the user explicitly says not to commit them. Intentional uncommitted continuation is an explicit user-approved exception and must be reported with reason and affected files. |
 | Handoff | After docs and routine follow-up are ready, hand off to an execution skill such as `task-execution-simple`. |
 
 After a review pause, treat any clear forward-motion message as approval to follow the recommended path. Ask a separate approval question only for hard gates.
@@ -44,8 +44,10 @@ Default flow:
 | Trigger present | `spec -> review pause -> plan -> review pause -> auto follow-up -> execution handoff` |
 
 - If the agent has just drafted `spec.md` and stopped for its review pause, a user reply such as `continue`, `next`, or other clear forward-motion language counts as approval to leave that review pause and follow the recommended safe next step.
-- Review approval and routine commit approval are merged by default. If the user reviews `spec.md` or `plan.md` and says `continue`, the agent may commit those reviewed docs when that is the recommended next operational step.
-- If the agent intentionally continues with reviewed changes uncommitted, it must say so explicitly and report the affected files.
+- Review approval and routine commit approval are merged by default. If the user reviews `spec.md` or `plan.md` and says `continue`, the default recommended next operational step is to commit those reviewed task-local docs before execution handoff.
+- Do not skip that commit unless the user explicitly says not to commit the reviewed docs, for example `ok, but I don't want to commit that yet`.
+- If the agent intentionally continues with reviewed changes uncommitted, it must treat that as an explicit user-approved exception, say so clearly, give the reason, and report the affected files.
+- Before handing off to an execution skill, the agent must state the auto follow-up outcome: either the reviewed docs were committed, or they remain intentionally uncommitted with files listed.
 - When `milestone-planning` has just created or reshaped roadmap/task docs, report those changes as a planning review pause before entering task-local `spec.md` work.
 - If `milestone-planning` creates the first concrete task in a milestone, the first user `continue` may both accept those planning docs and advance into task-local `spec.md` work if no hard gate blocks the handoff.
 - In that first-task-in-milestone case, once the drafted `spec.md` is shown and paused for review, the next `continue` should approve that reviewed spec and move to the next routine non-destructive step rather than requiring an extra approval whose only purpose is checkpointing the spec.

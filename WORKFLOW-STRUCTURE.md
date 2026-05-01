@@ -212,7 +212,7 @@ A task is selectable only when all of these are true:
 - task-local `spec.md`
 - optional task-local `plan.md`
 - review pauses for `spec.md` and `plan.md`
-- routine follow-up after review, such as committing reviewed docs or reporting intentional uncommitted state
+- routine follow-up after review, with reviewed docs committed by default unless the user explicitly says not to commit them; intentional uncommitted state is an explicit exception that must be reported
 - handoff context into an execution skill
 
 It does not own implementation edits, branch/worktree isolation, readiness, code verification, docs/status updates after code changes, or branch closing.
@@ -226,7 +226,7 @@ flowchart TD
     NeedsPlan{Plan trigger present?}
     Plan[Write task-local plan.md]
     PlanReview[Stop for plan review]
-    AutoOps[Auto-run routine follow-up such as commit or explicit uncommitted report]
+    AutoOps[Auto-run routine follow-up: commit reviewed docs unless the user explicitly refuses, otherwise report intentional uncommitted state]
     Handoff[Hand off to task-execution-simple]
     Stop[Stop]
 
@@ -312,7 +312,10 @@ Default continuation behavior after a review pause:
 
 - If the user clearly expresses an intent to move forward after review, treat that as approval to follow the recommended path. Do not require a specific phrase.
 - The recommended path may include routine operational steps such as committing reviewed docs, updating task status, creating branch/worktree isolation, or moving into the next workflow stage.
-- If the agent chooses to continue with reviewed changes uncommitted, it must say so explicitly and report the affected files.
+- After a reviewed `spec.md` or `plan.md`, the default routine operational step is to commit the reviewed task-local docs before handing off into execution unless the user explicitly says not to commit them.
+- Explicit refusal is required to skip that commit. Statements such as `ok, but I don't want to commit that yet` or `continue, but leave the spec uncommitted` count as that exception.
+- If the agent intentionally continues with reviewed changes uncommitted, it must treat that as an explicit user-approved exception, say so clearly, give the reason, and report the affected files.
+- Before handing off to the next stage, the agent must state the `AutoOps` outcome: either the reviewed docs were committed, or they remain intentionally uncommitted with files listed.
 - Do not auto-commit before first reporting the result that the user is reviewing.
 
 ## Hard Gates
@@ -331,7 +334,8 @@ When a stop is a review pause rather than a hard gate, the user does not need to
 
 Examples of merged approval:
 
-- User reviews a new `spec.md` and says `continue` -> agent may commit the reviewed spec if that is the recommended next step, then move into plan/readiness/coding as appropriate.
+- User reviews a new `spec.md` and says `continue` -> agent should commit the reviewed spec by default, then move into plan/readiness/coding as appropriate.
+- User reviews a new `spec.md` and says `ok, but I don't want to commit that yet` -> agent should keep it uncommitted, report that explicit exception and the affected files, then continue only through the next non-destructive step.
 - User reviews planning docs and says `next step` -> agent may checkpoint those planning docs and then enter task-local spec work if the workflow is otherwise ready.
 
 Examples of hard gates:

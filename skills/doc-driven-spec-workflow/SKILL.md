@@ -44,7 +44,7 @@ Do not skip from ambiguous scope to spec writing, use task execution to invent r
 - Bootstrap -> brainstorming or planning: minimum docs scaffold exists.
 - Brainstorming -> planning: scope, boundaries, and success criteria are clear enough to plan delivery structure.
 - Planning -> task preparation: selected concrete task is in confirmed roadmap state, dependencies and prior hard gates are clear, and the user wants spec-first execution.
-- Task preparation -> simple execution: task-local docs and routine follow-up are complete, and the next work is straightforward direct implementation.
+- Task preparation -> simple execution: task-local docs are complete, the auto follow-up outcome has been explicitly reported, and the next work is straightforward direct implementation.
 
 At each handoff, briefly restate:
 
@@ -52,6 +52,8 @@ At each handoff, briefly restate:
 - what remains undecided
 - what the next skill is responsible for
 - whether the next stop is a review pause or a hard gate
+
+When handing off from `task-preparation`, include the task-local docs follow-up outcome explicitly: reviewed docs committed by default unless the user explicitly refused that commit, or intentionally left uncommitted with affected files listed.
 
 Treat any user message that clearly means "move forward" as permission to advance after a review pause. If the recommended next step includes a routine commit, status update, branch isolation, or stage handoff, do that work without asking a second approval question. Stop only when a hard gate is outstanding.
 
