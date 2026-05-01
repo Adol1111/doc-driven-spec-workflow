@@ -32,7 +32,9 @@ Create or update task-local docs only for concrete implementation work on an exi
 - Default to no `plan.md`; create it only when ordering, compatibility, migration, cross-module coordination, rollout, or verification complexity makes implementation sequencing non-obvious.
 - If multiple specs seem necessary, stop and use `milestone-planning` to split the task first.
 - Compact specs are fine; vague specs are not. If implementation intent could be misread, make boundaries, non-goals, and allowed minimal implementation explicit.
-- Same-agent continuation may use an author-ready compact spec. Another agent, subagent, model, or fresh conversation should default to handoff-ready anchors. If the execution mode cannot be inferred reliably and the difference matters, ask before drafting.
+- If the same agent will continue immediately in the same conversation, the spec may stay compact and rely on nearby shared context.
+- If the work is likely to be picked up by another agent, subagent, model, or fresh conversation, make the spec more self-contained by spelling out the key implementation anchors directly in the document.
+- If the expected execution mode cannot be inferred reliably and that difference matters, ask before drafting.
 
 ## Review Pauses and Handoff
 
@@ -45,6 +47,8 @@ Default flow:
 
 - If the agent has just drafted `spec.md` and stopped for its review pause, a user reply such as `continue`, `next`, or other clear forward-motion language counts as approval to leave that review pause and follow the recommended safe next step.
 - Review approval and routine commit approval are merged by default. If the user reviews `spec.md` or `plan.md` and says `continue`, the default recommended next operational step is to commit those reviewed task-local docs before execution handoff.
+- With no plan trigger, the normal route is `spec -> review pause -> auto follow-up`.
+- With a plan trigger, the normal route is `spec -> review pause -> plan -> review pause -> auto follow-up`.
 - Do not skip that commit unless the user explicitly says not to commit the reviewed docs, for example `ok, but I don't want to commit that yet`.
 - If the agent intentionally continues with reviewed changes uncommitted, it must treat that as an explicit user-approved exception, say so clearly, give the reason, and report the affected files.
 - Before handing off to an execution skill, the agent must state the auto follow-up outcome: either the reviewed docs were committed, or they remain intentionally uncommitted with files listed.

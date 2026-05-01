@@ -13,7 +13,7 @@ Owns branch/worktree isolation, readiness, implementation edits, verification, d
 
 | Gate | Required behavior |
 |------|-------------------|
-| Branch | Default never implement on the current branch; use a worktree or dedicated task branch unless the user explicitly chooses otherwise. |
+| Branch | Default never implement on the current branch; create a dedicated task branch by default unless the user explicitly chooses otherwise or a worktree workflow is specifically needed. |
 | Readiness | Handle branch/worktree isolation and any other pre-code readiness work before implementation edits. |
 | Verification | Verify implementation and update docs/status in the same round when behavior, API shape, or task state changed. |
 | Review | Stop for implementation review before destructive cleanup or branch deletion. |
@@ -23,8 +23,8 @@ After an implementation review pause, treat any clear forward-motion message as 
 
 ## Branch Isolation
 
-- Workspace dirty, shared, risky, or likely to conflict: use `superpowers:using-git-worktrees` or equivalent safe worktree workflow.
-- Workspace clean and isolation risk is low: create a dedicated task branch in place.
+- Default to creating a dedicated task branch in the current workspace.
+- Use a worktree workflow only when the user explicitly wants one or when parallel or high-conflict execution makes a separate workspace specifically valuable.
 - User explicitly asks to stay on current branch: proceed only with explicit user choice.
 
 ## Branch Closing

@@ -262,7 +262,7 @@ Do not create `plan.md` for a small single-capability task with straightforward 
 
 `task-execution-simple` owns:
 
-- branch/worktree isolation
+- branch isolation by default, with worktree isolation only when specifically needed
 - readiness checks
 - implementation edits
 - verification
@@ -273,7 +273,7 @@ Do not create `plan.md` for a small single-capability task with straightforward 
 ```mermaid
 flowchart TD
     Ready[Preparation complete]
-    Isolation[Create branch or worktree isolation]
+    Isolation[Create branch isolation by default, or use a worktree when specifically needed]
     Readiness[Run readiness checkpoint]
     Code[Implement one task]
     Verify[Verify and update docs/status]
@@ -313,6 +313,9 @@ Default continuation behavior after a review pause:
 - If the user clearly expresses an intent to move forward after review, treat that as approval to follow the recommended path. Do not require a specific phrase.
 - The recommended path may include routine operational steps such as committing reviewed docs, updating task status, creating branch/worktree isolation, or moving into the next workflow stage.
 - After a reviewed `spec.md` or `plan.md`, the default routine operational step is to commit the reviewed task-local docs before handing off into execution unless the user explicitly says not to commit them.
+- This yields only two normal task-preparation exit routes:
+  `spec -> review pause -> auto follow-up`
+  `spec -> review pause -> plan -> review pause -> auto follow-up`
 - Explicit refusal is required to skip that commit. Statements such as `ok, but I don't want to commit that yet` or `continue, but leave the spec uncommitted` count as that exception.
 - If the agent intentionally continues with reviewed changes uncommitted, it must treat that as an explicit user-approved exception, say so clearly, give the reason, and report the affected files.
 - Before handing off to the next stage, the agent must state the `AutoOps` outcome: either the reviewed docs were committed, or they remain intentionally uncommitted with files listed.
@@ -336,7 +339,7 @@ Examples of merged approval:
 
 - User reviews a new `spec.md` and says `continue` -> agent should commit the reviewed spec by default, then move into plan/readiness/coding as appropriate.
 - User reviews a new `spec.md` and says `ok, but I don't want to commit that yet` -> agent should keep it uncommitted, report that explicit exception and the affected files, then continue only through the next non-destructive step.
-- User reviews planning docs and says `next step` -> agent may checkpoint those planning docs and then enter task-local spec work if the workflow is otherwise ready.
+- User reviews planning docs and says `next step` -> agent should commit those reviewed planning docs by default, then enter task-local spec work if the workflow is otherwise ready.
 
 Examples of hard gates:
 
