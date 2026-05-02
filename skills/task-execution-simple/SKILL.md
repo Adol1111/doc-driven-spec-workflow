@@ -5,16 +5,16 @@ description: Use when task-local spec or plan work is complete and a concrete do
 
 # Task Execution Simple
 
-Use after `task-preparation` has finished task-local docs and routine follow-up, and the task is ready for straightforward direct execution.
+Use after `task-preparation` has finished task-local docs and routine follow-up, and the task is ready for straightforward execution.
 
-Owns branch/worktree isolation, readiness, implementation edits, verification, docs/status updates caused by implementation, implementation review, and branch closing. Does not own roadmap decomposition or task-local `spec.md` and `plan.md` authoring.
+Owns execution isolation, readiness, implementation edits, verification, implementation-caused docs/status updates, implementation review, and branch closing. It does not own roadmap decomposition or task-local `spec.md`/`plan.md` authoring.
 
 ## Required Gates
 
 | Gate | Required behavior |
 |------|-------------------|
 | Branch | Default never implement on the current branch; create a dedicated task branch by default unless the user explicitly chooses otherwise or a worktree workflow is specifically needed. |
-| Readiness | Handle branch/worktree isolation and any other pre-code readiness work before implementation edits. |
+| Readiness | Handle execution isolation and any other pre-code readiness work before implementation edits. |
 | Verification | Verify implementation and update docs/status in the same round when behavior, API shape, or task state changed. |
 | Review | Stop for implementation review before destructive cleanup or branch deletion. |
 | Closing | Resolve only any remaining hard gate such as branch deletion or destructive cleanup after implementation review. |
@@ -24,7 +24,7 @@ After an implementation review pause, treat any clear forward-motion message as 
 ## Branch Isolation
 
 - Default to creating a dedicated task branch in the current workspace.
-- Use a worktree workflow only when the user explicitly wants one or when parallel or high-conflict execution makes a separate workspace specifically valuable.
+- Use a worktree only when the user explicitly wants one or when parallel or high-conflict execution makes a separate workspace specifically valuable.
 - User explicitly asks to stay on current branch: proceed only with explicit user choice.
 
 ## Branch Closing
@@ -55,7 +55,7 @@ Use the existing execution references when needed:
 ## Workflow
 
 1. Receive handoff context from `task-preparation`.
-2. Create branch/worktree isolation and complete readiness work before code edits.
+2. Create execution isolation and complete readiness work before code edits.
 3. Implement one concrete task.
 4. Verify behavior and update docs/status affected by implementation.
 5. Stop for implementation review.
@@ -73,6 +73,6 @@ Do not use when:
 
 ## Common Mistakes
 
-- Starting implementation before branch/worktree isolation is complete
+- Starting implementation before execution isolation is complete
 - Treating a normal forward-motion message as approval for destructive cleanup
 - Rewriting roadmap or task structure here instead of routing back to `milestone-planning`

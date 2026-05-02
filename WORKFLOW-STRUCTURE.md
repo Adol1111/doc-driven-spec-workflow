@@ -215,11 +215,12 @@ A task is selectable only when all of these are true:
 - routine follow-up after review, with reviewed docs committed by default unless the user explicitly says not to commit them; intentional uncommitted state is an explicit exception that must be reported
 - handoff context into an execution skill
 
-It does not own implementation edits, branch/worktree isolation, readiness, code verification, docs/status updates after code changes, or branch closing.
+It does not own implementation edits, execution isolation, readiness, code verification, docs/status updates after code changes, or branch closing.
 
 ```mermaid
 flowchart TD
     Selected{Task selected from confirmed roadmap state?}
+    PlanningChanged{Milestone planning just created\nor reshaped roadmap/task docs?}
     PlanningReview[Report planning docs for review]
     Spec[Write or update task-local spec.md]
     SpecReview[Stop for spec review]
@@ -231,7 +232,9 @@ flowchart TD
     Stop[Stop]
 
     Selected -- No --> Stop
-    Selected -- Yes --> PlanningReview
+    Selected -- Yes --> PlanningChanged
+    PlanningChanged -- Yes --> PlanningReview
+    PlanningChanged -- No --> Spec
     PlanningReview --> Spec
     Spec --> SpecReview
     SpecReview --> NeedsPlan
@@ -311,8 +314,8 @@ Default review pauses:
 Default continuation behavior after a review pause:
 
 - If the user clearly expresses an intent to move forward after review, treat that as approval to follow the recommended path. Do not require a specific phrase.
-- The recommended path may include routine operational steps such as committing reviewed docs, updating task status, creating branch/worktree isolation, or moving into the next workflow stage.
-- After a reviewed `spec.md` or `plan.md`, the default routine operational step is to commit the reviewed task-local docs before handing off into execution unless the user explicitly says not to commit them.
+- The recommended path may include routine operational steps such as committing reviewed docs, updating task status, creating execution isolation, or moving into the next workflow stage.
+- After the final required task-local review for the route, the default routine operational step is to commit the reviewed task-local docs before handing off into execution unless the user explicitly says not to commit them.
 - This yields only two normal task-preparation exit routes:
   `spec -> review pause -> auto follow-up`
   `spec -> review pause -> plan -> review pause -> auto follow-up`
@@ -337,7 +340,8 @@ When a stop is a review pause rather than a hard gate, the user does not need to
 
 Examples of merged approval:
 
-- User reviews a new `spec.md` and says `continue` -> agent should commit the reviewed spec by default, then move into plan/readiness/coding as appropriate.
+- User reviews a new `spec.md` and says `continue` with no plan trigger -> agent should commit the reviewed spec by default, then move into execution readiness.
+- User reviews a new `spec.md` and says `continue` with a plan trigger -> agent should write the task-local `plan.md`, stop for plan review, then default-commit the reviewed task-local docs after plan review.
 - User reviews a new `spec.md` and says `ok, but I don't want to commit that yet` -> agent should keep it uncommitted, report that explicit exception and the affected files, then continue only through the next non-destructive step.
 - User reviews planning docs and says `next step` -> agent should commit those reviewed planning docs by default, then enter task-local spec work if the workflow is otherwise ready.
 
@@ -358,7 +362,7 @@ Examples of hard gates:
 | `docs/tasks/<milestone>/` | milestone goal, status, modules/tasks, handoff notes | task-local implementation design |
 | `docs/tasks/<task>/task.md` | task placement, dependencies, status, acceptance points | detailed implementation plan |
 | `docs/tasks/<task>/spec.md` | behavior, scope, exclusions, tradeoffs | branch/worktree or execution logistics |
-| `docs/tasks/<task>/plan.md` | implementation sequencing and verification order | new scope or roadmap reshaping |
+| `docs/tasks/<task>/plan.md` | implementation sequencing and verification order that supplements the approved spec | new scope, repeated spec content, or roadmap reshaping |
 | `docs/context/` | supporting research and unstable notes | stable system rules or concrete task selection |
 
 When a conclusion in `docs/context/` becomes a stable rule, move or restate it in `docs/architecture/`.

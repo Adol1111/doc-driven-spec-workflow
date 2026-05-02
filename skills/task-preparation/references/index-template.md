@@ -9,18 +9,14 @@ Roadmap-layer `docs/tasks/` indexes belong to `skills/milestone-planning/referen
 ```md
 # Documentation Index
 
-`docs/` is the main documentation entry point, organized by stable design, working specs, optional plans, task tracking, and context references.
+`docs/` is the main documentation entry point, organized by stable design, task tracking, task-local specs/plans, and context references.
 
 ## Sections
 
 - [Architecture](./architecture/index.md)
   Stable design documents and behavior boundaries.
-- [Specs](./specs/index.md)
-  Working specs for the current task before implementation.
-- [Plans](./plans/index.md)
-  Optional implementation plans for tasks with a plan trigger.
 - [Tasks](./tasks/index.md)
-  Project-level milestones, modules, task status, dependencies, and history.
+  Project-level milestones, modules, task status, dependencies, history, and task-local specs/plans.
 - [Context](./context/index.md)
   Research notes, samples, references, and conclusions that are not yet stable.
 
@@ -29,8 +25,7 @@ Roadmap-layer `docs/tasks/` indexes belong to `skills/milestone-planning/referen
 - Read `architecture/` first when you need stable system behavior.
 - Read `tasks/` first when you need roadmap, task status, or next-step guidance.
 - Read `context/` for research notes or external references.
-- Read or write `specs/` before starting implementation.
-- Create `plans/` only when a task has a plan trigger.
+- Write task-local `spec.md` and optional `plan.md` inside the selected task directory under `tasks/`.
 ```
 
 ## `docs/architecture/index.md`
@@ -66,59 +61,6 @@ This directory stores research notes, validation notes, and references.
 
 - Move stable conclusions to `docs/architecture/`
 - Do not write current task status here
-```
-
-## `docs/specs/index.md`
-
-```md
-# Working Specs
-
-This directory stores design specs created before implementation begins.
-
-## Naming
-
-- Use `YYYY-MM-DD-<topic>-design.md`
-- Use short English kebab-case for `<topic>`
-- Example: `2026-04-16-chat-fixed-user-context-design.md`
-
-## Role
-
-- Use specs to record goals, boundaries, approach, and verification before implementation.
-- Follow the `task-preparation` skill and its reference templates for task-local spec structure and writing guidance.
-- Move stable long-term constraints into `docs/architecture/`.
-
-## Lifecycle
-
-- Create new specs before implementation starts, and get user approval before coding.
-- Create a corresponding `docs/plans/` document only when a task has a plan trigger.
-```
-
-## `docs/plans/index.md`
-
-```md
-# Working Plans
-
-This directory stores detailed implementation plans for tasks with a plan trigger.
-
-## Naming
-
-- Use `YYYY-MM-DD-<feature-name>.md`
-- Use short English kebab-case for `<feature-name>`
-- Example: `2026-04-16-chat-fixed-user-context.md`
-
-## Role
-
-- Create plans only when a task has a plan trigger.
-- Use plans to break down implementation slices, file scope, and verification without repeating the approved spec.
-- Follow the `task-preparation` skill and its reference templates for task-local plan structure and writing guidance.
-
-## Lifecycle
-
-- Wait for user approval after writing the plan before starting implementation.
-
-## Relationship To `docs/tasks/`
-
-`docs/plans/` is the detailed execution entry point. `docs/tasks/` records milestone, module, task status, dependencies, and historical indexing only. If a project task has a corresponding plan here, link to it from the task's `Source` or `Notes` instead of copying the full execution steps.
 ```
 
 ## Rules

@@ -12,15 +12,15 @@ Plan roadmap structure before task-local spec work. This skill owns `Milestone -
 - **Entry**: reached from `doc-driven-spec-workflow` after scope is clear enough to plan delivery structure.
 - **Owns**: milestone boundaries, optional module grouping, roadmap-layer task breakdown, backlog/handoff governance, planning-stage `docs/tasks/` documents.
 - **Does not own**: repository scaffold bootstrap, task-local `spec.md`, task-local `plan.md`, readiness checks, implementation, verification, branch closing.
-- **Handoff**: stop at a planning review pause after roadmap/task docs change; once the user continues, the default follow-up is to commit those reviewed docs as part of the normal handoff into `task-preparation` unless the user explicitly says not to commit them. Intentional uncommitted continuation is an explicit user-approved exception and must be reported with reason and affected files.
+- **Handoff**: stop at a planning review pause after roadmap/task docs change. On user continuation, default to committing those reviewed docs before handing off into `task-preparation`. Leaving them uncommitted is an explicit user-approved exception with reason and affected files.
 
 ## Core Rules
 
 | Boundary | Rule |
 |----------|------|
-| Milestone | Start from release goal, phase boundary, or acceptance boundary, not feature count. Use one milestone for the same delivery goal plus same completion definition and no meaningful stage boundary; split when phase boundaries, exit criteria, release timing, or frozen history differ. |
+| Milestone | Start from release goal, phase boundary, or acceptance boundary, not feature count. Use one milestone for the same delivery goal plus same completion definition and no meaningful stage boundary. Split when phase boundaries, exit criteria, release timing, or frozen history differ. |
 | Module | Optional. Use only for multiple durable capability areas with distinct ownership, dependency graphs, risk profiles, release boundaries, or acceptance criteria. |
-| Task | One independently reviewable implementation round delivering one coherent capability outcome, including required tests, migrations, docs/status updates, refactors, and verification. When the user asks for roadmap-level tasks so a first implementation task can be chosen, prefer user-visible or operator-visible capability boundaries; do not hide multiple independently selectable capabilities inside a vague `core`, `MVP`, `foundation`, or `polish` task. |
+| Task | One independently reviewable implementation round delivering one coherent capability outcome, including required tests, migrations, docs/status updates, refactors, and verification. When the user needs roadmap-level tasks so a first implementation task can be chosen, prefer user-visible or operator-visible capability boundaries. Do not hide multiple independently selectable capabilities inside a vague `core`, `MVP`, `foundation`, or `polish` task. |
 
 ### Routing
 
@@ -38,13 +38,13 @@ Plan roadmap structure before task-local spec work. This skill owns `Milestone -
 
 - Explain why each milestone, module, and task boundary exists. Structure without rationale is incomplete.
 - Empty `Open Milestones` is a routing signal, not enough information to decompose by itself. Check `docs/tasks/planning-inbox.md`, `docs/tasks/backlog.md`, relevant task docs, and the prompt before choosing a path.
-- Ask the planning mode question when no evidence identifies either a concrete short-term target or roadmap misalignment.
-- Use `superpowers:brainstorming` first only when docs or prompt evidence says goals, constraints, success criteria, roadmap direction, or phase boundaries are not aligned.
-- Decompose directly when the user already has a concrete short-term target.
+- Ask the planning mode question when no evidence identifies a concrete short-term target or roadmap misalignment.
+- Use `superpowers:brainstorming` only for positive ambiguity evidence.
+- Decompose directly when docs or prompt evidence gives a concrete short-term target.
 - Treat milestone confirmation as the primary routing signal. Tasks in `Roadmap confirmed: no` milestones are provisional planning output, not formally selected execution work.
 - Treat milestone/module/task creation or reshaping as docs governance only. It does not authorize spec writing or implementation.
 - Stop at a planning review pause after creating or reshaping roadmap/task docs.
-- When the user clearly indicates they want to move forward after reviewing planning docs, treat that as approval to follow the recommended next step. The default follow-up is to commit the reviewed planning docs before task-preparation handoff unless the user explicitly says not to commit them; intentional uncommitted continuation is an explicit user-approved exception and must be reported with reason and affected files.
+- When the user clearly indicates they want to move forward after reviewing planning docs, treat that as approval for that default follow-up.
 - Hand off to `task-preparation` only after the current concrete task is chosen from confirmed roadmap state and no hard gate blocks the handoff.
 
 ## Handoff and Closure

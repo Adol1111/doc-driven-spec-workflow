@@ -4,7 +4,7 @@ Low-frequency execution details and stop conditions for simple task execution. R
 
 ## Violations That Require Stopping Immediately
 
-- Coding before branch/worktree isolation.
+- Coding before execution isolation.
 - Skipping the checkpoint because a change seems small.
 - Inferring a task directly from architecture instead of using `milestone-planning` to add or select it in `docs/tasks/`.
 - Creating standalone tasks for routine cleanup, concept clarification, link fixes, renames, formatting, index maintenance, or small docs reorganization that should be handled in the current work round.
@@ -14,23 +14,21 @@ Low-frequency execution details and stop conditions for simple task execution. R
 - Creating a task-local spec or plan in global `docs/specs/` or `docs/plans/` by default.
 - Creating multiple specs for one task instead of revising the existing spec or splitting the task first.
 - Adding work to a completed milestone.
-- Auto-committing docs-only/governance changes before reporting the result or before user commit confirmation.
+- Auto-committing docs-only/governance changes before reporting the result for review, or before review approval.
 - Starting task-local `spec.md` work before reporting freshly changed planning docs for review.
 - Starting another task before resolving branch closing for the current task.
 - Starting a task in milestone `M(n+1)` while `M(n)` still appears open and unclosed, or while the target milestone is still explicitly unconfirmed.
 - Treating a task file as selectable when its milestone is unconfirmed, dependencies are unresolved, or branch closing is unresolved.
 - Treating a destructive cleanup choice as implicitly approved by generic forward-motion language.
 - Quietly changing the meaning of existing tests, weakening their assertions, deleting them, or marking them skip/xfail/todo without explaining why and getting user confirmation.
-- Assuming the workspace is clean or staying on the current branch without explicit user choice.
+- Assuming the workspace is clean, or staying on the current branch without explicit user choice.
 
 ## Execution Details
 
 - Do not default to TDD, plan-driven execution, or heavyweight shared workflows unless the user explicitly asks.
-- Write task-local specs/plans directly in this repository's compact local format.
+- Do not create or revise task-local `spec.md` or `plan.md` in this execution stage.
 - Treat tests and verification as delivery checks, not as a mandatory test-first workflow.
-- Default to no `plan.md`. Create `plan.md` only when a plan trigger is present: ordered changes across 3 or more major files/modules, schema/migration/data changes, public compatibility boundaries, cross-module coordination, phased rollout or flags, non-obvious verification order, multiple slices that remain one task, or a required spike/risk-reduction step.
-- Skip `plan.md` for small single-capability tasks with straightforward implementation order.
-- If plan trigger status is uncertain, name the suspected trigger and ask before writing `plan.md`.
+- If required task-local docs are missing, incomplete, unreviewed, or a `plan.md` trigger is discovered before coding, stop and route back to `task-preparation`.
 - If `milestone-planning` just created the selected task or reshaped its roadmap docs, report those docs for review before task-local `spec.md` work.
 - In that state, a user `continue` may both accept the planning docs and move into `spec.md` drafting unless a hard gate still blocks the handoff.
 - Review approval and routine commit approval are merged by default. Commit reviewed task-local docs when that is the recommended next step before implementation isolation, unless the user already said to keep them uncommitted.
@@ -40,7 +38,8 @@ Low-frequency execution details and stop conditions for simple task execution. R
 - If existing tests need semantic changes because the task intentionally changes behavior, explain the reason and get user confirmation before changing what those tests assert.
 - Small test-file repairs that preserve the original assertion intent do not need separate confirmation.
 
-- If a worktree is needed, prefer `superpowers:using-git-worktrees`; if it is unavailable, use the environment's equivalent git worktree workflow and preserve the same safety checks.
+- Default to creating a dedicated task branch in the current workspace.
+- If a worktree is specifically needed, prefer `superpowers:using-git-worktrees`; if it is unavailable, use the environment's equivalent git worktree workflow and preserve the same safety checks.
 - Before the first implementation edit, tell the user: `Spec/plan review is complete. I am handling branch isolation now before coding.`
 
 ## Task And Status Rules

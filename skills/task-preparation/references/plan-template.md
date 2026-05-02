@@ -2,6 +2,8 @@
 
 Create a plan only when a plan trigger is present. Prefer a compact structure:
 
+The plan supplements the approved `spec.md`. It should focus on implementation sequencing, file touch points, coordination boundaries, and verification order. Do not restate the full spec unless a short recap is needed to make the plan readable on its own.
+
 ```md
 # <Task Name> Implementation Plan
 
@@ -41,6 +43,8 @@ Create a plan only when a plan trigger is present. Prefer a compact structure:
 Notes:
 
 - Prefer `Goal + File Map + 3-5 implementation sections + Verification`
+- Treat the approved `spec.md` as the source of truth for behavior, scope, exclusions, and tradeoffs
+- Keep any recap minimal; avoid rewriting sections that already belong in `spec.md`
 - Favor concise implementation guidance over step-by-step execution scripts
 - Unless the task truly needs it, avoid large code blocks, TDD scaffolding, or commit steps
 - Keep docs-sync work in one compact section instead of many mechanical substeps

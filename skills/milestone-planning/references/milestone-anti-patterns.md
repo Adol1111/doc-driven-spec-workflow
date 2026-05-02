@@ -40,6 +40,6 @@ Stop and reshape if the output looks like any of these.
 
 ## Governance Anti-Patterns
 
-- Auto-committing docs-only/governance changes before reporting the result or before user commit confirmation
+- Auto-committing docs-only/governance changes before reporting the result for review, or before review approval
 - Starting another task before resolving branch closing for the current task
 - Starting a task in milestone `M(n+1)` while `M(n)` still appears open and unclosed, or while the target milestone is still explicitly unconfirmed

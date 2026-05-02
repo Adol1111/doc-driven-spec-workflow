@@ -32,11 +32,11 @@ Notes:
 - Keep each section concise and focused on task-specific decisions and boundaries.
 - Do not add content unrelated to the current task just to fill the template.
 - For very small tasks, sections may be brief, but keep the same information order.
-- Choose the compact spec strictness from the expected execution mode:
-  - same agent continuing immediately in the current session: author-ready is acceptable
-  - another agent, subagent, model, or fresh conversation: default to handoff-ready
+- Choose spec detail from the expected execution mode:
+  - if the same agent continues immediately in the current session, the spec may stay compact and rely on nearby context
+  - if another agent, subagent, model, or fresh conversation may pick up the work, make the spec self-contained enough to execute without chat memory
   - if the execution mode is unclear and the difference matters, ask before drafting
-- For handoff-ready compact specs, make the handoff anchors concrete inside the existing sections:
+- For self-contained compact specs, write the concrete handoff details inside the existing sections:
   - preferred proof samples, fixtures, or evidence sources
   - preferred implementation surface or first modification target
   - per-case acceptance signals stating what each proof case must show to pass

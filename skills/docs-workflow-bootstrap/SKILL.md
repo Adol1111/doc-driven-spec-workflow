@@ -5,15 +5,13 @@ description: Use when initializing, bootstrapping, creating, or scaffolding the 
 
 # Docs Workflow Bootstrap
 
-Initialize the minimum docs-driven workflow scaffold for a repository.
-
-This skill is only for repository documentation bootstrap. It does not plan milestones, create implementation tasks, write specs, or authorize code changes.
+Initialize the minimum docs-driven workflow scaffold for a repository. This skill is only for bootstrap docs governance; it does not plan milestones, create implementation tasks, write specs, or authorize code changes.
 
 ## Composition
 
 - Entry: normally reached from `doc-driven-spec-workflow` when the repository lacks the minimum docs scaffold.
 - Owns: minimum docs entry points and compact bootstrap content.
-- Does not own: roadmap decomposition, task creation, task-local specs, plans, implementation, or branch closing.
+- Does not own: roadmap decomposition, task creation, task-local specs/plans, implementation, or branch closing.
 - Handoff: return to `doc-driven-spec-workflow` after reporting created or changed files, unless the user explicitly asks to continue to planning.
 
 ## Mandatory Rules
@@ -22,8 +20,7 @@ This skill is only for repository documentation bootstrap. It does not plan mile
 - MUST create only the minimum docs entry points unless the user explicitly asks for more.
 - MUST NOT create implementation tasks during bootstrap.
 - If the user provides actual roadmap or task content during bootstrap, record it only as compact `planning-inbox.md` candidate context when explicitly requested, then hand off to `milestone-planning`.
-- MUST NOT create `docs/specs/` or `docs/plans/` by default.
-- MUST NOT write task-local `spec.md` or `plan.md`.
+- MUST NOT create `docs/specs/`, `docs/plans/`, or task-local `spec.md` / `plan.md` by default.
 - MUST report created or changed files and stop.
 
 ## Bootstrap Layout
@@ -52,10 +49,9 @@ Do not create roadmap details during bootstrap unless the user supplies actual r
 
 ## Handoff
 
-After bootstrap:
+After bootstrap, return to `doc-driven-spec-workflow` so it can choose the next stage. Continue directly only when the user explicitly asks:
 
-- Return to `doc-driven-spec-workflow` so it can choose the next stage.
-- Continue directly to `milestone-planning` only when the user explicitly asks to plan milestones, modules, and tasks.
-- Continue directly to `task-preparation` only when the user explicitly asks, a concrete task is selected from confirmed roadmap state, and dependencies and prior hard gates are clear.
+- `milestone-planning` for milestone/module/task planning
+- `task-preparation` for a concrete selected task in confirmed roadmap state with dependencies and prior hard gates clear
 
-Stop after reporting the bootstrap result unless the user explicitly asks to continue.
+Otherwise stop after reporting the bootstrap result.

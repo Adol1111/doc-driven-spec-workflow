@@ -5,7 +5,7 @@ description: Use when a docs-driven repository request is unclear about whether 
 
 # Using Doc-Driven Spec Workflow
 
-Use this root skill only to select and coordinate the next docs-driven stage. Stage-specific skills own bootstrap, planning, specs, plans, implementation, templates, and branch closing.
+Use this root skill only to select and coordinate the next docs-driven stage. Stage-specific skills own the actual bootstrap, planning, spec, plan, execution, and closing behavior.
 
 ## Mandatory Rules
 
@@ -35,7 +35,14 @@ Use `docs-workflow-bootstrap` when any minimum scaffold file is missing: `docs/i
 
 Use `superpowers:brainstorming` for positive ambiguity evidence only. Missing or stale docs alone route to bootstrap or planning.
 
-Use `task-preparation` only when the task milestone has `Roadmap confirmed: yes`, previous milestone closure is resolved when crossing milestones, status is `planned` or `in_progress`, dependencies are satisfied or waived, no prior hard gate remains unresolved, and the user selected it or `docs/tasks/` clearly identifies it as next by order/status.
+Use `task-preparation` only when all are true:
+
+- the task milestone has `Roadmap confirmed: yes`
+- previous milestone closure is resolved when crossing milestones
+- task status is `planned` or `in_progress`
+- dependencies are satisfied or waived
+- no prior hard gate remains unresolved
+- the user selected it, or `docs/tasks/` clearly identifies it as next by order/status
 
 Do not skip from ambiguous scope to spec writing, use task execution to invent roadmap structure, or keep planning after the question is current-task execution.
 
@@ -48,14 +55,14 @@ Do not skip from ambiguous scope to spec writing, use task execution to invent r
 
 At each handoff, briefly restate:
 
-- what has already been decided
-- what remains undecided
-- what the next skill is responsible for
+- what is decided
+- what is undecided
+- what the next skill owns
 - whether the next stop is a review pause or a hard gate
 
-When handing off from `task-preparation`, include the task-local docs follow-up outcome explicitly: reviewed docs committed by default unless the user explicitly refused that commit, or intentionally left uncommitted with affected files listed.
+From `task-preparation`, also state the docs follow-up outcome explicitly: committed by default unless the user explicitly refused that commit, or intentionally left uncommitted with affected files listed.
 
-Treat any user message that clearly means "move forward" as permission to advance after a review pause. If the recommended next step includes a routine commit, status update, branch isolation, or stage handoff, do that work without asking a second approval question. Stop only when a hard gate is outstanding.
+Treat any user message that clearly means "move forward" as permission to advance after a review pause. If the recommended next step includes a routine commit, status update, isolation step, or stage handoff, do it without a second approval question. Stop only when a hard gate is outstanding.
 
 ## Response Shape
 
