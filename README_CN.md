@@ -226,6 +226,7 @@ module 层是可选的。当 milestone 只有一个真实能力域时，使用 `
 Superpowers 是更完整的软件开发方法论，包含 `superpowers:brainstorming`、planning、TDD、subagents、code review、verification、branch finishing 等一组可组合 skills。这个 workflow 刻意更窄：
 
 - 它围绕项目长期文档结构组织：`docs/architecture/`、`docs/tasks/`、`docs/context/`、task-local `spec.md` 和可选 `plan.md`。
+- 它是以 milestone 为中心、而不是以单个 task 为中心的 workflow：具体 task work 应该从已确认的 roadmap state 中产生，阶段推进由 milestone、task selection 和 review checkpoints 共同约束，而不是只跟随 task execution 前进。
 - 它把 `docs/tasks/` 当作 roadmap decomposition 和选择具体工作的 source of truth，避免 agent 直接从 architecture notes 发明实现任务。
 - 它区分 docs governance 和 implementation permission，因此 architecture edits、roadmap reshaping 和 index maintenance 不会自动授权写代码。
 - 它把 workflow routing、roadmap planning 和 current-task execution 拆成不同 skills，而不是堆进一个过大的说明文件里。

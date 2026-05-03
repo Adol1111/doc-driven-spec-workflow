@@ -226,6 +226,7 @@ If your agent environment does not have these skills, use equivalent clarificati
 Superpowers is a broader software development methodology with many composable skills including `superpowers:brainstorming`, planning, TDD, subagents, code review, verification, and branch finishing. This workflow is intentionally narrower:
 
 - It is organized around a repository's durable documentation structure: `docs/architecture/`, `docs/tasks/`, `docs/context/`, task-local `spec.md`, and optional `plan.md`.
+- It is milestone-centric rather than task-centric: concrete task work is expected to emerge from confirmed roadmap state, and phase progression is governed by milestone, task-selection, and review checkpoints instead of task execution alone.
 - It treats `docs/tasks/` as the source of truth for both roadmap decomposition and selecting concrete work.
 - It separates docs governance from implementation permission, so architecture edits, roadmap reshaping, and index maintenance do not automatically authorize code changes.
 - It splits workflow routing, roadmap planning, and current-task execution into separate skills instead of collapsing them into one oversized instruction file.
