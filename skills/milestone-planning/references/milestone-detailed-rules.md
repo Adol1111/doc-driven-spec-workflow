@@ -24,6 +24,7 @@ Detailed mandatory rules for milestone planning. See SKILL.md for core framework
 ## Milestone Entry and Closure
 
 - Allow newly discovered follow-up discussion points to be recorded in the current milestone's `Handoff Notes` first when their final destination is not decided yet.
+- When a new follow-up item is discovered during active milestone execution, default to recording it in the current milestone's `Handoff Notes` first. Skip that only when the user explicitly decides the item is high priority enough to interrupt the current milestone and reorder or insert work immediately.
 - Treat `Handoff Notes` as a temporary transfer queue. Once a handoff item is attached to a later milestone, backlog, or equivalent planning location, remove it from the current milestone.
 - Treat placeholder names or other provisional milestone markers as fallback routing signals only when no explicit confirmation flag exists.
 - Ask a routing question before recommending a path whenever it is still unclear whether the user needs roadmap alignment or direct decomposition.

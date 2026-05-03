@@ -246,6 +246,7 @@ Reason:
 - `cross-milestone-transition-requires-closure`: crossing milestones requires closure/confirmation first.
 - `milestone-close-handoff-notes-blocked`: non-empty `Handoff Notes` blocks closure.
 - `milestone-close-handoff-notes-cleared`: cleared handoff notes allow closure governance.
+- `new-followup-defaults-to-handoff-notes`: newly discovered follow-up during an active milestone stays in `Handoff Notes` until explicitly classified.
 - `completed-milestone-frozen-followup`: completed milestone follow-up moves to new governance/backlog/inbox.
 
 ### Task Preparation

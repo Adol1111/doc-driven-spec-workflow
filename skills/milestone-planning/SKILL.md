@@ -50,6 +50,7 @@ Plan roadmap structure before task-local spec work. This skill owns `Milestone -
 ## Handoff and Closure
 
 - `Handoff Notes`: temporary transfer queue for follow-up findings. Resolve before milestone closure.
+- Newly discovered follow-up work during an active milestone should go to that milestone's `Handoff Notes` first by default. Skip that only when the user explicitly decides the item is high priority enough to interrupt the current milestone and reorder or insert work immediately.
 - **Before closure**: every `Handoff Notes` item must be resolved to current-milestone open work, later milestone, `docs/tasks/backlog.md`, or removal.
 - Close milestone when original exit criteria are satisfied.
 - Completed milestones are frozen; add follow-up work to a new open milestone.
