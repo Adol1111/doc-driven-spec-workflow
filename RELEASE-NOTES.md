@@ -19,6 +19,7 @@ This project follows Conventional Commits for commit history, but release notes 
 - Task-local templates live under `skills/task-preparation/references/`, and simple execution rules live under `skills/task-execution-simple/references/`.
 - Workflow-routing expectations are being updated in parallel with the stage rename.
 - Auto follow-up after reviewed task-local docs is now documented more explicitly: committing reviewed `spec.md` and `plan.md` is the default unless the user explicitly says not to commit them, while leaving them uncommitted is an explicit exception that must include a reason and affected files before execution handoff.
+- Roadmap task directories now use stable, unnumbered slugs. Task order is controlled by milestone or module `index.md` list order so inserting or reordering tasks does not require renaming existing task directories.
 
 ## v0.5.1
 
@@ -115,7 +116,7 @@ This project follows Conventional Commits for commit history, but release notes 
 - `milestone-planning` now treats `Handoff Notes` as a temporary transfer queue that must be empty before milestone closure.
 - milestone roadmap docs now support an optional `docs/tasks/backlog.md` for roadmap items that are worth keeping but not yet attached to a milestone.
 - tasks inside milestones marked `Roadmap confirmed: no` are now treated as candidate tasks only until milestone entry is explicitly confirmed.
-- roadmap templates now simplify module indexes by removing standalone `Recommended Order` and `Dependency Notes` sections; default order follows task numbering and task-level `Dependencies`.
+- roadmap templates now simplify module indexes by removing standalone `Recommended Order` and `Dependency Notes` sections; default order follows the documented task order convention and task-level `Dependencies`.
 - execution-side index templates are now fully English again, matching the repository convention outside `README_CN.md`.
 
 ### Notes

@@ -40,7 +40,7 @@ The spec should explicitly capture enough concrete anchors for direct subagent h
 
 When running a file-generating check, create or propose only this task-local spec under `tests/workflow-routing/expected/task-preparation/selected-task-spec-subagent-handoff-default/`:
 
-- `docs/tasks/m1-private-beta/handoff/03-source-proof-subagent/spec.md`
+- `docs/tasks/m1-private-beta/handoff/source-proof-subagent/spec.md`
 
 ## Must Not
 

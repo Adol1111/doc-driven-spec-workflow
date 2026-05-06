@@ -43,6 +43,7 @@ Plan roadmap structure before task-local spec work. This skill owns `Milestone -
 - Decompose directly when docs or prompt evidence gives a concrete short-term target.
 - Treat milestone confirmation as the primary routing signal. Tasks in `Roadmap confirmed: no` milestones are provisional planning output, not formally selected execution work.
 - Treat milestone/module/task creation or reshaping as docs governance only. It does not authorize spec writing or implementation.
+- Use stable task directory slugs without numeric order prefixes. Task order is expressed by the order of task links in the relevant `index.md`, not by task filenames.
 - Stop at a planning review pause after creating or reshaping roadmap/task docs.
 - When the user clearly indicates they want to move forward after reviewing planning docs, treat that as approval for that default follow-up.
 - Hand off to `task-preparation` only after the current concrete task is chosen from confirmed roadmap state and no hard gate blocks the handoff.

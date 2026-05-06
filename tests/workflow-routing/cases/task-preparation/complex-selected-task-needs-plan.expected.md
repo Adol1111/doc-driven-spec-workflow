@@ -16,7 +16,7 @@
 
 When running a file-generating check, create or propose only this task-local plan under `tests/workflow-routing/expected/task-preparation/complex-selected-task-needs-plan/`:
 
-- `docs/tasks/m1-private-beta/api-compatibility/02-session-token-migration/plan.md`
+- `docs/tasks/m1-private-beta/api-compatibility/session-token-migration/plan.md`
 
 ## Must Not
 

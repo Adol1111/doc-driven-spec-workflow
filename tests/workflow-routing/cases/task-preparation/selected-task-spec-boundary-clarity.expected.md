@@ -41,7 +41,7 @@ The spec should explicitly capture:
 
 When running a file-generating check, create or propose only this task-local spec under `tests/workflow-routing/expected/task-preparation/selected-task-spec-boundary-clarity/`:
 
-- `docs/tasks/m1-private-beta/handoff/01-source-eligibility-boundary/spec.md`
+- `docs/tasks/m1-private-beta/handoff/source-eligibility-boundary/spec.md`
 
 ## Must Not
 

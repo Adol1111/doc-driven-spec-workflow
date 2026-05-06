@@ -6,7 +6,7 @@
 
 ## Expected Behavior
 
-- Explains that the first `continue` should accept the reviewed planning docs and move into task-local `spec.md` drafting for `01-login-session`.
+- Explains that the first `continue` should accept the reviewed planning docs and move into task-local `spec.md` drafting for `login-session`.
 - Makes clear that the planning-docs commit, if used, is part of that same first continuation rather than a separately approved gate.
 - Explains that the second `continue` should approve the reviewed `spec.md` and move to the next routine task-execution step.
 - Makes clear that the second `continue` should not jump straight into coding if a plan trigger, branch-isolation step, or other non-destructive operational step still comes first.

@@ -211,6 +211,8 @@ docs/
 
 module 层是可选的。当 milestone 只有一个真实能力域时，使用 `docs/tasks/<milestone>/<task>/`。只有当 milestone 包含多个长期、有意义的能力域，并且它们有不同 ownership、dependencies、risk profiles、release boundaries 或 acceptance criteria 时，才使用 `docs/tasks/<milestone>/<module>/<task>/`。
 
+task 目录名应该是稳定 slug，而不是顺序标记。把 task 按预期顺序放在 milestone 或 module 的 `index.md` 里；插入或重排任务时，不应该为了反映顺序而改名已有 task 目录。
+
 ## 兼容说明
 
 `task-preparation` 和 `task-execution-simple` 在 concrete task 已从已确认 roadmap state 中选定、dependencies 和 prior hard gates 都清楚后可以独立使用，但这个仓库的整体 workflow 设计上会和 [obra/superpowers](https://github.com/obra/superpowers) 中的可选澄清与执行安全 skills 组合：
@@ -324,7 +326,7 @@ cp -R skills/<skill-name> "${CODEX_HOME:-$HOME/.codex}/skills/"
 当一个仓库已经有、或希望建立如下 docs-driven workflow 时使用：
 
 - `docs/architecture/`：稳定行为和约束。
-- `docs/tasks/`：milestones、task ordering、status 和 dependencies。
+- `docs/tasks/`：milestones、由 index 驱动的 task 顺序、status 和 dependencies。
 - `docs/context/`：支持性 research。
 - Task-local `task.md`、`spec.md` 和可选 `plan.md`。
 

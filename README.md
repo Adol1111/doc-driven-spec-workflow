@@ -211,6 +211,8 @@ Task-local `spec.md` and `plan.md` files should live with the task by default. U
 
 The module layer is optional. Use `docs/tasks/<milestone>/<task>/` when a milestone has one real capability area. Use `docs/tasks/<milestone>/<module>/<task>/` only when a milestone has multiple durable capability areas with different ownership, dependencies, risk profiles, release boundaries, or acceptance criteria.
 
+Task directory names should be stable slugs, not order markers. Put tasks in the intended order in the milestone or module `index.md`; inserting or reordering work should not require renaming existing task directories.
+
 ## Compatibility Notes
 
 The `task-preparation` and `task-execution-simple` skills can work on their own after a concrete task is selected from confirmed roadmap state with dependencies and prior hard gates clear, but this repository is designed to compose with optional clarification and execution-safety skills from [obra/superpowers](https://github.com/obra/superpowers):
@@ -347,7 +349,7 @@ Restart the agent after installation.
 Use this skill when a repository has, or should have, a documentation-driven workflow based on:
 
 - `docs/architecture/` for stable behavior and constraints.
-- `docs/tasks/` for milestones, task ordering, status, and dependencies.
+- `docs/tasks/` for milestones, index-driven task order, status, and dependencies.
 - `docs/context/` for supporting research.
 - Task-local `task.md`, `spec.md`, and optional `plan.md` files.
 

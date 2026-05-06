@@ -36,7 +36,7 @@ The `## Design` section may use task-specific subheadings. Boundary-oriented des
 
 When running a file-generating check, create or propose only this task-local spec under `tests/workflow-routing/expected/task-preparation/selected-task-spec/`:
 
-- `docs/tasks/m1-private-beta/authentication/01-login-session/spec.md`
+- `docs/tasks/m1-private-beta/authentication/login-session/spec.md`
 
 ## Must Not
 

@@ -34,7 +34,8 @@ This directory stores project-level task documents grouped by milestone, optiona
 - `planning-inbox.md` stores unconfirmed goals, opportunities, and roadmap candidates until they are promoted into a milestone, moved to backlog, or discarded
 - `backlog.md` is optional and stores roadmap items that are not yet attached to a milestone
 - Module directories are optional; use them only when a milestone has multiple meaningful capability areas
-- Task directories contain `task.md`, task-local `spec.md`, and optional `plan.md`
+- Task directories use stable, unnumbered slugs and contain `task.md`, task-local `spec.md`, and optional `plan.md`
+- Task order is the ordered-list order of task links in the relevant milestone or module `index.md`
 - Milestones are frozen after completion; add follow-up work to a new open milestone
 - Milestones do not use `[completed/total]`; module progress lives in milestone indexes
 ```
@@ -54,7 +55,7 @@ This directory stores project-level task documents grouped by milestone, optiona
 - [Some Module [1/3]](./some-module/index.md)
 
 ## Tasks
-- [01 Some Task](./01-some-task/task.md)
+1. [Some Task](./some-task/task.md)
 
 ## Status
 - Current milestone: yes/no/next/later
@@ -80,13 +81,13 @@ Use either `Modules` or `Tasks`. Do not create a single catch-all module when th
 - ...
 
 ## Open Tasks
-- `planned`: [01 Some Task](./01-some-task/task.md)
+1. `planned`: [Some Task](./some-task/task.md)
 
 ## Completed Tasks
-- [02 Done Task](./02-done-task/task.md)
+- [Done Task](./done-task/task.md)
 
 ## Notes
-- Default order follows task numbering unless a task's own `Dependencies` says otherwise.
+- Default order follows this ordered list unless a task's own `Dependencies` says otherwise.
 ```
 
 ## `docs/tasks/<milestone>/<task>/task.md`
@@ -166,6 +167,8 @@ Unconfirmed goals, opportunities, and roadmap candidates live here until they ar
 - `docs/tasks/backlog.md` is optional. Use it for roadmap items that are not yet attached to a milestone.
 - Modules are optional durable capability areas, not one-off buckets.
 - If a proposed module has fewer than three likely tasks, merge it unless it has a distinct long-term domain, owner, lifecycle, risk profile, release boundary, or acceptance boundary.
+- Task directory slugs are stable identifiers, not ordering controls; do not add numeric prefixes.
+- Reorder tasks by editing the relevant `index.md` list order and dependency links, not by renaming task directories.
 - Do not create tasks for implementation or verification sub-steps such as code review, tests, migrations, single files, or refactor slices.
 - Do not create standalone tasks for routine cleanup, concept clarification, link fixes, renames, formatting, index maintenance, or small docs reorganization.
 - Cross-milestone sequencing belongs in milestone-level notes or exit criteria, not repeated task-level `Depends on` links.
