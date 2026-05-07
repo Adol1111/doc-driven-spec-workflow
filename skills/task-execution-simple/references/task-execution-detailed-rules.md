@@ -20,6 +20,7 @@ Low-frequency execution details and stop conditions for simple task execution. R
 - Starting a task in milestone `M(n+1)` while `M(n)` still appears open and unclosed, or while the target milestone is still explicitly unconfirmed.
 - Treating a task file as selectable when its milestone is unconfirmed, dependencies are unresolved, or branch closing is unresolved.
 - Treating a destructive cleanup choice as implicitly approved by generic forward-motion language.
+- Stopping for implementation review while verified task-branch implementation work remains uncommitted, unless committing is blocked by unrelated user changes, unresolved verification failure, or explicit user instruction.
 - Quietly changing the meaning of existing tests, weakening their assertions, deleting them, or marking them skip/xfail/todo without explaining why and getting user confirmation.
 - Assuming the workspace is clean, or staying on the current branch without explicit user choice.
 
@@ -37,6 +38,9 @@ Low-frequency execution details and stop conditions for simple task execution. R
 - Prefer fixing production code so existing tests keep expressing the same behavior.
 - If existing tests need semantic changes because the task intentionally changes behavior, explain the reason and get user confirmation before changing what those tests assert.
 - Small test-file repairs that preserve the original assertion intent do not need separate confirmation.
+- If `plan.md` includes commit points, treat them as natural stable boundaries. They can appear after any implementation section, not fixed stage numbers, and they are used only when the slice is verified, reviewable, and reversible.
+- If no `plan.md` exists, or the task is simple, make a final verified implementation commit before the implementation review pause.
+- Do not ask the user to review ordinary uncommitted implementation work before committing it on the task branch. Ask first only when the commit would include unrelated user edits, failing verification, or a hard gate.
 
 - Default to creating a dedicated task branch in the current workspace.
 - If a worktree is specifically needed, prefer `superpowers:using-git-worktrees`; if it is unavailable, use the environment's equivalent git worktree workflow and preserve the same safety checks.

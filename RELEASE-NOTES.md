@@ -6,12 +6,22 @@ This project follows Conventional Commits for commit history, but release notes 
 
 ## Unreleased
 
+No unreleased changes yet.
+
+## v0.5.2
+
 ### Breaking Changes
 
 - The execution-stage split is complete: the main workflow now routes through `task-preparation` and `task-execution-simple` instead of the old combined `task-spec-execution` stage.
 - `task-preparation` owns task-local `spec.md`, optional `plan.md`, review pauses, and routine follow-up such as reviewed-doc commits.
 - `task-execution-simple` owns branch/worktree isolation, readiness, implementation, verification, implementation review, and branch-closing hard gates.
 - During migration, the legacy `task-spec-execution` skill may remain installed as a compatibility facade while prompts, habits, and tests transition to the new stage names.
+
+### Fixes
+
+- `task-execution-simple` now treats verified implementation commits as part of execution before implementation review. Agents should commit completed task-branch work first, then stop for review of the committed branch or merge diff.
+- `task-execution-simple` now distinguishes routine task-branch commits from hard gates. It should ask before committing only when the commit would include unrelated user changes, unresolved verification failures, or another hard gate.
+- `plan.md` can now include optional commit points at natural stable boundaries. These checkpoints are based on engineering judgment, not fixed stage numbers or one commit per implementation section.
 
 ### Notes
 
@@ -20,6 +30,10 @@ This project follows Conventional Commits for commit history, but release notes 
 - Workflow-routing expectations are being updated in parallel with the stage rename.
 - Auto follow-up after reviewed task-local docs is now documented more explicitly: committing reviewed `spec.md` and `plan.md` is the default unless the user explicitly says not to commit them, while leaving them uncommitted is an explicit exception that must include a reason and affected files before execution handoff.
 - Roadmap task directories now use stable, unnumbered slugs. Task order is controlled by milestone or module `index.md` list order so inserting or reordering tasks does not require renaming existing task directories.
+- Simple tasks may still use a single final implementation commit.
+- Complex plans may mark intermediate commit points when a slice is verified, reviewable, and reversible.
+- Task-local plans should stay compact. Short snippets are allowed for critical interfaces, data shapes, migration rules, or tricky algorithm boundaries, but large copyable implementation drafts should stay out of `plan.md`.
+- Workflow-routing coverage now includes implementation review after commit and natural-boundary plan commit points.
 
 ## v0.5.1
 

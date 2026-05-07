@@ -34,6 +34,11 @@ The plan supplements the approved `spec.md`. It should focus on implementation s
 
 - Use concise bullets for implementation scope, boundaries, and key notes
 
+## Commit Points
+
+- Optional: after `<Implementation Section>` when the completed slice is verified, reviewable, and reversible
+- Optional: final task commit after verification and docs/status updates
+
 ## Verification
 
 - `command`
@@ -46,5 +51,6 @@ Notes:
 - Treat the approved `spec.md` as the source of truth for behavior, scope, exclusions, and tradeoffs
 - Keep any recap minimal; avoid rewriting sections that already belong in `spec.md`
 - Favor concise implementation guidance over step-by-step execution scripts
-- Unless the task truly needs it, avoid large code blocks, TDD scaffolding, or commit steps
+- Use short code snippets only when they clarify a critical interface, data shape, migration rule, or tricky algorithm boundary. Avoid large code blocks or implementation drafts that can be copied wholesale into production code.
+- Commit points are optional judgment-based checkpoints. Do not add one per section mechanically; simple tasks may only need the final implementation commit.
 - Keep docs-sync work in one compact section instead of many mechanical substeps

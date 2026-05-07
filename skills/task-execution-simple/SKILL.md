@@ -16,7 +16,8 @@ Owns execution isolation, readiness, implementation edits, verification, impleme
 | Branch | Default never implement on the current branch; create a dedicated task branch by default unless the user explicitly chooses otherwise or a worktree workflow is specifically needed. |
 | Readiness | Handle execution isolation and any other pre-code readiness work before implementation edits. |
 | Verification | Verify implementation and update docs/status in the same round when behavior, API shape, or task state changed. |
-| Review | Stop for implementation review before destructive cleanup or branch deletion. |
+| Commit | Commit verified implementation work on the task branch before implementation review. If `plan.md` defines commit points, commit at those natural stable points after local verification for that slice. |
+| Review | Stop for implementation review after the verified implementation is committed, before merge, destructive cleanup, or branch deletion. |
 | Closing | Resolve only any remaining hard gate such as branch deletion or destructive cleanup after implementation review. |
 
 After an implementation review pause, treat any clear forward-motion message as approval to follow the recommended non-destructive next step. Ask a separate approval question only for hard gates.
@@ -37,10 +38,19 @@ After an implementation review pause, treat any clear forward-motion message as 
 ## Testing and Verification
 
 - Follow the task-local `spec.md` and optional `plan.md` for testing and verification expectations.
+- Treat `plan.md` commit points as judgment-based checkpoints, not mandatory per-stage commits. Simple tasks may only need the final task commit; complex tasks may commit after any stage that forms a verified, reviewable, reversible stable state.
 - If relevant existing automated tests fail during the task, do not ignore them just because the task did not require adding new unit tests.
 - Prefer fixing production code so existing tests keep expressing the same behavior.
 - If existing tests need semantic changes because the task intentionally changes behavior, explain the reason and get user confirmation before changing what those tests assert.
 - Small test-file repairs that preserve the original assertion intent do not need separate confirmation.
+
+## Implementation Commits
+
+- Default to committing completed implementation work before asking for user review. The review pause is for reviewing the committed task branch or merge diff, not for deciding whether ordinary task work may be committed.
+- Use concise conventional commits when the repository uses them; keep each commit at a coherent, verified task slice.
+- When there is no `plan.md`, expect one final task commit unless the work naturally divides into multiple independently verified slices.
+- When there is a `plan.md`, follow any listed commit points and use engineering judgment if a point should move because the actual stable boundary changed.
+- Do not ask before routine implementation commits on the task branch. Ask only if committing would include unrelated user changes, unresolved failing verification, or another hard gate.
 
 ## Docs Boundaries
 
@@ -58,8 +68,9 @@ Use the existing execution references when needed:
 2. Create execution isolation and complete readiness work before code edits.
 3. Implement one concrete task.
 4. Verify behavior and update docs/status affected by implementation.
-5. Stop for implementation review.
-6. Resolve branch closing and cleanup hard gates only when explicitly confirmed.
+5. Commit verified implementation work, including any planned commit-point slices.
+6. Stop for implementation review of the committed task branch or merge diff.
+7. Resolve branch closing and cleanup hard gates only when explicitly confirmed.
 
 ## When To Use
 
@@ -74,5 +85,6 @@ Do not use when:
 ## Common Mistakes
 
 - Starting implementation before execution isolation is complete
+- Stopping for implementation review with routine verified task work left uncommitted
 - Treating a normal forward-motion message as approval for destructive cleanup
 - Rewriting roadmap or task structure here instead of routing back to `milestone-planning`
