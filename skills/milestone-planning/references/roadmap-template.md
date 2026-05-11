@@ -165,6 +165,7 @@ Unconfirmed goals, opportunities, and roadmap candidates live here until they ar
 - Completed milestones are frozen; add follow-up work to a new open milestone.
 - `docs/tasks/planning-inbox.md` is the routing source for goals that are not yet milestone-shaped.
 - `docs/tasks/backlog.md` is optional. Use it for roadmap items that are not yet attached to a milestone.
+- Task `Status` checkboxes are mutually exclusive. Exactly one of `planned`, `in_progress`, `blocked`, or `completed` should be checked at a time; do not treat them as a checklist of completed phases.
 - Modules are optional durable capability areas, not one-off buckets.
 - If a proposed module has fewer than three likely tasks, merge it unless it has a distinct long-term domain, owner, lifecycle, risk profile, release boundary, or acceptance boundary.
 - Task directory slugs are stable identifiers, not ordering controls; do not add numeric prefixes.

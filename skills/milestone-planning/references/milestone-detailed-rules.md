@@ -53,6 +53,7 @@ Detailed mandatory rules for milestone planning. See SKILL.md for core framework
 - Write `Exit Criteria` as checklist items and mark them complete before milestone closure; do not remove them after closure.
 - `Open Tasks` lists only `planned`, `in_progress`, and `blocked`.
 - `Completed Tasks` lists only `completed`.
+- Task `Status` checkboxes in `task.md` are a single-choice state marker, not a phase checklist. Keep exactly one checked: `planned`, `in_progress`, `blocked`, or `completed`.
 - Task directory slugs should be stable identifiers without numeric order prefixes.
 - Default task order follows the relevant milestone or module `index.md` list order unless a task's own `Dependencies` says otherwise.
 - Reordering or inserting tasks should update only the relevant `index.md` ordering and dependency links when possible; do not rename existing task directories just to reflect order changes.
