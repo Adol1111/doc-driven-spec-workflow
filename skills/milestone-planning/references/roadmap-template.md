@@ -40,7 +40,7 @@ This directory stores project-level task documents grouped by milestone, optiona
 - Milestones do not use `[completed/total]`; module progress lives in milestone indexes
 ```
 
-## `docs/tasks/<milestone>/index.md`
+## `docs/tasks/<milestone>/index.md` with modules
 
 ```md
 # <Milestone Name>
@@ -53,9 +53,6 @@ This directory stores project-level task documents grouped by milestone, optiona
 
 ## Modules
 - [Some Module [1/3]](./some-module/index.md)
-
-## Tasks
-1. [Some Task](./some-task/task.md)
 
 ## Status
 - Current milestone: yes/no/next/later
@@ -70,9 +67,41 @@ This directory stores project-level task documents grouped by milestone, optiona
 - After completion, do not add new modules or tasks here
 ```
 
-Use either `Modules` or `Tasks`. Do not create a single catch-all module when the milestone has only one real capability area.
+## `docs/tasks/<milestone>/index.md` without modules
+
+```md
+# <Milestone Name>
+
+## Goal
+- ...
+
+## Exit Criteria
+- [ ] ...
+
+## Open Tasks
+1. `planned`: [Some Task](./some-task/task.md)
+
+## Completed Tasks
+- [Done Task](./done-task/task.md)
+
+## Status
+- Current milestone: yes/no/next/later
+- Roadmap confirmed: yes/no
+- When `Roadmap confirmed: no`, treat listed tasks as candidate tasks only until milestone entry is explicitly confirmed.
+
+## Handoff Notes
+- ...
+
+## Notes
+- When complete, move this milestone from `Open Milestones` to `Completed Milestones`
+- After completion, do not add new modules or tasks here
+```
+
+Choose one of the two milestone shapes above. Do not mix `Modules` with milestone-level task lists in the same file. Do not create a single catch-all module when the milestone has only one real capability area.
 
 ## `docs/tasks/<milestone>/<module>/index.md`
+
+This template intentionally looks similar to the milestone index, but modules omit milestone-only governance fields such as `Status` and `Handoff Notes`.
 
 ```md
 # <Module Name> Tasks
@@ -120,6 +149,8 @@ Use this shape when the milestone has no module layer:
 ## Notes
 - Keep detailed implementation steps in task-local `spec.md` or optional `plan.md`.
 ```
+
+`Status` is a single-choice state marker. Exactly one of `planned`, `in_progress`, `blocked`, or `completed` should be checked at a time.
 
 Use this path when modules exist:
 
