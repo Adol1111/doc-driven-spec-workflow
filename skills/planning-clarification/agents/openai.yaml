@@ -1,0 +1,4 @@
+interface:
+  display_name: "Planning Clarification"
+  short_description: "Clarify ambiguous direction before roadmap decomposition"
+  default_prompt: "Use $planning-clarification to clarify goals, constraints, success criteria, and now-versus-later boundaries before roadmap decomposition or task-local spec work."
