@@ -4,9 +4,19 @@ User-facing workflow, installation, and migration changes are documented here.
 
 This project follows Conventional Commits for commit history, but release notes focus on what users need to know when adopting or upgrading the workflow.
 
-## Unreleased
+## v0.6.0
 
-No unreleased changes yet.
+### Features
+
+- Added local `planning-clarification` as the planning-stage clarification skill. It replaces the repository's dependency on external `superpowers:brainstorming` for docs-driven routing.
+- Rewrote the main stage `SKILL.md` files into a lighter `write-a-skill` style: clearer descriptions, shorter main instructions, and progressive disclosure through references.
+- `task-preparation` now makes its clarification style explicit: inspect code/docs first, then ask one question at a time when task-local boundaries or proof requirements are still unclear.
+- `task-execution-simple` now keeps simple branch-closing behavior local instead of pointing users to external branch-finishing skills.
+
+### Notes
+
+- This release preserves stage boundaries while reducing cross-skill and external workflow coupling.
+- Historical release notes below still describe the workflow as it existed in those versions, including older Superpowers-based routing and the pre-rename staged model.
 
 ## v0.5.2
 
