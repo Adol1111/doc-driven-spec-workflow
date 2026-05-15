@@ -187,7 +187,7 @@ Unconfirmed goals, opportunities, and roadmap candidates live here until they ar
 - Source: <user request, research note, handoff, or other origin>
 - Problem: <what need or opportunity this represents>
 - Current question: <what must be decided next>
-- Next routing: brainstorming | milestone-planning | backlog | discard
+- Next routing: planning-clarification | milestone-planning | backlog | discard
 ```
 
 ## Rules

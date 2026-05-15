@@ -15,8 +15,9 @@ Detailed mandatory rules for milestone planning. See SKILL.md for core framework
 - First determine whether the user needs roadmap alignment or decomposition of an already-defined target whenever the current situation is unclear.
 - Treat an empty `Open Milestones` list as a routing signal, not enough information to decompose by itself.
 - When `Open Milestones` is empty, inspect `docs/tasks/planning-inbox.md`, `docs/tasks/backlog.md`, relevant task docs, and the current prompt for evidence of the next planning mode. Do not infer roadmap state from the empty list alone.
-- When `Open Milestones` is empty and neither docs nor prompt gives evidence of a concrete short-term target or misaligned roadmap goals, ask the planning mode question before recommending `superpowers:brainstorming` or decomposition.
+- When `Open Milestones` is empty and neither docs nor prompt gives evidence of a concrete short-term target or misaligned roadmap goals, ask the planning mode question before recommending `planning-clarification` or decomposition.
 - When `Open Milestones` is empty and docs or prompt gives evidence of a concrete short-term target, decompose that target directly with `milestone-planning`.
+- If planning direction is still unresolved, do not decompose roadmap structure yet; route to `planning-clarification`.
 - Treat milestone confirmation as the primary routing signal for task decomposition. If a milestone is explicitly unconfirmed, ask whether to re-evaluate milestone structure or continue on the current path.
 - Treat tasks inside a milestone marked `Roadmap confirmed: no` as provisional candidate tasks for planning only, not as formally selected execution tasks.
 - Treat cross-milestone movement as a separate governance decision from "start the next task". If the user appears to be moving from one milestone to another, first resolve whether the previous milestone should be closed and whether the next milestone path is confirmed.
@@ -29,11 +30,12 @@ Detailed mandatory rules for milestone planning. See SKILL.md for core framework
 - Treat placeholder names or other provisional milestone markers as fallback routing signals only when no explicit confirmation flag exists.
 - Ask a routing question before recommending a path whenever it is still unclear whether the user needs roadmap alignment or direct decomposition.
 - Treat that routing question as the required first response in ambiguous cases. Do not explain the recommended route, propose next steps, or start decomposition before the user answers.
-- Use `superpowers:brainstorming` first when docs or prompt evidence says goals, constraints, success criteria, roadmap direction, or phase boundaries are not aligned. If `Open Milestones` is empty because roadmap direction is not aligned, use `superpowers:brainstorming` to align direction before detailed decomposition.
-- Skip `superpowers:brainstorming` and decompose directly when the user already has a concrete short-term target, especially in enterprise or iteration-driven work with a clear case, scope, or delivery outcome.
+- Use `planning-clarification` first when docs or prompt evidence says goals, constraints, success criteria, roadmap direction, or phase boundaries are not aligned. If `Open Milestones` is empty because roadmap direction is not aligned, use `planning-clarification` to align direction before detailed decomposition.
+- Skip `planning-clarification` and decompose directly when the user already has a concrete short-term target, especially in enterprise or iteration-driven work with a clear case, scope, or delivery outcome.
 - Stop at a planning review pause after creating or reshaping roadmap/task docs.
 - If the user clearly indicates they want to move forward after reviewing those planning docs, treat that as approval to follow the recommended next step, including committing the reviewed docs when appropriate.
 - Hand off to `task-preparation` only after the current concrete task is chosen from confirmed roadmap state and no hard gate blocks the handoff.
+- Before handoff, state `Decided`, `Undecided`, `Next skill`, and `Stop point`.
 - Treat milestone/module/task creation or reshaping as docs governance. Updating roadmap structure does not by itself authorize spec writing or implementation.
 - Close a milestone when its original exit criteria are satisfied, even if the work surfaced new follow-up findings for later milestones. Record those findings as handoff context or new roadmap items instead of keeping the finished milestone artificially open.
 - Clear `Handoff Notes` before milestone closure by resolving each item into exactly one outcome: current-milestone open work, a later milestone, `docs/tasks/backlog.md`, or removal if it is no longer worth tracking.
