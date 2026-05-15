@@ -10,7 +10,7 @@
 - Routes directly to `milestone-planning`.
 - Treats the inbox candidate as a concrete short-term target for roadmap decomposition.
 - Proposes or prepares to propose milestone/module/task boundaries with rationale.
-- Does not detour into `superpowers:brainstorming` because the candidate is already ready for decomposition.
+- Does not detour into `planning-clarification` because the candidate is already ready for decomposition.
 
 ## Expected File Changes
 
@@ -19,7 +19,7 @@ None.
 ## Must Not
 
 - Must not ask the generic planning mode question.
-- Must not route to `superpowers:brainstorming`.
+- Must not route to `planning-clarification`.
 - Must not route directly to `task-preparation`.
 - Must not write task-local `spec.md`.
 - Must not start implementation.

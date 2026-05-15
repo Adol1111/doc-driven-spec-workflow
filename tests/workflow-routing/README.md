@@ -27,7 +27,7 @@ Use doc-driven-spec-workflow.
 
 Run the workflow-routing test case prompt in tests/workflow-routing/cases/<group>/<case-name>.prompt.md.
 Treat it as an isolated simulated conversation.
-Do not edit repository files unless the test case explicitly expects file changes.
+Default to a response-only simulation. Do not edit repository files unless the prompt explicitly asks for file changes or clearly places the run inside a stage whose required outcome is that document output.
 
 IMPORTANT — preserve context isolation:
 1. Clear previous output first:
@@ -51,7 +51,7 @@ Use doc-driven-spec-workflow.
 
 Run one workflow-routing case group, for example tests/workflow-routing/cases/task-preparation/*.prompt.md.
 Treat each prompt as an isolated simulated conversation.
-Do not edit repository files unless a test case explicitly expects file changes.
+Default to a response-only simulation. Do not edit repository files unless the prompt explicitly asks for file changes or clearly places the run inside a stage whose required outcome is that document output.
 
 IMPORTANT — preserve expected isolation:
 1. Clear previous group output first:
@@ -77,7 +77,7 @@ Use doc-driven-spec-workflow.
 
 Run all workflow-routing case groups under tests/workflow-routing/cases/*/*.prompt.md.
 Treat each prompt as an isolated simulated conversation.
-Do not edit repository files unless a test case explicitly expects file changes.
+Default to a response-only simulation. Do not edit repository files unless the prompt explicitly asks for file changes or clearly places the run inside a stage whose required outcome is that document output.
 
 IMPORTANT — preserve expected isolation:
 1. Clear previous all-groups output first:
@@ -107,7 +107,9 @@ IMPORTANT — preserve expected isolation:
 - `tests/workflow-routing/expected/<group>/result.md` is the group run report. It contains per-case simulation output first, then one concise comparison table with case names, status, and reason only.
 - Comparison output is append-only at EOF. Do not move, rewrite, or reorder existing result sections just to place `## Comparison Results` in a different location.
 - `tests/workflow-routing/expected/result.md` is only the multi-group summary report. It must not contain detailed simulation output or detailed per-case grading when more than one group is run.
-- A case is file-generating when the prompt asks to create, write, update, initialize, bootstrap, scaffold, close, or otherwise change docs/files, or when the relevant skill stage normally owns that requested document output.
+- Default assumption: a case is response-only unless the prompt itself makes file output part of the requested behavior.
+- A case is file-generating only when the prompt asks to create, write, update, initialize, bootstrap, scaffold, close, or otherwise change docs/files, or when the prompt clearly places the run inside a stage whose required outcome is that document output.
+- Do not infer file generation only from the skill name. If the case is asking for explanation, routing, comparison, review, or another pure-answer outcome, keep it response-only even when that skill often writes files in other situations.
 - File-generating checks write generated files under `tests/workflow-routing/expected/<group>/<case-name>/` as a disposable simulated repo root.
 - File-generating checks must include `tests/workflow-routing/expected/<group>/<case-name>/response.md`; that file contains only the simulated response for that case, not grading.
 - Do not create group aggregate output directories such as `tests/workflow-routing/expected/all-groups/`; use the top-level `result.md` only as a summary index.
@@ -116,6 +118,11 @@ IMPORTANT — preserve expected isolation:
 ## Simulation Output
 
 Produce simulation output before reading any `*.expected.md` file. The simulation output must be written to `tests/workflow-routing/expected/<group>/result.md` so there is a visible basis for later comparison, but it must not contain grading language.
+
+Prefer the cheapest faithful simulation:
+
+- For pure-answer or routing-only cases, write only the simulated response in group `result.md` and keep `Generated files: None`.
+- For file-generating cases, simulate only the minimum files needed by the prompt and stage stop point. Do not continue into extra execution or extra docs just because the skill could do more.
 
 For file-generating cases, also write the full simulated response to `tests/workflow-routing/expected/<group>/<case-name>/response.md` and list every generated file in the group `result.md` before reading expected files:
 
@@ -231,7 +238,7 @@ Reason:
 ### Planning Inbox And Top-Level Routing
 
 - `empty-open-milestones-asks-routing-question`: empty `Open Milestones` without evidence asks a routing question.
-- `empty-open-milestones-needs-alignment`: inbox candidate `needs alignment` routes to `superpowers:brainstorming`.
+- `empty-open-milestones-needs-alignment`: inbox candidate `needs alignment` routes to `planning-clarification`.
 - `planning-inbox-ready-to-decompose`: inbox candidate `ready to decompose` routes to `milestone-planning`.
 - `iteration-breakdown`: concrete iteration target routes directly to `milestone-planning`.
 - `roadmap-needed`: broad product scope routes to `milestone-planning`.
