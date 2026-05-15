@@ -43,8 +43,11 @@ Low-frequency execution details and stop conditions for simple task execution. R
 - Do not ask the user to review ordinary uncommitted implementation work before committing it on the task branch. Ask first only when the commit would include unrelated user edits, failing verification, or a hard gate.
 
 - Default to creating a dedicated task branch in the current workspace.
-- If a worktree is specifically needed, prefer `superpowers:using-git-worktrees`; if it is unavailable, use the environment's equivalent git worktree workflow and preserve the same safety checks.
+- Stay on current branch only when the user explicitly chooses that path.
+- If a worktree is specifically needed, use the environment's git worktree workflow and preserve the same safety checks.
 - Before the first implementation edit, tell the user: `Spec/plan review is complete. I am handling branch isolation now before coding.`
+- Branch closing remains unresolved until one explicit outcome is chosen: merge and keep branch, merge and delete branch, or discard work.
+- Merge complete does not by itself resolve branch closing.
 
 ## Task And Status Rules
 

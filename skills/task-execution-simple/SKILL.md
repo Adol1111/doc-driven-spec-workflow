@@ -1,15 +1,16 @@
 ---
 name: task-execution-simple
-description: Use when task-local spec or plan work is complete and a concrete docs/tasks task should be implemented through the repository's simple direct execution path.
+description: Implements a prepared concrete docs/tasks task through branch isolation, code changes, verification, review, and branch closing. Use when task-local spec or plan work is complete and next step is straightforward direct execution.
 ---
 
 # Task Execution Simple
 
-Use after `task-preparation` has finished task-local docs and routine follow-up, and the task is ready for straightforward execution.
+## Quick start
 
-Owns execution isolation, readiness, implementation edits, verification, implementation-caused docs/status updates, implementation review, and branch closing. It does not own roadmap decomposition or task-local `spec.md`/`plan.md` authoring.
+Use after `task-preparation` finished and task ready for direct impl.
+This skill owns execution isolation, implementation, verification, implementation review, and branch closing. It does not own roadmap decomposition or task-local `spec.md` / `plan.md` authoring.
 
-## Required Gates
+## Workflows
 
 | Gate | Required behavior |
 |------|-------------------|
@@ -22,20 +23,7 @@ Owns execution isolation, readiness, implementation edits, verification, impleme
 
 After an implementation review pause, treat any clear forward-motion message as approval to follow the recommended non-destructive next step. Ask a separate approval question only for hard gates.
 
-## Branch Isolation
-
-- Default to creating a dedicated task branch in the current workspace.
-- Use a worktree only when the user explicitly wants one or when parallel or high-conflict execution makes a separate workspace specifically valuable.
-- User explicitly asks to stay on current branch: proceed only with explicit user choice.
-
-## Branch Closing
-
-- Use `superpowers:finishing-a-development-branch` for merge/PR/keep/discard options.
-- Use `superpowers:using-git-worktrees` cleanup rules; removing a worktree does not remove its task branch.
-- Confirm before deleting any branch or worktree. If merge plus cleanup is chosen, confirm whether cleanup includes deleting the fully merged task branch.
-- If the user asks to move forward, keep moving through non-destructive wrap-up steps, but stop before deleting a branch or worktree.
-
-## Testing and Verification
+## Mandatory rules
 
 - Follow the task-local `spec.md` and optional `plan.md` for testing and verification expectations.
 - Treat `plan.md` commit points as judgment-based checkpoints, not mandatory per-stage commits. Simple tasks may only need the final task commit; complex tasks may commit after any stage that forms a verified, reviewable, reversible stable state.
@@ -43,26 +31,22 @@ After an implementation review pause, treat any clear forward-motion message as 
 - Prefer fixing production code so existing tests keep expressing the same behavior.
 - If existing tests need semantic changes because the task intentionally changes behavior, explain the reason and get user confirmation before changing what those tests assert.
 - Small test-file repairs that preserve the original assertion intent do not need separate confirmation.
-
-## Implementation Commits
-
-- Default to committing completed implementation work before asking for user review. The review pause is for reviewing the committed task branch or merge diff, not for deciding whether ordinary task work may be committed.
-- Use concise conventional commits when the repository uses them; keep each commit at a coherent, verified task slice.
-- When there is no `plan.md`, expect one final task commit unless the work naturally divides into multiple independently verified slices.
-- When there is a `plan.md`, follow any listed commit points and use engineering judgment if a point should move because the actual stable boundary changed.
-- Do not ask before routine implementation commits on the task branch. Ask only if committing would include unrelated user changes, unresolved failing verification, or another hard gate.
-
-## Docs Boundaries
+- Default to creating dedicated task branch in current workspace.
+- Use worktree only when user explicitly wants one or when parallel/high-conflict execution makes separate workspace valuable.
+- Stay on current branch only when user explicitly chooses that path.
+- Confirm before deleting any branch or worktree. Removing worktree does not remove its task branch.
+- Branch closing must be resolved before starting another task.
+- Merge complete does not mean branch closing complete. A merged branch that is still undeleted remains an explicit closing choice.
+- Closing outcomes are limited to: merge and keep branch, merge and delete branch, or discard work.
+- If merge plus cleanup is chosen, confirm whether cleanup includes deleting the merged task branch.
+- If the user asks to move forward, keep moving through non-destructive closing steps, but stop before branch deletion, worktree deletion, or discard.
+- Default to committing completed implementation work before asking for implementation review.
 
 Code is source of truth when code and docs diverge. If implementation changes behavior, API shape, task status, architecture assumptions, or stable constraints, update the relevant docs in the same round. Move stable rules out of `docs/context/`.
 
-## Detailed Rules and References
+## Advanced features
 
-Use the existing execution references when needed:
-
-- `references/task-execution-detailed-rules.md`
-
-## Workflow
+Use `references/task-execution-detailed-rules.md` when branch-closing, checkpoint, or execution edge cases are unclear.
 
 1. Receive handoff context from `task-preparation`.
 2. Create execution isolation and complete readiness work before code edits.
@@ -70,21 +54,5 @@ Use the existing execution references when needed:
 4. Verify behavior and update docs/status affected by implementation.
 5. Commit verified implementation work, including any planned commit-point slices.
 6. Stop for implementation review of the committed task branch or merge diff.
-7. Resolve branch closing and cleanup hard gates only when explicitly confirmed.
-
-## When To Use
-
-Use when a concrete task already has its task-local `spec.md` and optional `plan.md`, and the next work is direct implementation through the repository's simple execution path rather than delegated or specialized execution. Do not use before task-local docs are ready.
-
-Do not use when:
-
-- milestone/module/task structure is still being decided; use `milestone-planning`
-- task-local `spec.md` or `plan.md` work still needs to be written or reviewed; use `task-preparation`
-- the repository needs a delegated or specialized execution path instead of the simple direct path
-
-## Common Mistakes
-
-- Starting implementation before execution isolation is complete
-- Stopping for implementation review with routine verified task work left uncommitted
-- Treating a normal forward-motion message as approval for destructive cleanup
-- Rewriting roadmap or task structure here instead of routing back to `milestone-planning`
+7. Resolve branch closing through one explicit outcome: merge and keep branch, merge and delete branch, or discard work.
+8. State `Decided`, `Undecided`, `Next skill`, and `Stop point` at implementation review and branch-closing gates.
