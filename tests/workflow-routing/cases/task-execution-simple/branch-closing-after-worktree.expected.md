@@ -9,7 +9,7 @@
 - Recognizes that branch closing is still unresolved because deleting a worktree does not delete the merged task branch.
 - Does not start another task.
 - Does not treat `continue` as permission to skip branch closing.
-- Asks whether to delete the merged task branch or keep it for review/history.
+- Makes the remaining branch-closing choice explicit: keep the merged task branch for review/history or delete it with explicit confirmation.
 - Explains that branch deletion requires explicit confirmation unless the prior closing decision already included branch deletion.
 - Keeps the workflow at the branch closing gate.
 
