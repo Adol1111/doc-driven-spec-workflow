@@ -12,35 +12,35 @@ This repository packages a reusable methodology for keeping implementation work 
 
 ## How It Works
 
-Like Superpowers, this project splits a larger agent workflow into composable stage skills. The root skill, `doc-driven-spec-workflow`, plays the same kind of role as an entry protocol: it decides which stage skill applies next and where the agent must stop.
+This workflow is split into local stage skills. The root skill, `doc-driven-spec-workflow`, decides which stage comes next and where the agent must stop.
 
 The stage chain is:
 
-`doc-driven-spec-workflow -> docs-workflow-bootstrap -> superpowers:brainstorming -> milestone-planning -> task-preparation -> task-execution-simple`
+`doc-driven-spec-workflow -> docs-workflow-bootstrap -> planning-clarification -> milestone-planning -> task-preparation -> task-execution-simple`
 
-Not every request uses every stage:
+Use each stage only when needed:
 
 - Start with `doc-driven-spec-workflow` when the main question is which stage comes next.
 - Use `docs-workflow-bootstrap` when the repository needs the minimum docs scaffold.
-- Use `superpowers:brainstorming` only when goals, scope, or success criteria are still unclear.
+- Use `planning-clarification` only when goals, scope, or success criteria are still unclear.
 - Use `milestone-planning` when the roadmap shape is unclear and you need to decide milestones, modules, and tasks.
 - Use `task-preparation` after the current concrete task is selected from confirmed roadmap state and no prior hard gate still blocks task-local spec/plan work.
 - Use `task-execution-simple` after task-local docs and review follow-up are complete and the task is ready for straightforward direct implementation.
 
-The root skill does not own templates or implementation details. It routes, hands off context, and distinguishes review pauses from hard gates. Stage-specific skills own their own rules, templates, and stop points.
+The root skill only routes and hands off context. Stage skills own their own rules, templates, and stop points.
 
 ## Skills Library
 
-This repository currently contains five workflow skills plus one optional upstream clarification skill:
+This repository currently contains six local workflow skills:
 
 | Skill | Responsibility | Stop Point |
 | --- | --- | --- |
 | `doc-driven-spec-workflow` | Route work to the right workflow stage | When the next stage is clear |
 | `docs-workflow-bootstrap` | Initialize the minimum docs scaffold | When core docs entry points are created |
+| `planning-clarification` | Clarify ambiguous planning direction before roadmap decomposition | When scope, stage boundaries, and first roadmap slice direction are clear enough to continue |
 | `milestone-planning` | Decompose scope into `Milestone -> optional Module -> Task` | When roadmap docs are updated, or the current task is selected |
 | `task-preparation` | Prepare a selected task via `spec -> optional plan -> review -> routine follow-up` | When task-local docs are ready to hand off into execution |
 | `task-execution-simple` | Implement a prepared task through the simple direct execution path | When the current implementation review pause or any remaining hard gate is resolved |
-| `superpowers:brainstorming` | Clarify ambiguous intent before planning or spec work | When scope and success criteria are clear enough to continue |
 
 Roadmap planning and task reshaping are docs governance work. They do not automatically authorize spec writing or code changes.
 
@@ -80,7 +80,7 @@ docs/
 
 The workflow does not create `docs/specs/` or `docs/plans/` by default. Task-local `spec.md` and `plan.md` files should be created under `docs/tasks/<milestone>/<task>/` when there is a concrete task. Global `docs/specs/` and `docs/plans/` are reserved for standalone or cross-task documents.
 
-A plan trigger is a concrete execution-sequencing risk, such as ordered changes across several major files or modules, migrations or data changes, public compatibility boundaries, cross-module coordination, phased rollout, non-obvious verification order, multiple implementation slices that still belong to one task, or a required spike before implementation edits.
+A plan trigger means execution sequencing is non-obvious: ordered multi-file changes, migrations, compatibility boundaries, cross-module coordination, phased rollout, verification-order risk, or a required spike.
 
 ## Template Language
 
@@ -115,7 +115,7 @@ After installation, ask your agent to use the root workflow skill when starting 
 Recommended entry point when you are unsure which stage comes next:
 
 ```text
-Use doc-driven-spec-workflow to decide whether this request needs bootstrap, clarification, milestone planning, task preparation, or simple task execution.
+Use doc-driven-spec-workflow to decide whether this request needs bootstrap, planning clarification, milestone planning, task preparation, or simple task execution.
 ```
 
 After entering through `doc-driven-spec-workflow`, you can usually keep moving stage by stage with any message that clearly expresses "go forward from here." The root skill should route to one stage skill at a time and carry forward handoff context. After a review pause, that forward-motion intent should mean "follow the recommended next step," including routine actions such as committing reviewed docs or creating branch isolation. Explicit confirmation is still reserved for hard gates such as keeping an explicitly unconfirmed roadmap shape, staying on a risky current branch, or deleting branches/worktrees.
@@ -143,6 +143,7 @@ For Claude Code, you can also invoke the individual skills directly:
 ```text
 /doc-driven-spec-workflow
 /docs-workflow-bootstrap
+/planning-clarification
 /milestone-planning
 /task-preparation
 /task-execution-simple
@@ -154,25 +155,14 @@ These skills are designed for repositories that use `docs/architecture/`, `docs/
 
 1. Route the request with `doc-driven-spec-workflow`.
 2. Use `docs-workflow-bootstrap` if the repository still needs the minimum docs scaffold.
-3. Clarify ambiguous intent with `superpowers:brainstorming` or an equivalent clarification flow when needed.
+3. Clarify ambiguous intent with `planning-clarification` when needed.
 4. Use `milestone-planning` to decide milestone, module, and task structure when the roadmap shape is still unclear.
 5. Select the current concrete task under `docs/tasks/`.
 6. Use `task-preparation` to write or update the task-local `spec.md`.
 7. Stop for review after `spec.md`, and after `plan.md` when needed.
 8. When the user clearly asks to move forward, let `task-preparation` handle the routine next step such as committing reviewed docs.
 9. Hand off to `task-execution-simple` for branch/worktree isolation, implementation, verification, and docs/status updates.
-10. Stop again for implementation review before any destructive cleanup choice, then resolve only any remaining hard gate such as deleting the merged task branch.
-
-## What It Does
-
-- Treats `docs/tasks/` as the source of truth for roadmap and concrete implementation work.
-- Separates the root routing protocol, roadmap decomposition, task preparation, and simple task execution into distinct skills.
-- Requires task-local specs before implementation and optional plans when a plan trigger is present.
-- Keeps architecture, task tracking, specs, and status updates aligned.
-- Separates docs governance from implementation permission.
-- Enforces readiness preparation before code edits, including branch or worktree isolation.
-- Merges review approval and routine continuation approval by default, so a normal "move forward" reply after review does not trigger a second commit-approval question.
-- Keeps templates with their owning stage: roadmap templates in `milestone-planning`, task-local spec/plan templates in `task-preparation`, and execution references shared with the simple execution path.
+10. Stop again for implementation review, then resolve one explicit branch-closing outcome: merge and keep branch, merge and delete branch, or discard work.
 
 ## Expected Docs Layout
 
@@ -213,29 +203,13 @@ The module layer is optional. Use `docs/tasks/<milestone>/<task>/` when a milest
 
 Task directory names should be stable slugs, not order markers. Put tasks in the intended order in the milestone or module `index.md`; inserting or reordering work should not require renaming existing task directories.
 
-## Compatibility Notes
+## Notes
 
-The `task-preparation` and `task-execution-simple` skills can work on their own after a concrete task is selected from confirmed roadmap state with dependencies and prior hard gates clear, but this repository is designed to compose with optional clarification and execution-safety skills from [obra/superpowers](https://github.com/obra/superpowers):
-
-- `superpowers:brainstorming`: Clarifies ambiguous feature, behavior, or task intent before roadmap decomposition or current-task spec work.
-- `superpowers:using-git-worktrees`: Creates safe branch/worktree isolation when a workspace is dirty, shared, risky, or likely to conflict.
-- `superpowers:finishing-a-development-branch`: Handles Git integration choices after implementation is complete, including local merge, PR creation, keeping a branch, discarding work, and branch/worktree cleanup.
-
-If your agent environment does not have these skills, use equivalent clarification, git isolation, and branch finishing workflows instead. Preserve the same safety rules: clarify unclear intent before locking roadmap structure or specs, do not start concrete implementation on an unsafe current branch, and do not delete or merge branches/worktrees without an explicit closing decision. Removing a worktree does not remove its task branch; branch closing is not complete until the merged branch is explicitly deleted or intentionally kept.
-
-## Why Not Just Use Superpowers?
-
-Superpowers is a broader software development methodology with many composable skills including `superpowers:brainstorming`, planning, TDD, subagents, code review, verification, and branch finishing. This workflow is intentionally narrower:
-
-- It is organized around a repository's durable documentation structure: `docs/architecture/`, `docs/tasks/`, `docs/context/`, task-local `spec.md`, and optional `plan.md`.
-- It is milestone-centric rather than task-centric: concrete task work is expected to emerge from confirmed roadmap state, and phase progression is governed by milestone, task-selection, and review checkpoints instead of task execution alone.
-- It treats `docs/tasks/` as the source of truth for both roadmap decomposition and selecting concrete work.
-- It separates docs governance from implementation permission, so architecture edits, roadmap reshaping, and index maintenance do not automatically authorize code changes.
-- It splits workflow routing, roadmap planning, and current-task execution into separate skills instead of collapsing them into one oversized instruction file.
-- It keeps TDD, heavyweight planning, and subagent workflows optional instead of mandatory, which makes it easier to use in projects that want spec-first coordination without adopting the full Superpowers methodology.
-- It can still compose with Superpowers where useful, especially `superpowers:brainstorming` before ambiguous scope, `superpowers:using-git-worktrees` before risky implementation work, and `superpowers:finishing-a-development-branch` when a task branch needs merge, PR, keep, discard, or cleanup decisions.
-
-Use Superpowers when you want the full end-to-end agentic development methodology. Use this workflow when your main need is to keep agents aligned with a docs-driven architecture, task roadmap, and review-first spec process.
+- `task-preparation` and `task-execution-simple` can run on their own once a concrete task is selected from confirmed roadmap state.
+- Clarification, execution isolation, and simple branch-closing rules are local to this skill set.
+- Do not start implementation on an unsafe current branch.
+- Do not start a new task while branch closing is unresolved.
+- Use Superpowers when you want a broader end-to-end methodology. Use this workflow when your main need is docs-driven planning, spec-first execution, and explicit checkpoints.
 
 ## Installation
 
@@ -296,8 +270,6 @@ Or install each skill by pointing the installer at its path:
 scripts/install-skill-from-github.py --repo Adol1111/doc-driven-spec-workflow --path skills/milestone-planning
 ```
 
-Restart your agent after installation so it can discover the new skills.
-
 ### Manual Install For Claude Code
 
 Claude Code discovers personal skills from `~/.claude/skills/`:
@@ -314,8 +286,6 @@ mkdir -p .claude/skills
 cp -R skills/<skill-name> .claude/skills/
 ```
 
-Claude Code also supports invoking each installed skill directly as `/doc-driven-spec-workflow`, `/docs-workflow-bootstrap`, `/milestone-planning`, `/task-preparation`, or `/task-execution-simple`.
-
 ### Manual Install For Codex
 
 Codex discovers skills from `$CODEX_HOME/skills`, or `~/.codex/skills` when `CODEX_HOME` is unset:
@@ -324,8 +294,6 @@ Codex discovers skills from `$CODEX_HOME/skills`, or `~/.codex/skills` when `COD
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 cp -R skills/<skill-name> "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
-
-Restart Codex after copying the skill.
 
 ### Manual Install For Other Agents
 
@@ -341,8 +309,6 @@ For example, in an environment that discovers skills from `~/.agents/skills`:
 mkdir -p "$HOME/.agents/skills"
 cp -R skills/<skill-name> "$HOME/.agents/skills/"
 ```
-
-Restart the agent after installation.
 
 ## When To Use
 

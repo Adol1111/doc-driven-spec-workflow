@@ -24,7 +24,7 @@ Missing docs are not proof that goals are unclear. Missing docs are a routing si
 flowchart LR
     Root[doc-driven-spec-workflow]
     Bootstrap[docs-workflow-bootstrap]
-    Brainstorm[superpowers:brainstorming]
+    Brainstorm[planning-clarification]
     Milestone[milestone-planning]
     Preparation[task-preparation]
     SimpleExecution[task-execution-simple]
@@ -52,7 +52,7 @@ flowchart TD
     Roadmap{Milestone/module/task\nshape unclear?}
     TaskReady{Concrete task selected or selectable\nfrom confirmed roadmap state?}
     Bootstrap[Use docs-workflow-bootstrap]
-    Brainstorm[Use superpowers:brainstorming]
+    Brainstorm[Use planning-clarification]
     Milestone[Use milestone-planning]
     Preparation[Use task-preparation]
     Ask[Ask the smallest routing question]
@@ -100,7 +100,7 @@ flowchart TD
     Align{Evidence says roadmap direction,\ngoals, or phase boundaries are not aligned?}
     Question[Ask planning mode question]
     Decompose[Use milestone-planning]
-    Brainstorm[Use superpowers:brainstorming]
+    Brainstorm[Use planning-clarification]
 
     EmptyOpen -- No --> Decompose
     EmptyOpen -- Yes --> Inbox
@@ -121,7 +121,7 @@ Recommended candidate shape:
 - Source: <user request, research note, handoff, or other origin>
 - Problem: <what need or opportunity this represents>
 - Current question: <what must be decided next>
-- Next routing: brainstorming | milestone-planning | backlog | discard
+- Next routing: planning-clarification | milestone-planning | backlog | discard
 ```
 
 ## Milestone Planning
@@ -272,6 +272,7 @@ Do not create `plan.md` for a small single-capability task with straightforward 
 - docs/status updates caused by implementation
 - implementation review pause
 - branch closing and cleanup hard gates
+- explicit closing outcomes: merge and keep branch, merge and delete branch, or discard work
 
 ```mermaid
 flowchart TD
@@ -281,7 +282,7 @@ flowchart TD
     Code[Implement one task]
     Verify[Verify and update docs/status]
     WrapReview[Stop for implementation review]
-    Closing[Resolve branch closing only if destructive cleanup or keep/delete decision remains]
+    Closing[Resolve one explicit branch-closing outcome]
     Stop[Stop]
 
     Ready --> Isolation
@@ -292,6 +293,8 @@ flowchart TD
     WrapReview --> Closing
     Closing --> Stop
 ```
+
+Branch closing remains unresolved until one explicit outcome is chosen. Removing a worktree does not remove its task branch, and no new task should start while branch closing is unresolved.
 
 ## Pause Semantics
 
@@ -323,6 +326,13 @@ Default continuation behavior after a review pause:
 - If the agent intentionally continues with reviewed changes uncommitted, it must treat that as an explicit user-approved exception, say so clearly, give the reason, and report the affected files.
 - Before handing off to the next stage, the agent must state the `AutoOps` outcome: either the reviewed docs were committed, or they remain intentionally uncommitted with files listed.
 - Do not auto-commit before first reporting the result that the user is reviewing.
+
+Default handoff shape between stages:
+
+- `Decided`
+- `Undecided`
+- `Next skill`
+- `Stop point`
 
 ## Hard Gates
 
