@@ -49,8 +49,10 @@ Routing:
 ## Advanced features
 
 - `Handoff Notes`: temporary transfer queue for follow-up findings. Resolve before milestone closure.
+- A milestone must not close while any item remains in `Handoff Notes`.
 - Newly discovered follow-up work during an active milestone should go to that milestone's `Handoff Notes` first by default. Skip that only when the user explicitly decides the item is high priority enough to interrupt the current milestone and reorder or insert work immediately.
 - **Before closure**: every `Handoff Notes` item must be resolved to current-milestone open work, later milestone, `docs/tasks/backlog.md`, or removal.
+- Do not move into later-milestone decomposition or task selection until the previous milestone's `Handoff Notes` are fully resolved.
 - Close milestone when original exit criteria are satisfied.
 - Completed milestones are frozen; add follow-up work to a new open milestone.
 - If the user appears to be moving into a later milestone, resolve previous milestone closure and target milestone confirmation before decomposing or selecting work there.

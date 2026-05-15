@@ -16,6 +16,7 @@ This project follows Conventional Commits for commit history, but release notes 
 ### Notes
 
 - This release preserves stage boundaries while reducing cross-skill and external workflow coupling.
+- `milestone-planning` now states the `Handoff Notes` closure gate directly in the main skill: a milestone cannot close, and later-milestone decomposition or task selection cannot begin, until those notes are fully resolved.
 - Historical release notes below still describe the workflow as it existed in those versions, including older Superpowers-based routing and the pre-rename staged model.
 
 ## v0.5.2
