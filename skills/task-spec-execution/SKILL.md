@@ -15,7 +15,3 @@ If a prompt, saved workflow, or older test still says `task-spec-execution`, do 
 - Use `task-execution-simple` when task-local docs are already ready and the next work is straightforward direct implementation.
 
 Preserve the target stage's own gates, review pauses, and hard-gate behavior during the redirect. Do not use this compatibility shim to invent roadmap structure or bypass the split stages.
-
-## When To Use
-
-Use only when older prompts, installed skills, tests, or habits still call `task-spec-execution` by name and you need a compatibility redirect. Prefer `task-preparation` or `task-execution-simple` directly in new workflows.

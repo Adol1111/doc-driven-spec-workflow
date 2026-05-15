@@ -24,7 +24,7 @@ This skill consumes an existing concrete task. It does not create task directori
 
 After a review pause, treat any clear forward-motion message as approval to follow the recommended path. Ask a separate approval question only for hard gates.
 
-Clarification style inside this stage:
+Use a grill-me style clarification pass inside this stage:
 
 - Inspect code/docs first when they can answer.
 - Ask one question at a time when boundary, acceptance, non-goals, migration risk, rollout, or verification proof still unclear.
