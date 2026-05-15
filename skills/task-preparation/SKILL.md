@@ -1,15 +1,16 @@
 ---
 name: task-preparation
-description: Use when a docs-driven repository has a selected or selectable concrete docs/tasks task and needs task-local spec or plan governance before code execution.
+description: Prepares a selected concrete docs/tasks task through task-local spec, optional plan, review pauses, and execution handoff before code changes. Use when roadmap state is confirmed and next work is task-local preparation.
 ---
 
 # Task Preparation
 
-Use after roadmap structure exists and one concrete task already exists in `docs/tasks/` and is selected or selectable from confirmed roadmap state.
+## Quick start
 
-Owns task-local `spec.md`, optional `plan.md`, review pauses, routine follow-up, and execution handoff context. It consumes an existing roadmap-layer task; it does not create task directories, author `task.md`, or reshape roadmap structure.
+Use after roadmap exists and one concrete task already selected or clearly next.
+This skill consumes an existing concrete task. It does not create task directories, reshape roadmap structure, or implement code.
 
-## Required Gates
+## Workflows
 
 | Gate | Required behavior |
 |------|-------------------|
@@ -23,7 +24,13 @@ Owns task-local `spec.md`, optional `plan.md`, review pauses, routine follow-up,
 
 After a review pause, treat any clear forward-motion message as approval to follow the recommended path. Ask a separate approval question only for hard gates.
 
-## Spec and Plan
+Clarification style inside this stage:
+
+- Inspect code/docs first when they can answer.
+- Ask one question at a time when boundary, acceptance, non-goals, migration risk, rollout, or verification proof still unclear.
+- Give a recommended answer with each question when useful.
+
+## Mandatory rules
 
 Create or update task-local docs only for concrete implementation work on an existing task. Pure docs governance, such as architecture edits, task/module reshaping, milestone changes, task creation, or index maintenance, does not create an implementation spec or code permission.
 
@@ -34,9 +41,10 @@ Create or update task-local docs only for concrete implementation work on an exi
 - If multiple specs seem necessary, stop and use `milestone-planning` to split the task first.
 - Compact specs are fine; vague specs are not.
 - If another agent, subagent, model, or fresh conversation may pick up the work, make boundaries, non-goals, allowed minimal implementation, proof expectations, and likely first edit surface explicit.
+- If boundary, acceptance, non-goals, migration risk, rollout, or verification proof is still unclear, ask exactly one question at a time before drafting.
 - Ask before drafting only when execution mode is unclear and the difference matters.
 
-## Review Pauses and Handoff
+## Advanced features
 
 Default flow:
 
@@ -53,34 +61,13 @@ Default flow:
 - Do not skip that commit unless the user explicitly says not to commit the reviewed docs, for example `ok, but I don't want to commit that yet`.
 - If reviewed docs remain uncommitted, say that this is an explicit user-approved exception, give the reason, and report the affected files.
 - Before execution handoff, state the auto follow-up outcome: committed, or intentionally uncommitted with files listed.
+- Before execution handoff, state `Decided`, `Undecided`, `Next skill`, and `Stop point`.
 - When `milestone-planning` has just created or reshaped roadmap/task docs, report those changes as a planning review pause before entering task-local `spec.md` work.
 - If `milestone-planning` creates the first concrete task in a milestone, the first `continue` may accept planning docs and advance into `spec.md` work if no hard gate blocks the handoff. The next `continue`, after `spec.md` review, should write `plan.md` when a trigger is present or proceed through auto follow-up when no trigger is present, rather than ask for redundant checkpoint-only approval.
 
-## Task And Status Rules
+Reference loading:
 
-- Use `docs/tasks/` as the only source of truth for concrete next work, not `docs/context/` or architecture alone.
-- Tasks in `Roadmap confirmed: no` milestones remain provisional until the selectable-task gate is satisfied.
-- Respect task sizing, dependencies, and status exactly. If the candidate is too small, too broad, only a sub-step, or implies a missing roadmap shape, stop and use `milestone-planning`.
-- Each concrete task already has a directory with `task.md`; task preparation adds `spec.md` and optional `plan.md` there. `task.md` tracks status, dependencies, and acceptance points, not detailed implementation steps.
-- Keep implementation steps inside `spec.md`, optional `plan.md`, or checklist items; do not promote them into tasks.
-- If a planning stage just changed roadmap docs, report and review that planning output before drafting the first task spec.
-
-## Detailed Rules and References
-
-Use the task-local references when needed:
-
-- `references/spec-template.md`
-- `references/plan-template.md`
-- `references/index-template.md`
-- `references/architecture-template.md`
-- `references/context-template.md`
-
-## When To Use
-
-Use when the repository has the docs-driven layout and the current concrete task is selected or ready to select from confirmed roadmap state, and the next work is task-local `spec.md` or `plan.md` preparation before code execution.
-
-Do not use when:
-
-- milestone/module/task structure is still being decided; use `milestone-planning` first
-- the next work is direct implementation, verification, or branch closing; use `task-execution-simple`
-- the repository does not use this docs-driven layout
+- Use `references/spec-template.md` for task-local `spec.md`.
+- Use `references/plan-template.md` for task-local `plan.md`.
+- Use `references/index-template.md`, `references/architecture-template.md`, or `references/context-template.md` only when that exact doc type is relevant.
+- Do not load every reference by default.
