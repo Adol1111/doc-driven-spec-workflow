@@ -40,6 +40,8 @@ After an implementation review pause, treat any clear forward-motion message as 
 - Closing outcomes are limited to: merge and keep branch, merge and delete branch, or discard work.
 - If merge plus cleanup is chosen, confirm whether cleanup includes deleting the merged task branch.
 - If the user asks to move forward, keep moving through non-destructive closing steps, but stop before branch deletion, worktree deletion, or discard.
+- If any `Undecided` item still blocks the next stage, do not treat `continue` as permission to move past it. Resolve that blocker first or ask the direct blocking question.
+- If an `Undecided` item is a hard gate such as branch deletion, worktree deletion, or discard, ask the explicit confirmation question directly. Listing it under `Undecided` does not count as having asked.
 - Default to committing completed implementation work before asking for implementation review.
 
 Code is source of truth when code and docs diverge. If implementation changes behavior, API shape, task status, architecture assumptions, or stable constraints, update the relevant docs in the same round. Move stable rules out of `docs/context/`.

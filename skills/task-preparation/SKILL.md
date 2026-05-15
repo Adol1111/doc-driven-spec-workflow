@@ -42,6 +42,7 @@ Create or update task-local docs only for concrete implementation work on an exi
 - Compact specs are fine; vague specs are not.
 - If another agent, subagent, model, or fresh conversation may pick up the work, make boundaries, non-goals, allowed minimal implementation, proof expectations, and likely first edit surface explicit.
 - If boundary, acceptance, non-goals, migration risk, rollout, or verification proof is still unclear, ask exactly one question at a time before drafting.
+- If an `Undecided` item still blocks `spec.md`, `plan.md`, reviewed-doc follow-up, or execution handoff, do not treat `continue` as permission to skip that blocker. Resolve it first or ask the direct blocking question.
 - Ask before drafting only when execution mode is unclear and the difference matters.
 
 ## Advanced features

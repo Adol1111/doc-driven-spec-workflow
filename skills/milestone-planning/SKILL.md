@@ -43,6 +43,7 @@ Routing:
 - Use stable task directory slugs without numeric order prefixes. Task order is expressed by the order of task links in the relevant `index.md`, not by task filenames.
 - Stop at a planning review pause after creating or reshaping roadmap/task docs.
 - When the user clearly indicates they want to move forward after reviewing planning docs, treat that as approval for that default follow-up.
+- If an `Undecided` item still blocks milestone closure, milestone confirmation, or later-milestone movement, do not treat `continue` as permission to move past it. Resolve that blocker first or ask the direct blocking question.
 - Hand off to `task-preparation` only after the current concrete task is chosen from confirmed roadmap state and no hard gate blocks the handoff.
 - Before handoff, state `Decided`, `Undecided`, `Next skill`, and `Stop point`.
 

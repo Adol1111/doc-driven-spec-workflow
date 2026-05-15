@@ -48,6 +48,8 @@ Low-frequency execution details and stop conditions for simple task execution. R
 - Before the first implementation edit, tell the user: `Spec/plan review is complete. I am handling branch isolation now before coding.`
 - Branch closing remains unresolved until one explicit outcome is chosen: merge and keep branch, merge and delete branch, or discard work.
 - Merge complete does not by itself resolve branch closing.
+- If an unresolved `Undecided` item still blocks the next stage, do not move forward on generic messages like `continue`; first resolve that blocker or ask the direct blocking question.
+- If the unresolved item is a destructive hard gate, such as deleting a branch, deleting a worktree, or discarding work, the response must include an explicit confirmation question. Reporting the item under `Undecided` is not enough.
 
 ## Task And Status Rules
 
