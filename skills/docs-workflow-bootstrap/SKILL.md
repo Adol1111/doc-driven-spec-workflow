@@ -1,31 +1,17 @@
 ---
 name: docs-workflow-bootstrap
-description: Use when initializing, bootstrapping, creating, or scaffolding the minimum docs-driven workflow layout for a repository before roadmap planning, specs, or implementation tasks exist.
+description: Initializes minimum docs-driven workflow entry points for a repository before roadmap planning or task-local execution docs exist. Use when repository is missing core docs scaffold files.
 ---
 
 # Docs Workflow Bootstrap
 
-Initialize the minimum docs-driven workflow scaffold for a repository. This skill is only for bootstrap docs governance; it does not plan milestones, create implementation tasks, write specs, or authorize code changes.
+## Quick start
 
-## Composition
+Create only minimum docs scaffold. This skill does not own roadmap decomposition, task creation, task-local specs/plans, implementation, or branch closing. Stop after reporting created or changed files.
 
-- Entry: normally reached from `doc-driven-spec-workflow` when the repository lacks the minimum docs scaffold.
-- Owns: minimum docs entry points and compact bootstrap content.
-- Does not own: roadmap decomposition, task creation, task-local specs/plans, implementation, or branch closing.
-- Handoff: return to `doc-driven-spec-workflow` after reporting created or changed files, unless the user explicitly asks to continue to planning.
+## Workflows
 
-## Mandatory Rules
-
-- MUST keep bootstrap work in docs governance mode.
-- MUST create only the minimum docs entry points unless the user explicitly asks for more.
-- MUST NOT create implementation tasks during bootstrap.
-- If the user provides actual roadmap or task content during bootstrap, record it only as compact `planning-inbox.md` candidate context when explicitly requested, then hand off to `milestone-planning`.
-- MUST NOT create `docs/specs/`, `docs/plans/`, or task-local `spec.md` / `plan.md` by default.
-- MUST report created or changed files and stop.
-
-## Bootstrap Layout
-
-Create these files when missing:
+Create when missing:
 
 - `docs/index.md`
 - `docs/architecture/index.md`
@@ -33,21 +19,25 @@ Create these files when missing:
 - `docs/tasks/planning-inbox.md`
 - `docs/context/index.md`
 
-Use the repository's documentation language instructions when available. Otherwise follow the user's current language request.
+Default content:
 
-## Default Content Shape
+- `docs/index.md`: entry point + links
+- `docs/architecture/index.md`: stable design boundaries
+- `docs/tasks/index.md`: roadmap/task tracking + `Open Milestones` + `Completed Milestones` + planning inbox link
+- `docs/tasks/planning-inbox.md`: unconfirmed goals/opportunities/candidates
+- `docs/context/index.md`: research/supporting context
 
-Keep generated files compact:
+## Mandatory rules
 
-- `docs/index.md`: explain the docs entry point and link to architecture, tasks, and context
-- `docs/architecture/index.md`: explain stable design and behavior boundaries
-- `docs/tasks/index.md`: explain roadmap/task tracking; include `Open Milestones`, `Completed Milestones`, and a link to `Planning Inbox`
-- `docs/tasks/planning-inbox.md`: explain that unconfirmed goals, opportunities, and roadmap candidates live there until promoted into a milestone, moved to backlog, or discarded
-- `docs/context/index.md`: explain research notes and supporting context
+- MUST keep bootstrap work in docs governance mode.
+- MUST create only the minimum docs entry points unless the user explicitly asks for more.
+- MUST NOT create implementation tasks during bootstrap.
+- If the user provides actual roadmap or task content during bootstrap, record it only as compact `planning-inbox.md` candidate context when explicitly requested, then hand off to `milestone-planning`.
+- MUST NOT create `docs/specs/`, `docs/plans/`, or task-local `spec.md` / `plan.md` by default.
+- MUST report created or changed files and stop.
+- Use repository doc language rules when available. Else follow current user language.
 
-Do not create roadmap details during bootstrap unless the user supplies actual roadmap content.
-
-## Handoff
+## Advanced features
 
 After bootstrap, return to `doc-driven-spec-workflow` so it can choose the next stage. Continue directly only when the user explicitly asks:
 

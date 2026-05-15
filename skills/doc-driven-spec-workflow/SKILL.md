@@ -1,13 +1,29 @@
 ---
 name: doc-driven-spec-workflow
-description: Use when a docs-driven repository request is unclear about whether the next step is scaffold initialization, clarification, roadmap decomposition, or current-task execution.
+description: Routes docs-driven repository work to the correct local workflow stage and preserves handoff context between stages. Use when the next step is unclear between bootstrap, clarification, roadmap decomposition, task preparation, or simple execution.
 ---
 
-# Using Doc-Driven Spec Workflow
+# Doc-Driven Spec Workflow
 
-Use this root skill only to select and coordinate the next docs-driven stage. Stage-specific skills own the actual bootstrap, planning, spec, plan, execution, and closing behavior.
+## Quick start
 
-## Mandatory Rules
+Use this root skill only to choose next stage. Stage skills own actual work.
+
+## Workflows
+
+Default chain: `docs-workflow-bootstrap -> planning-clarification -> milestone-planning -> task-preparation -> task-execution-simple`
+Skip stages only when their decision is already settled.
+
+Routing:
+
+| Current uncertainty | Next skill |
+|---------------------|------------|
+| Minimum docs scaffold is missing | `docs-workflow-bootstrap` |
+| Goals, constraints, success criteria, or now-vs-later boundaries are unresolved by docs or prompt evidence | `planning-clarification` |
+| Milestone count, module grouping, task breakdown, delivery order, or stage boundaries are unclear | `milestone-planning` |
+| A concrete task is selected or selectable from confirmed roadmap state | `task-preparation` |
+
+## Mandatory rules
 
 - MUST start docs-driven repository work by identifying the current workflow stage.
 - MUST load exactly one stage skill next unless the user explicitly asks for a comparison or audit.
@@ -17,23 +33,9 @@ Use this root skill only to select and coordinate the next docs-driven stage. St
 - MUST treat any clear forward-motion message after a review pause as approval to follow the recommended next step unless the current stop is a hard gate. Do not require specific wording.
 - MUST require explicit confirmation only for hard gates such as destructive cleanup, risky stay-on-current-branch choices, deleting branches/worktrees, or advancing across an unresolved milestone-closure boundary.
 - MUST preserve handoff context when switching skills: what is decided, what is undecided, and why the next skill applies.
-
-## Routing Rules
-
-Default chain: `docs-workflow-bootstrap -> superpowers:brainstorming -> milestone-planning -> task-preparation -> task-execution-simple`. Skip stages only when their decision is already settled.
-
-Choose the next skill by the user's current uncertainty:
-
-| Current uncertainty | Next skill |
-|---------------------|------------|
-| Minimum docs scaffold is missing | `docs-workflow-bootstrap` |
-| Goals, constraints, success criteria, or "now versus later" boundaries are unresolved by docs or prompt evidence | `superpowers:brainstorming` |
-| Milestone count, module grouping, task breakdown, delivery order, or stage boundaries are unclear | `milestone-planning` |
-| A concrete task is selected or selectable from confirmed roadmap state | `task-preparation` |
+- MUST use `planning-clarification` only for positive ambiguity evidence. Missing or stale docs alone route to bootstrap or planning.
 
 Use `docs-workflow-bootstrap` when any minimum scaffold file is missing: `docs/index.md`, `docs/architecture/index.md`, `docs/tasks/index.md`, `docs/tasks/planning-inbox.md`, or `docs/context/index.md`.
-
-Use `superpowers:brainstorming` for positive ambiguity evidence only. Missing or stale docs alone route to bootstrap or planning.
 
 Use `task-preparation` only when all are true:
 
@@ -44,12 +46,10 @@ Use `task-preparation` only when all are true:
 - no prior hard gate remains unresolved
 - the user selected it, or `docs/tasks/` clearly identifies it as next by order/status
 
-Do not skip from ambiguous scope to spec writing, use task execution to invent roadmap structure, or keep planning after the question is current-task execution.
+Do not skip from ambiguous scope to spec writing, use task execution to invent roadmap structure, or keep planning after question is current-task execution.
 
-## Handoff Rules
-
-- Bootstrap -> brainstorming or planning: minimum docs scaffold exists.
-- Brainstorming -> planning: scope, boundaries, and success criteria are clear enough to plan delivery structure.
+- Bootstrap -> clarification or planning: minimum docs scaffold exists.
+- Clarification -> planning: scope, boundaries, and success criteria are clear enough to plan delivery structure.
 - Planning -> task preparation: selected concrete task is in confirmed roadmap state, dependencies and prior hard gates are clear, and the user wants spec-first execution.
 - Task preparation -> simple execution: task-local docs are complete, the auto follow-up outcome has been explicitly reported, and the next work is straightforward direct implementation.
 
@@ -64,6 +64,6 @@ From `task-preparation`, also state the docs follow-up outcome explicitly: commi
 
 Treat any user message that clearly means "move forward" as permission to advance after a review pause. If the recommended next step includes a routine commit, status update, isolation step, or stage handoff, do it without a second approval question. Stop only when a hard gate is outstanding.
 
-## Response Shape
+## Advanced features
 
 Keep orchestration responses compact: current stage, why it applies, next skill, and expected stop point.
