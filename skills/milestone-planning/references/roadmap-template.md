@@ -130,6 +130,20 @@ Use this shape when the milestone has no module layer:
 - Milestone: `<milestone>`
 - Module: None
 
+## Why
+- Problem: <what user or operator problem this task solves>
+- Outcome: <what becomes possible or better when this task is done>
+
+## Who / When
+- User or role: <who this is for>
+- Scenario: <when this task matters>
+
+## Scope
+- In scope now:
+  - <current scope item>
+- Later / not in scope:
+  - <later item or explicit non-goal>
+
 ## Source
 - Architecture: <path or link, if relevant>
 - Request: <short request summary>
@@ -146,8 +160,12 @@ Use this shape when the milestone has no module layer:
 ## Checklist
 - [ ] Project-level acceptance point
 
+## Success Signals
+- <observable result that should be true when this task is complete>
+
 ## Notes
-- Keep detailed implementation steps in task-local `spec.md` or optional `plan.md`.
+- Keep detailed design decisions in task-local `spec.md`.
+- Keep detailed implementation sequencing in optional `plan.md`.
 ```
 
 `Status` is a single-choice state marker. Exactly one of `planned`, `in_progress`, `blocked`, or `completed` should be checked at a time.
@@ -196,6 +214,7 @@ Unconfirmed goals, opportunities, and roadmap candidates live here until they ar
 - Completed milestones are frozen; add follow-up work to a new open milestone.
 - `docs/tasks/planning-inbox.md` is the routing source for goals that are not yet milestone-shaped.
 - `docs/tasks/backlog.md` is optional. Use it for roadmap items that are not yet attached to a milestone.
+- Treat `task.md` as a lightweight product brief for one concrete task: enough problem, user, scope, and success context to justify the later `spec.md`, but not a full implementation design.
 - Task `Status` checkboxes are mutually exclusive. Exactly one of `planned`, `in_progress`, `blocked`, or `completed` should be checked at a time; do not treat them as a checklist of completed phases.
 - Modules are optional durable capability areas, not one-off buckets.
 - If a proposed module has fewer than three likely tasks, merge it unless it has a distinct long-term domain, owner, lifecycle, risk profile, release boundary, or acceptance boundary.

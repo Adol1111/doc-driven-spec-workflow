@@ -13,7 +13,19 @@ Prefer a compact task spec structure:
 
 ## Option Selection
 
-## Design
+## Design Overview
+
+## Design Details
+
+### Entry Points / Surfaces
+
+### Data / Control Flow
+
+### Boundary Decisions
+
+## Diagram
+
+- Optional: add a small `mermaid` diagram only when flow, state, ownership, or system interaction would be hard to understand from text alone
 
 ## Error Handling
 
@@ -32,6 +44,7 @@ Notes:
 - Keep each section concise and focused on task-specific decisions and boundaries.
 - Do not add content unrelated to the current task just to fill the template.
 - For very small tasks, sections may be brief, but keep the same information order.
+- Prefer writing this as a real design document, not only a task summary. A good spec should make the intended solution, boundaries, and implementation shape understandable before code starts.
 - Choose spec detail from the expected execution mode:
   - if the same agent continues immediately in the current session, the spec may stay compact and rely on nearby context
   - if another agent, subagent, model, or fresh conversation may pick up the work, make the spec self-contained enough to execute without chat memory
@@ -43,8 +56,12 @@ Notes:
 - Compact does not mean implicit. If another agent could reasonably misread the task, make the boundary explicit in the existing sections:
   - `Goals`: state whether the task is defining/proving a boundary, implementing behavior, migrating data, cleaning up docs, or another work type.
   - `Non-goals`: name tempting but forbidden implementation shortcuts or related changes that must not be done in this task.
-  - `Design`: use task-specific subheadings as needed; for ambiguous tasks, include boundary decisions, the allowed minimal implementation, and where responsibility or classification must and must not live.
-  - `Testing and Verification`: say explicitly which proof types are required for this task. Unit tests are one possible proof type, not the only one.
+  - `Design Overview`: summarize the chosen approach in a few sentences so the reader knows what is being built before reading details.
+  - `Entry Points / Surfaces`: name the first edit surface, owning module, external interface, or user-visible touchpoint.
+  - `Data / Control Flow`: explain the main request, state, or event flow from entry to outcome. Prefer a small `mermaid` diagram when this would otherwise be dense.
+  - `Boundary Decisions`: state what responsibility lives where, the allowed minimal implementation, and where responsibility or classification must and must not live.
+- `Testing and Verification`: say explicitly which proof types are required for this task. Unit tests are one possible proof type, not the only one.
+- Use `Diagram` only when it materially improves understanding. Prefer one small high-signal diagram over large decorative diagrams.
 - Prefer making testing expectations explicit rather than implied.
 - For code changes, consider automated verification by default when it is practical, but do not force unit tests when they do not fit the task.
 - If the user explicitly asks not to add unit tests, record that decision in `Testing and Verification` instead of silently omitting tests.

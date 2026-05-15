@@ -9,9 +9,11 @@ The plan supplements the approved `spec.md`. It should focus on implementation s
 
 **Goal:** <One sentence describing what this implementation should deliver>
 
-**Architecture:** <2-3 sentences on approach, responsibilities, and key tradeoffs>
+**Approach:** <2-4 sentences on implementation strategy, responsibilities, and key tradeoffs>
 
 **Tech Stack:** <Key technologies or modules involved>
+
+**Key Risks / Constraints:** <What can go wrong, what must stay compatible, or what sequencing pressure matters>
 
 ---
 
@@ -22,21 +24,34 @@ The plan supplements the approved `spec.md`. It should focus on implementation s
 - Modify: `path/to/file`
   - Explain the responsibility of the change
 
-## 1. <Implementation Section>
+## 1. <Implementation Slice>
 
-- Use concise bullets for implementation scope, boundaries, and key notes
+- Outcome: <what is true after this slice>
+- Files: `<path>`, `<path>`
+- Notes: <key boundary, ordering, or coordination note>
+- Verification: <how this slice is proven before moving on>
 
-## 2. <Implementation Section>
+## 2. <Implementation Slice>
 
-- Use concise bullets for implementation scope, boundaries, and key notes
+- Outcome: <what is true after this slice>
+- Files: `<path>`, `<path>`
+- Notes: <key boundary, ordering, or coordination note>
+- Verification: <how this slice is proven before moving on>
 
-## 3. <Implementation Section>
+## 3. <Implementation Slice>
 
-- Use concise bullets for implementation scope, boundaries, and key notes
+- Outcome: <what is true after this slice>
+- Files: `<path>`, `<path>`
+- Notes: <key boundary, ordering, or coordination note>
+- Verification: <how this slice is proven before moving on>
+
+## Optional Flow Diagram
+
+- Optional: add a small `mermaid` diagram only when implementation sequencing, rollout flow, or system coordination is hard to explain with bullets alone
 
 ## Commit Points
 
-- Optional: after `<Implementation Section>` when the completed slice is verified, reviewable, and reversible
+ - Optional: after `<Implementation Slice>` when the completed slice is verified, reviewable, and reversible
 - Optional: final task commit after verification and docs/status updates
 
 ## Verification
@@ -47,10 +62,12 @@ The plan supplements the approved `spec.md`. It should focus on implementation s
 
 Notes:
 
-- Prefer `Goal + File Map + 3-5 implementation sections + Verification`
+- Prefer `Goal + File Map + 3-5 implementation slices + Verification`
 - Treat the approved `spec.md` as the source of truth for behavior, scope, exclusions, and tradeoffs
 - Keep any recap minimal; avoid rewriting sections that already belong in `spec.md`
-- Favor concise implementation guidance over step-by-step execution scripts
+- Favor concise implementation guidance over step-by-step execution scripts, but make the sequencing and expected post-slice state obvious.
 - Use short code snippets only when they clarify a critical interface, data shape, migration rule, or tricky algorithm boundary. Avoid large code blocks or implementation drafts that can be copied wholesale into production code.
+- If a reader cannot tell why the order matters, what each slice delivers, or where the risky boundary is, the plan is still too vague.
+- Use a small `mermaid` diagram only when it materially improves understanding of rollout, sequencing, or cross-system coordination.
 - Commit points are optional judgment-based checkpoints. Do not add one per section mechanically; simple tasks may only need the final implementation commit.
 - Keep docs-sync work in one compact section instead of many mechanical substeps
