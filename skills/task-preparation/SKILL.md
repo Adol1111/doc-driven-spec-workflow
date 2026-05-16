@@ -24,12 +24,15 @@ This skill consumes an existing concrete task. It does not create task directori
 
 After a review pause, treat any clear forward-motion message as approval to follow the recommended path. Ask a separate approval question only for hard gates.
 
-Before drafting:
+Required before drafting:
 
+- Always run this loop before any `spec.md` drafting, even when the task appears clear at first glance.
 - Inspect code/docs first when they can answer.
-- Interview the unresolved design tree one branch at a time until shared understanding is reached.
+- Resolve the design tree one blocking branch at a time until shared understanding is reached.
 - Ask one question at a time.
 - Give a recommended answer with each question when useful.
+- If code/docs already settle most branches, the loop may end after minimal questioning, but it must still be executed.
+- Do not write any `spec.md` content yet.
 
 ## Mandatory rules
 
@@ -42,12 +45,15 @@ Create or update task-local docs only for concrete implementation work on an exi
 - If multiple specs seem necessary, stop and use `milestone-planning` to split the task first.
 - Compact specs are fine; vague specs are not.
 - If another agent, subagent, model, or fresh conversation may pick up the work, make boundaries, non-goals, allowed minimal implementation, proof expectations, and likely first edit surface explicit.
-- Before drafting `spec.md`, run the clarification loop until task boundaries, acceptance, non-goals, migration risk, rollout, and required proof are clear enough for shared understanding.
-- If boundary, acceptance, non-goals, migration risk, rollout, or verification proof is still unclear, ask exactly one question at a time instead of drafting a partial or vague spec.
+- Drafting must execute the `Required before drafting` loop above first.
+- Do not draft `spec.md` until task boundaries, acceptance, non-goals, migration risk, rollout, and required proof are clear enough for shared understanding.
+- If a design branch would materially change scope, acceptance, proof, rollout, migration ownership, implementation level, `Option Selection`, `Design Overview`, `Testing and Verification`, or the allowed minimal implementation, treat it as blocking and ask before drafting.
+- Do not draft `spec.md` from assumed defaults for unresolved design branches.
 - If an `Undecided` item still blocks `spec.md`, `plan.md`, reviewed-doc follow-up, or execution handoff, do not treat `continue` as permission to skip that blocker. Resolve it first or ask the direct blocking question.
 - Ask before drafting only when execution mode is unclear and the difference matters.
-- After shared understanding is reached, draft the full `spec.md` in one pass instead of incrementally patching the spec between unresolved questions.
+- After shared understanding is reached, draft the full `spec.md` in one pass.
 - Keep explicit option comparison when real alternatives exist. The clarification loop should help choose among options, not erase them from the final `spec.md`.
+- Drafting a partial or default-assumption spec while blocking branches remain unresolved is a workflow violation.
 
 ## Advanced features
 
