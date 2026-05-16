@@ -24,10 +24,11 @@ This skill consumes an existing concrete task. It does not create task directori
 
 After a review pause, treat any clear forward-motion message as approval to follow the recommended path. Ask a separate approval question only for hard gates.
 
-Use a grill-me style clarification pass inside this stage:
+Before drafting:
 
 - Inspect code/docs first when they can answer.
-- Ask one question at a time when boundary, acceptance, non-goals, migration risk, rollout, or verification proof still unclear.
+- Interview the unresolved design tree one branch at a time until shared understanding is reached.
+- Ask one question at a time.
 - Give a recommended answer with each question when useful.
 
 ## Mandatory rules
@@ -41,9 +42,12 @@ Create or update task-local docs only for concrete implementation work on an exi
 - If multiple specs seem necessary, stop and use `milestone-planning` to split the task first.
 - Compact specs are fine; vague specs are not.
 - If another agent, subagent, model, or fresh conversation may pick up the work, make boundaries, non-goals, allowed minimal implementation, proof expectations, and likely first edit surface explicit.
-- If boundary, acceptance, non-goals, migration risk, rollout, or verification proof is still unclear, ask exactly one question at a time before drafting.
+- Before drafting `spec.md`, run the clarification loop until task boundaries, acceptance, non-goals, migration risk, rollout, and required proof are clear enough for shared understanding.
+- If boundary, acceptance, non-goals, migration risk, rollout, or verification proof is still unclear, ask exactly one question at a time instead of drafting a partial or vague spec.
 - If an `Undecided` item still blocks `spec.md`, `plan.md`, reviewed-doc follow-up, or execution handoff, do not treat `continue` as permission to skip that blocker. Resolve it first or ask the direct blocking question.
 - Ask before drafting only when execution mode is unclear and the difference matters.
+- After shared understanding is reached, draft the full `spec.md` in one pass instead of incrementally patching the spec between unresolved questions.
+- Keep explicit option comparison when real alternatives exist. The clarification loop should help choose among options, not erase them from the final `spec.md`.
 
 ## Advanced features
 

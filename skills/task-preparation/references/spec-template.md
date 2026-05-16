@@ -56,10 +56,12 @@ Notes:
 - Compact does not mean implicit. If another agent could reasonably misread the task, make the boundary explicit in the existing sections:
   - `Goals`: state whether the task is defining/proving a boundary, implementing behavior, migrating data, cleaning up docs, or another work type.
   - `Non-goals`: name tempting but forbidden implementation shortcuts or related changes that must not be done in this task.
+  - `Option Selection`: when multiple real approaches exist, keep 2-3 concrete options such as `A/B/C`, say which one was chosen, and record why the rejected options were not chosen. Use the clarification-loop answers as the selection rationale when relevant.
   - `Design Overview`: summarize the chosen approach in a few sentences so the reader knows what is being built before reading details.
   - `Entry Points / Surfaces`: name the first edit surface, owning module, external interface, or user-visible touchpoint.
   - `Data / Control Flow`: explain the main request, state, or event flow from entry to outcome. Prefer a small `mermaid` diagram when this would otherwise be dense.
   - `Boundary Decisions`: state what responsibility lives where, the allowed minimal implementation, and where responsibility or classification must and must not live.
+- Do not drop the option section just because clarification happened through back-and-forth questions. The final spec should still make the evaluated alternatives and final rationale visible to later readers.
 - `Testing and Verification`: say explicitly which proof types are required for this task. Unit tests are one possible proof type, not the only one.
 - Use `Diagram` only when it materially improves understanding. Prefer one small high-signal diagram over large decorative diagrams.
 - Prefer making testing expectations explicit rather than implied.
