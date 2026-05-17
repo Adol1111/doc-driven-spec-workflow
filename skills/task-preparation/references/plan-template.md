@@ -30,6 +30,7 @@ The plan supplements the approved `spec.md`. It should focus on implementation s
 - Files: `<path>`, `<path>`
 - Notes: <key boundary, ordering, or coordination note>
 - Verification: <how this slice is proven before moving on>
+- Commit checkpoint: `<optional checkpoint name>` only when this slice ends in a verified, reviewable, reversible state
 
 ## 2. <Implementation Slice>
 
@@ -37,6 +38,7 @@ The plan supplements the approved `spec.md`. It should focus on implementation s
 - Files: `<path>`, `<path>`
 - Notes: <key boundary, ordering, or coordination note>
 - Verification: <how this slice is proven before moving on>
+- Commit checkpoint: `<optional checkpoint name>` only when this slice ends in a verified, reviewable, reversible state
 
 ## 3. <Implementation Slice>
 
@@ -44,15 +46,11 @@ The plan supplements the approved `spec.md`. It should focus on implementation s
 - Files: `<path>`, `<path>`
 - Notes: <key boundary, ordering, or coordination note>
 - Verification: <how this slice is proven before moving on>
+- Commit checkpoint: `<optional checkpoint name>` only when this slice ends in a verified, reviewable, reversible state
 
 ## Optional Flow Diagram
 
 - Optional: add a small `mermaid` diagram only when implementation sequencing, rollout flow, or system coordination is hard to explain with bullets alone
-
-## Commit Points
-
- - Optional: after `<Implementation Slice>` when the completed slice is verified, reviewable, and reversible
-- Optional: final task commit after verification and docs/status updates
 
 ## Verification
 
@@ -69,5 +67,7 @@ Notes:
 - Use short code snippets only when they clarify a critical interface, data shape, migration rule, or tricky algorithm boundary. Avoid large code blocks or implementation drafts that can be copied wholesale into production code.
 - If a reader cannot tell why the order matters, what each slice delivers, or where the risky boundary is, the plan is still too vague.
 - Use a small `mermaid` diagram only when it materially improves understanding of rollout, sequencing, or cross-system coordination.
-- Commit points are optional judgment-based checkpoints. Do not add one per section mechanically; simple tasks may only need the final implementation commit.
+- Put commit checkpoints inside the relevant implementation slices, not in a separate summary section.
+- Commit checkpoints are optional judgment-based checkpoints. Do not add one per slice mechanically; simple tasks may only need the final implementation commit.
+- Name each checkpoint by the stable state it captures, not as `commit1`, `commit2`, or by fixed stage numbers.
 - Keep docs-sync work in one compact section instead of many mechanical substeps
