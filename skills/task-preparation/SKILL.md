@@ -27,10 +27,10 @@ After a review pause, treat any clear forward-motion message as approval to foll
 Required before drafting:
 
 - Always run this loop before any `spec.md` drafting, even when the task appears clear at first glance.
-- Inspect code/docs first when they can answer.
-- Resolve the design tree one blocking branch at a time until shared understanding is reached.
-- Ask one question at a time.
-- Give a recommended answer with each question when useful.
+- If a question can be answered by exploring the code/docs, explore the code/docs instead.
+- Walk down each blocking branch of the design tree until shared understanding is reached.
+- For each question, provide your recommended answer.
+- Ask the questions one at a time.
 - If code/docs already settle most branches, the loop may end after minimal questioning, but it must still be executed.
 - Do not write any `spec.md` content yet.
 
@@ -49,6 +49,7 @@ Create or update task-local docs only for concrete implementation work on an exi
 - Do not draft `spec.md` until task boundaries, acceptance, non-goals, migration risk, rollout, and required proof are clear enough for shared understanding.
 - If a design branch would materially change scope, acceptance, proof, rollout, migration ownership, implementation level, `Option Selection`, `Design Overview`, `Testing and Verification`, or the allowed minimal implementation, treat it as blocking and ask before drafting.
 - Do not draft `spec.md` from assumed defaults for unresolved design branches.
+- Stopping after only one question is allowed only when that answer resolves the last blocking branch.
 - If an `Undecided` item still blocks `spec.md`, `plan.md`, reviewed-doc follow-up, or execution handoff, do not treat `continue` as permission to skip that blocker. Resolve it first or ask the direct blocking question.
 - Ask before drafting only when execution mode is unclear and the difference matters.
 - After shared understanding is reached, draft the full `spec.md` in one pass.
