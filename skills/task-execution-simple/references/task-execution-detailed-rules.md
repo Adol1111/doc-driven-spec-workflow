@@ -1,6 +1,7 @@
 # Task Execution Simple Detailed Rules
 
-Low-frequency execution details and stop conditions for simple task execution. Read this when the main `SKILL.md` leaves a concrete execution edge case unresolved.
+Supplementary clauses for simple task execution. These rules extend the main `SKILL.md` for low-frequency edge cases and clarifications; they do not replace or restate the main workflow unless extra detail is needed.
+Read this only when the main `SKILL.md` leaves a concrete execution edge case unresolved.
 
 ## Violations That Require Stopping Immediately
 
@@ -46,10 +47,13 @@ Low-frequency execution details and stop conditions for simple task execution. R
 - Stay on current branch only when the user explicitly chooses that path.
 - If a worktree is specifically needed, use the environment's git worktree workflow and preserve the same safety checks.
 - Before the first implementation edit, tell the user: `Spec/plan review is complete. I am handling branch isolation now before coding.`
-- Branch closing remains unresolved until one explicit outcome is chosen: merge and keep branch, merge and delete branch, or discard work.
-- Merge complete does not by itself resolve branch closing.
-- If an unresolved `Undecided` item still blocks the next stage, do not move forward on generic messages like `continue`; first resolve that blocker or ask the direct blocking question.
-- If the unresolved item is a destructive hard gate, such as deleting a branch, deleting a worktree, or discarding work, the response must include an explicit confirmation question. Reporting the item under `Undecided` is not enough.
+- For branch closing, rely on the main `SKILL.md` for the default workflow and safety rules. This reference only clarifies edge cases, such as what counts as current task context or when a destructive action reaches execution time.
+- Generic forward-motion after implementation review authorizes presenting closing choices, not selecting one.
+- If closing is unresolved, ask directly for one outcome:
+  - `merge and keep branch`
+  - `merge and delete branch`
+  - `discard work`
+- If the user selected a merge outcome but did not separately state cleanup timing, merge first, then ask again before the destructive delete step runs.
 
 ## Task And Status Rules
 
