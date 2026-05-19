@@ -49,10 +49,19 @@ Read this only when the main `SKILL.md` leaves a concrete execution edge case un
 - Before the first implementation edit, tell the user: `Spec/plan review is complete. I am handling branch isolation now before coding.`
 - For branch closing, rely on the main `SKILL.md` for the default workflow and safety rules. This reference only clarifies edge cases, such as what counts as current task context or when a destructive action reaches execution time.
 - Generic forward-motion after implementation review authorizes presenting closing choices, not selecting one.
-- If closing is unresolved, ask directly for one outcome:
-  - `merge and keep branch`
-  - `merge and delete branch`
-  - `discard work`
+- If closing is unresolved, use this prompt shape in the repository or conversation document language:
+
+```text
+Choose the closing outcome:
+
+1. merge and delete branch
+2. merge and keep branch
+3. discard work
+
+Reply with 1, 2, or 3.
+```
+
+- Do not paraphrase this into an inline comma-separated list when asking for the choice.
 - If the user selected a merge outcome but did not separately state cleanup timing, merge first, then ask again before the destructive delete step runs.
 
 ## Task And Status Rules

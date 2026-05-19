@@ -37,6 +37,8 @@ After an implementation review pause, treat clear forward-motion language as app
 - Confirm before deleting any branch or worktree. Removing worktree does not remove its task branch.
 - Branch closing must be resolved before starting another task.
 - After implementation review, branch closing starts by choosing one explicit outcome: `merge and keep branch`, `merge and delete branch`, or `discard work`.
+- Present closing outcomes as a numbered choice so the user can reply with `1`, `2`, or `3` instead of retyping the full outcome text.
+- When closing is unresolved, use the fixed closing prompt from `references/task-execution-detailed-rules.md` instead of paraphrasing the choices freely.
 - Generic forward-motion language such as `continue`, `next`, or `go on` may enter branch closing, but it does not choose a closing outcome.
 - `git merge`, including fast-forward merge, must not run until a merge outcome is explicit.
 - Any default branch-closing preference must be explicit in the current task context; do not infer it from how a previous task was closed. Persistent defaults may cover `merge and keep branch` or `merge and delete branch`, but never `discard work`.
