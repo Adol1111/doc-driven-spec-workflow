@@ -19,6 +19,7 @@ Create or update task-local docs only for concrete implementation work on an exi
 - Default to no `plan.md`. Create it only when sequencing is non-obvious because of ordering, compatibility, migration, rollout, cross-module coordination, or verification risk.
 - Keep `1 task -> 1 spec`. If multiple specs seem necessary, stop and use `milestone-planning` to split the task first.
 - `plan.md` supplements the approved `spec.md`; it does not restate it.
+- Do not write follow-up work into the current task `plan.md` unless it is part of the current task's committed scope. If work should be remembered but not completed in the current task, record it in milestone handoff or create a new task instead.
 - Compact specs are fine; vague specs are not.
 - If another agent or fresh conversation may pick up the work, make boundaries, non-goals, allowed minimal implementation, proof expectations, and likely first edit surface explicit.
 
