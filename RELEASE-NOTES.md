@@ -4,6 +4,46 @@ User-facing workflow, installation, and migration changes are documented here.
 
 This project follows Conventional Commits for commit history, but release notes focus on what users need to know when adopting or upgrading the workflow.
 
+## v0.7.0
+
+### Breaking Changes
+
+- The workflow skills were rewritten around stage protocols instead of large mixed rule pools. Each core stage now defines `Purpose`, `Owns`, `Must not own`, `Default flow`, `Stop point`, and `Handoff` explicitly.
+- `doc-driven-spec-workflow` is now a thin router only. It chooses exactly one next stage and no longer carries stage-local execution, spec, or roadmap behavior in the root skill.
+- `planning-clarification` now means only roadmap-blocking ambiguity resolution. It no longer acts like broad brainstorming or open-ended product discovery.
+- `milestone-planning`, `task-preparation`, and `task-execution-simple` now enforce sharper ownership boundaries between roadmap governance, task-local design, and execution/closing.
+
+### Features
+
+- Added explicit default follow-up semantics after review pauses across the workflow:
+  - bootstrap reviews default to committing reviewed scaffold docs unless the user explicitly says not to
+  - planning reviews default to committing reviewed planning docs unless the user explicitly says not to
+  - task-local spec/plan reviews default to committing reviewed task docs unless the user explicitly says not to
+  - implementation review defaults to entering branch-closing choice, not auto-selecting a closing outcome
+- Added a dedicated bootstrap scaffold reference at `skills/docs-workflow-bootstrap/references/scaffold-template.md`.
+- Clarified `Handoff Notes` governance so future work discovered during preparation or execution lands in the current milestone `index.md`, not in task-local `plan.md`.
+- Clarified the difference between `planning-inbox.md` and `backlog.md`:
+  - `planning-inbox.md` stores unconfirmed planning candidates and unresolved roadmap direction
+  - `backlog.md` stores deferred roadmap items that are already concrete enough to keep
+- Clarified when items should be pulled back out of `planning-inbox.md` and `backlog.md` into active planning.
+
+### Fixes
+
+- Removed ambiguous review behavior where `continue` could either skip stage-closing work or get trapped behind unnecessary approval wording.
+- Standardized the workflow so clear forward-motion messages such as `ok`, `continue`, or `next` trigger routine non-destructive follow-up, but do not authorize hard-gate actions.
+- Tightened `task-preparation` so task-boundary failures now route back to `milestone-planning` instead of encouraging vague specs or multiple specs for one task.
+- Tightened `task-execution-simple` so branch closing remains unresolved until one explicit outcome is chosen, and destructive cleanup stays behind explicit execution-time confirmation.
+- Slimmed references so high-frequency rules live in main `SKILL.md` files and only true templates or low-frequency edge cases stay in `references/`.
+- Removed unused or misplaced reference files from `milestone-planning` and `task-preparation`.
+
+### Notes
+
+- This release is a workflow-behavior refinement more than a new stage-model change. The main goal is to make stage transitions, review pauses, default commits, hard gates, and handoff routing behave predictably in fresh conversations.
+- The intended interaction model is now:
+  - review pause -> user gives any clear forward-motion signal -> agent performs the stage's routine follow-up
+  - hard gate -> agent asks for explicit confirmation of the specific destructive or high-risk action
+- If you previously relied on hidden reference rules, older anti-pattern files, or implicit stage behavior, read the updated main `SKILL.md` files first; they are now the primary source of truth.
+
 ## v0.6.0
 
 ### Features
