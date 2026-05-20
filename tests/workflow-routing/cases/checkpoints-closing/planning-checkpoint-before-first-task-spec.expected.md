@@ -6,10 +6,10 @@
 
 ## Expected Behavior
 
-- Explains that the first `continue` should accept the reviewed planning docs and move into task-local `spec.md` drafting for `login-session`.
-- Makes clear that the planning-docs commit, if used, is part of that same first continuation rather than a separately approved gate.
-- Explains that the second `continue` should approve the reviewed `spec.md` and move to the next routine task-execution step.
-- Makes clear that the second `continue` should not jump straight into coding if a plan trigger, branch-isolation step, or other non-destructive operational step still comes first.
+- Explains that the first `continue` should accept the reviewed planning docs and perform the routine planning-doc checkpoint.
+- Makes clear that the planning-doc commit is routine follow-up, not a separately approved hard gate.
+- Makes clear that after that checkpoint, the workflow can move into `task-preparation` on the next forward-motion reply.
+- Does not need to spell out the full second-step wording, but must not imply that another approval is needed only for the planning-doc commit.
 - Does not need to output the full completed `spec.md`; it is enough to state that drafting `spec.md` is the correct second-step action.
 - Keeps implementation safety rules intact behind later plan/isolation/readiness steps as needed.
 
@@ -20,7 +20,7 @@ None. This case checks checkpoint sequencing only; the prompt explicitly says no
 ## Must Not
 
 - Must not require a separate approval step whose only purpose is committing the reviewed planning docs.
-- Must not require a third `continue` before starting `spec.md`.
+- Must not require a third `continue` before entering `task-preparation` and starting `spec.md`.
 - Must not say that the first `continue` should start implementation.
 - Must not say that the second `continue` should perform destructive cleanup.
 

@@ -25,12 +25,13 @@ The generated `spec.md` should follow the local task spec template shape:
 - `## Goals`
 - `## Non-goals`
 - `## Option Selection`
-- `## Design`
+- `## Design Overview`
+- `## Design Details`
 - `## Error Handling`
 - `## Testing and Verification`
 - `## Docs Updates`
 
-The `## Design` section may use task-specific subheadings. Boundary-oriented design detail is required only when the prompt, task docs, architecture docs, context docs, or loaded template guidance make a boundary decision relevant to the task.
+`## Design Details` may use task-specific subheadings such as `### Entry Points / Surfaces`, `### Data / Control Flow`, or `### Boundary Decisions`. Boundary-oriented design detail is required only when the prompt, task docs, architecture docs, context docs, or loaded template guidance make a boundary decision relevant to the task.
 
 ## Expected File Changes
 

@@ -8,7 +8,7 @@
 
 - Recognizes that milestone closure is still blocked because `Handoff Notes` is non-empty.
 - Explains that `Handoff Notes` is a temporary transfer queue rather than historical residue.
-- Requires the handoff item to be attached to a later milestone or backlog and removed from `M1` before closure.
+- Requires the handoff item to be resolved to a recorded destination such as a later milestone, backlog, planning inbox, or explicit discard before closure.
 - Keeps the workflow at milestone governance instead of closing `M1` immediately.
 
 ## Expected File Changes

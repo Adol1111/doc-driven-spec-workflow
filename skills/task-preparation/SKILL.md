@@ -113,6 +113,7 @@ Route back to `milestone-planning` instead of forcing the current spec when any 
 - Stop at a review pause after `spec.md`.
 - Stop at a second review pause after `plan.md` when a plan exists.
 - Treat any clear forward-motion message after a review pause as permission for routine follow-up.
+- At a `spec.md` review pause, that same forward-motion message counts as approval of the reviewed spec unless the user asks for changes instead.
 - Default follow-up after the final task-local review is:
   - commit reviewed task-local docs
   - unless the user explicitly asks to leave them uncommitted
