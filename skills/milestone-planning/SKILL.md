@@ -66,9 +66,13 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 ## Boundary rules
 
 - Milestone boundaries are about release or phase meaning, not about keeping milestone size visually balanced.
+- Do not keep one giant milestone open just because the original request was broad. Split when there are real phase, exit, or release boundaries.
 - Modules are optional. Do not create a single catch-all module for one capability area.
+- Do not use tiny one-off modules as buckets for isolated tasks.
 - Task boundaries must stay above implementation design. A roadmap task says what capability lands, not how code changes are sequenced.
 - Do not hide multiple selectable capabilities inside vague task names such as `core`, `foundation`, `mvp`, or `polish`.
+- Do not name roadmap tasks after files, endpoints, tests, migrations, or refactor slices.
+- Do not split implementation, tests, docs, verification, or review follow-up into separate roadmap tasks unless that governance work is itself the user-visible delivery outcome.
 - Task order belongs in the relevant ordered list, not in numeric directory prefixes.
 
 ## If blocked
@@ -90,6 +94,7 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - Do not move into a later milestone while an earlier milestone still appears open and unresolved.
 - Do not treat `continue` as milestone confirmation when the roadmap structure is still explicitly unconfirmed.
 - Do not close a milestone while any `Handoff Notes` item remains unresolved.
+- Do not add follow-up work to a completed milestone. Create a new open milestone or backlog item instead.
 
 ## Output
 
