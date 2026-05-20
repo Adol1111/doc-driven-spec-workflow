@@ -62,7 +62,9 @@ Turn one selected roadmap task into implementation-ready task-local docs. This i
 ## Clarification rules
 
 - Run a clarification loop before drafting `spec.md`, even when the task looks obvious.
-- If code or docs can answer a question, explore first instead of asking the user.
+- Use code and docs to resolve present-state facts first.
+- Do not treat current implementation or existing docs as authority for future intent, scope, acceptance, or non-goal decisions.
+- Ask the user whenever the unresolved branch is about what should change, what should stay out of scope, or what future behavior the task is meant to produce.
 - Ask one blocking question at a time and include your recommended answer.
 - Treat scope, acceptance, non-goals, migration ownership, rollout behavior, proof expectations, and allowed minimal implementation as blocking when they materially affect the task-local design.
 - Do not draft from assumed defaults while blocking branches remain unresolved.
