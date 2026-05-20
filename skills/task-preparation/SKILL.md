@@ -72,12 +72,13 @@ Turn one selected roadmap task into implementation-ready task-local docs. This i
 ## Default flow
 
 1. Confirm the selected task is genuinely selectable from confirmed roadmap state.
-2. Run the task-local clarification loop until blocking branches are resolved.
-3. Draft the full `spec.md` in one pass.
-4. Stop for spec review.
-5. If a plan trigger is present after spec review, write `plan.md` and stop for plan review.
-6. Run the default docs follow-up.
-7. Hand off to execution only after the docs follow-up outcome is explicit.
+2. If the task is still `planned`, move it to `in_progress` when active task-local work begins.
+3. Run the task-local clarification loop until blocking branches are resolved.
+4. Draft the full `spec.md` in one pass.
+5. Stop for spec review.
+6. If a plan trigger is present after spec review, write `plan.md` and stop for plan review.
+7. Run the default docs follow-up.
+8. Hand off to execution only after the docs follow-up outcome is explicit.
 
 ## Plan triggers
 
@@ -109,6 +110,14 @@ Route back to `milestone-planning` instead of forcing the current spec when any 
 - the task appears to need two separate specs
 - acceptance actually describes two independently reviewable or independently shippable capabilities
 - a missing dependency is really a roadmap-order problem rather than a task-local design question
+
+## Task status rules
+
+- Entering active task-local preparation should move the task from `planned` to `in_progress` if it has not already changed.
+- Keep the task at `in_progress` while clarification, `spec.md`, optional `plan.md`, review pauses, or docs follow-up are still active.
+- Use `blocked` when task-local preparation cannot continue because a real blocking question, external dependency, missing prerequisite, or explicit user hold prevents progress.
+- Move a blocked task back to `in_progress` once the blocking condition is resolved and active work resumes.
+- Do not mark the task `completed` during preparation; completion belongs to execution after implementation and branch closing are done.
 
 ## Review and default follow-up
 

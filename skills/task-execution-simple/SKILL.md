@@ -76,6 +76,14 @@ Execute one prepared task end-to-end without reopening planning or spec work.
 - Small test-file repairs that preserve the original assertion intent do not need separate confirmation.
 - If `plan.md` includes commit checkpoints, treat them as optional stable boundaries rather than mandatory per-slice commits.
 
+## Task status rules
+
+- Enter execution with the task already `in_progress`; if it is still `planned`, move it to `in_progress` before coding starts.
+- Keep the task at `in_progress` while isolation, implementation, verification, implementation review, or branch closing are still unresolved.
+- Use `blocked` when execution cannot continue because of a real external dependency, failed prerequisite, unresolved verification blocker, or explicit user hold.
+- Move a blocked task back to `in_progress` once execution can continue.
+- Mark the task `completed` only after implementation is accepted, verification and required docs/status updates are done, and the chosen closing outcome is fully resolved.
+
 ## When to route back
 
 Route back to `task-preparation` before coding when any of these become true:

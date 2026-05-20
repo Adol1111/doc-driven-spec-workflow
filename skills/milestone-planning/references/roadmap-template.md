@@ -172,6 +172,13 @@ Use this shape when the milestone has no module layer:
 
 `Status` is a single-choice state marker. Exactly one of `planned`, `in_progress`, `blocked`, or `completed` should be checked at a time.
 
+Use the task states this way:
+
+- `planned`: decomposed and tracked, but active task-local work has not started yet
+- `in_progress`: active preparation or execution work is underway
+- `blocked`: the selected task cannot continue because of a real blocker that should be visible in docs or handoff context
+- `completed`: implementation, verification, required docs/status updates, and closing are all resolved
+
 Use this path when modules exist:
 
 ```md

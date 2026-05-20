@@ -87,6 +87,15 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - Remove an item only when it is explicitly discarded or no longer worth tracking.
 - If the user explicitly decides the item is high priority enough to interrupt the current path, replan it instead of leaving it as handoff-only follow-up.
 
+## Task status lifecycle
+
+- New roadmap tasks start as `planned`.
+- Keep a task at `planned` while it is only decomposed, ordered, or selected as a future candidate.
+- Move a task to `in_progress` only when active task-local preparation or implementation work actually begins.
+- Use `blocked` only when the selected task cannot currently move forward because of an external dependency, unresolved decision, failed prerequisite, or explicit stop condition.
+- Do not mark a task `completed` from roadmap planning alone; completion belongs to execution after implementation, verification, required docs/status updates, and closing outcome are resolved.
+- Keep task `Status` single-choice at all times.
+
 ## Inbox vs backlog
 
 - `planning-inbox.md` stores unconfirmed planning candidates: ideas, goals, opportunities, or follow-up work that still needs alignment before milestone decomposition.
