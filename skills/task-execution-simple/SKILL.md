@@ -1,54 +1,135 @@
 ---
 name: task-execution-simple
-description: Implements a prepared concrete docs/tasks task through branch isolation, code changes, verification, review, and branch closing. Use when task-local spec or plan work is complete and next step is straightforward direct execution.
+description: Executes one prepared task through isolation, implementation, verification, review, and branch closing. Use when task-local docs are complete and the next work is straightforward direct execution.
 ---
 
 # Task Execution Simple
 
-## Quick start
+## Purpose
 
-Use after `task-preparation` finished and task ready for direct impl.
-This skill owns execution isolation, implementation, verification, implementation review, and branch closing. It does not own roadmap decomposition or task-local `spec.md` / `plan.md` authoring.
+Execute one prepared task end-to-end without reopening planning or spec work.
 
-## Mandatory rules
+## Use when
 
-- Follow the task-local `spec.md` and optional `plan.md` for testing and verification expectations.
-- Default never implement on the current branch. Create a dedicated task branch in the current workspace unless the user explicitly wants another path.
-- Use a worktree only when the user explicitly wants one or parallel/high-conflict execution makes it meaningfully better.
-- Handle branch isolation and any other readiness work before code edits.
-- Verify implementation and update affected docs or status in the same round when behavior, API shape, task status, architecture assumptions, or stable constraints changed.
-- Default to committing completed implementation work before asking for implementation review.
-- Treat `plan.md` commit points as judgment-based checkpoints, not mandatory per-stage commits. Simple tasks may only need the final task commit; complex tasks may commit after any stage that forms a verified, reviewable, reversible stable state.
+- `task-preparation` is complete
+- task-local docs are reviewed and ready
+- the next work is branch isolation, implementation, verification, and closing
+
+## Do not use when
+
+- task-local `spec.md` is missing, unreviewed, or still blocked
+- a `plan.md` trigger is discovered before coding and task-local planning is still incomplete
+- the current work is roadmap reshaping, task selection, or task-local design
+
+## Read first
+
+- selected task `task.md`
+- task-local `spec.md`
+- optional task-local `plan.md`
+- relevant milestone or module `index.md`
+- current branch and task status
+- the current user prompt
+
+## Owns
+
+- execution isolation
+- readiness before code edits
+- implementation
+- verification
+- docs and status updates caused by implementation
+- implementation review pause
+- branch closing choice and destructive cleanup gates
+
+## Must not own
+
+- roadmap decomposition or milestone reshaping
+- task-local `spec.md` or `plan.md` authoring
+- expanding task scope because execution is difficult
+- treating generic forward-motion as permission for destructive closing actions
+
+## Entry checks
+
+- Enter only when task-local docs are complete enough for direct implementation.
+- If required task-local docs are missing, blocked, or unreviewed, route back to `task-preparation`.
+- Default to a dedicated task branch in the current workspace.
+- Stay on the current branch only when the user explicitly chooses that path.
+- Use a worktree only when the user explicitly wants one or parallel/high-conflict execution makes it clearly better.
+
+## Default flow
+
+1. Create execution isolation and finish readiness work before coding.
+2. Implement the selected task.
+3. Verify behavior and update affected docs or task status in the same round.
+4. Commit verified implementation work on the task branch.
+5. Stop for implementation review.
+6. After review, enter branch-closing choice.
+7. Execute only the explicitly chosen closing outcome.
+
+## Execution rules
+
+- Follow the approved `spec.md` and optional `plan.md` as the source of truth for scope and proof expectations.
+- Code is the source of truth when code and docs diverge; update relevant docs in the same round when implementation changes behavior, API shape, task status, architecture assumptions, or stable constraints.
 - If relevant existing automated tests fail during the task, do not ignore them just because the task did not require adding new unit tests.
 - Prefer fixing production code so existing tests keep expressing the same behavior.
-- If existing tests need semantic changes because the task intentionally changes behavior, explain the reason and get user confirmation before changing what those tests assert.
+- If existing tests need semantic changes because the task intentionally changes behavior, explain why and get user confirmation before changing what those tests assert.
 - Small test-file repairs that preserve the original assertion intent do not need separate confirmation.
-- Stay on current branch only when user explicitly chooses that path.
-- Branch closing must be resolved before starting another task.
-- After implementation review, branch closing starts by choosing one explicit outcome: `merge and keep branch`, `merge and delete branch`, or `discard work`.
-- Present closing outcomes as a numbered choice so the user can reply with `1`, `2`, or `3` instead of retyping the full outcome text.
-- When closing is unresolved, use the fixed closing prompt from `references/task-execution-detailed-rules.md` instead of paraphrasing the choices freely.
-- Generic forward-motion language such as `continue`, `next`, or `go on` may enter branch closing, but it does not choose a closing outcome.
+- If `plan.md` includes commit checkpoints, treat them as optional stable boundaries rather than mandatory per-slice commits.
+
+## When to route back
+
+Route back to `task-preparation` before coding when any of these become true:
+
+- a required task-local doc is missing or incomplete
+- the task still has a blocking `Undecided` item
+- a real `plan.md` trigger appears before coding and the plan does not exist yet
+- the task boundary looks wrong enough that execution would have to invent new scope
+
+## Review and default follow-up
+
+- Stop at an implementation review pause only after verified implementation work is committed, unless that commit is blocked by unrelated user edits, unresolved verification failure, or explicit user instruction.
+- Treat clear forward-motion language after implementation review as permission to enter branch-closing choice.
+- Default follow-up after implementation review is to present closing choices, not to select one.
+- Branch closing remains unresolved until one explicit outcome is chosen.
+- Must not start another task while branch closing is unresolved.
+
+## Closing outcomes
+
+- `merge and keep branch`
+- `merge and delete branch`
+- `discard work`
+
+Present closing outcomes as a numbered choice using the fixed prompt in `references/task-execution-detailed-rules.md`.
+
+## Hard gates
+
+- `continue`, `ok`, or `next` may enter closing choice, but they do not choose a closing outcome.
 - `git merge`, including fast-forward merge, must not run until a merge outcome is explicit.
-- Any default branch-closing preference must be explicit in the current task context; do not infer it from how a previous task was closed. Persistent defaults may cover `merge and keep branch` or `merge and delete branch`, but never `discard work`.
-- If a closing outcome is already explicit, `continue` may advance only its non-destructive steps.
-- Confirm before deleting any branch or worktree. Removing worktree does not remove its task branch.
-- Destructive actions, including branch deletion, worktree deletion, and discard, always require explicit confirmation at execution time. `discard work` always requires a fresh explicit confirmation for the current task, and `merge and delete branch` still requires a second explicit confirmation when branch deletion is about to run.
+- Deleting a branch or worktree always requires explicit confirmation at execution time.
+- `discard work` always requires a fresh explicit confirmation for the current task.
+- If the user selects `merge and delete branch`, merge first, then ask again before the destructive delete step runs.
 
-Code is source of truth when code and docs diverge. If implementation changes behavior, API shape, task status, architecture assumptions, or stable constraints, update the relevant docs in the same round. Move stable rules out of `docs/context/`.
+## Output
 
-## Advanced features
+- `Isolation`
+- `Implementation result`
+- `Verification result`
+- `Docs/status updates`
+- `Review stop`
+- `Closing choice`
 
-Use `references/task-execution-detailed-rules.md` only as supplementary clauses when the main skill leaves an execution edge case unresolved.
-Read it for test-semantics changes, docs-follow-up edge cases, fixed closing-prompt wording, destructive-confirmation timing, current-task-context rules, or checkpoint boundary cases.
+## Stop point
 
-Default flow:
+- implementation review pause
+- closing choice prompt
+- or a direct blocking question about execution readiness or test semantics
 
-1. Receive handoff context from `task-preparation`.
-2. Create execution isolation and complete readiness work.
-3. Implement one concrete task.
-4. Verify behavior and update affected docs or status.
-5. Commit verified implementation work, including any useful checkpoint commits from `plan.md`.
-6. Stop for implementation review of the committed task branch or merge diff.
-7. Ask for one explicit branch-closing outcome and execute only that outcome.
-8. State `Decided`, `Undecided`, `Next skill`, and `Stop point` at implementation review and branch-closing gates.
+## Handoff
+
+- `Decided`
+- `Undecided`
+- `Next skill`
+- `Stop point`
+
+## References
+
+- Use `references/task-execution-detailed-rules.md` only for low-frequency execution edge cases and the fixed closing prompt.
