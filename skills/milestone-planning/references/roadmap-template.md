@@ -177,7 +177,7 @@ Use the task states this way:
 - `planned`: decomposed and tracked, but active task-local work has not started yet
 - `in_progress`: active preparation or execution work is underway
 - `blocked`: the selected task cannot continue because of a real blocker that should be visible in docs or handoff context
-- `completed`: implementation, verification, required docs/status updates, and closing are all resolved
+- `completed`: implementation is accepted, verification and required docs/status updates are done, and the task-local checklist is complete; branch cleanup may still remain as a separate closing step
 
 Use this path when modules exist:
 

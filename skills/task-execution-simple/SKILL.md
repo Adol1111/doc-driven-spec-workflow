@@ -59,11 +59,12 @@ Execute one prepared task end-to-end without reopening planning or spec work.
 
 1. Create execution isolation and finish readiness work before coding.
 2. Implement the selected task.
-3. Verify behavior and update affected docs or task status in the same round.
+3. Verify behavior, run the task completion self-check, and update affected docs in the same round.
 4. Commit verified implementation work on the task branch.
 5. Stop for implementation review.
-6. After review, enter branch-closing choice.
-7. Execute only the explicitly chosen closing outcome.
+6. After review, update the task doc state to reflect accepted completion and commit that follow-up.
+7. Enter branch-closing choice.
+8. Execute only the explicitly chosen closing outcome.
 
 ## Execution rules
 
@@ -82,7 +83,10 @@ Execute one prepared task end-to-end without reopening planning or spec work.
 - Keep the task at `in_progress` while isolation, implementation, verification, implementation review, or branch closing are still unresolved.
 - Use `blocked` when execution cannot continue because of a real external dependency, failed prerequisite, unresolved verification blocker, or explicit user hold.
 - Move a blocked task back to `in_progress` once execution can continue.
-- Mark the task `completed` only after implementation is accepted, verification and required docs/status updates are done, and the chosen closing outcome is fully resolved.
+- Before stopping for implementation review, complete the task-level self-check: verification passes, required docs updates are done, and task-local checklist items are honestly ready to be checked.
+- Do not ask the user for implementation review while the agent already knows the task checklist or required docs/status updates are still incomplete.
+- After implementation review is accepted, mark the task `completed`, record the accepted checklist state, and commit that post-review task-doc update before presenting merge/delete/discard options.
+- If the user later chooses `discard work`, revert task status away from `completed` as part of the discard flow.
 
 ## When to route back
 
@@ -96,8 +100,12 @@ Route back to `task-preparation` before coding when any of these become true:
 ## Review and default follow-up
 
 - Stop at an implementation review pause only after verified implementation work is committed, unless that commit is blocked by unrelated user edits, unresolved verification failure, or explicit user instruction.
-- Treat clear forward-motion language after implementation review as permission to enter branch-closing choice.
-- Default follow-up after implementation review is to present closing choices, not to select one.
+- Treat clear forward-motion language after implementation review as permission to finalize accepted task-doc state and commit that non-destructive follow-up.
+- Default follow-up after implementation review is:
+  - update task-local checklist state if needed
+  - update task status to `completed`
+  - commit the accepted task-doc state update
+  - then present closing choices without selecting one
 - Branch closing remains unresolved until one explicit outcome is chosen.
 - Must not start another task while branch closing is unresolved.
 
@@ -123,7 +131,9 @@ Present closing outcomes as a numbered choice using the fixed prompt in `referen
 - `Implementation result`
 - `Verification result`
 - `Docs/status updates`
+- `Pre-review completion check`
 - `Review stop`
+- `Post-review task-state update`
 - `Closing choice`
 
 ## Stop point
