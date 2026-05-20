@@ -1,62 +1,154 @@
 ---
 name: task-preparation
-description: Prepares a selected concrete docs/tasks task through task-local spec, optional plan, review pauses, and execution handoff before code changes. Use when roadmap state is confirmed and next work is task-local preparation.
+description: Prepares one selected concrete task for implementation through task-local spec, optional plan, review pauses, and execution handoff. Use when roadmap state is confirmed and the next work is task-local preparation.
 ---
 
 # Task Preparation
 
-## Quick start
+## Purpose
 
-Use after roadmap exists and one concrete task already selected or clearly next.
-This skill consumes an existing concrete task. It does not create task directories, reshape roadmap structure, or implement code.
+Turn one selected roadmap task into implementation-ready task-local docs. This is the spec stage.
 
-## Mandatory rules
+## Use when
 
-Create or update task-local docs only for concrete implementation work on an existing task. Pure docs governance, such as architecture edits, task or module reshaping, milestone changes, task creation, or index maintenance, does not create an implementation spec or code permission.
+- one concrete task is selected or clearly next from confirmed roadmap state
+- the next work is task-local clarification, `spec.md`, optional `plan.md`, and execution handoff
+- roadmap structure is stable enough that implementation can be prepared without reshaping milestones or tasks
 
-- Enter only when one existing concrete task is selected or clearly next from confirmed roadmap state. If milestone confirmation, task selection, or dependencies are still ambiguous, stop and use `milestone-planning`.
-- Always write `spec.md`. If the user asks to skip it, refuse and stop.
-- Default to no `plan.md`. Create it only when sequencing is non-obvious because of ordering, compatibility, migration, rollout, cross-module coordination, or verification risk.
-- Keep `1 task -> 1 spec`. If multiple specs seem necessary, stop and use `milestone-planning` to split the task first.
-- `plan.md` supplements the approved `spec.md`; it does not restate it.
-- Do not write follow-up work into the current task `plan.md` unless it is part of the current task's committed scope. If work should be remembered but not completed in the current task, record it in milestone handoff or create a new task instead.
-- Compact specs are fine; vague specs are not.
-- If another agent or fresh conversation may pick up the work, make boundaries, non-goals, allowed minimal implementation, proof expectations, and likely first edit surface explicit.
+## Do not use when
 
-Required before drafting:
+- milestone confirmation, task selection, or dependency order is still ambiguous
+- the current work is still roadmap decomposition or planning alignment
+- the current work is implementation, readiness, verification, or branch closing
 
-- Run a clarification loop before any `spec.md` content, even when the task seems obvious.
-- If code or docs can answer a question, explore first instead of asking.
-- Walk each blocking design branch to shared understanding.
+## Read first
+
+- selected task `task.md`
+- relevant milestone or module `index.md`
+- relevant `docs/architecture/` constraints
+- supporting `docs/context/` notes when needed
+- the current user prompt
+
+## Owns
+
+- task selectability checks
+- task-local clarification loop
+- `spec.md`
+- optional `plan.md`
+- review pauses for task-local docs
+- default reviewed-doc follow-up
+- execution handoff context
+
+## Must not own
+
+- milestone reshaping or new roadmap decomposition
+- execution isolation, implementation, verification, or branch closing
+- leaving blocking task-boundary ambiguity hidden inside a vague spec
+- using `plan.md` to introduce new scope or rewrite the approved spec
+
+## Entry checks
+
+- Enter only when all are true:
+  - the milestone has `Roadmap confirmed: yes`
+  - previous milestone closure is resolved when crossing milestones
+  - task status is `planned` or `in_progress`
+  - dependencies are satisfied or explicitly waived
+  - no unresolved hard gate blocks progress
+  - the user selected the task, or docs clearly identify it as next
+- If any of those conditions are unclear, route back to `milestone-planning`.
+- Always write `spec.md`. Do not skip it.
+- Default to no `plan.md`. Create one only when a real plan trigger is present.
+
+## Clarification rules
+
+- Run a clarification loop before drafting `spec.md`, even when the task looks obvious.
+- If code or docs can answer a question, explore first instead of asking the user.
 - Ask one blocking question at a time and include your recommended answer.
-- Do not draft `spec.md` until scope, acceptance, non-goals, migration risk, rollout, and proof expectations are settled enough for shared understanding.
-- If a design branch would materially change scope, acceptance, proof, rollout, migration ownership, implementation level, `Option Selection`, `Design Overview`, `Testing and Verification`, or allowed minimal implementation, treat it as blocking.
+- Treat scope, acceptance, non-goals, migration ownership, rollout behavior, proof expectations, and allowed minimal implementation as blocking when they materially affect the task-local design.
 - Do not draft from assumed defaults while blocking branches remain unresolved.
-- If an `Undecided` item still blocks `spec.md`, `plan.md`, reviewed-doc follow-up, or execution handoff, resolve it before moving on.
-- Keep explicit option comparison when real alternatives exist.
-- After shared understanding is reached, draft the full `spec.md` in one pass.
 
-## Advanced features
+## Default flow
 
-Default flow:
+1. Confirm the selected task is genuinely selectable from confirmed roadmap state.
+2. Run the task-local clarification loop until blocking branches are resolved.
+3. Draft the full `spec.md` in one pass.
+4. Stop for spec review.
+5. If a plan trigger is present after spec review, write `plan.md` and stop for plan review.
+6. Run the default docs follow-up.
+7. Hand off to execution only after the docs follow-up outcome is explicit.
 
-| Plan Trigger | Flow |
-|------------|------|
-| No trigger | `spec -> review pause -> auto follow-up (default commit) -> execution handoff` |
-| Trigger present | `spec -> review pause -> plan -> review pause -> auto follow-up (default commit) -> execution handoff` |
+## Plan triggers
 
-- After a review pause, clear forward-motion language such as `continue` or `next` means follow the recommended route. Ask a separate approval question only for hard gates.
-- After `spec.md` review, write `plan.md` only when a plan trigger is present; otherwise proceed through auto follow-up.
-- After `plan.md` review, proceed through auto follow-up, including the default docs commit, unless the user explicitly refuses that commit.
-- Do not skip the reviewed-docs commit unless the user explicitly wants the docs left uncommitted.
-- If reviewed docs stay uncommitted, say it is an explicit exception, give the reason, and list affected files.
-- Before execution handoff, state the docs follow-up outcome, `Decided`, `Undecided`, `Next skill`, and `Stop point`.
-- When `milestone-planning` has just created or reshaped roadmap or task docs, report that as a planning review pause before entering task-local doc work.
-- If `milestone-planning` created the first concrete task in a milestone, the first `continue` may accept planning docs and move into `spec.md` work when no hard gate blocks it.
+- 3 or more major files or modules must change and modification order affects correctness
+- database schema, migration, backfill, or persisted-format changes
+- public API, CLI, config format, plugin interface, or task-doc compatibility boundary
+- cross-module coordination where responsibilities or sequence are non-obvious
+- phased rollout, feature flag, dual-read, dual-write, or migration transition behavior
+- non-obvious verification order
+- multiple implementation slices remain inside one task and should not be split at roadmap level
+- exploratory spike or risk-reduction work is required before implementation edits
 
-Reference loading:
+Do not create `plan.md` for a small single-capability task with straightforward implementation order. If plan-trigger status is uncertain, name the suspected trigger and ask before writing the plan.
+
+## Boundary rules
+
+- Keep `1 task -> 1 spec`. If the task appears to need multiple specs, the task boundary is wrong.
+- `plan.md` supplements the approved `spec.md`; it does not restate the spec.
+- Do not write follow-up work into the current `plan.md` unless it is already in the current task scope.
+- Compact specs are fine; vague specs are not.
+- Make boundaries, non-goals, likely first edit surface, and proof expectations explicit enough for a fresh conversation or another agent to continue.
+
+## When to route back
+
+Route back to `milestone-planning` instead of forcing the current spec when any of these become true:
+
+- the task needs two mutually exclusive scope choices to make sense
+- the task appears to need two separate specs
+- acceptance actually describes two independently reviewable or independently shippable capabilities
+- a missing dependency is really a roadmap-order problem rather than a task-local design question
+
+## Review and default follow-up
+
+- Stop at a review pause after `spec.md`.
+- Stop at a second review pause after `plan.md` when a plan exists.
+- Treat any clear forward-motion message after a review pause as permission for routine follow-up.
+- Default follow-up after the final task-local review is:
+  - commit reviewed task-local docs
+  - unless the user explicitly asks to leave them uncommitted
+- If reviewed docs stay uncommitted, say that it is an explicit exception, give the reason, and list the affected files.
+- The stage is not complete until the docs follow-up outcome is resolved and reported.
+
+## Hard gates
+
+- Do not use `continue` to bypass unresolved task-boundary ambiguity.
+- Do not hand off to execution while a blocking `Undecided` item still affects `spec.md`, `plan.md`, or the reviewed-doc follow-up.
+- Do not let reviewed-doc approval imply permission for destructive execution actions; those belong to the execution stage.
+
+## Output
+
+- `Task`
+- `Readiness check`
+- `Blocking questions`
+- `Spec result`
+- `Plan needed? why?`
+- `Review stop`
+- `Docs follow-up outcome`
+- `Execution handoff`
+
+## Stop point
+
+- spec review pause
+- plan review pause
+- or a direct blocking question about task-local ambiguity or task boundary failure
+
+## Handoff
+
+- `Decided`
+- `Undecided`
+- `Next skill`
+- `Stop point`
+
+## References
 
 - Use `references/spec-template.md` for task-local `spec.md`.
 - Use `references/plan-template.md` for task-local `plan.md`.
-- Use `references/index-template.md`, `references/architecture-template.md`, or `references/context-template.md` only when that exact doc type is relevant.
-- Do not load every reference by default.
