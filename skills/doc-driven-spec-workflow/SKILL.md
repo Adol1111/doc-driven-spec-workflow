@@ -1,69 +1,95 @@
 ---
 name: doc-driven-spec-workflow
-description: Routes docs-driven repository work to the correct local workflow stage and preserves handoff context between stages. Use when the next step is unclear between bootstrap, clarification, roadmap decomposition, task preparation, or simple execution.
+description: Routes docs-driven repository work to the correct workflow stage and preserves handoff context. Use when the next step is unclear between bootstrap, clarification, roadmap planning, task preparation, or execution.
 ---
 
 # Doc-Driven Spec Workflow
 
-## Quick start
+## Purpose
 
-Use this root skill only to choose next stage. Stage skills own actual work.
+Choose exactly one next stage skill. Do not do stage work here.
 
-## Workflows
+## Use when
 
-Default chain: `docs-workflow-bootstrap -> planning-clarification -> milestone-planning -> task-preparation -> task-execution-simple`
-Skip stages only when their decision is already settled.
+- the repository follows this docs-driven workflow
+- the user wants to continue work but the current stage is not explicit
+- a fresh conversation must recover workflow state from docs and the prompt
 
-Routing:
+## Read first
 
-| Current uncertainty | Next skill |
-|---------------------|------------|
+1. `docs/tasks/index.md`
+2. `docs/tasks/planning-inbox.md`
+3. relevant milestone, module, and task docs under `docs/tasks/`
+4. `docs/architecture/`
+5. `docs/context/`
+6. the current user prompt
+
+Missing docs are routing signals, not proof that goals are unclear.
+
+## Owns
+
+- identify the current workflow stage
+- choose the next stage skill
+- ask the smallest routing question when evidence is insufficient
+- hand off `Decided`, `Undecided`, `Next skill`, and `Stop point`
+
+## Must not own
+
+- scaffold creation details
+- roadmap decomposition details
+- task-local `spec.md` or `plan.md` authoring
+- execution isolation, implementation, verification, or branch closing
+- local decisions that belong to the selected stage skill
+
+## Routing table
+
+| Situation | Next skill |
+| --- | --- |
 | Minimum docs scaffold is missing | `docs-workflow-bootstrap` |
-| Goals, constraints, success criteria, or now-vs-later boundaries are unresolved by docs or prompt evidence | `planning-clarification` |
-| Milestone count, module grouping, task breakdown, delivery order, or stage boundaries are unclear | `milestone-planning` |
-| A concrete task is selected or selectable from confirmed roadmap state | `task-preparation` |
+| Docs or prompt show unresolved goals, constraints, success criteria, or now-vs-later boundaries | `planning-clarification` |
+| Milestone shape, module grouping, task breakdown, or delivery order is unclear | `milestone-planning` |
+| A concrete task is selected or clearly selectable from confirmed roadmap state | `task-preparation` |
 
-## Mandatory rules
+## Entry checks
 
-- MUST start docs-driven repository work by identifying the current workflow stage.
-- MUST load exactly one stage skill next unless the user explicitly asks for a comparison or audit.
-- MUST delegate stage behavior to the selected skill instead of restating or bypassing that skill's rules.
-- MUST treat roadmap planning and task reshaping as docs governance. They do not authorize spec writing or implementation by themselves.
-- MUST distinguish review pauses from hard gates.
-- MUST treat any clear forward-motion message after a review pause as approval to follow the recommended next step unless the current stop is a hard gate. Do not require specific wording.
-- MUST require explicit confirmation only for hard gates such as destructive cleanup, risky stay-on-current-branch choices, deleting branches/worktrees, or advancing across an unresolved milestone-closure boundary.
-- MUST preserve handoff context when switching skills: what is decided, what is undecided, and why the next skill applies.
-- MUST use `planning-clarification` only for positive ambiguity evidence. Missing or stale docs alone route to bootstrap or planning.
+- Route to `docs-workflow-bootstrap` when any minimum scaffold file is missing:
+  - `docs/index.md`
+  - `docs/architecture/index.md`
+  - `docs/tasks/index.md`
+  - `docs/tasks/planning-inbox.md`
+  - `docs/context/index.md`
+- Route to `planning-clarification` only for positive ambiguity evidence. Missing or stale docs alone are not enough.
+- Route to `task-preparation` only when all are true:
+  - the milestone has `Roadmap confirmed: yes`
+  - previous milestone closure is resolved when crossing milestones
+  - task status is `planned` or `in_progress`
+  - dependencies are satisfied or explicitly waived
+  - no unresolved hard gate blocks progress
+  - the user selected the task, or docs clearly identify it as next
 
-Use `docs-workflow-bootstrap` when any minimum scaffold file is missing: `docs/index.md`, `docs/architecture/index.md`, `docs/tasks/index.md`, `docs/tasks/planning-inbox.md`, or `docs/context/index.md`.
+## Default flow
 
-Use `task-preparation` only when all are true:
+1. Read docs in evidence order and identify the strongest routing signal.
+2. Choose exactly one next stage skill.
+3. If evidence is insufficient, ask one minimal routing question instead of guessing.
+4. Hand off only stage context, not stage-specific decisions.
 
-- the task milestone has `Roadmap confirmed: yes`
-- previous milestone closure is resolved when crossing milestones
-- task status is `planned` or `in_progress`
-- dependencies are satisfied or waived
-- no prior hard gate remains unresolved
-- the user selected it, or `docs/tasks/` clearly identifies it as next by order/status
+## Stop point
 
-Do not skip from ambiguous scope to spec writing, use task execution to invent roadmap structure, or keep planning after question is current-task execution.
+- handoff to one stage skill
+- or one minimal routing question
 
-- Bootstrap -> clarification or planning: minimum docs scaffold exists.
-- Clarification -> planning: scope, boundaries, and success criteria are clear enough to plan delivery structure.
-- Planning -> task preparation: selected concrete task is in confirmed roadmap state, dependencies and prior hard gates are clear, and the user wants spec-first execution.
-- Task preparation -> simple execution: task-local docs are complete, the auto follow-up outcome has been explicitly reported, and the next work is straightforward direct implementation.
+## If blocked
 
-At each handoff, briefly restate:
+- ask one routing question when evidence does not identify the next stage
+- do not answer the routing question on the user's behalf
+- do not bypass uncertainty by drafting specs or inventing roadmap structure
 
-- what is decided
-- what is undecided
-- what the next skill owns
-- whether the next stop is a review pause or a hard gate
+## Handoff
 
-From `task-preparation`, also state the docs follow-up outcome explicitly: committed by default unless the user explicitly refused that commit, or intentionally left uncommitted with affected files listed.
-
-Treat any user message that clearly means "move forward" as permission to advance after a review pause. If the recommended next step includes a routine commit, status update, isolation step, or stage handoff, do it without a second approval question. Stop only when a hard gate is outstanding.
-
-## Advanced features
-
-Keep orchestration responses compact: current stage, why it applies, next skill, and expected stop point.
+- `Current stage`
+- `Why`
+- `Decided`
+- `Undecided`
+- `Next skill`
+- `Stop point`
