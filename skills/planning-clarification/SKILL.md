@@ -1,40 +1,99 @@
 ---
 name: planning-clarification
-description: Clarifies ambiguous planning direction before roadmap decomposition by resolving goals, scope, stage boundaries, and first roadmap slice direction. Use when goals, constraints, success criteria, or now-versus-later boundaries are unresolved.
+description: Resolves roadmap-blocking planning ambiguity before roadmap decomposition. Use when goals, constraints, success criteria, or now-vs-later boundaries are unresolved by docs or prompt evidence.
 ---
 
 # Planning Clarification
 
-## Quick start
+## Purpose
 
-Use this skill when docs or prompt show real ambiguity about direction, not just missing docs. Expand options first, then converge on a recommended direction.
+Resolve only the ambiguity that blocks roadmap planning. Do not decompose roadmap structure here.
 
-## Workflows
+## Use when
 
-1. Explore current evidence first: `docs/tasks/`, `docs/architecture/`, `docs/context/`, recent task docs, current prompt.
-2. If codebase can answer a question, inspect code/docs instead of asking user.
-3. Ask one question at a time until goals, constraints, success criteria, and now-vs-later boundaries are clear.
-4. Expand option space before narrowing it: compare at least 2-3 plausible scope, stage, or sequencing directions when direction is still open.
-5. Prefer short options with a recommendation.
-6. Make stage boundaries explicit: what belongs now, what belongs later, and what first coherent roadmap slice direction should be.
-7. If scope is too large for one planning pass, split it into smaller planning targets before recommending roadmap decomposition.
-8. Present recommended direction and ask user to confirm or correct it.
-9. After direction is confirmed, state handoff context in this shape: `Decided`, `Undecided`, `Next skill`, `Stop point`.
-10. Stop before roadmap decomposition, spec writing, or implementation.
-11. Hand off to `milestone-planning` when direction is clear enough to shape delivery.
+- docs or prompt show real ambiguity about goals, constraints, success criteria, or now-vs-later boundaries
+- roadmap decomposition cannot proceed without first choosing direction
+- the next step depends on clarifying what belongs now, what belongs later, or what the first planning slice should target
 
-## Mandatory rules
+## Do not use when
 
-- Missing docs alone do not trigger this skill.
-- Do not decompose milestones, write task-local `spec.md`, or implement code here.
-- Treat this as a hard gate before downstream planning when direction is still ambiguous.
-- Direction clarification here must include divergence, not only requirement collection.
-- Clarify `now vs later`, phase boundaries, and first roadmap slice direction before handoff.
-- Do not perform roadmap structure design here; `milestone-planning` owns milestone/module/task decomposition.
-- Stop after direction is confirmed and handoff context is stated. Do not start roadmap decomposition in the same response.
-- If scope is too large for one planning pass, help split it into smaller planning targets first.
-- Keep output compact: current ambiguity, next question or options, recommendation, `Decided`, `Undecided`, `Next skill`, `Stop point`.
+- missing docs are the only problem
+- roadmap direction is already clear enough to decompose
+- the current work is milestone decomposition, task-local design, or execution
 
-## Advanced features
+## Read first
 
-Downstream handoff target is usually `milestone-planning` once direction is clear enough to shape delivery.
+- `docs/tasks/index.md`
+- `docs/tasks/planning-inbox.md`
+- relevant `docs/tasks/` materials
+- `docs/architecture/`
+- `docs/context/`
+- the current user prompt
+
+## Owns
+
+- identifying roadmap-blocking ambiguity
+- asking the smallest blocking question
+- making now-vs-later boundaries explicit
+- recommending one clarified direction
+- handing off clarified planning context
+
+## Must not own
+
+- milestone, module, or task decomposition
+- task-local `spec.md` or `plan.md`
+- implementation or execution isolation
+- open-ended product discovery beyond what is needed to unblock roadmap planning
+
+## Entry checks
+
+- Use this skill only for positive ambiguity evidence, not for missing docs alone.
+- If codebase or docs can answer a question, inspect them before asking the user.
+- If the issue is already about roadmap structure rather than direction, route to `milestone-planning`.
+
+## Default flow
+
+1. Identify the specific ambiguity blocking roadmap planning.
+2. Resolve one blocking branch at a time.
+3. Ask one question at a time, with a recommended answer.
+4. Make the consequence of each branch explicit: what belongs now, what belongs later, and what the next planning target becomes.
+5. Once direction is clear enough for decomposition, stop and hand off to `milestone-planning`.
+
+## Clarification rules
+
+- Treat this as roadmap-blocking clarification, not broad product discovery.
+- Keep the question surface narrow: ask only what changes roadmap direction, phase boundaries, success criteria, or first-slice scope.
+- When real alternatives exist, compare 2-3 plausible directions briefly and recommend one.
+- If scope is too large for one planning pass, clarify the first coherent planning target instead of trying to settle the whole product at once.
+- Do not start roadmap decomposition in the same response that finishes clarification.
+
+## If blocked
+
+- Ask one blocking question at a time.
+- Do not stack multiple unresolved questions in one turn unless one answer depends directly on another.
+- If the user has not answered the current routing question, do not answer it on their behalf.
+
+## Review and follow-up
+
+- Stop after clarified direction is confirmed or corrected.
+- Treat clear forward-motion language after that stop as permission to move into the recommended next planning stage.
+- Default follow-up is handoff to `milestone-planning`.
+
+## Output
+
+- current ambiguity
+- next question or option set
+- recommended direction
+- clarified now-vs-later boundary
+
+## Stop point
+
+- one blocking clarification question
+- or clarified-direction handoff to `milestone-planning`
+
+## Handoff
+
+- `Decided`
+- `Undecided`
+- `Next skill`
+- `Stop point`
