@@ -1,81 +1,117 @@
 ---
 name: milestone-planning
-description: Decomposes docs-driven delivery scope into milestones, optional modules, and independently reviewable tasks before task-local spec work. Use when roadmap boundaries, delivery order, or task breakdown are unclear.
+description: Decomposes confirmed docs-driven direction into milestones, optional modules, and roadmap-level tasks. Use when roadmap boundaries, delivery order, or task breakdown are unclear.
 ---
 
 # Milestone Planning
 
-## Quick start
+## Purpose
 
-Use this before `spec.md` work when roadmap shape still unclear.
-If planning direction is still unresolved, route back to `planning-clarification` before decomposing milestones, modules, or tasks.
+Turn a clear direction into roadmap structure. This skill owns docs governance, not task-local design.
 
-## Workflows
+## Use when
 
-| Boundary | Rule |
-|----------|------|
-| Milestone | Start from release goal, phase boundary, or acceptance boundary, not feature count. Use one milestone for the same delivery goal plus same completion definition and no meaningful stage boundary. Split when phase boundaries, exit criteria, release timing, or frozen history differ. |
-| Module | Optional. Use only for multiple durable capability areas with distinct ownership, dependency graphs, risk profiles, release boundaries, or acceptance criteria. |
-| Task | One independently reviewable implementation round delivering one coherent capability outcome, including required tests, migrations, docs/status updates, refactors, and verification. When the user needs roadmap-level tasks so a first implementation task can be chosen, prefer user-visible or operator-visible capability boundaries. Do not hide multiple independently selectable capabilities inside a vague `core`, `MVP`, `foundation`, or `polish` task. |
+- planning direction is clear enough to decompose
+- milestone boundaries, module grouping, or task breakdown still need decisions
+- the user needs roadmap-level tasks before task-local `spec.md` work can begin
 
-Routing:
+## Do not use when
 
-| Situation | Action |
-|-----------|--------|
-| Empty `Open Milestones` and no docs/prompt evidence gives a concrete target or roadmap misalignment | Ask the planning mode question first |
-| Empty `Open Milestones` and docs/prompt evidence gives a concrete short-term target | Decompose directly with `milestone-planning` |
-| Empty `Open Milestones` and docs/prompt evidence says roadmap direction, goals, or phase boundaries are not aligned | Use `planning-clarification` first |
-| `Roadmap confirmed: no` and user asks to decompose or start work | Ask whether to re-evaluate milestone structure or continue on the current milestone path; keep tasks provisional |
-| Cross-milestone movement | Resolve previous milestone closure first |
+- goals, constraints, or now-vs-later boundaries are still genuinely unclear
+- the current task is already selected from confirmed roadmap state
+- the work now is task-local spec, plan, implementation, or branch closing
 
-**Planning mode question**: *"Do you already have a concrete short-term target for this iteration, or do we need to realign the next stage of the roadmap first?"*
-
-## Mandatory rules
-
-- Explain why each milestone, module, and task boundary exists. Structure without rationale is incomplete.
-- Empty `Open Milestones` is a routing signal, not enough information to decompose by itself. Check `docs/tasks/planning-inbox.md`, `docs/tasks/backlog.md`, relevant task docs, and the prompt before choosing a path.
-- Ask the planning mode question when no evidence identifies a concrete short-term target or roadmap misalignment.
-- Use `planning-clarification` only for positive ambiguity evidence.
-- If planning direction is still unresolved, do not decompose roadmap structure yet; route to `planning-clarification`.
-- Decompose directly when docs or prompt evidence gives a concrete short-term target.
-- Treat milestone confirmation as the primary routing signal. Tasks in `Roadmap confirmed: no` milestones are provisional planning output, not formally selected execution work.
-- Treat milestone/module/task creation or reshaping as docs governance only. It does not authorize spec writing or implementation.
-- Use stable task directory slugs without numeric order prefixes. Task order is expressed by the order of task links in the relevant `index.md`, not by task filenames.
-- Stop at a planning review pause after creating or reshaping roadmap/task docs.
-- When the user clearly indicates they want to move forward after reviewing planning docs, treat that as approval for that default follow-up.
-- If an `Undecided` item still blocks milestone closure, milestone confirmation, or later-milestone movement, do not treat `continue` as permission to move past it. Resolve that blocker first or ask the direct blocking question.
-- Hand off to `task-preparation` only after the current concrete task is chosen from confirmed roadmap state and no hard gate blocks the handoff.
-- Before handoff, state `Decided`, `Undecided`, `Next skill`, and `Stop point`.
-
-## Advanced features
-
-- `Handoff Notes`: temporary transfer queue for follow-up findings. Resolve before milestone closure.
-- A milestone must not close while any item remains in `Handoff Notes`.
-- Newly discovered follow-up work during an active milestone should go to that milestone's `Handoff Notes` first by default. Skip that only when the user explicitly decides the item is high priority enough to interrupt the current milestone and reorder or insert work immediately.
-- **Before closure**: every `Handoff Notes` item must be resolved to current-milestone open work, later milestone, `docs/tasks/backlog.md`, or removal.
-- Do not move into later-milestone decomposition or task selection until the previous milestone's `Handoff Notes` are fully resolved.
-- Close milestone when original exit criteria are satisfied.
-- Completed milestones are frozen; add follow-up work to a new open milestone.
-- If the user appears to be moving into a later milestone, resolve previous milestone closure and target milestone confirmation before decomposing or selecting work there.
-- If milestone entry is still ambiguous, do not answer the routing question on the user's behalf before the user responds.
-
-## Output Requirements
-
-Always provide:
-
-- Recommended milestone structure
-- Why it is one milestone or several
-- Whether modules are needed
-- Task list per milestone or module
-- Delivery order when not obvious
-- Assumptions or open questions
-
-Documents to create/update:
+## Read first
 
 - `docs/tasks/index.md`
-- Optional: `docs/tasks/backlog.md`
-- `docs/tasks/<milestone>/index.md`
-- Optional: `docs/tasks/<milestone>/<module>/index.md`
-- `docs/tasks/<milestone>/<task>/task.md`
+- `docs/tasks/planning-inbox.md`
+- optional `docs/tasks/backlog.md`
+- relevant milestone, module, and task docs under `docs/tasks/`
+- the current user prompt
 
-Use `references/roadmap-template.md` for exact planning-stage shape.
+## Owns
+
+- milestone boundaries
+- optional module boundaries
+- roadmap-level task decomposition
+- `Roadmap confirmed` state and its consequences
+- backlog and `Handoff Notes` governance
+- planning review pause and planning handoff context
+
+## Must not own
+
+- task-local `spec.md`
+- task-local `plan.md`
+- execution isolation or implementation
+- readiness checks, verification flow, or branch closing
+- implementation-level sequencing disguised as roadmap structure
+
+## Entry checks
+
+- If planning direction is still unresolved, route back to `planning-clarification`.
+- If `Open Milestones` is empty, check `planning-inbox.md`, `backlog.md`, and prompt evidence before decomposing.
+- If no evidence identifies either a concrete short-term target or roadmap misalignment, ask the planning mode question.
+- If the user asks to start work inside `Roadmap confirmed: no`, keep decomposition provisional until milestone structure is explicitly confirmed.
+- If the user is moving into a later milestone, resolve previous milestone closure first.
+
+## Default flow
+
+1. Confirm whether the current problem is roadmap structure rather than planning ambiguity.
+2. Choose milestone boundaries from delivery goals, phase boundaries, or exit criteria, not feature count.
+3. Add modules only when there are multiple durable capability areas with distinct ownership, risk, dependency, release, or acceptance boundaries.
+4. Split roadmap tasks by coherent capability outcome. Each task should be independently reviewable, independently handoffable, and independently completable.
+5. Record rationale for milestone, module, and task boundaries in roadmap docs.
+6. Stop at a planning review pause after creating or reshaping roadmap docs.
+
+## Boundary rules
+
+- Milestone boundaries are about release or phase meaning, not about keeping milestone size visually balanced.
+- Modules are optional. Do not create a single catch-all module for one capability area.
+- Task boundaries must stay above implementation design. A roadmap task says what capability lands, not how code changes are sequenced.
+- Do not hide multiple selectable capabilities inside vague task names such as `core`, `foundation`, `mvp`, or `polish`.
+- Task order belongs in the relevant ordered list, not in numeric directory prefixes.
+
+## If blocked
+
+- Ask the planning mode question when no evidence identifies a concrete short-term target or misalignment:
+  - `Do you already have a concrete short-term target for this iteration, or do we need to realign the next stage of the roadmap first?`
+- Route back to `planning-clarification` when roadmap structure still depends on unresolved goal or boundary ambiguity.
+- Stop and ask directly when an unresolved item blocks milestone confirmation, milestone closure, or cross-milestone movement.
+
+## Review and follow-up
+
+- Stop at a planning review pause after roadmap docs change.
+- Treat clear forward-motion language after that review pause as permission for routine follow-up.
+- Default routine follow-up is to preserve planning outputs, report handoff context, and move toward the next applicable stage.
+- Do not treat planning review approval as permission to skip unresolved hard gates.
+
+## Hard gates
+
+- Do not move into a later milestone while an earlier milestone still appears open and unresolved.
+- Do not treat `continue` as milestone confirmation when the roadmap structure is still explicitly unconfirmed.
+- Do not close a milestone while any `Handoff Notes` item remains unresolved.
+
+## Output
+
+- recommended milestone structure
+- why it is one milestone or several
+- whether modules are needed
+- task list per milestone or module
+- delivery order when not obvious
+- assumptions or open questions
+
+## Stop point
+
+- planning review pause
+- or a direct blocking question about roadmap ambiguity, confirmation, or closure
+
+## Handoff
+
+- `Decided`
+- `Undecided`
+- `Next skill`
+- `Stop point`
+
+## References
+
+- Use `references/roadmap-template.md` for roadmap document shape.
