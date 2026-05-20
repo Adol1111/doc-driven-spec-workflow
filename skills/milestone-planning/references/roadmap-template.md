@@ -217,6 +217,8 @@ Unconfirmed goals, opportunities, and roadmap candidates live here until they ar
 - `docs/tasks/planning-inbox.md` is the routing source for goals that are not yet milestone-shaped.
 - `docs/tasks/planning-inbox.md` is for planning candidates and unresolved roadmap direction, not deferred tasks that are already well-shaped.
 - `docs/tasks/backlog.md` is optional. Use it for deferred roadmap items that are concrete enough to keep, but are not yet attached to a milestone.
+- Revisit `docs/tasks/planning-inbox.md` when the current question is direction, alignment, or whether a candidate is now ready to decompose.
+- Revisit `docs/tasks/backlog.md` when the current planning pass, user request, or milestone reshaping may promote a deferred roadmap item into active milestone consideration.
 - Record handoff items in the current milestone `index.md`, not in task-local `plan.md`.
 - Keep a handoff item in the current milestone only when it is required for the current milestone's exit criteria.
 - Move a handoff item to a later milestone when it is clearly future milestone work.

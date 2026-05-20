@@ -93,6 +93,8 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - `backlog.md` stores deferred roadmap items: work that is already concrete enough to keep as a known item, but is not currently attached to a milestone.
 - `planning-inbox.md` is about deciding what the roadmap should become.
 - `backlog.md` is about remembering roadmap work that is already shaped enough to keep, but not scheduled now.
+- Pull an item out of `planning-inbox.md` when alignment is now the current question or when the candidate is ready to decompose into milestone structure.
+- Pull an item out of `backlog.md` when the user or current planning pass promotes it into active roadmap consideration, milestone assignment, or concrete decomposition.
 
 ## If blocked
 
