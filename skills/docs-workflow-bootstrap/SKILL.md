@@ -1,17 +1,50 @@
 ---
 name: docs-workflow-bootstrap
-description: Initializes minimum docs-driven workflow entry points for a repository before roadmap planning or task-local execution docs exist. Use when repository is missing core docs scaffold files.
+description: Creates the minimum docs-driven workflow scaffold for a repository. Use when the repository is missing core workflow entry-point docs.
 ---
 
 # Docs Workflow Bootstrap
 
-## Quick start
+## Purpose
 
-Create only minimum docs scaffold. This skill does not own roadmap decomposition, task creation, task-local specs/plans, implementation, or branch closing. Stop after reporting created or changed files.
+Create the minimum workflow scaffold so later stages have authoritative docs to read.
 
-## Workflows
+## Use when
 
-Create when missing:
+- one or more minimum scaffold files are missing
+- the repository has not been initialized for this docs-driven workflow
+- later stages cannot recover state because the basic docs entry points do not exist yet
+
+## Do not use when
+
+- the minimum scaffold already exists
+- the current work is roadmap decomposition, task-local design, or execution
+- the user wants implementation tasks, specs, plans, or code changes during bootstrap
+
+## Read first
+
+- existing `docs/` files, if any
+- repository doc language cues, if any
+- the current user prompt
+
+## Owns
+
+- minimum scaffold detection
+- creation of the minimum workflow entry-point docs
+- compact planning-inbox capture only when explicitly requested during bootstrap
+- bootstrap review pause and handoff suggestion
+
+## Must not own
+
+- milestone decomposition
+- implementation task creation
+- task-local `spec.md` or `plan.md`
+- implementation or branch workflow
+- overfilling scaffold docs with roadmap or execution detail
+
+## Entry checks
+
+Create only these files when missing:
 
 - `docs/index.md`
 - `docs/architecture/index.md`
@@ -19,29 +52,55 @@ Create when missing:
 - `docs/tasks/planning-inbox.md`
 - `docs/context/index.md`
 
-Default content:
+Use repository doc language rules when available. Otherwise follow the current user language.
 
-- `docs/index.md`: entry point + links
-- `docs/architecture/index.md`: stable design boundaries
-- `docs/tasks/index.md`: roadmap/task tracking + `Open Milestones` + `Completed Milestones` + planning inbox link
-- `docs/tasks/planning-inbox.md`: unconfirmed goals/opportunities/candidates
-- `docs/context/index.md`: research/supporting context
+## Default flow
 
-## Mandatory rules
+1. Detect which minimum scaffold files are missing.
+2. Create only the missing workflow entry points.
+3. Keep content minimal and navigational.
+4. If the user explicitly asks to preserve roadmap-like input during bootstrap, record it only as compact planning-inbox candidate context.
+5. Stop at a bootstrap review pause after reporting created or changed files.
 
-- MUST keep bootstrap work in docs governance mode.
-- MUST create only the minimum docs entry points unless the user explicitly asks for more.
-- MUST NOT create implementation tasks during bootstrap.
-- If the user provides actual roadmap or task content during bootstrap, record it only as compact `planning-inbox.md` candidate context when explicitly requested, then hand off to `milestone-planning`.
-- MUST NOT create `docs/specs/`, `docs/plans/`, or task-local `spec.md` / `plan.md` by default.
-- MUST report created or changed files and stop.
-- Use repository doc language rules when available. Else follow current user language.
+## Boundary rules
 
-## Advanced features
+- Bootstrap is docs governance only.
+- Do not create milestones, modules, tasks, `spec.md`, `plan.md`, `docs/specs/`, or `docs/plans/` by default.
+- Do not turn broad user requirements into task breakdown during bootstrap.
+- `planning-inbox.md` may capture compact candidate context, but it is not milestone decomposition.
+- Keep scaffold docs small enough that later stages can reshape them without cleanup work.
 
-After bootstrap, return to `doc-driven-spec-workflow` so it can choose the next stage. Continue directly only when the user explicitly asks:
+## If blocked
 
-- `milestone-planning` for milestone/module/task planning
-- `task-preparation` for a concrete selected task in confirmed roadmap state with dependencies and prior hard gates clear
+- If the minimum scaffold exists but the next stage is unclear, hand off back to `doc-driven-spec-workflow`.
+- If the user asks for roadmap planning during bootstrap, finish the minimal scaffold first, then suggest `milestone-planning`.
+- If the user asks for concrete task execution during bootstrap, do not skip directly there unless the repository already has confirmed roadmap state.
 
-Otherwise stop after reporting the bootstrap result.
+## Review and follow-up
+
+- Stop at a bootstrap review pause after reporting created or changed files.
+- Treat clear forward-motion language after that review pause as permission for routine follow-up.
+- Default follow-up is to return to `doc-driven-spec-workflow` so routing can choose the next stage.
+- Continue directly to another stage only when the user explicitly asks for that path.
+
+## Output
+
+- created files
+- changed files
+- preserved planning-inbox candidate context, if any
+- recommended next skill
+
+## Stop point
+
+- bootstrap review pause
+
+## Handoff
+
+- `Decided`
+- `Undecided`
+- `Next skill`
+- `Stop point`
+
+## References
+
+- Use `references/scaffold-template.md` for minimum scaffold document shape.
