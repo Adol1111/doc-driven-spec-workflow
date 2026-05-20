@@ -32,7 +32,7 @@ This directory stores project-level task documents grouped by milestone, optiona
 
 - Each milestone directory has its own `index.md`
 - `planning-inbox.md` stores unconfirmed goals, opportunities, and roadmap candidates until they are promoted into a milestone, moved to backlog, or discarded
-- `backlog.md` is optional and stores roadmap items that are not yet attached to a milestone
+- `backlog.md` is optional and stores deferred roadmap items that are concrete enough to keep, but not yet attached to a milestone
 - Module directories are optional; use them only when a milestone has multiple meaningful capability areas
 - Task directories use stable, unnumbered slugs and contain `task.md`, task-local `spec.md`, and optional `plan.md`
 - Task order is the ordered-list order of task links in the relevant milestone or module `index.md`
@@ -183,7 +183,7 @@ docs/tasks/<milestone>/<module>/<task>/task.md
 ```md
 # Backlog
 
-This file stores candidate roadmap items that are not yet attached to a milestone.
+This file stores deferred roadmap items that are concrete enough to keep, but are not yet attached to a milestone.
 
 ## Items
 
@@ -197,7 +197,7 @@ This file stores candidate roadmap items that are not yet attached to a mileston
 ```md
 # Planning Inbox
 
-Unconfirmed goals, opportunities, and roadmap candidates live here until they are promoted into a milestone, moved to backlog, or discarded.
+Unconfirmed goals, opportunities, and roadmap candidates live here until they are aligned enough to become milestones, moved to backlog, or discarded.
 
 ## Candidates
 
@@ -215,11 +215,12 @@ Unconfirmed goals, opportunities, and roadmap candidates live here until they ar
 - `docs/tasks/index.md` lists `Open Milestones` and `Completed Milestones`; it should link `Planning Inbox` and may also link an optional `Backlog`.
 - Completed milestones are frozen; add follow-up work to a new open milestone.
 - `docs/tasks/planning-inbox.md` is the routing source for goals that are not yet milestone-shaped.
-- `docs/tasks/backlog.md` is optional. Use it for roadmap items that are not yet attached to a milestone.
+- `docs/tasks/planning-inbox.md` is for planning candidates and unresolved roadmap direction, not deferred tasks that are already well-shaped.
+- `docs/tasks/backlog.md` is optional. Use it for deferred roadmap items that are concrete enough to keep, but are not yet attached to a milestone.
 - Record handoff items in the current milestone `index.md`, not in task-local `plan.md`.
 - Keep a handoff item in the current milestone only when it is required for the current milestone's exit criteria.
 - Move a handoff item to a later milestone when it is clearly future milestone work.
-- Move a handoff item to `docs/tasks/backlog.md` when it is worth keeping but not yet assigned to a milestone.
+- Move a handoff item to `docs/tasks/backlog.md` when it is already a recognizable roadmap item, but not yet assigned to a milestone.
 - Move a handoff item to `docs/tasks/planning-inbox.md` when it still needs alignment or is not yet milestone-shaped.
 - Treat `task.md` as a lightweight product brief for one concrete task: enough problem, user, scope, and success context to justify the later `spec.md`, but not a full implementation design.
 - Task `Status` checkboxes are mutually exclusive. Exactly one of `planned`, `in_progress`, `blocked`, or `completed` should be checked at a time; do not treat them as a checklist of completed phases.

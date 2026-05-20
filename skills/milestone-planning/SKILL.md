@@ -36,6 +36,7 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - roadmap-level task decomposition
 - `Roadmap confirmed` state and its consequences
 - backlog and `Handoff Notes` governance
+- `planning-inbox` versus `backlog` routing
 - planning review pause and planning handoff context
 
 ## Must not own
@@ -81,10 +82,17 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - Record `Handoff Notes` in the current milestone `index.md`, not in task-local `plan.md`.
 - Keep an item in the current milestone only when it must be completed to satisfy the current milestone's exit criteria.
 - Move an item to a later milestone when it is clearly milestone-shaped future work, but not required to close the current milestone.
-- Move an item to `docs/tasks/backlog.md` when it is aligned enough to keep, but not yet assigned to a milestone.
-- Move an item to `docs/tasks/planning-inbox.md` when it is still not milestone-shaped or still needs direction/alignment before decomposition.
+- Move an item to `docs/tasks/backlog.md` when it is already a recognizable roadmap item or deferred task, but not yet assigned to a milestone.
+- Move an item to `docs/tasks/planning-inbox.md` when it is still a planning candidate, unresolved direction, or not yet milestone-shaped.
 - Remove an item only when it is explicitly discarded or no longer worth tracking.
 - If the user explicitly decides the item is high priority enough to interrupt the current path, replan it instead of leaving it as handoff-only follow-up.
+
+## Inbox vs backlog
+
+- `planning-inbox.md` stores unconfirmed planning candidates: ideas, goals, opportunities, or follow-up work that still needs alignment before milestone decomposition.
+- `backlog.md` stores deferred roadmap items: work that is already concrete enough to keep as a known item, but is not currently attached to a milestone.
+- `planning-inbox.md` is about deciding what the roadmap should become.
+- `backlog.md` is about remembering roadmap work that is already shaped enough to keep, but not scheduled now.
 
 ## If blocked
 
