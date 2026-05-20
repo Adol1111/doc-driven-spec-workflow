@@ -80,7 +80,10 @@ Use repository doc language rules when available. Otherwise follow the current u
 
 - Stop at a bootstrap review pause after reporting created or changed files.
 - Treat clear forward-motion language after that review pause as permission for routine follow-up.
-- Default follow-up is to return to `doc-driven-spec-workflow` so routing can choose the next stage.
+- Default follow-up after review is:
+  - commit reviewed scaffold docs
+  - unless the user explicitly asks to leave them uncommitted
+  - then return to `doc-driven-spec-workflow` so routing can choose the next stage
 - Continue directly to another stage only when the user explicitly asks for that path.
 
 ## Output

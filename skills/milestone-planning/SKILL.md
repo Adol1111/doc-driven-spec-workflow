@@ -86,7 +86,10 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 
 - Stop at a planning review pause after roadmap docs change.
 - Treat clear forward-motion language after that review pause as permission for routine follow-up.
-- Default routine follow-up is to preserve planning outputs, report handoff context, and move toward the next applicable stage.
+- Default routine follow-up after review is:
+  - commit reviewed planning docs
+  - unless the user explicitly asks to leave them uncommitted
+  - then report handoff context and move toward the next applicable stage
 - Do not treat planning review approval as permission to skip unresolved hard gates.
 
 ## Hard gates

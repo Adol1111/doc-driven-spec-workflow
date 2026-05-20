@@ -1,55 +1,37 @@
 # Task Execution Simple Detailed Rules
 
-Supplementary clauses for simple task execution. These rules extend the main `SKILL.md` for low-frequency edge cases and clarifications; they do not replace or restate the main workflow unless extra detail is needed.
-Read this only when the main `SKILL.md` leaves a concrete execution edge case unresolved.
+Use this reference only when the main `SKILL.md` leaves a concrete execution edge case unresolved.
 
-## Violations That Require Stopping Immediately
+This file is not a second workflow definition. It only clarifies low-frequency execution issues and preserves the fixed closing prompt.
 
-- Coding before execution isolation.
-- Skipping the checkpoint because a change seems small.
-- Inferring a task directly from architecture instead of using `milestone-planning` to add or select it in `docs/tasks/`.
-- Creating standalone tasks for routine cleanup, concept clarification, link fixes, renames, formatting, index maintenance, or small docs reorganization that should be handled in the current work round.
-- Splitting implementation or delivery verification into separate tasks, such as "code review", "write unit tests", "add repository file", "update handler", or "write migration" when they belong to one coherent implementation round.
-- Creating tiny modules as buckets for one-off tasks, or one catch-all module when tasks should live directly under the milestone.
-- Adding cross-milestone task-level `Depends on` links when the milestone order already expresses the dependency.
-- Creating a task-local spec or plan in global `docs/specs/` or `docs/plans/` by default.
-- Creating multiple specs for one task instead of revising the existing spec or splitting the task first.
-- Adding work to a completed milestone.
-- Auto-committing docs-only/governance changes before reporting the result for review, or before review approval.
-- Starting task-local `spec.md` work before reporting freshly changed planning docs for review.
-- Starting another task before resolving branch closing for the current task.
-- Starting a task in milestone `M(n+1)` while `M(n)` still appears open and unclosed, or while the target milestone is still explicitly unconfirmed.
-- Treating a task file as selectable when its milestone is unconfirmed, dependencies are unresolved, or branch closing is unresolved.
-- Treating a destructive cleanup choice as implicitly approved by generic forward-motion language.
-- Stopping for implementation review while verified task-branch implementation work remains uncommitted, unless committing is blocked by unrelated user changes, unresolved verification failure, or explicit user instruction.
-- Quietly changing the meaning of existing tests, weakening their assertions, deleting them, or marking them skip/xfail/todo without explaining why and getting user confirmation.
-- Assuming the workspace is clean, or staying on the current branch without explicit user choice.
+## Commit and Review Edge Cases
 
-## Execution Details
+- Stop before implementation review if verified implementation work is still uncommitted, unless the commit is blocked by:
+  - unrelated user edits that must not be swept into the task commit
+  - unresolved verification failure
+  - explicit user instruction to keep the work uncommitted for now
+- If reviewed implementation work intentionally remains uncommitted, say that it is an explicit exception and list the affected files.
+- If `plan.md` includes commit checkpoints, treat them as optional stable boundaries. They do not replace the expectation that verified task work is committed before implementation review.
 
-- Do not default to TDD, plan-driven execution, or heavyweight shared workflows unless the user explicitly asks.
-- Do not create or revise task-local `spec.md` or `plan.md` in this execution stage.
+## Test Semantics Edge Cases
+
 - Treat tests and verification as delivery checks, not as a mandatory test-first workflow.
-- If required task-local docs are missing, incomplete, unreviewed, or a `plan.md` trigger is discovered before coding, stop and route back to `task-preparation`.
-- If `milestone-planning` just created the selected task or reshaped its roadmap docs, report those docs for review before task-local `spec.md` work.
-- In that state, a user `continue` may both accept the planning docs and move into `spec.md` drafting unless a hard gate still blocks the handoff.
-- Review approval and routine commit approval are merged by default. Commit reviewed task-local docs when that is the recommended next step before implementation isolation, unless the user already said to keep them uncommitted.
-- When continuing with reviewed changes uncommitted, report the affected files and say that choice is intentional.
 - If relevant existing automated tests fail during the task, do not ignore them just because the task does not require adding new unit tests.
 - Prefer fixing production code so existing tests keep expressing the same behavior.
-- If existing tests need semantic changes because the task intentionally changes behavior, explain the reason and get user confirmation before changing what those tests assert.
+- If existing tests need semantic changes because the task intentionally changes behavior, explain why and get user confirmation before changing what those tests assert.
 - Small test-file repairs that preserve the original assertion intent do not need separate confirmation.
-- If `plan.md` includes commit points, treat them as natural stable boundaries. They can appear after any implementation section, not fixed stage numbers, and they are used only when the slice is verified, reviewable, and reversible.
-- If no `plan.md` exists, or the task is simple, make a final verified implementation commit before the implementation review pause.
-- Do not ask the user to review ordinary uncommitted implementation work before committing it on the task branch. Ask first only when the commit would include unrelated user edits, failing verification, or a hard gate.
+- Do not quietly weaken assertions, delete tests, or mark them skip/xfail/todo without explicit explanation and confirmation when semantics change.
 
-- Default to creating a dedicated task branch in the current workspace.
-- Stay on current branch only when the user explicitly chooses that path.
-- If a worktree is specifically needed, use the environment's git worktree workflow and preserve the same safety checks.
-- Before the first implementation edit, tell the user: `Spec/plan review is complete. I am handling branch isolation now before coding.`
-- For branch closing, rely on the main `SKILL.md` for the default workflow and safety rules. This reference only clarifies edge cases, such as what counts as current task context or when a destructive action reaches execution time.
-- Generic forward-motion after implementation review authorizes presenting closing choices, not selecting one.
-- If closing is unresolved, use this prompt shape in the repository or conversation document language:
+## Isolation and Cleanup Edge Cases
+
+- Do not assume the workspace is clean.
+- Stay on the current branch only when the user explicitly chooses that path.
+- If a worktree is specifically needed, preserve the same safety rules as the default branch-isolation path.
+- Removing a worktree does not remove its task branch.
+
+## Closing Prompt
+
+If closing is unresolved, use this prompt shape in the repository or conversation document language:
 
 ```text
 Choose the closing outcome:
@@ -61,29 +43,5 @@ Choose the closing outcome:
 Reply with 1, 2, or 3.
 ```
 
-- Do not paraphrase this into an inline comma-separated list when asking for the choice.
+- Do not paraphrase this into an inline comma-separated list.
 - If the user selected a merge outcome but did not separately state cleanup timing, merge first, then ask again before the destructive delete step runs.
-
-## Task And Status Rules
-
-- If architecture implies follow-up work but `docs/tasks/` has no corresponding open task, use `milestone-planning` or an equivalent roadmap update flow before creating a spec.
-- Modules are optional durable capability areas owned by roadmap planning. Respect the selected task's existing milestone/module placement; if placement seems wrong, stop and use `milestone-planning`.
-- Keep implementation steps inside `spec.md`, optional `plan.md`, or checklist items; do not promote them into tasks.
-- Task-level `Depends on` should normally stay within the same milestone. Put cross-milestone sequencing in milestone-level `Notes`, `Exit Criteria`, or roadmap text; if future task details depend on an earlier milestone, keep them as roadmap text or milestone-level `planned`.
-- Respect task dependencies exactly as written.
-- Keep milestone/module indexes accurate, but do not redesign their structure here.
-- `task.md` tracks status, dependencies, and acceptance points; it should not become a detailed step-by-step implementation plan.
-- Pure cleanup, concept clarification, or docs governance belongs in the current work round by default. Create a task directory only for complex/cross-cutting governance or clarification with independent acceptance or project-level execution state; even then, do not create a spec unless it drives concrete implementation.
-
-## Templates And Workflow
-
-Load only the relevant reference:
-
-- `docs/architecture/`: `references/architecture-template.md`
-- `docs/context/`: `references/context-template.md`
-- non-roadmap docs indexes: `references/index-template.md`
-- task-local `spec.md`: `references/spec-template.md`
-- task-local `plan.md`: `references/plan-template.md`
-
-Do not load every template by default.
-Do not use these references as the default planning-stage output for milestone decomposition.
