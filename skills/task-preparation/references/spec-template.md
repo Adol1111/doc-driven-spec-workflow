@@ -13,6 +13,12 @@ Prefer a compact task spec structure:
 
 ## Option Selection
 
+### Decision Matrix
+
+| Decision Point | Chosen | Rejected | Why |
+| --- | --- | --- | --- |
+| <what needs deciding> | <selected option> | <other real options> | <selection rationale> |
+
 ## Design Overview
 
 ## Design Details
@@ -56,7 +62,7 @@ Notes:
 - Compact does not mean implicit. If another agent could reasonably misread the task, make the boundary explicit in the existing sections:
   - `Goals`: state whether the task is defining/proving a boundary, implementing behavior, migrating data, cleaning up docs, or another work type.
   - `Non-goals`: name tempting but forbidden implementation shortcuts or related changes that must not be done in this task.
-  - `Option Selection`: when multiple real approaches exist, keep 2-3 concrete options such as `A/B/C`, say which one was chosen, and record why the rejected options were not chosen. Use the clarification-loop answers as the selection rationale when relevant.
+- `Option Selection`: when multiple real approaches exist, keep 2-3 concrete options such as `A/B/C`, say which one was chosen, and record why the rejected options were not chosen. Use the clarification-loop answers as the selection rationale when relevant. Prefer a small `Decision Matrix` when there are multiple real branches, but keep it brief or collapse it to short bullets when the decision is tiny.
   - `Design Overview`: summarize the chosen approach in a few sentences so the reader knows what is being built before reading details.
   - `Entry Points / Surfaces`: name the first edit surface, owning module, external interface, or user-visible touchpoint.
   - `Data / Control Flow`: explain the main request, state, or event flow from entry to outcome. Prefer a small `mermaid` diagram when this would otherwise be dense.
