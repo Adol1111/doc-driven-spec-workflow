@@ -74,6 +74,17 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - Do not name roadmap tasks after files, endpoints, tests, migrations, or refactor slices.
 - Do not split implementation, tests, docs, verification, or review follow-up into separate roadmap tasks unless that governance work is itself the user-visible delivery outcome.
 - Task order belongs in the relevant ordered list, not in numeric directory prefixes.
+- Newly discovered future work during an active milestone should go to that milestone's `Handoff Notes` first by default, not into task-local `plan.md`.
+
+## Handoff Notes routing
+
+- Record `Handoff Notes` in the current milestone `index.md`, not in task-local `plan.md`.
+- Keep an item in the current milestone only when it must be completed to satisfy the current milestone's exit criteria.
+- Move an item to a later milestone when it is clearly milestone-shaped future work, but not required to close the current milestone.
+- Move an item to `docs/tasks/backlog.md` when it is aligned enough to keep, but not yet assigned to a milestone.
+- Move an item to `docs/tasks/planning-inbox.md` when it is still not milestone-shaped or still needs direction/alignment before decomposition.
+- Remove an item only when it is explicitly discarded or no longer worth tracking.
+- If the user explicitly decides the item is high priority enough to interrupt the current path, replan it instead of leaving it as handoff-only follow-up.
 
 ## If blocked
 

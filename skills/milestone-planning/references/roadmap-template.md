@@ -65,6 +65,7 @@ This directory stores project-level task documents grouped by milestone, optiona
 ## Notes
 - When complete, move this milestone from `Open Milestones` to `Completed Milestones`
 - After completion, do not add new modules or tasks here
+- Use `Handoff Notes` as a temporary queue for future work discovered during the milestone until each item is resolved to current-milestone work, a later milestone, `backlog.md`, `planning-inbox.md`, or removal
 ```
 
 ## `docs/tasks/<milestone>/index.md` without modules
@@ -95,6 +96,7 @@ This directory stores project-level task documents grouped by milestone, optiona
 ## Notes
 - When complete, move this milestone from `Open Milestones` to `Completed Milestones`
 - After completion, do not add new modules or tasks here
+- Use `Handoff Notes` as a temporary queue for future work discovered during the milestone until each item is resolved to current-milestone work, a later milestone, `backlog.md`, `planning-inbox.md`, or removal
 ```
 
 Choose one of the two milestone shapes above. Do not mix `Modules` with milestone-level task lists in the same file. Do not create a single catch-all module when the milestone has only one real capability area.
@@ -214,6 +216,11 @@ Unconfirmed goals, opportunities, and roadmap candidates live here until they ar
 - Completed milestones are frozen; add follow-up work to a new open milestone.
 - `docs/tasks/planning-inbox.md` is the routing source for goals that are not yet milestone-shaped.
 - `docs/tasks/backlog.md` is optional. Use it for roadmap items that are not yet attached to a milestone.
+- Record handoff items in the current milestone `index.md`, not in task-local `plan.md`.
+- Keep a handoff item in the current milestone only when it is required for the current milestone's exit criteria.
+- Move a handoff item to a later milestone when it is clearly future milestone work.
+- Move a handoff item to `docs/tasks/backlog.md` when it is worth keeping but not yet assigned to a milestone.
+- Move a handoff item to `docs/tasks/planning-inbox.md` when it still needs alignment or is not yet milestone-shaped.
 - Treat `task.md` as a lightweight product brief for one concrete task: enough problem, user, scope, and success context to justify the later `spec.md`, but not a full implementation design.
 - Task `Status` checkboxes are mutually exclusive. Exactly one of `planned`, `in_progress`, `blocked`, or `completed` should be checked at a time; do not treat them as a checklist of completed phases.
 - Modules are optional durable capability areas, not one-off buckets.

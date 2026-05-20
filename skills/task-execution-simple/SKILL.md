@@ -69,6 +69,7 @@ Execute one prepared task end-to-end without reopening planning or spec work.
 
 - Follow the approved `spec.md` and optional `plan.md` as the source of truth for scope and proof expectations.
 - Code is the source of truth when code and docs diverge; update relevant docs in the same round when implementation changes behavior, API shape, task status, architecture assumptions, or stable constraints.
+- Future work discovered during execution belongs in the current milestone `index.md` under `Handoff Notes` by default, unless the user explicitly reprioritizes it into current work.
 - If relevant existing automated tests fail during the task, do not ignore them just because the task did not require adding new unit tests.
 - Prefer fixing production code so existing tests keep expressing the same behavior.
 - If existing tests need semantic changes because the task intentionally changes behavior, explain why and get user confirmation before changing what those tests assert.

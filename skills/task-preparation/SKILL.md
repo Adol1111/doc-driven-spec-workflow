@@ -95,6 +95,7 @@ Do not create `plan.md` for a small single-capability task with straightforward 
 - Keep `1 task -> 1 spec`. If the task appears to need multiple specs, the task boundary is wrong.
 - `plan.md` supplements the approved `spec.md`; it does not restate the spec.
 - Do not write follow-up work into the current `plan.md` unless it is already in the current task scope.
+- Future work discovered during preparation belongs in the current milestone `index.md` under `Handoff Notes` by default, not in `plan.md`.
 - Compact specs are fine; vague specs are not.
 - Make boundaries, non-goals, likely first edit surface, and proof expectations explicit enough for a fresh conversation or another agent to continue.
 
