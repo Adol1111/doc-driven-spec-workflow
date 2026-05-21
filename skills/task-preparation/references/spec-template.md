@@ -13,6 +13,65 @@ Prefer a compact task spec structure:
 
 ## Option Selection
 
+### Option A: <option name>
+
+Approach:
+
+- <what this option does>
+- <optional second detail>
+
+Pros:
+
+- <short advantage>
+- <short advantage>
+
+Cons:
+
+- <short drawback>
+- <short drawback>
+
+Conclusion: `reject, <very short reason>` or `choose`
+
+### Option B: <option name>
+
+Approach:
+
+- <what this option does>
+- <optional second detail>
+
+Pros:
+
+- <short advantage>
+- <short advantage>
+
+Cons:
+
+- <short drawback>
+- <short drawback>
+
+Conclusion: `reject, <very short reason>` or `choose`
+
+### Option C: <option name>
+
+Approach:
+
+- <what this option does>
+- <optional second detail>
+
+Pros:
+
+- <short advantage>
+- <short advantage>
+
+Cons:
+
+- <short drawback>
+- <short drawback>
+
+Conclusion: `reject, <very short reason>` or `choose`
+
+Selected: `Option <A | B | C>`
+
 ### Decision Matrix
 
 | Decision Point | Chosen | Rejected | Why |
@@ -62,7 +121,7 @@ Notes:
 - Compact does not mean implicit. If another agent could reasonably misread the task, make the boundary explicit in the existing sections:
   - `Goals`: state whether the task is defining/proving a boundary, implementing behavior, migrating data, cleaning up docs, or another work type.
   - `Non-goals`: name tempting but forbidden implementation shortcuts or related changes that must not be done in this task.
-- `Option Selection`: when multiple real approaches exist, keep 2-3 concrete options such as `A/B/C`, say which one was chosen, and record why the rejected options were not chosen. Use the clarification-loop answers as the selection rationale when relevant. Prefer a small `Decision Matrix` when there are multiple real branches, but keep it brief or collapse it to short bullets when the decision is tiny.
+- `Option Selection`: prefer a shallow structure like `Option A/B/C` headings rather than deeply nested bullets. For each option, include `Approach`, `Pros`, `Cons`, and a one-line `Conclusion`. Rejected options should end with `reject, <very short reason>`. After the options, add one short `Selected: Option X` line to make the final choice obvious. Use a small `Decision Matrix` only as supporting structure when there are multiple real branches. Use the clarification-loop answers as the selection rationale when relevant. If the decision is tiny, short bullets are better than a table.
   - `Design Overview`: summarize the chosen approach in a few sentences so the reader knows what is being built before reading details.
   - `Entry Points / Surfaces`: name the first edit surface, owning module, external interface, or user-visible touchpoint.
   - `Data / Control Flow`: explain the main request, state, or event flow from entry to outcome. Prefer a small `mermaid` diagram when this would otherwise be dense.
