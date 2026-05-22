@@ -163,5 +163,7 @@ Route back to `milestone-planning` instead of forcing the current spec when any 
 
 ## References
 
+- Generate `spec.md` in the repository documentation language when a language rule exists; otherwise use the current user language.
+- Template section names are structural hints, not fixed English text. Localize headings, labels, and field names to the selected documentation language.
 - Use `references/spec-template.md` for task-local `spec.md`.
 - Use `references/plan-template.md` for task-local `plan.md`.

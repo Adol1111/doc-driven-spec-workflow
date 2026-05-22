@@ -1,5 +1,7 @@
 # Spec Template
 
+Language rule: localize generated headings, labels, and field names to the repository documentation language. The English headings below describe structure only and are not fixed output text.
+
 Prefer a compact task spec structure:
 
 ```md
