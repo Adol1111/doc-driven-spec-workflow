@@ -123,7 +123,6 @@ Present closing outcomes as a numbered choice using the fixed prompt in `referen
 - `git merge`, including fast-forward merge, must not run until a merge outcome is explicit.
 - Deleting a branch or worktree always requires explicit confirmation at execution time.
 - `discard work` always requires a fresh explicit confirmation for the current task.
-- If the user selects `merge and delete branch`, merge first, then ask again before the destructive delete step runs.
 
 ## Output
 
