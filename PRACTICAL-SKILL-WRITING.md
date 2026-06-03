@@ -224,7 +224,7 @@ root skill 只要 60 到 100 行左右。能用表格的地方就用表格，不
 - module 什么时候需要
 - task 怎么按 capability outcome 切
 - `Roadmap confirmed` 的含义
-- handoff notes / backlog / completed milestone 的治理
+- handoff notes / planning inbox / backlog / completed milestone 的治理
 - planning review pause
 
 ### 它最重要的规则

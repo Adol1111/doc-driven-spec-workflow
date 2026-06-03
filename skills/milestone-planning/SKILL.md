@@ -25,7 +25,7 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 
 - `docs/tasks/index.md`
 - `docs/tasks/planning-inbox.md`
-- optional `docs/tasks/backlog.md`
+- `docs/tasks/backlog.md`
 - relevant milestone, module, and task docs under `docs/tasks/`
 - the current user prompt
 
@@ -35,8 +35,7 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - optional module boundaries
 - roadmap-level task decomposition
 - `Roadmap confirmed` state and its consequences
-- backlog and `Handoff Notes` governance
-- `planning-inbox` versus `backlog` routing
+- `planning-inbox`, `backlog`, and `Handoff Notes` governance
 - planning review pause and planning handoff context
 
 ## Must not own
@@ -54,6 +53,7 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - If no evidence identifies either a concrete short-term target or roadmap misalignment, ask the planning mode question.
 - If the user asks to start work inside `Roadmap confirmed: no`, keep decomposition provisional until milestone structure is explicitly confirmed.
 - If the user is moving into a later milestone, resolve previous milestone closure first.
+- When confirming a milestone or changing `Roadmap confirmed: no` to `yes`, inspect `backlog.md` for deferred tasks that fit the milestone goal.
 
 ## Default flow
 
@@ -61,8 +61,9 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 2. Choose milestone boundaries from delivery goals, phase boundaries, or exit criteria, not feature count.
 3. Add modules only when there are multiple durable capability areas with distinct ownership, risk, dependency, release, or acceptance boundaries.
 4. Split roadmap tasks by coherent capability outcome. Each task should be independently reviewable, independently handoffable, and independently completable.
-5. Record rationale for milestone, module, and task boundaries in roadmap docs.
-6. Stop at a planning review pause after creating or reshaping roadmap docs.
+5. When a milestone is confirmed, promote matching `backlog.md` tasks into the milestone or explicitly leave them deferred.
+6. Record rationale for milestone, module, and task boundaries in roadmap docs.
+7. Stop at a planning review pause after creating or reshaping roadmap docs.
 
 ## Boundary rules
 
@@ -76,14 +77,16 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - Do not split implementation, tests, docs, verification, or review follow-up into separate roadmap tasks unless that governance work is itself the user-visible delivery outcome.
 - Task order belongs in the relevant ordered list, not in numeric directory prefixes.
 - Newly discovered future work during an active milestone should go to that milestone's `Handoff Notes` first by default, not into task-local `plan.md`.
+- `planning-inbox.md` stores goals and candidate milestone direction, not concrete tasks.
+- `backlog.md` stores concrete deferred tasks, not broad goals.
 
 ## Handoff Notes routing
 
 - Record `Handoff Notes` in the current milestone `index.md`, not in task-local `plan.md`.
 - Keep an item in the current milestone only when it must be completed to satisfy the current milestone's exit criteria.
 - Move an item to a later milestone when it is clearly milestone-shaped future work, but not required to close the current milestone.
-- Move an item to `docs/tasks/backlog.md` when it is already a recognizable roadmap item or deferred task, but not yet assigned to a milestone.
-- Move an item to `docs/tasks/planning-inbox.md` when it is still a planning candidate, unresolved direction, or not yet milestone-shaped.
+- Move an item to `docs/tasks/backlog.md` when it is a concrete task-shaped follow-up that is not assigned to a milestone.
+- Move an item to `docs/tasks/planning-inbox.md` when it is a goal, phase, opportunity, or direction that is not yet ready to become a milestone.
 - Remove an item only when it is explicitly discarded or no longer worth tracking.
 - If the user explicitly decides the item is high priority enough to interrupt the current path, replan it instead of leaving it as handoff-only follow-up.
 
@@ -96,14 +99,19 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - Do not mark a task `completed` from roadmap planning alone; completion belongs to execution after implementation, verification, required docs/status updates, and closing outcome are resolved.
 - Keep task `Status` single-choice at all times.
 
-## Inbox vs backlog
+## Planning inbox
 
-- `planning-inbox.md` stores unconfirmed planning candidates: ideas, goals, opportunities, or follow-up work that still needs alignment before milestone decomposition.
-- `backlog.md` stores deferred roadmap items: work that is already concrete enough to keep as a known item, but is not currently attached to a milestone.
-- `planning-inbox.md` is about deciding what the roadmap should become.
-- `backlog.md` is about remembering roadmap work that is already shaped enough to keep, but not scheduled now.
-- Pull an item out of `planning-inbox.md` when alignment is now the current question or when the candidate is ready to decompose into milestone structure.
-- Pull an item out of `backlog.md` when the user or current planning pass promotes it into active roadmap consideration, milestone assignment, or concrete decomposition.
+- `planning-inbox.md` is the goal layer. It stores future product goals, opportunities, candidate phases, and long-range roadmap direction.
+- Do not store concrete task-shaped work in `planning-inbox.md`; move that work to `backlog.md` unless it belongs in an open milestone.
+- Pull an item out of `planning-inbox.md` when the goal is ready to become an open milestone or needs planning clarification.
+- When a planning inbox goal becomes a milestone, check `backlog.md` for deferred tasks that match that goal.
+
+## Backlog
+
+- `backlog.md` is the task layer. It stores concrete deferred tasks that are worth keeping but are not assigned to an open milestone.
+- A backlog item should be task-shaped: it has an outcome, rough scope, source, and a plausible goal or milestone fit.
+- Pull an item out of `backlog.md` when milestone planning, milestone confirmation, or `Roadmap confirmed: no` to `yes` promotes it into active milestone consideration.
+- Remove a backlog item after it is promoted into a milestone task, explicitly discarded, or superseded by a different task.
 
 ## If blocked
 
@@ -127,7 +135,7 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - Do not move into a later milestone while an earlier milestone still appears open and unresolved.
 - Do not treat `continue` as milestone confirmation when the roadmap structure is still explicitly unconfirmed.
 - Do not close a milestone while any `Handoff Notes` item remains unresolved.
-- Do not add follow-up work to a completed milestone. Create a new open milestone or backlog item instead.
+- Do not add follow-up work to a completed milestone. Create a new open milestone, backlog task, or planning inbox goal instead.
 
 ## Output
 

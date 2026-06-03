@@ -239,7 +239,7 @@ Reason:
 
 - `empty-open-milestones-asks-routing-question`: empty `Open Milestones` without evidence asks a routing question.
 - `empty-open-milestones-needs-alignment`: inbox candidate `needs alignment` routes to `planning-clarification`.
-- `planning-inbox-ready-to-decompose`: inbox candidate `ready to decompose` routes to `milestone-planning`.
+- `planning-inbox-ready-to-decompose`: inbox goal `ready for milestone planning` routes to `milestone-planning`.
 - `iteration-breakdown`: concrete iteration target routes directly to `milestone-planning`.
 - `roadmap-needed`: broad product scope routes to `milestone-planning`.
 
@@ -254,7 +254,7 @@ Reason:
 - `milestone-close-handoff-notes-blocked`: non-empty `Handoff Notes` blocks closure.
 - `milestone-close-handoff-notes-cleared`: cleared handoff notes allow closure governance.
 - `new-followup-defaults-to-handoff-notes`: newly discovered follow-up during an active milestone stays in `Handoff Notes` until explicitly classified.
-- `completed-milestone-frozen-followup`: completed milestone follow-up moves to new governance/backlog/inbox.
+- `completed-milestone-frozen-followup`: completed milestone follow-up moves to new governance through a new milestone, backlog, or planning inbox.
 
 ### Task Preparation
 

@@ -6,11 +6,11 @@
 
 ## Expected Behavior
 
-- Recognizes that `Open Milestones` is empty but `planning-inbox.md` contains a candidate marked `ready to decompose`.
+- Recognizes that `Open Milestones` is empty but `planning-inbox.md` contains a goal marked `ready for milestone planning`.
 - Routes directly to `milestone-planning`.
-- Treats the inbox candidate as a concrete short-term target for roadmap decomposition.
+- Treats the inbox goal as a concrete short-term target for roadmap decomposition.
 - Proposes or prepares to propose milestone/module/task boundaries with rationale.
-- Does not detour into `planning-clarification` because the candidate is already ready for decomposition.
+- Does not detour into `planning-clarification` because the goal is already ready for milestone planning.
 
 ## Expected File Changes
 

@@ -13,6 +13,7 @@
   - `docs/architecture/index.md`
   - `docs/tasks/index.md`
   - `docs/tasks/planning-inbox.md`
+  - `docs/tasks/backlog.md`
   - `docs/context/index.md`
 - Treats bootstrap as docs governance, not implementation permission.
 - Stops after reporting the bootstrap result unless the user explicitly asks to continue.
@@ -25,6 +26,7 @@ When running a file-generating check, create only these files under `tests/workf
 - `docs/architecture/index.md`
 - `docs/tasks/index.md`
 - `docs/tasks/planning-inbox.md`
+- `docs/tasks/backlog.md`
 - `docs/context/index.md`
 
 ## Must Not

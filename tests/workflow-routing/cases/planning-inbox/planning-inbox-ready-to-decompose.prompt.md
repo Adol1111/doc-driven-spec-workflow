@@ -11,15 +11,16 @@ Use doc-driven-spec-workflow.
 ```md
 # Planning Inbox
 
-## Candidates
+## Goals
 
 ### Team Invitations
 
-- Status: ready to decompose
+- Status: ready for milestone planning
+- Horizon: short-term
 - Source: product planning sync
-- Problem: Admins need to invite teammates by email, see pending invitations, and revoke stale pending invitations.
-- Current question: Break this into the first delivery milestone and independently reviewable tasks.
-- Next routing: milestone-planning
+- Goal: Admins can invite teammates by email, see pending invitations, and revoke stale pending invitations.
+- Why not in open milestones: no active milestone has been created for this goal yet.
+- Promotion trigger: create the first delivery milestone and then decompose independently reviewable tasks.
 ```
 
 Please continue the workflow.

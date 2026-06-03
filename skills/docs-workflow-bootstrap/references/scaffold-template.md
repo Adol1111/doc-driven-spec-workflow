@@ -8,6 +8,7 @@ Create only the missing entry-point docs:
 - `docs/architecture/index.md`
 - `docs/tasks/index.md`
 - `docs/tasks/planning-inbox.md`
+- `docs/tasks/backlog.md`
 - `docs/context/index.md`
 
 Keep bootstrap docs minimal, navigational, and easy for later stages to reshape.
@@ -56,6 +57,10 @@ This directory stores milestone, task, and task-local execution documents.
 ## Planning Inbox
 
 - [Planning Inbox](./planning-inbox.md)
+
+## Backlog
+
+- [Backlog](./backlog.md)
 ```
 
 ## `docs/tasks/planning-inbox.md`
@@ -63,25 +68,51 @@ This directory stores milestone, task, and task-local execution documents.
 ```md
 # Planning Inbox
 
-Unconfirmed goals and roadmap candidates live here until they are aligned, decomposed, deferred, or discarded.
+Future goals and candidate milestones live here until they are promoted into open milestone planning or discarded.
 
-## Candidates
+## Goals
 
 - None yet
 ```
 
-If the user explicitly asks to preserve roadmap-like content during bootstrap, replace `None yet` with one compact candidate block.
+If the user explicitly asks to preserve roadmap-like content during bootstrap, replace `None yet` with one compact goal block.
 
-Recommended candidate shape:
+Recommended goal shape:
 
 ```md
-### <Candidate Name>
+### <Goal Name>
 
-- Status: needs alignment | ready to decompose | parked | discarded
+- Status: needs alignment | ready for milestone planning | parked | discarded
+- Horizon: short-term | mid-term | long-term
 - Source: <user request, handoff, or other origin>
-- Problem: <what need or opportunity this represents>
-- Current question: <what must be decided next>
-- Next routing: planning-clarification | milestone-planning | backlog | discard
+- Goal: <what future outcome or phase this represents>
+- Why not in open milestones: <why this goal is not active yet>
+- Promotion trigger: <what makes this goal ready to plan as a milestone>
+```
+
+## `docs/tasks/backlog.md`
+
+```md
+# Backlog
+
+Concrete deferred tasks live here until they are promoted into a milestone, discarded, or superseded.
+
+## Deferred Tasks
+
+- None yet
+```
+
+Recommended task shape:
+
+```md
+### <Task Name>
+
+- Status: deferred | candidate for next milestone | promoted | discarded
+- Fits goal: <planning-inbox goal or milestone name>
+- Task shape: <what concrete outcome this task would deliver>
+- Why deferred: <why this is not assigned to an open milestone now>
+- Promotion trigger: <when to reconsider this task>
+- Source: <handoff note, user request, or other origin>
 ```
 
 ## `docs/context/index.md`

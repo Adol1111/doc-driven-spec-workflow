@@ -20,19 +20,19 @@ This directory stores project-level task documents grouped by milestone, optiona
 
 - None
 
-## Backlog
-
-- Optional: [Backlog](./backlog.md)
-
 ## Planning Inbox
 
 - [Planning Inbox](./planning-inbox.md)
 
+## Backlog
+
+- [Backlog](./backlog.md)
+
 ## Conventions
 
 - Each milestone directory has its own `index.md`
-- `planning-inbox.md` stores unconfirmed goals, opportunities, and roadmap candidates until they are promoted into a milestone, moved to backlog, or discarded
-- `backlog.md` is optional and stores deferred roadmap items that are concrete enough to keep, but not yet attached to a milestone
+- `planning-inbox.md` stores future goals and candidate milestones, not concrete tasks
+- `backlog.md` stores concrete deferred tasks, not broad goals
 - Module directories are optional; use them only when a milestone has multiple meaningful capability areas
 - Task directories use stable, unnumbered slugs and contain `task.md`, task-local `spec.md`, and optional `plan.md`
 - Task order is the ordered-list order of task links in the relevant milestone or module `index.md`
@@ -185,52 +185,58 @@ Use this path when modules exist:
 docs/tasks/<milestone>/<module>/<task>/task.md
 ```
 
-## `docs/tasks/backlog.md`
-
-```md
-# Backlog
-
-This file stores deferred roadmap items that are concrete enough to keep, but are not yet attached to a milestone.
-
-## Items
-
-- Some follow-up item
-  Source: `M1` handoff note
-  Notes: waiting for milestone assignment
-```
-
 ## `docs/tasks/planning-inbox.md`
 
 ```md
 # Planning Inbox
 
-Unconfirmed goals, opportunities, and roadmap candidates live here until they are aligned enough to become milestones, moved to backlog, or discarded.
+Future goals and candidate milestones live here until they are promoted into open milestone planning or discarded.
 
-## Candidates
+## Goals
 
-### <Candidate Name>
+### <Goal Name>
 
-- Status: needs alignment | ready to decompose | parked | discarded
+- Status: needs alignment | ready for milestone planning | parked | discarded
+- Horizon: short-term | mid-term | long-term
 - Source: <user request, research note, handoff, or other origin>
-- Problem: <what need or opportunity this represents>
-- Current question: <what must be decided next>
-- Next routing: planning-clarification | milestone-planning | backlog | discard
+- Goal: <what future outcome or phase this represents>
+- Why not in open milestones: <why this goal is not active yet>
+- Promotion trigger: <what makes this goal ready to plan as a milestone>
+```
+
+## `docs/tasks/backlog.md`
+
+```md
+# Backlog
+
+Concrete deferred tasks live here until they are promoted into a milestone, discarded, or superseded.
+
+## Deferred Tasks
+
+### <Task Name>
+
+- Status: deferred | candidate for next milestone | promoted | discarded
+- Fits goal: <planning-inbox goal or milestone name>
+- Task shape: <what concrete outcome this task would deliver>
+- Why deferred: <why this is not assigned to an open milestone now>
+- Promotion trigger: <when to reconsider this task>
+- Source: <handoff note, user request, or other origin>
 ```
 
 ## Rules
 
-- `docs/tasks/index.md` lists `Open Milestones` and `Completed Milestones`; it should link `Planning Inbox` and may also link an optional `Backlog`.
+- `docs/tasks/index.md` lists `Open Milestones` and `Completed Milestones`; it should link `Planning Inbox` and `Backlog`.
 - Completed milestones are frozen; add follow-up work to a new open milestone.
-- `docs/tasks/planning-inbox.md` is the routing source for goals that are not yet milestone-shaped.
-- `docs/tasks/planning-inbox.md` is for planning candidates and unresolved roadmap direction, not deferred tasks that are already well-shaped.
-- `docs/tasks/backlog.md` is optional. Use it for deferred roadmap items that are concrete enough to keep, but are not yet attached to a milestone.
-- Revisit `docs/tasks/planning-inbox.md` when the current question is direction, alignment, or whether a candidate is now ready to decompose.
-- Revisit `docs/tasks/backlog.md` when the current planning pass, user request, or milestone reshaping may promote a deferred roadmap item into active milestone consideration.
+- `docs/tasks/planning-inbox.md` is the routing source for goals that are not yet in the active milestone list.
+- `docs/tasks/backlog.md` is the routing source for task-shaped deferred work that is not attached to an open milestone.
+- Revisit `docs/tasks/planning-inbox.md` when the current question is direction, phase selection, or whether a future goal is ready to become a milestone.
+- Revisit `docs/tasks/backlog.md` during milestone planning, milestone confirmation, and `Roadmap confirmed: no` to `yes` transitions.
 - Record handoff items in the current milestone `index.md`, not in task-local `plan.md`.
 - Keep a handoff item in the current milestone only when it is required for the current milestone's exit criteria.
 - Move a handoff item to a later milestone when it is clearly future milestone work.
-- Move a handoff item to `docs/tasks/backlog.md` when it is already a recognizable roadmap item, but not yet assigned to a milestone.
-- Move a handoff item to `docs/tasks/planning-inbox.md` when it still needs alignment or is not yet milestone-shaped.
+- Move a handoff item to `docs/tasks/backlog.md` when it is a concrete task-shaped follow-up that is not assigned to a milestone.
+- Move a handoff item to `docs/tasks/planning-inbox.md` when it is a goal, phase, opportunity, or direction that is not yet ready to become a milestone.
+- When a planning inbox goal becomes an open or confirmed milestone, pull matching backlog tasks into that milestone or explicitly keep them deferred.
 - Treat `task.md` as a lightweight product brief for one concrete task: enough problem, user, scope, and success context to justify the later `spec.md`, but not a full implementation design.
 - Task `Status` checkboxes are mutually exclusive. Exactly one of `planned`, `in_progress`, `blocked`, or `completed` should be checked at a time; do not treat them as a checklist of completed phases.
 - Modules are optional durable capability areas, not one-off buckets.

@@ -22,10 +22,11 @@ This project follows Conventional Commits for commit history, but release notes 
   - implementation review defaults to entering branch-closing choice, not auto-selecting a closing outcome
 - Added a dedicated bootstrap scaffold reference at `skills/docs-workflow-bootstrap/references/scaffold-template.md`.
 - Clarified `Handoff Notes` governance so future work discovered during preparation or execution lands in the current milestone `index.md`, not in task-local `plan.md`.
-- Clarified the difference between `planning-inbox.md` and `backlog.md`:
-  - `planning-inbox.md` stores unconfirmed planning candidates and unresolved roadmap direction
-  - `backlog.md` stores deferred roadmap items that are already concrete enough to keep
-- Clarified when items should be pulled back out of `planning-inbox.md` and `backlog.md` into active planning.
+- Clarified `planning-inbox.md` and `backlog.md` as separate roadmap layers:
+  - `planning-inbox.md` stores future goals and candidate milestones
+  - `backlog.md` stores concrete deferred tasks that are already task-shaped
+- Added `backlog.md` to the minimum scaffold so handoff and milestone planning have a stable task-level deferred pool.
+- Restored backlog pickup during milestone planning, milestone confirmation, and `Roadmap confirmed: no` to `yes` transitions.
 
 ### Fixes
 

@@ -19,10 +19,11 @@ Choose exactly one next stage skill. Do not do stage work here.
 
 1. `docs/tasks/index.md`
 2. `docs/tasks/planning-inbox.md`
-3. relevant milestone, module, and task docs under `docs/tasks/`
-4. `docs/architecture/`
-5. `docs/context/`
-6. the current user prompt
+3. `docs/tasks/backlog.md`
+4. relevant milestone, module, and task docs under `docs/tasks/`
+5. `docs/architecture/`
+6. `docs/context/`
+7. the current user prompt
 
 Missing docs are routing signals, not proof that goals are unclear.
 
@@ -57,6 +58,7 @@ Missing docs are routing signals, not proof that goals are unclear.
   - `docs/architecture/index.md`
   - `docs/tasks/index.md`
   - `docs/tasks/planning-inbox.md`
+  - `docs/tasks/backlog.md`
   - `docs/context/index.md`
 - Route to `planning-clarification` only for positive ambiguity evidence. Missing or stale docs alone are not enough.
 - Route to `task-preparation` only when all are true:

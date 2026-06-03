@@ -71,12 +71,13 @@ docs/
 │   └── index.md
 ├── tasks/
 │   ├── index.md
-│   └── planning-inbox.md
+│   ├── planning-inbox.md
+│   └── backlog.md
 └── context/
     └── index.md
 ```
 
-`docs/tasks/planning-inbox.md` 用来保存还没有进入 milestone 的目标、机会和 roadmap candidates，避免新会话丢失这些 planning 信号；后续可以把它们提升到 milestone、移入 backlog，或明确丢弃。
+`docs/tasks/planning-inbox.md` 用来保存未来目标和候选 milestones，避免新会话丢失 roadmap 方向；`docs/tasks/backlog.md` 用来保存具体但暂时延期的 tasks，供后续 milestone planning 和 milestone confirmation 时回捞。
 
 默认不会创建 `docs/specs/` 或 `docs/plans/`。当存在具体 task 时，task-local `spec.md` 和 `plan.md` 应该创建在 `docs/tasks/<milestone>/<task>/` 下。全局 `docs/specs/` 和 `docs/plans/` 只用于 standalone 或 cross-task 文档。
 

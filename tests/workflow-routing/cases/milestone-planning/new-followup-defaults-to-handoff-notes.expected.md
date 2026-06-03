@@ -17,7 +17,7 @@ None.
 
 ## Must Not
 
-- Must not send the item directly to `docs/tasks/backlog.md` by default.
+- Must not send the item directly to `docs/tasks/backlog.md` by default while the current milestone handoff routing is still unresolved.
 - Must not treat the item as already attached to a later milestone without an explicit decision.
 - Must not route directly to `task-preparation`.
 - Must not start implementation work.

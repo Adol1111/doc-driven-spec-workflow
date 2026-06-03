@@ -31,7 +31,7 @@ Create the minimum workflow scaffold so later stages have authoritative docs to 
 
 - minimum scaffold detection
 - creation of the minimum workflow entry-point docs
-- compact planning-inbox capture only when explicitly requested during bootstrap
+- compact planning-inbox goal capture only when explicitly requested during bootstrap
 - bootstrap review pause and handoff suggestion
 
 ## Must not own
@@ -50,6 +50,7 @@ Create only these files when missing:
 - `docs/architecture/index.md`
 - `docs/tasks/index.md`
 - `docs/tasks/planning-inbox.md`
+- `docs/tasks/backlog.md`
 - `docs/context/index.md`
 
 Use repository doc language rules when available. Otherwise follow the current user language.
@@ -59,7 +60,7 @@ Use repository doc language rules when available. Otherwise follow the current u
 1. Detect which minimum scaffold files are missing.
 2. Create only the missing workflow entry points.
 3. Keep content minimal and navigational.
-4. If the user explicitly asks to preserve roadmap-like input during bootstrap, record it only as compact planning-inbox candidate context.
+4. If the user explicitly asks to preserve roadmap-like input during bootstrap, record it only as compact planning-inbox goal context.
 5. Stop at a bootstrap review pause after reporting created or changed files.
 
 ## Boundary rules
@@ -67,7 +68,7 @@ Use repository doc language rules when available. Otherwise follow the current u
 - Bootstrap is docs governance only.
 - Do not create milestones, modules, tasks, `spec.md`, `plan.md`, `docs/specs/`, or `docs/plans/` by default.
 - Do not turn broad user requirements into task breakdown during bootstrap.
-- `planning-inbox.md` may capture compact candidate context, but it is not milestone decomposition.
+- `planning-inbox.md` may capture compact goal context, but it is not milestone decomposition.
 - Keep scaffold docs small enough that later stages can reshape them without cleanup work.
 
 ## If blocked
@@ -90,7 +91,7 @@ Use repository doc language rules when available. Otherwise follow the current u
 
 - created files
 - changed files
-- preserved planning-inbox candidate context, if any
+- preserved planning-inbox goal context, if any
 - recommended next skill
 
 ## Stop point

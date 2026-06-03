@@ -11,10 +11,11 @@ Use evidence in this order:
 
 1. `docs/tasks/index.md`
 2. `docs/tasks/planning-inbox.md`
-3. relevant milestone, module, and task docs under `docs/tasks/`
-4. `docs/architecture/` for stable constraints
-5. `docs/context/` for supporting, non-authoritative research
-6. the current user prompt
+3. `docs/tasks/backlog.md`
+4. relevant milestone, module, and task docs under `docs/tasks/`
+5. `docs/architecture/` for stable constraints
+6. `docs/context/` for supporting, non-authoritative research
+7. the current user prompt
 
 Missing docs are not proof that goals are unclear. Missing docs are a routing signal.
 
@@ -81,16 +82,17 @@ docs/
 │   └── index.md
 ├── tasks/
 │   ├── index.md
-│   └── planning-inbox.md
+│   ├── planning-inbox.md
+│   └── backlog.md
 └── context/
     └── index.md
 ```
 
-Bootstrap does not create milestones, implementation tasks, task-local specs, plans, or code changes. If the user provides roadmap-like content during bootstrap, it can be recorded only as compact planning inbox context when explicitly requested, then handed off to `milestone-planning`.
+Bootstrap does not create milestones, implementation tasks, task-local specs, plans, or code changes. If the user provides roadmap-like content during bootstrap, it can be recorded only as compact planning inbox goal context when explicitly requested, then handed off to `milestone-planning`.
 
 ## Planning Inbox Routing
 
-`docs/tasks/planning-inbox.md` stores goals that are not yet milestone-shaped. It prevents fresh conversations from losing product intent.
+`docs/tasks/planning-inbox.md` stores future goals and candidate milestones. `docs/tasks/backlog.md` stores concrete deferred tasks. Keeping goals and tasks separate prevents handoff work from being promoted at the wrong roadmap layer.
 
 ```mermaid
 flowchart TD
@@ -115,13 +117,14 @@ flowchart TD
 Recommended candidate shape:
 
 ```md
-### <Candidate Name>
+### <Goal Name>
 
-- Status: needs alignment | ready to decompose | parked | discarded
+- Status: needs alignment | ready for milestone planning | parked | discarded
+- Horizon: short-term | mid-term | long-term
 - Source: <user request, research note, handoff, or other origin>
-- Problem: <what need or opportunity this represents>
-- Current question: <what must be decided next>
-- Next routing: planning-clarification | milestone-planning | backlog | discard
+- Goal: <what future outcome or phase this represents>
+- Why not in open milestones: <why this goal is not active yet>
+- Promotion trigger: <what makes this goal ready to plan as a milestone>
 ```
 
 ## Milestone Planning
@@ -131,7 +134,7 @@ Recommended candidate shape:
 - milestone boundaries
 - optional module grouping
 - task breakdown
-- backlog and handoff governance
+- planning inbox, backlog, and handoff governance
 - roadmap-layer `docs/tasks/` documents
 
 It does not write task-local `spec.md`, create `plan.md`, run readiness checks, or implement code.
@@ -173,13 +176,15 @@ If the user asks to decompose or start work inside an unconfirmed milestone, ask
 
 Continuing on the current path does not automatically change `Roadmap confirmed` to `yes`. Flip it only when the user explicitly confirms the milestone roadmap structure.
 
+When a milestone is confirmed or changes from `Roadmap confirmed: no` to `yes`, inspect `docs/tasks/backlog.md` for deferred tasks whose `Fits goal` or `Promotion trigger` matches the milestone. Promote matching tasks into the milestone or explicitly leave them deferred.
+
 ## Milestone Closure
 
 ```mermaid
 flowchart TD
     Done{All concrete tasks completed\nand exit criteria satisfied?}
     Handoff{Handoff Notes empty?}
-    Resolve[Move each handoff item to current work,\nlater milestone, backlog, or remove it]
+    Resolve[Move each handoff item to current work,\nlater milestone, backlog, planning inbox, or remove it]
     Close[Move milestone to Completed Milestones]
     Stop[Stop before next task]
 
@@ -191,7 +196,7 @@ flowchart TD
     Close --> Stop
 ```
 
-Completed milestones are frozen. Follow-up work belongs in a later milestone, backlog, or planning inbox.
+Completed milestones are frozen. Concrete follow-up work belongs in a later milestone or backlog; future goals belong in planning inbox.
 
 ## Task Preparation
 
@@ -367,8 +372,8 @@ Examples of hard gates:
 | --- | --- | --- |
 | `docs/architecture/` | stable behavior, design constraints, long-lived boundaries | volatile research or task state |
 | `docs/tasks/index.md` | open/completed milestones and planning links | modules, task counts, implementation details |
-| `docs/tasks/planning-inbox.md` | unconfirmed goals and roadmap candidates | formal task execution state |
-| `docs/tasks/backlog.md` | known deferred roadmap items | vague product direction with unresolved alignment |
+| `docs/tasks/planning-inbox.md` | future goals and candidate milestones | concrete deferred tasks |
+| `docs/tasks/backlog.md` | concrete deferred tasks | future goals or unresolved roadmap direction |
 | `docs/tasks/<milestone>/` | milestone goal, status, modules/tasks, handoff notes | task-local implementation design |
 | `docs/tasks/<task>/task.md` | task placement, dependencies, status, acceptance points | detailed implementation plan |
 | `docs/tasks/<task>/spec.md` | behavior, scope, exclusions, tradeoffs | branch/worktree or execution logistics |
@@ -382,8 +387,8 @@ When a conclusion in `docs/context/` becomes a stable rule, move or restate it i
 Use these scenario families to verify the workflow:
 
 - empty `Open Milestones` with no planning inbox evidence
-- planning inbox candidate marked `needs alignment`
-- planning inbox candidate marked `ready to decompose`
+- planning inbox goal marked `needs alignment`
+- planning inbox goal marked `ready for milestone planning`
 - bootstrap request bundled with roadmap and spec demands
 - unconfirmed milestone where user asks to start work
 - completed milestone with non-empty `Handoff Notes`
