@@ -192,6 +192,10 @@ docs/tasks/<milestone>/<module>/<task>/task.md
 
 Future goals and candidate milestones live here until they are promoted into open milestone planning or discarded.
 
+A goal is a desired future state, product outcome, opportunity, or phase direction. It explains what should become true and why it matters before deciding the roadmap shape. If an item can already be written as a concrete `task.md` with outcome, rough scope, acceptance checklist, and success signals, keep it in `backlog.md` or an open milestone instead.
+
+Example: `API contract stability` is a goal; `Unify API business error model and response envelope` is task-shaped unless it represents a real release, migration, or phase boundary.
+
 ## Goals
 
 ### <Goal Name>
@@ -228,7 +232,9 @@ Concrete deferred tasks live here until they are promoted into a milestone, disc
 - `docs/tasks/index.md` lists `Open Milestones` and `Completed Milestones`; it should link `Planning Inbox` and `Backlog`.
 - Completed milestones are frozen; add follow-up work to a new open milestone.
 - `docs/tasks/planning-inbox.md` is the routing source for goals that are not yet in the active milestone list.
+- Planning inbox goals describe outcomes or phases, not the exact implementation task expected to deliver them.
 - `docs/tasks/backlog.md` is the routing source for task-shaped deferred work that is not attached to an open milestone.
+- If promoting a planning inbox item would create a milestone and a single same-named task, reclassify it as task-shaped unless the item is itself a real release, migration, or phase boundary.
 - Revisit `docs/tasks/planning-inbox.md` when the current question is direction, phase selection, or whether a future goal is ready to become a milestone.
 - Revisit `docs/tasks/backlog.md` during milestone planning, milestone confirmation, and `Roadmap confirmed: no` to `yes` transitions.
 - Record handoff items in the current milestone `index.md`, not in task-local `plan.md`.

@@ -80,6 +80,24 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 - `planning-inbox.md` stores goals and candidate milestone direction, not concrete tasks.
 - `backlog.md` stores concrete deferred tasks, not broad goals.
 
+## Goal definition
+
+- A goal is a desired future state, product outcome, opportunity, or phase direction. It explains what should become true and why it matters, before deciding the roadmap shape.
+- A goal should usually be broader than one implementation task, but it does not need to be huge. It may later become one milestone, several milestones, or be discarded after clarification.
+- A goal is not a code change, endpoint, migration, test suite, refactor slice, or already selectable implementation outcome.
+- Treat an item as task-shaped when it can already be given a concrete `task.md` with outcome, rough scope, acceptance checklist, and success signals without first deciding phase direction.
+- If promoting a planning inbox item would naturally create a milestone and a single same-named task with no additional boundary decision, reclassify the item as a backlog task or current milestone task unless the item is itself a real release, migration, or phase boundary.
+- Name goals by the outcome or phase, not by the likely implementation mechanism.
+
+Examples:
+
+- Good planning-inbox goal: `API contract stability` with goal text such as "make backend responses predictable enough that frontend and external clients can handle success, validation failure, and business failure consistently."
+- Task-shaped, not a goal: `Unify API business error model and response envelope`. This already names the concrete implementation outcome and can likely become one `task.md`.
+- Better classification for that task-shaped item: put `Unify API business error model and response envelope` in `backlog.md` or the current milestone, and optionally fit it under a goal such as `API contract stability`.
+- Good milestone from that goal: `API Contract Stabilization`, with exit criteria around documented response semantics, client-safe compatibility, and contract tests.
+- Good tasks under that milestone: `Define response envelope and business error semantics`, `Adapt callers to the unified response contract`, and `Add API contract coverage and migration notes`.
+- Bad promotion shape: planning inbox goal `Unify API business error model and response envelope` -> milestone `Unify API business error model and response envelope` -> one task `Unify API business error model and response envelope`. This duplicates labels across layers instead of making a roadmap decision.
+
 ## Handoff Notes routing
 
 - Record `Handoff Notes` in the current milestone `index.md`, not in task-local `plan.md`.
@@ -102,6 +120,7 @@ Turn a clear direction into roadmap structure. This skill owns docs governance, 
 ## Planning inbox
 
 - `planning-inbox.md` is the goal layer. It stores future product goals, opportunities, candidate phases, and long-range roadmap direction.
+- Planning inbox goals should describe the future state or phase to plan, not the exact task that will implement it.
 - Do not store concrete task-shaped work in `planning-inbox.md`; move that work to `backlog.md` unless it belongs in an open milestone.
 - Pull an item out of `planning-inbox.md` when the goal is ready to become an open milestone or needs planning clarification.
 - When a planning inbox goal becomes a milestone, check `backlog.md` for deferred tasks that match that goal.

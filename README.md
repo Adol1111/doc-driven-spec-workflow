@@ -77,7 +77,7 @@ docs/
     └── index.md
 ```
 
-`docs/tasks/planning-inbox.md` keeps future goals and candidate milestones visible across fresh agent conversations. `docs/tasks/backlog.md` keeps concrete deferred tasks available for milestone planning and confirmation.
+`docs/tasks/planning-inbox.md` keeps future goals and candidate milestones visible across fresh agent conversations. A goal is a desired future state, product outcome, opportunity, or phase direction; it is not just any future work item. `docs/tasks/backlog.md` keeps concrete deferred tasks available for milestone planning and confirmation.
 
 The workflow does not create `docs/specs/` or `docs/plans/` by default. Task-local `spec.md` and `plan.md` files should be created under `docs/tasks/<milestone>/<task>/` when there is a concrete task. Global `docs/specs/` and `docs/plans/` are reserved for standalone or cross-task documents.
 

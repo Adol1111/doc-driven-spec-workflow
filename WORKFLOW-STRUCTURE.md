@@ -94,6 +94,15 @@ Bootstrap does not create milestones, implementation tasks, task-local specs, pl
 
 `docs/tasks/planning-inbox.md` stores future goals and candidate milestones. `docs/tasks/backlog.md` stores concrete deferred tasks. Keeping goals and tasks separate prevents handoff work from being promoted at the wrong roadmap layer.
 
+A goal is a desired future state, product outcome, opportunity, or phase direction. It answers "what should become true and why does that matter?" before the workflow decides milestone and task shape. It is not simply any future work item.
+
+Use these classification checks:
+
+- Keep an item as a goal when it still needs phase, milestone, or roadmap boundary decisions.
+- Treat an item as task-shaped when it can already be described with a concrete outcome, rough scope, acceptance checklist, and success signals.
+- If promotion would create a milestone and one same-named task, the item was probably task-shaped unless it represents a real release, migration, or phase boundary.
+- Name goals by outcomes or phases, not by likely implementation mechanisms.
+
 ```mermaid
 flowchart TD
     EmptyOpen{Open Milestones empty?}

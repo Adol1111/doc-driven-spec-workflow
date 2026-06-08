@@ -63,6 +63,8 @@ Resolve only the ambiguity that blocks roadmap planning. Do not decompose roadma
 
 - Treat this as roadmap-blocking clarification, not broad product discovery.
 - Keep the question surface narrow: ask only what changes roadmap direction, phase boundaries, success criteria, or first-slice scope.
+- Treat a goal as a desired future state, product outcome, opportunity, or phase direction. Do not use clarification just to relabel an already concrete task-shaped item as a goal.
+- If the prompt item already has a concrete outcome, rough scope, and obvious acceptance surface, hand it to `milestone-planning` for placement instead of asking abstract goal questions.
 - When real alternatives exist, compare 2-3 plausible directions briefly and recommend one.
 - If scope is too large for one planning pass, clarify the first coherent planning target instead of trying to settle the whole product at once.
 - Do not start roadmap decomposition in the same response that finishes clarification.

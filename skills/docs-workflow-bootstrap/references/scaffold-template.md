@@ -70,6 +70,8 @@ This directory stores milestone, task, and task-local execution documents.
 
 Future goals and candidate milestones live here until they are promoted into open milestone planning or discarded.
 
+A goal is a desired future state, product outcome, opportunity, or phase direction. It explains what should become true and why it matters before deciding the roadmap shape. If an item can already be written as a concrete `task.md` with outcome, rough scope, acceptance checklist, and success signals, keep it in `backlog.md` or an open milestone instead.
+
 ## Goals
 
 - None yet
